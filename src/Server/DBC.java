@@ -29,7 +29,7 @@ public class DBC {
 			ResultSet rs = stmt.executeQuery(
 					"SELECT * FROM moodle.teachers where Id='" + Id + "'");
 			// where UserName="+userName+"AND where Password="+password
-			while (rs.next()) {
+			while http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=335225(rs.next()) {
 				// Print out the values
 
 				try {

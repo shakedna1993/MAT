@@ -5,11 +5,12 @@ package client;
 import java.io.IOException;
 
 import client.MsgFromServer;
-import entities.Member;
-import entities.RequestType;
+
+import client.RequestType;
 import entity.Teacher;
-import gui.client.ClientConsole;
-import gui.client.Loginmain;
+import entity.User;
+//import gui.client.ClientConsole;
+import client.connectionmain;
 import thred.IndexList;
 import thred.MyThread;
 
@@ -63,9 +64,9 @@ public class LoginGUIcontroller {
 		try {
 
 			cli = new ClientConsole(IP_text.getText(), Integer.valueOf(PortText.getText())); 
-			Member mem = new Member(username.getText(), password.getText());
+			User mem = new User(username.getText(), password.getText());
 			
-			if (mem.getUserName().length() == 0 || mem.getPassword().length() == 0) {
+			if (mem.getName().length() == 0 || mem.getPassword().length() == 0) {
 
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Empty Fields");
@@ -81,7 +82,7 @@ public class LoginGUIcontroller {
 			a.join();
 			//
 	
-			if(((Member) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getmID() == -1) {
+			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getId() == -1) {
  				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Wrong details");
 				alert.setHeaderText(null);
@@ -91,7 +92,7 @@ public class LoginGUIcontroller {
 				return;
 			}
 			
-			if(((Member) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getIsConnected() == 1) {
+			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getIsConnected() == 1) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Connection details");
 				alert.setHeaderText(null);
@@ -100,7 +101,7 @@ public class LoginGUIcontroller {
 				alert.show();
 				return;
 			}
-			if(((Member) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getmStatus() == 0) {
+			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getPriv() == 0) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Ban");
 				alert.setHeaderText(null);
