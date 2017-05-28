@@ -123,7 +123,7 @@ public class LoginGUIcontroller {
 			e.printStackTrace();
 		}
 		
-		connectionmain.showMainMenu();
+	//	connectionmain.showMainMenu();
 	}
 
 
