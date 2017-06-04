@@ -5,11 +5,11 @@ package client;
 import java.io.IOException;
 
 import client.MsgFromServer;
-import entities.Member;
-import entities.RequestType;
+
+import client.RequestType;
 import entity.Teacher;
-import gui.client.ClientConsole;
-import gui.client.Loginmain;
+import client.ClientConsole;
+import client.connectionmain;
 import thred.IndexList;
 import thred.MyThread;
 
@@ -122,7 +122,7 @@ public class LoginGUIcontroller {
 			e.printStackTrace();
 		}
 		
-		connectionmain.showMainMenu();
+	//	connectionmain.showMainMenu();
 	}
 
 

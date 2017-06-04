@@ -16,7 +16,7 @@
       <Pane prefHeight="328.0" prefWidth="376.0">
          <children>
             <Button fx:id="info" layoutX="66.0" layoutY="248.0" mnemonicParsing="false" onAction="#Info" prefHeight="25.0" prefWidth="55.0" text="Info" />
-            <Button fx:id="Logcancel" layoutX="245.0" layoutY="248.0" mnemonicParsing="false" onAction="#clsInfoUpdate" text="Cancel" />
+            <Button fx:id="CancelBtn" layoutX="245.0" layoutY="248.0" mnemonicParsing="false" onAction="#clsInfoUpdate" text="Cancel" />
             <TextField fx:id="Id" layoutX="131.0" layoutY="34.0" />
             <TextField fx:id="unitupdate" layoutX="131.0" layoutY="72.0" />
             <Label layoutX="38.0" layoutY="38.0" text="Id" />
