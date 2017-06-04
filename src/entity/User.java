@@ -9,7 +9,6 @@ public class User implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	private String Name,Password;
 	private int Id,isConnected,priv;
-	private double dd1;
 	
 	public User() {
 		super();
