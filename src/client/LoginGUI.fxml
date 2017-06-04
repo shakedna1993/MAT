@@ -17,11 +17,6 @@
    <children>
       <Pane prefHeight="400.0" prefWidth="500.0">
          <children>
-             <ImageView fitHeight="164.0" fitWidth="533.0" layoutX="7.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
-                 <image>
-                    <Image url="@LOGO2.gif" />
-                 </image>
-             </ImageView>
             <Button fx:id="Login" layoutX="122.0" layoutY="311.0" mnemonicParsing="false" onAction="#Login" prefHeight="31.0" prefWidth="112.0" text="Log in" />
             <Button fx:id="Logcancel" cancelButton="true" layoutX="266.0" layoutY="311.0" mnemonicParsing="false" onAction="#clsLogin" prefHeight="31.0" prefWidth="112.0" text="Cancel" />
             <TextField fx:id="username" layoutX="211.0" layoutY="108.0" />

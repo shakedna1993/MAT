@@ -3,46 +3,72 @@ package entity;
 import java.io.Serializable;
 
 public class User implements Serializable  {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String Name,Password;
-	private int Id,isConnected,priv;
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	private String Name,Password,UserName,Id;
+	private int isConnected,Role,Blocked;
+	/*
+	 * Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-.....}
+	 * 
+	 */
 	
 	public User() {
 		super();
 	}
-	public User(String name, String password, int id, int isConnected, int priv) {
+	
+	public User(String name, String password, String userName, String id, int isConnected, int role, int blocked) {
 		super();
 		Name = name;
 		Password = password;
+		UserName = userName;
 		Id = id;
 		this.isConnected = isConnected;
-		this.priv = priv;
+		Role = role;
+		Blocked = blocked;
 	}
 	
-	public User(String name, String password) {
+	
+	
+	public User(String password, String userName) {
 		super();
-		Name = name;
 		Password = password;
+		UserName = userName;
 	}
+
 	public String getName() {
 		return Name;
 	}
 	public void setName(String name) {
 		Name = name;
 	}
+	
+	public String getUserName() {
+		return UserName;
+	}
+
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
+
 	public String getPassword() {
 		return Password;
 	}
 	public void setPassword(String password) {
 		Password = password;
 	}
-	public int getId() {
+	public String getId() {
 		return Id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		Id = id;
 	}
 	public int getIsConnected() {
@@ -51,16 +77,26 @@ public class User implements Serializable  {
 	public void setIsConnected(int isConnected) {
 		this.isConnected = isConnected;
 	}
-	public int getPriv() {
-		return priv;
+ 
+	public int getBlocked() {
+		return Blocked;
 	}
-	public void setPriv(int priv) {
-		this.priv = priv;
+
+	public void setBlocked(int blocked) {
+		Blocked = blocked;
 	}
+
+	public int getRole() {
+		return Role;
+	}
+
+	public void setRole(int role) {
+		Role = role;
+	}
+
 	@Override
 	public String toString() {
-		return "User [Name=" + Name + ", Password=" + Password + ", Id=" + Id + ", isConnected=" + isConnected
-				+ ", priv=" + priv + "]";
+		return "User [Name=" + Name + ", Password=" + Password + ", UserName=" + UserName + ", Id=" + Id
+				+ ", isConnected=" + isConnected + ", Role=" + Role + ", Blocked=" + Blocked + "]";
 	}
-	
 }

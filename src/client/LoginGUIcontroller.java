@@ -82,7 +82,7 @@ public class LoginGUIcontroller {
 			a.join();
 			//
 	
-			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getid() == -1) {
+			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getId().equals("-1")) {
  				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Wrong details");
 				alert.setHeaderText(null);
@@ -101,14 +101,21 @@ public class LoginGUIcontroller {
 				alert.show();
 				return;
 			}
-			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getmStatus() == 0) {
+			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getBlocked() == 0) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Ban");
 				alert.setHeaderText(null);
 				alert.setContentText("The user is banned from the system");
-
 				alert.show();
 				return;
+			}
+			switch(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getRole()){
+			case 1:
+				connectionmain.showSecretary();
+				break;
+			case 2:
+				connectionmain.showManager();
+				break;	
 			}
 			
 
