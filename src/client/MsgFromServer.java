@@ -79,7 +79,9 @@ public class MsgFromServer {
 		}
 		System.out.println(returnMsg.getMsg());
 		switch (returnMsg.getOp()) {
-		
+		case LOGIN:
+			setDataListByIndex(IndexList.LOGIN, returnMsg.getMsg());
+			return;
 		case UpdateUnit:
 			setDataListByIndex(IndexList.UpdateUnit, returnMsg.getMsg());
 	
