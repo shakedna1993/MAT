@@ -19,7 +19,7 @@ public class User implements Serializable  {
 	/*
 	 * Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager, 6- Parent, 7- Manager&Teacher}
 	 * isConnected={0-No, 1-Yes}
-	 * Blocked={0-Blocked, 1-Not Blocked}
+	 * Blocked={0-Not Blocked, 1-Blocked}
 	 */
 	
 	public User() {

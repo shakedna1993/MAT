@@ -49,6 +49,7 @@ public class DBC {
 				}
 
 			}
+			rs.close();  // Before every close.stage we need to update isConnected=0 
 			if (lst.getIsConnected() == 0 && lst.getBlocked() == 0) {
 				String Quary = ("UPDATE moodle.users set isConnected = " + 1 + " where UserName ='" + userName + "'");
 				stmt.executeUpdate(Quary);
@@ -58,12 +59,15 @@ public class DBC {
 			return lst;
 
 		} catch (SQLException e) {
+			lst.setId("0");
 			e.printStackTrace();
 		}
-
 		return lst;
 	}
-
+	
+	
+	
+	
 	
 	public static Teacher Teacherdetails(String id) {
 		Statement stmt;
