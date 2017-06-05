@@ -8,6 +8,7 @@ import thred.IndexList;
 import client.Op;
 
 import entity.Teacher;
+import entity.User;
 /**
  * 
  * This class handles with all the functionality of the server.
@@ -20,7 +21,10 @@ public class OpCheck {
 		int val;
 
 		switch (op.getOp()) {
-	
+		case Userdetails:
+			User User = (User) op.getMsg();
+			return DBC.Userdetails(User.getUserName(), User.getPassword());
+			
 		case Teacherdetails:
 			Teacher Teacher = (Teacher) op.getMsg();
 			return DBC.Teacherdetails(Teacher.getId());

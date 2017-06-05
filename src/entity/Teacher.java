@@ -4,49 +4,41 @@ import java.io.Serializable;
 
 
 
-public class Teacher implements Serializable {
+public class Teacher extends User implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8969357742306461220L;
-	private String Name,Password,Unit;
-	private int Id,isConnected;
-	
-	
-	public Teacher(String unit, int id) {
-		super();
-		Unit = unit;
-		Id = id;
-	}
+//	private String Name,Password,UserName,Id;
+//	private int isConnected,Role,Blocked;
+	private String Unit,intership;
+	private int maxHours;
 	
 	public Teacher() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Teacher(int id) {
-		super();
-		Id = id;
-	}
-	public Teacher(String name, String password, String unit, int id) {
-		super();
-		Name = name;
-		Password = password;
+	public Teacher(String name, String password, String userName, String id, String unit, String intership,
+			int isConnected, int role, int blocked, int maxHours){
+		super(name, password, userName, id, isConnected, role, blocked);
 		Unit = unit;
-		Id = id;
+		this.intership = intership;
+		this.maxHours = maxHours;
+		// TODO Auto-generated constructor stub
 	}
-	public String getName() {
-		return Name;
+
+	public Teacher(String userName, String password) {
+		super(userName, password);
+		// TODO Auto-generated constructor stub
 	}
-	public void setName(String name) {
-		Name = name;
+
+	public Teacher(String userName) {
+		super(userName);
+		// TODO Auto-generated constructor stub
 	}
-	public String getPassword() {
-		return Password;
-	}
-	public void setPassword(String password) {
-		Password = password;
-	}
+
 	public String getUnit() {
 		return Unit;
 	}
@@ -54,23 +46,29 @@ public class Teacher implements Serializable {
 	public void setUnit(String unit) {
 		Unit = unit;
 	}
-	public int getId() {
-		return Id;
+
+	public String getIntership() {
+		return intership;
 	}
-	public void setId(int id) {
-		Id = id;
+
+	public void setIntership(String intership) {
+		this.intership = intership;
 	}
-	public int getIsConnected() {
-		return isConnected;
+
+	public int getMaxHours() {
+		return maxHours;
 	}
-	public void setIsConnected(int isConnected) {
-		this.isConnected = isConnected;
+
+	public void setMaxHours(int maxHours) {
+		this.maxHours = maxHours;
 	}
+
 	@Override
 	public String toString() {
-		return "Teacher [Name=" + Name + ", Password=" + Password + ", Unit=" + Unit + ", Id=" + Id + ", isConnected="
-				+ isConnected + "]";
+		return "Teacher [Unit=" + Unit + ", intership=" + intership + ", maxHours=" + maxHours + "]";
 	}
+
+	
 	
 	
 }

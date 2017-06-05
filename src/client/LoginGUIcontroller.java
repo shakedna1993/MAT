@@ -9,7 +9,7 @@ import client.MsgFromServer;
 import client.RequestType;
 import entity.Teacher;
 import entity.User;
-//import client.ClientConsole;
+import client.ClientConsole;
 import client.connectionmain;
 import thred.IndexList;
 import thred.MyThread;
@@ -47,6 +47,8 @@ public class LoginGUIcontroller {
 	TextField IP_text;
 	@FXML
 	TextField PortText;
+	@FXML
+	Label name,id,unit,port;
 
 	@FXML
 	public void initialize() {
@@ -63,10 +65,10 @@ public class LoginGUIcontroller {
 	public void Login() throws IOException {
 		try {
 
-			cli = new ClientConsole(IP_text.getText(), Integer.valueOf(PortText.getText())); 
+			//cli = new ClientConsole(IP_text.getText(), Integer.valueOf(PortText.getText())); 
 			User mem = new User(username.getText(), password.getText());
 			
-			if (mem.getName().length() == 0 || mem.getPassword().length() == 0) {
+			if (mem.getUserName().length() == 0 || mem.getPassword().length() == 0) {
 
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Empty Fields");
@@ -77,7 +79,7 @@ public class LoginGUIcontroller {
 				return;
 			}
 			
-			MyThread a = new MyThread(RequestType.LOGIN, IndexList.LOGIN, mem);
+			MyThread a = new MyThread(RequestType.Userdetails, IndexList.LOGIN, mem);
 			a.start();
 			a.join();
 			//
@@ -101,7 +103,7 @@ public class LoginGUIcontroller {
 				alert.show();
 				return;
 			}
-			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getBlocked() == 0) {
+			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getBlocked() == 1) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Ban");
 				alert.setHeaderText(null);
@@ -109,12 +111,28 @@ public class LoginGUIcontroller {
 				alert.show();
 				return;
 			}
+			// Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager, 6- Parent, 7- Manager&Teacher}
 			switch(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getRole()){
 			case 1:
-				connectionmain.showSecretary();
+			//	connectionmain.showSecretary();
 				break;
 			case 2:
-				connectionmain.showManager();
+			//	connectionmain.showManager();
+				break;	
+			case 3:
+				connectionmain.showTeacher();
+				break;
+			case 4:
+			//	connectionmain.showStudent();
+				break;	
+			case 5:
+			//	connectionmain.showSysManager();
+				break;
+			case 6:
+			//	connectionmain.showParent();
+				break;
+			case 7:
+			//	connectionmain.showManager&Teacher();
 				break;	
 			}
 			

@@ -45,9 +45,9 @@ public class ConnectGuicontroller {
 		connect.setDisable(cli.isConectedFlag());
 		if (cli.client.isConnected()) {
 			connect.setDisable(true);
-			System.out.print("the server has connected");
+			System.out.print("the server has connected ");
 			try {
-				concent.showInfo();
+				connectionmain.showUserLogin();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -17,8 +17,9 @@ public class User implements Serializable  {
 	private String Name,Password,UserName,Id;
 	private int isConnected,Role,Blocked;
 	/*
-	 * Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-.....}
-	 * 
+	 * Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager, 6- Parent, 7- Manager&Teacher}
+	 * isConnected={0-No, 1-Yes}
+	 * Blocked={0-Blocked, 1-Not Blocked}
 	 */
 	
 	public User() {
@@ -38,7 +39,12 @@ public class User implements Serializable  {
 	
 	
 	
-	public User(String password, String userName) {
+	public User(String userName) {
+		super();
+		UserName = userName;
+	}
+
+	public User(String userName, String password) {
 		super();
 		Password = password;
 		UserName = userName;
