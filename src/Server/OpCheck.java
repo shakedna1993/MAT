@@ -21,9 +21,9 @@ public class OpCheck {
 		int val;
 
 		switch (op.getOp()) {
-		case Userdetails:
+		case LOGIN:
 			User User = (User) op.getMsg();
-			return DBC.Userdetails(User.getUserName(), User.getPassword());
+			return DBC.LOGIN(User.getUserName(), User.getPassword());
 			
 		case Teacherdetails:
 			Teacher Teacher = (Teacher) op.getMsg();

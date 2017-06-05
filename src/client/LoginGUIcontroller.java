@@ -38,7 +38,6 @@ public class LoginGUIcontroller {
 	Button Login;
 	@FXML
 	Button Logcancel;
-
 	@FXML
 	TextField username;
 	@FXML
@@ -47,8 +46,6 @@ public class LoginGUIcontroller {
 	TextField IP_text;
 	@FXML
 	TextField PortText;
-	@FXML
-	Label name,id,unit,port;
 
 	@FXML
 	public void initialize() {
@@ -65,7 +62,7 @@ public class LoginGUIcontroller {
 	public void Login() throws IOException {
 		try {
 
-			//cli = new ClientConsole(IP_text.getText(), Integer.valueOf(PortText.getText())); 
+			cli = new ClientConsole(IP_text.getText(), Integer.valueOf(PortText.getText())); 
 			User mem = new User(username.getText(), password.getText());
 			
 			if (mem.getUserName().length() == 0 || mem.getPassword().length() == 0) {
@@ -79,7 +76,7 @@ public class LoginGUIcontroller {
 				return;
 			}
 			
-			MyThread a = new MyThread(RequestType.Userdetails, IndexList.LOGIN, mem);
+			MyThread a = new MyThread(RequestType.LOGIN, IndexList.LOGIN, mem);
 			a.start();
 			a.join();
 			//
@@ -141,12 +138,12 @@ public class LoginGUIcontroller {
 			
 			e.printStackTrace();
 		}
-		try {
+	/*	try {
 			Stage stage = (Stage) Logcancel.getScene().getWindow();
 			stage.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 	//	connectionmain.showMainMenu();
 	}
@@ -163,5 +160,13 @@ public class LoginGUIcontroller {
 			e.printStackTrace();
 		}
 		
-	}	 
+	}
+
+	@Override
+	public String toString() {
+		return "LoginGUIcontroller [Login=" + Login + ", Logcancel=" + Logcancel + ", username=" + username
+				+ ", password=" + password + ", IP_text=" + IP_text + ", PortText=" + PortText + "]";
+	}
+
+	
 }

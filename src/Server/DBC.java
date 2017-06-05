@@ -19,7 +19,7 @@ import java.sql.ResultSet;
 
 public class DBC {
 
-	public static User Userdetails(String userName , String password) {
+	public static User LOGIN(String userName , String password) {
 		Statement stmt;
 		User lst = new User();
 
@@ -40,6 +40,7 @@ public class DBC {
 					lst.setUserName(rs.getString(4));
 					lst.setRole(Integer.parseInt(rs.getString(5)));
 					lst.setBlocked(Integer.parseInt(rs.getString(6)));
+					lst.setIsConnected(Integer.parseInt(rs.getString(7)));
 				}
 				catch (Exception e) {
 					lst.setId("0");
