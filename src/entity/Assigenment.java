@@ -71,10 +71,4 @@ public class Assigenment implements Serializable{
 	public void setDueDate(Date dueDate) {
 		DueDate = dueDate;
 	}
-
-
-	
-	
-	
-
 }
