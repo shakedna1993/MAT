@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import entity.Teacher;
 import entity.User;
+import Server.Connect;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -48,7 +49,12 @@ public class DBC {
 				}
 
 			}
-			rs.close();
+			rs.close();  // Before every close.stage we need to update isConnected=0 
+			if (lst.getIsConnected() == 0 && lst.getBlocked() == 0) {
+				String Quary = ("UPDATE moodle.users set isConnected = " + 1 + " where UserName ='" + userName + "'");
+				stmt.executeUpdate(Quary);
+				System.out.println(lst);
+			}
 			Connect.close();
 			return lst;
 
