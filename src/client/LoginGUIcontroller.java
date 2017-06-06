@@ -120,7 +120,7 @@ public class LoginGUIcontroller {
 				connectionmain.showTeacher();
 				break;
 			case 4:
-			//	connectionmain.showStudent();
+				connectionmain.showStudentMain();
 				break;	
 			case 5:
 			//	connectionmain.showSysManager();
