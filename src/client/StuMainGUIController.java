@@ -8,13 +8,14 @@ import entity.Student;
 import entity.Teacher;
 import entity.User;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import thred.IndexList;
 
-public class StuMainGUIController {
+public class StuMainGUIController implements Initializable{
 	
 	public static ClientConsole cli;
 	public static Stage primaryStage;
@@ -35,7 +36,7 @@ public class StuMainGUIController {
 	@FXML
 	Label Hello;
 	@FXML
-	Label stuName;
+	javafx.scene.control.Label stuName;
 	@FXML
 	Label CalcAvg;
 	
