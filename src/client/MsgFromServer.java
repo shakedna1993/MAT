@@ -82,6 +82,9 @@ public class MsgFromServer {
 		case LOGIN:
 			setDataListByIndex(IndexList.LOGIN, returnMsg.getMsg());
 			return;
+		case LOGOUT:
+			setDataListByIndex(IndexList.LOGOUT, returnMsg.getMsg());
+			return;
 		case UpdateUnit:
 			setDataListByIndex(IndexList.UpdateUnit, returnMsg.getMsg());
 	

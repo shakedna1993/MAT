@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import client.RequestType;
 import entity.Student;
 import entity.Teacher;
 import entity.User;
+import client.connectionmain;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import thred.IndexList;
+import thred.MyThread;
 
 public class StuMainGUIController implements Initializable{
 	
@@ -54,14 +57,20 @@ public class StuMainGUIController implements Initializable{
 	
 	@FXML
 	public void clsStudentMain() {
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		a.start();
 		try {
-			Stage stage = (Stage) LogOut.getScene().getWindow();
-			stage.close();
-		} catch (Exception e) {
+			a.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			connectionmain.showLogin();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
+	
 
 	@Override
 	public String toString() {

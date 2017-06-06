@@ -66,7 +66,21 @@ public class DBC {
 	}
 	
 	
-	
+	public static void LOGOUT(String userName) {
+		Statement stmt;
+
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			String Query = ("UPDATE moodle.users set isConnected = " + 0 + " where UserName ='" + userName + "'");
+			stmt.executeUpdate(Query);
+
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 	
 	
 	public static Teacher Teacherdetails(String id) {

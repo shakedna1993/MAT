@@ -25,6 +25,11 @@ public class OpCheck {
 			User User = (User) op.getMsg();
 			return DBC.LOGIN(User.getUserName(), User.getPassword());
 			
+		case LOGOUT:
+			User User1 = (User) op.getMsg();
+			DBC.LOGOUT(User1.getUserName());
+			return User1;
+			
 		case Teacherdetails:
 			Teacher Teacher = (Teacher) op.getMsg();
 			return DBC.Teacherdetails(Teacher.getId());
