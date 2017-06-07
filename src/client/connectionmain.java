@@ -6,14 +6,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+//import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sun.applet.Main;
 
 public class connectionmain extends Application {
 	private static Stage primaryStage;
 	private static AnchorPane mainLayout;
-	private static VBox vbox;
+//	private static VBox vbox;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -35,12 +35,12 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 		 
-	public static void showTeacher() throws IOException {
+	public static void showTeacherMain() throws IOException {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/client/Info&Update.fxml"));
+			loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));
 			mainLayout = loader.load();
 			primaryStage.setScene(new Scene(mainLayout));
-			primaryStage.setTitle("Info");
+			primaryStage.setTitle("M.A.T- Teacher Connection");
 			primaryStage.show();
 	}
 	
@@ -49,7 +49,7 @@ public class connectionmain extends Application {
 		loader.setLocation(Main.class.getResource("/client/StudentMainGUI.fxml"));
 		mainLayout = loader.load();
 		primaryStage.setScene(new Scene(mainLayout));
-		primaryStage.setTitle("M.A.T");
+		primaryStage.setTitle("M.A.T- Teacher Connection");
 		primaryStage.show();
 	}
 	public static void main(String[] args) {

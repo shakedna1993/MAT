@@ -117,7 +117,7 @@ public class LoginGUIcontroller {
 			//	connectionmain.showManager();
 				break;	
 			case 3:
-				connectionmain.showTeacher();
+				connectionmain.showTeacherMain();
 				break;
 			case 4:
 				connectionmain.showStudentMain();

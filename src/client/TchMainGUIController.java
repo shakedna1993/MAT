@@ -4,47 +4,50 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import client.RequestType;
 import entity.User;
-import client.connectionmain;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
-public class StuMainGUIController implements Initializable{
+public class TchMainGUIController implements Initializable{
 	
 	public static ClientConsole cli;
 	public static Stage primaryStage;
 	
 	@FXML
-	Button Ass_Sub;
+	ComboBox<String> STC;
 	@FXML
-	Button GradeL;
+	Button Post_Ass;
+	@FXML
+	Button Check_Ass;
 	@FXML
 	Button CourseL;
 	@FXML
-	Button Evalu;
+	Button Back;
 	@FXML
 	Button LogOut;
 
 	@FXML
-	Label Hello;
+	Label Hello, selectAss, WeekTH ;
 	@FXML
-	Label Average;
+	Label selectTC;
 	@FXML
-	Label Per_File;
+	Label General;
 	@FXML
 	Label Ass;
 	@FXML
-	javafx.scene.control.Label stuName;
+	javafx.scene.control.Label TchName;
 	@FXML
-	Label CalcAvg;
-	
+	javafx.scene.control.Label WeekHours;
+	@FXML
+	TableView<String> Pub_Ass; 
 	@FXML
 	ImageView Logo;
 	
@@ -52,13 +55,11 @@ public class StuMainGUIController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 			User s =new User();
 			s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			stuName.setText(s.getName());
-		//	Average.setText(Float.toString(s.getAvg()));
-
+			TchName.setText(s.getName());
 		}
 	
 	@FXML
-	public void clsStudentMain() {
+	public void clsTeacherMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
@@ -72,16 +73,6 @@ public class StuMainGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
 
-	@Override
-	public String toString() {
-		return "StuMainGUIController [Average=" + Average + ", Ass_Sub=" + Ass_Sub + ", GradeL=" + GradeL + ", CourseL="
-				+ CourseL + ", Evalu=" + Evalu + ", LogOut=" + LogOut + ", Hello=" + Hello + ", stuName=" + stuName
-				+ ", CalcAvg=" + CalcAvg + ", Logo=" + Logo + "]";
-	}
-
-
-	
 
 }
