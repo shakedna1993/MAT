@@ -74,5 +74,14 @@ public class TchMainGUIController implements Initializable{
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "TchMainGUIController [STC=" + STC + ", Post_Ass=" + Post_Ass + ", Check_Ass=" + Check_Ass + ", CourseL="
+				+ CourseL + ", Back=" + Back + ", LogOut=" + LogOut + ", Hello=" + Hello + ", selectAss=" + selectAss
+				+ ", WeekTH=" + WeekTH + ", selectTC=" + selectTC + ", General=" + General + ", Ass=" + Ass
+				+ ", TchName=" + TchName + ", WeekHours=" + WeekHours + ", Pub_Ass=" + Pub_Ass + ", Logo=" + Logo + "]";
+	}
+	
+
 
 }

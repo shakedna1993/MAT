@@ -7,7 +7,6 @@ import java.io.IOException;
 import client.MsgFromServer;
 
 import client.RequestType;
-import entity.Teacher;
 import entity.User;
 import client.ClientConsole;
 import client.connectionmain;
@@ -19,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -123,7 +121,7 @@ public class LoginGUIcontroller {
 				connectionmain.showStudentMain();
 				break;	
 			case 5:
-			//	connectionmain.showSysManager();
+				connectionmain.showSysManMain();
 				break;
 			case 6:
 			//	connectionmain.showParent();

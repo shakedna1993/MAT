@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.SysManMainGUIController">
+   <children>
+      <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+      <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
+         <image>
+            <Image url="@LOGO.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="20.0" prefWidth="56.0" text="Hello!" textFill="#061880">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="SysName" layoutX="102.0" layoutY="67.0" prefHeight="21.0" prefWidth="200.0" text="System Manager Name" textFill="#061880">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="LogOut" layoutX="348.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsSysManMain" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
+      <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
+      <Button fx:id="Back" layoutX="212.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Back" />
+      <TabPane fx:id="Main" layoutY="115.0" prefHeight="434.0" prefWidth="639.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.topAnchor="115.0">
+        <tabs>
+          <Tab fx:id="DefineTab" text="Define New Course">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="639.0">
+                     <children>
+                        <Label fx:id="CN_Define" alignment="CENTER" layoutX="161.0" layoutY="79.0" prefHeight="17.0" prefWidth="130.0" text="Course Name:" textAlignment="CENTER" underline="true" />
+                        <Label fx:id="TU_Define" alignment="CENTER" layoutX="161.0" layoutY="121.0" text="Teaching Unit (2- digits):" textAlignment="CENTER" underline="true" />
+                        <Label fx:id="CID_Define" alignment="CENTER" layoutX="161.0" layoutY="161.0" prefHeight="17.0" prefWidth="130.0" text="Course ID (3- digits):" textAlignment="CENTER" underline="true" />
+                        <Label fx:id="WH_Define" alignment="CENTER" layoutX="161.0" layoutY="201.0" prefHeight="17.0" prefWidth="130.0" text="Weekly Hours:" textAlignment="CENTER" underline="true" />
+                        <Label fx:id="PR_Define" alignment="CENTER" layoutX="161.0" layoutY="241.0" prefHeight="17.0" prefWidth="130.0" text="Pre Requisits:" textAlignment="CENTER" underline="true" />
+                        <TextField fx:id="CNT_Define" layoutX="301.0" layoutY="75.0" />
+                        <TextField fx:id="TUT_Define" layoutX="301.0" layoutY="117.0" />
+                        <TextField fx:id="CIDT_Define" layoutX="301.0" layoutY="157.0" />
+                        <TextField fx:id="WHT_Define" layoutX="301.0" layoutY="197.0" />
+                        <Button fx:id="DefineButton" layoutX="230.0" layoutY="352.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Define" />
+                        <Label fx:id="DefineLabel" layoutX="243.0" layoutY="32.0" text="Define New Course" underline="true">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="PRT_Define" layoutX="302.0" layoutY="240.0" prefHeight="96.0" prefWidth="200.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="EditTab" text="Edit Course">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="EditLabel" layoutX="285.0" layoutY="35.0" text="Edit Course" underline="true">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="EditButton" layoutX="230.0" layoutY="274.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Edit" />
+                        <Label fx:id="CID_Edit" layoutX="214.0" layoutY="84.0" prefHeight="17.0" prefWidth="85.0" text="Course ID:" underline="true" />
+                        <Label fx:id="WH_Edit" layoutX="213.0" layoutY="127.0" prefHeight="17.0" prefWidth="85.0" text="Weekly Hours:" underline="true" />
+                        <Label fx:id="PR_Edit" layoutX="213.0" layoutY="172.0" prefHeight="17.0" prefWidth="85.0" text="Pre Requisits: " underline="true" />
+                        <TextField fx:id="CIDT_Edit" layoutX="298.0" layoutY="80.0" />
+                        <TextField fx:id="WHT_Edit" layoutX="298.0" layoutY="123.0" />
+                        <TextArea fx:id="PRT_Edit" layoutX="298.0" layoutY="172.0" prefHeight="75.0" prefWidth="200.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="RemoveTab" text="Remove Exist Course">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="414.0" prefWidth="525.0">
+                     <children>
+                        <Button fx:id="RemoveButton" layoutX="230.0" layoutY="160.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="180.0" text="Remove" />
+                        <Label fx:id="RemoveLabel" layoutX="256.0" layoutY="35.0" text="Remove Exist Course" underline="true">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="CID_Remove" layoutX="221.0" layoutY="83.0" text="Course ID:" underline="true" />
+                        <TextField fx:id="CIDT_Remove" layoutX="320.0" layoutY="79.0" />
+                        <Label layoutX="138.0" layoutY="204.0" text="*Pay attention- The course will be deleted only from the next semester" textFill="#cd0c0c" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

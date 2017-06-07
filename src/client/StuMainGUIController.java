@@ -43,7 +43,7 @@ public class StuMainGUIController implements Initializable{
 	@FXML
 	javafx.scene.control.Label stuName;
 	@FXML
-	Label CalcAvg;
+	javafx.scene.control.Label CalcAvg;
 	
 	@FXML
 	ImageView Logo;
