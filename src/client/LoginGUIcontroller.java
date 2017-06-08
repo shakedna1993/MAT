@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -44,6 +45,8 @@ public class LoginGUIcontroller {
 	TextField IP_text;
 	@FXML
 	TextField PortText;
+	@FXML
+	ImageView Logo;
 
 	@FXML
 	public void initialize() {
@@ -109,10 +112,10 @@ public class LoginGUIcontroller {
 			// Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager, 6- Parent, 7- Manager&Teacher}
 			switch(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getRole()){
 			case 1:
-			//	connectionmain.showSecretary();
+				connectionmain.showSecretaryMain();
 				break;
 			case 2:
-			//	connectionmain.showManager();
+				connectionmain.showManagerMain();
 				break;	
 			case 3:
 				connectionmain.showTeacherMain();
@@ -124,10 +127,10 @@ public class LoginGUIcontroller {
 				connectionmain.showSysManMain();
 				break;
 			case 6:
-			//	connectionmain.showParent();
+				connectionmain.showParentMain();
 				break;
 			case 7:
-			//	connectionmain.showManager&Teacher();
+				connectionmain.showTch_ManMain();
 				break;	
 			}
 			

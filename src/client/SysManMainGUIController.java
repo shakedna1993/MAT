@@ -30,8 +30,6 @@ public class SysManMainGUIController implements Initializable{
 	@FXML
 	javafx.scene.control.Label SysName;
 	@FXML
-	Button Back;
-	@FXML
 	Button LogOut;
 	@FXML
 	TabPane Main;
@@ -115,5 +113,19 @@ public class SysManMainGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "SysManMainGUIController [Hello=" + Hello + ", SysName=" + SysName + ", LogOut=" + LogOut + ", Main="
+				+ Main + ", DefineTab=" + DefineTab + ", EditTab=" + EditTab + ", RemoveTab=" + RemoveTab
+				+ ", DefineLabel=" + DefineLabel + ", EditLabel=" + EditLabel + ", RemoveLabel=" + RemoveLabel
+				+ ", DefineButton=" + DefineButton + ", EditButton=" + EditButton + ", RemoveButton=" + RemoveButton
+				+ ", CN_Define=" + CN_Define + ", TU_Define=" + TU_Define + ", CID_Define=" + CID_Define
+				+ ", WH_Define=" + WH_Define + ", PR_Define=" + PR_Define + ", CNT_Define=" + CNT_Define
+				+ ", TUT_Define=" + TUT_Define + ", CIDT_Define=" + CIDT_Define + ", WHT_Define=" + WHT_Define
+				+ ", PRT_Define=" + PRT_Define + ", CID_Edit=" + CID_Edit + ", WH_Edit=" + WH_Edit + ", PR_Edit="
+				+ PR_Edit + ", CIDT_Edit=" + CIDT_Edit + ", WHT_Edit=" + WHT_Edit + ", PRT_Edit=" + PRT_Edit
+				+ ", CID_Remove=" + CID_Remove + ", CIDT_Remove=" + CIDT_Remove + ", Logo=" + Logo + "]";
+	}
+	
 }
 	
