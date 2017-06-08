@@ -5,7 +5,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
+import entity.Student;
 import entity.Teacher;
 import entity.User;
 import Server.Connect;
@@ -65,6 +65,39 @@ public class DBC {
 		return lst;
 	}
 	
+	public static Student StudentDetails(String Id) {
+		Statement stmt;
+		Student stud = new Student();
+
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.student where sid='" + Id + "'");
+			while (rs.next()) {
+				// Print out the values
+
+				try {
+					stud.setParentId(rs.getString(1));
+					stud.setAvg(rs.getFloat(2));
+					stud.setId(rs.getString(3) == null ? "-1" : rs.getString(3));
+				}
+				catch (Exception e) {
+					stud.setId("0");
+					e.printStackTrace();
+				}
+
+			}
+			rs.close();
+			Connect.close();
+			return stud;
+
+		} catch (SQLException e) {
+			stud.setId("0");
+			e.printStackTrace();
+		}
+		return stud;
+	}
 	
 	public static void LOGOUT(String userName) {
 		Statement stmt;

@@ -38,10 +38,10 @@ public class User implements Serializable  {
 	}
 	
 	
-	
-	public User(String userName) {
+
+	public User(String id) {
 		super();
-		UserName = userName;
+		Id = id;
 	}
 
 	public User(String userName, String password) {

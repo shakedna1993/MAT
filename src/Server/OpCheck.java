@@ -6,7 +6,7 @@ import java.util.Calendar;
 import client.MsgFromServer;
 import thred.IndexList;
 import client.Op;
-
+import entity.Student;
 import entity.Teacher;
 import entity.User;
 /**
@@ -29,6 +29,12 @@ public class OpCheck {
 			User User1 = (User) op.getMsg();
 			DBC.LOGOUT(User1.getUserName());
 			return User1;
+			
+		case StudentDetails:
+			Student std=new Student();
+			User User2 = (User) op.getMsg();
+			std=DBC.StudentDetails(User2.getId());
+			return std;
 			
 		case Teacherdetails:
 			Teacher Teacher = (Teacher) op.getMsg();

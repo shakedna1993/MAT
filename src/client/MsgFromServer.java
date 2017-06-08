@@ -84,12 +84,15 @@ public class MsgFromServer {
 			return;
 		case LOGOUT:
 			setDataListByIndex(IndexList.LOGOUT, returnMsg.getMsg());
+		case StudentDetails:
+			setDataListByIndex(IndexList.StudentDetails, returnMsg.getMsg());
 			return;
 		case UpdateUnit:
 			setDataListByIndex(IndexList.UpdateUnit, returnMsg.getMsg());
 	
 		case Teacherdetails:
 			setDataListByIndex(IndexList.Teacherdetails, returnMsg.getMsg());
+			
 			
 			
 		default:

@@ -1,10 +1,12 @@
 package client;
 
+import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import client.RequestType;
+import entity.Student;
 import entity.User;
 import client.connectionmain;
 import javafx.fxml.FXML;
@@ -30,20 +32,20 @@ public class StuMainGUIController implements Initializable{
 	@FXML
 	Button Evalu;
 	@FXML
+	Button Avg;
+	@FXML
 	Button LogOut;
 
 	@FXML
 	Label Hello;
 	@FXML
-	Label Average;
-	@FXML
 	Label Per_File;
 	@FXML
 	Label Ass;
 	@FXML
-	javafx.scene.control.Label stuName;
+	Label AvgC;
 	@FXML
-	Label CalcAvg;
+	javafx.scene.control.Label stuName;
 	
 	@FXML
 	ImageView Logo;
@@ -53,9 +55,16 @@ public class StuMainGUIController implements Initializable{
 			User s =new User();
 			s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 			stuName.setText(s.getName());
-		//	Average.setText(Float.toString(s.getAvg()));
-
 		}
+	
+	@FXML
+	public void Avgset() {
+		String avg;		
+		Student stud =new Student();
+		stud=(Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
+		avg=Float.toString(stud.getAvg());
+		AvgC.setText(avg);
+	}
 	
 	@FXML
 	public void clsStudentMain() {
@@ -73,13 +82,6 @@ public class StuMainGUIController implements Initializable{
 		}
 	}
 	
-
-	@Override
-	public String toString() {
-		return "StuMainGUIController [Average=" + Average + ", Ass_Sub=" + Ass_Sub + ", GradeL=" + GradeL + ", CourseL="
-				+ CourseL + ", Evalu=" + Evalu + ", LogOut=" + LogOut + ", Hello=" + Hello + ", stuName=" + stuName
-				+ ", CalcAvg=" + CalcAvg + ", Logo=" + Logo + "]";
-	}
 
 
 	

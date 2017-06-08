@@ -27,9 +27,10 @@ public class Student extends User implements Serializable{
 	public Student(String userName, String password) {
 		super(userName, password);
 		// TODO Auto-generated constructor stub
-	}
-	public Student(String userName) {
-		super(userName);
+	}	
+	
+	public Student(String id) {
+		super(id);
 		// TODO Auto-generated constructor stub
 	}
 	public String getParentId() {

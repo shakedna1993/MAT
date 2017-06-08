@@ -7,6 +7,7 @@ import java.io.IOException;
 import client.MsgFromServer;
 
 import client.RequestType;
+import entity.Student;
 import entity.Teacher;
 import entity.User;
 import client.ClientConsole;
@@ -120,6 +121,13 @@ public class LoginGUIcontroller {
 				connectionmain.showTeacherMain();
 				break;
 			case 4:
+				MyThread b = new MyThread(RequestType.StudentDetails, IndexList.StudentDetails, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+				b.start();
+				try {
+					b.join();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
 				connectionmain.showStudentMain();
 				break;	
 			case 5:
