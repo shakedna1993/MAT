@@ -1,56 +1,56 @@
 package client;
 
-import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import client.RequestType;
-import entity.Student;
 import entity.User;
-import client.connectionmain;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
-public class StuMainGUIController implements Initializable{
+public class ManMainGUIController implements Initializable{
 	
 	public static ClientConsole cli;
 	public static Stage primaryStage;
 	
 	@FXML
-	Button Ass_Sub;
-	@FXML
-	Button GradeL;
-	@FXML
-	Button CourseL;
-	@FXML
-	Button Evalu;
-	@FXML
-	Button Avg;
-	@FXML
-	Button LogOut;
-
-	@FXML
 	Label Hello;
 	@FXML
-	Label Per_File;
+	Label Reqs;
 	@FXML
-	Label Ass;
+	Label Reps;
 	@FXML
-	Label AvgC;
+	Label BlockLabel;
 	@FXML
-<<<<<<< HEAD
-	javafx.scene.control.Label stuName;
-=======
-	javafx.scene.control.Label CalcAvg;
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
-	
+	Label Ins_PID;
+	@FXML
+	TextField Parent_id;
+	@FXML
+	javafx.scene.control.Label ManName;
+	@FXML
+	Button CheckReq;
+	@FXML
+	Button OpenReq;
+	@FXML
+	Button GenRep;
+	@FXML
+	Button UnBlock;
+	@FXML
+	Button Block;
+	@FXML
+	Button Back;
+	@FXML
+	Button LogOut;
+	@FXML
+	TableView<String> Open_req; 
 	@FXML
 	ImageView Logo;
 	
@@ -58,20 +58,11 @@ public class StuMainGUIController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 			User s =new User();
 			s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			stuName.setText(s.getName());
+			ManName.setText(s.getName());
 		}
 	
 	@FXML
-	public void Avgset() {
-		String avg;		
-		Student stud =new Student();
-		stud=(Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
-		avg=Float.toString(stud.getAvg());
-		AvgC.setText(avg);
-	}
-	
-	@FXML
-	public void clsStudentMain() {
+	public void clsManagerMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
@@ -85,9 +76,12 @@ public class StuMainGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
-
-
-	
-
+	@Override
+	public String toString() {
+		return "ManMainGUIController [Hello=" + Hello + ", Reqs=" + Reqs + ", Reps=" + Reps + ", BlockLabel="
+				+ BlockLabel + ", Ins_PID=" + Ins_PID + ", Parent_id=" + Parent_id + ", ManName=" + ManName
+				+ ", CheckReq=" + CheckReq + ", OpenReq=" + OpenReq + ", GenRep=" + GenRep + ", UnBlock=" + UnBlock
+				+ ", Block=" + Block + ", Back=" + Back + ", LogOut=" + LogOut + ", Open_req=" + Open_req + ", Logo="
+				+ Logo + "]";
+	}
 }

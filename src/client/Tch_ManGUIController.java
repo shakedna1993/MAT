@@ -1,14 +1,10 @@
 package client;
 
-import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import client.RequestType;
-import entity.Student;
 import entity.User;
-import client.connectionmain;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,60 +14,41 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
-public class StuMainGUIController implements Initializable{
+public class Tch_ManGUIController implements Initializable{
 	
 	public static ClientConsole cli;
 	public static Stage primaryStage;
 	
 	@FXML
-	Button Ass_Sub;
-	@FXML
-	Button GradeL;
-	@FXML
-	Button CourseL;
-	@FXML
-	Button Evalu;
-	@FXML
-	Button Avg;
-	@FXML
-	Button LogOut;
-
+	ImageView Logo;
 	@FXML
 	Label Hello;
 	@FXML
-	Label Per_File;
+	Button LogOut;
 	@FXML
-	Label Ass;
+	javafx.scene.control.Label UName;
 	@FXML
-	Label AvgC;
+	Button Teacher_Win;
 	@FXML
-<<<<<<< HEAD
-	javafx.scene.control.Label stuName;
-=======
-	javafx.scene.control.Label CalcAvg;
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
-	
-	@FXML
-	ImageView Logo;
+	Button Manager_Win;
 	
 	
 	public void initialize(URL location, ResourceBundle resources) {
 			User s =new User();
 			s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			stuName.setText(s.getName());
-		}
-	
+			UName.setText(s.getName());
+	}
 	@FXML
-	public void Avgset() {
-		String avg;		
-		Student stud =new Student();
-		stud=(Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
-		avg=Float.toString(stud.getAvg());
-		AvgC.setText(avg);
+	public void showManMain() throws IOException {
+		connectionmain.showManagerMain();
+	}
+	@FXML
+	public void showTchMain() throws IOException {
+		connectionmain.showTeacherMain();
 	}
 	
 	@FXML
-	public void clsStudentMain() {
+	public void clsTchManMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
@@ -85,9 +62,11 @@ public class StuMainGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "Tch_ManGUIController [Logo=" + Logo + ", Hello=" + Hello + ", LogOut=" + LogOut + ", UName=" + UName
+				+ ", Teacher_Win=" + Teacher_Win + ", Manager_Win=" + Manager_Win + "]";
+	}
 	
-
-
 	
-
 }

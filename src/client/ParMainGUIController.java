@@ -1,30 +1,28 @@
 package client;
 
-import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import client.RequestType;
-import entity.Student;
 import entity.User;
 import client.connectionmain;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
-public class StuMainGUIController implements Initializable{
+public class ParMainGUIController implements Initializable{
 	
 	public static ClientConsole cli;
 	public static Stage primaryStage;
 	
-	@FXML
-	Button Ass_Sub;
+
 	@FXML
 	Button GradeL;
 	@FXML
@@ -32,24 +30,19 @@ public class StuMainGUIController implements Initializable{
 	@FXML
 	Button Evalu;
 	@FXML
-	Button Avg;
-	@FXML
 	Button LogOut;
+	@FXML
+	Button AvgBtn;
 
 	@FXML
 	Label Hello;
+
 	@FXML
-	Label Per_File;
+	javafx.scene.control.Label parName;
 	@FXML
-	Label Ass;
+	javafx.scene.control.Label CalcAvg ;
 	@FXML
-	Label AvgC;
-	@FXML
-<<<<<<< HEAD
-	javafx.scene.control.Label stuName;
-=======
-	javafx.scene.control.Label CalcAvg;
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
+	ComboBox<String> StuN;
 	
 	@FXML
 	ImageView Logo;
@@ -58,20 +51,12 @@ public class StuMainGUIController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 			User s =new User();
 			s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			stuName.setText(s.getName());
+			parName.setText(s.getName());
+
 		}
 	
 	@FXML
-	public void Avgset() {
-		String avg;		
-		Student stud =new Student();
-		stud=(Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
-		avg=Float.toString(stud.getAvg());
-		AvgC.setText(avg);
-	}
-	
-	@FXML
-	public void clsStudentMain() {
+	public void clsParentMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
@@ -88,6 +73,5 @@ public class StuMainGUIController implements Initializable{
 	
 
 
-	
 
 }

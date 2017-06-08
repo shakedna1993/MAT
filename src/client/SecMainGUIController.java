@@ -8,46 +8,66 @@ import entity.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
-public class TchMainGUIController implements Initializable{
+public class SecMainGUIController implements Initializable{
 	
 	public static ClientConsole cli;
 	public static Stage primaryStage;
 	
+
 	@FXML
-	ComboBox<String> STC;
+	Button NewSem;
 	@FXML
-	Button Post_Ass;
+	Button DefCl_Cs;
 	@FXML
-	Button Check_Ass;
+	Button DefineCl;
 	@FXML
-	Button CourseL;
+	Button EditCl;
 	@FXML
-	Button Back;
+	Button RemoveCl;
+	
+	@FXML
+	Button Req_Regi;
+	@FXML
+	Button Req_Remo;
+	@FXML
+	Button Req_Tch;
+	@FXML
+	Button Regi;
+	@FXML
+	Button Remo;
+	@FXML
+	Button TchAp;
+	@FXML
+	Button Check;
+
 	@FXML
 	Button LogOut;
 
 	@FXML
-	Label Hello, selectAss, WeekTH ;
+	Label Hello;
 	@FXML
-	Label selectTC;
+	Label ReqD;
 	@FXML
 	Label General;
 	@FXML
-	Label Ass;
+	Label Req;
 	@FXML
-	javafx.scene.control.Label TchName;
+	Label InReqID;
+	
 	@FXML
-	javafx.scene.control.Label WeekHours;
+	TextField Req_ID;
 	@FXML
-	TableView<String> Pub_Ass; 
+	javafx.scene.control.Label SecName;
+	@FXML
+	javafx.scene.control.Label ReqDes;
+
 	@FXML
 	ImageView Logo;
 	
@@ -55,11 +75,11 @@ public class TchMainGUIController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 			User s =new User();
 			s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			TchName.setText(s.getName());
+			SecName.setText(s.getName());
 		}
 	
 	@FXML
-	public void clsTeacherMain() {
+	public void clsSecretaryMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
@@ -76,12 +96,12 @@ public class TchMainGUIController implements Initializable{
 
 	@Override
 	public String toString() {
-		return "TchMainGUIController [STC=" + STC + ", Post_Ass=" + Post_Ass + ", Check_Ass=" + Check_Ass + ", CourseL="
-				+ CourseL + ", Back=" + Back + ", LogOut=" + LogOut + ", Hello=" + Hello + ", selectAss=" + selectAss
-				+ ", WeekTH=" + WeekTH + ", selectTC=" + selectTC + ", General=" + General + ", Ass=" + Ass
-				+ ", TchName=" + TchName + ", WeekHours=" + WeekHours + ", Pub_Ass=" + Pub_Ass + ", Logo=" + Logo + "]";
+		return "SecMainGUIController [NewSem=" + NewSem + ", DefCl_Cs=" + DefCl_Cs + ", DefineCl=" + DefineCl
+				+ ", EditCl=" + EditCl + ", RemoveCl=" + RemoveCl + ", Req_Regi=" + Req_Regi + ", Req_Remo=" + Req_Remo
+				+ ", Req_Tch=" + Req_Tch + ", Regi=" + Regi + ", Remo=" + Remo + ", TchAp=" + TchAp + ", Check=" + Check
+				+ ", LogOut=" + LogOut + ", Hello=" + Hello + ", ReqD=" + ReqD + ", General="
+				+ General + ", Req=" + Req + ", InReqID=" + InReqID + ", Req_ID=" + Req_ID + ", SecName=" + SecName
+				+ ", ReqDes=" + ReqDes + ", Logo=" + Logo + "]";
 	}
 	
-
-
 }

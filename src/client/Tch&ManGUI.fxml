@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="217.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Tch_ManGUIController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="500.0">
+         <children>
+            <Separator layoutX="-9.0" layoutY="87.0" prefHeight="7.0" prefWidth="509.0" />
+            <ImageView fx:id="Logo" fitHeight="94.0" fitWidth="343.0" layoutX="69.0" layoutY="9.0">
+               <image>
+                  <Image url="@LOGO.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="Manager_Win" layoutX="170.0" layoutY="174.0" mnemonicParsing="false" onAction="#showManMain" prefWidth="160.0" text="Connect as Manager">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="Teacher_Win" layoutX="170.0" layoutY="222.0" mnemonicParsing="false" onAction="#showTchMain" prefWidth="160.0" text="Connect as Teacher">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="LogOut" layoutX="221.0" layoutY="345.0" mnemonicParsing="false" onAction="#clsTchManMain" text="Log Out" />
+            <Separator layoutY="320.0" prefHeight="7.0" prefWidth="500.0" />
+            <Label fx:id="Hello" layoutX="42.0" layoutY="110.0" text="Hello!" textFill="#061880">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="UName" layoutX="120.0" layoutY="125.0" prefHeight="25.0" prefWidth="160.0" text="Name" textFill="#061880">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
