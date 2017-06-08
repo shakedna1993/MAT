@@ -45,11 +45,7 @@ public class StuMainGUIController implements Initializable{
 	@FXML
 	Label AvgC;
 	@FXML
-<<<<<<< HEAD
 	javafx.scene.control.Label stuName;
-=======
-	javafx.scene.control.Label CalcAvg;
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	
 	@FXML
 	ImageView Logo;
@@ -85,9 +81,12 @@ public class StuMainGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "StuMainGUIController [Ass_Sub=" + Ass_Sub + ", GradeL=" + GradeL + ", CourseL=" + CourseL + ", Evalu="
+				+ Evalu + ", Avg=" + Avg + ", LogOut=" + LogOut + ", Hello=" + Hello + ", Per_File=" + Per_File
+				+ ", Ass=" + Ass + ", AvgC=" + AvgC + ", stuName=" + stuName + ", Logo=" + Logo + "]";
+	}
 	
-
-
-	
-
 }
