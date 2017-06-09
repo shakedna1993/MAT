@@ -37,8 +37,10 @@ public class OpCheck {
 			return std;
 			
 		case Teacherdetails:
-			Teacher Teacher = (Teacher) op.getMsg();
-			return DBC.Teacherdetails(Teacher.getId());
+			User User3 = (User) op.getMsg();
+			Teacher Teacher = new Teacher();
+			Teacher=DBC.Teacherdetails(User3.getId());
+			return Teacher;
 		case UpdateUnit:
 			Teacher Teacher1 = (Teacher) op.getMsg();
 			val= DBC.UpdateUnit(Teacher1.getId(),Teacher1.getUnit());

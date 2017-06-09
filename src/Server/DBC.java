@@ -44,14 +44,14 @@ public class DBC {
 					lst.setIsConnected(Integer.parseInt(rs.getString(7)));
 				}
 				catch (Exception e) {
-					lst.setId("0");
+					lst.setId(null);
 					e.printStackTrace();
 				}
 
 			}
 			rs.close();  // Before every close.stage we need to update isConnected=0 
 			if (lst.getIsConnected() == 0 && lst.getBlocked() == 0) {
-				String Quary = ("UPDATE moodle.users set isConnected = " + 1 + " where UserName ='" + userName + "'");
+				String Quary = ("UPDATE moodle.users set isConnected = " + 1 + " where UserName ='" + userName + "' AND Password='" + password + "'");
 				stmt.executeUpdate(Quary);
 				System.out.println(lst);
 			}
@@ -59,7 +59,7 @@ public class DBC {
 			return lst;
 
 		} catch (SQLException e) {
-			lst.setId("0");
+			lst.setId(null);
 			e.printStackTrace();
 		}
 		return lst;
@@ -83,7 +83,7 @@ public class DBC {
 					stud.setId(rs.getString(3) == null ? "-1" : rs.getString(3));
 				}
 				catch (Exception e) {
-					stud.setId("0");
+					stud.setId(null);
 					e.printStackTrace();
 				}
 
@@ -93,7 +93,7 @@ public class DBC {
 			return stud;
 
 		} catch (SQLException e) {
-			stud.setId("0");
+			stud.setId(null);
 			e.printStackTrace();
 		}
 		return stud;
@@ -125,19 +125,20 @@ public class DBC {
 			Connection conn = Connect.getConnection();
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM moodle.users where Id='" + id + "'");
+					"SELECT * FROM moodle.teachers where tid='" + id + "'");
 			// where UserName="+userName+"AND where Password="+password
 			while (rs.next()) {
 				// Print out the values
 
 				try {
-					lst.setName(rs.getString(2));
-					lst.setId(rs.getString(1) == null ? "-1" : rs.getString(1));
-					lst.setUnit(rs.getString(3));
+					lst.setMaxHours(Integer.parseInt(rs.getString(1)));
+					lst.setIntership(rs.getString(2));
+					lst.setId(rs.getString(3)== null ? "-1" : rs.getString(3));
+					lst.setUnit(rs.getString(4));
 					
 				} 
 				catch (Exception e) {
-					lst.setId("0");
+					lst.setId(null);
 					e.printStackTrace();
 				}
 
@@ -147,7 +148,7 @@ public class DBC {
 			return lst;
 
 		} catch (SQLException e) {
-			lst.setId("0");
+			lst.setId(null);
 			e.printStackTrace();
 		}
 

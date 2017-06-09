@@ -84,7 +84,7 @@ public class LoginGUIcontroller {
 			a.join();
 			//
 	
-			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getId().equals("-1")) {
+			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getId()==null) {
  				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Wrong details");
 				alert.setHeaderText(null);
@@ -120,6 +120,13 @@ public class LoginGUIcontroller {
 				connectionmain.showManagerMain();
 				break;	
 			case 3:
+				MyThread C = new MyThread(RequestType.Teacherdetails, IndexList.Teacherdetails, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+				C.start();
+				try {
+					C.join();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
 				connectionmain.showTeacherMain();
 				break;
 			case 4:
