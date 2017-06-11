@@ -31,6 +31,8 @@ public class SecMainGUIController implements Initializable{
 	Button EditCl;
 	@FXML
 	Button RemoveCl;
+	@FXML
+	Button add_student_btn;
 	
 	@FXML
 	Button Req_Regi;
@@ -102,6 +104,10 @@ public class SecMainGUIController implements Initializable{
 				+ ", LogOut=" + LogOut + ", Hello=" + Hello + ", ReqD=" + ReqD + ", General="
 				+ General + ", Req=" + Req + ", InReqID=" + InReqID + ", Req_ID=" + Req_ID + ", SecName=" + SecName
 				+ ", ReqDes=" + ReqDes + ", Logo=" + Logo + "]";
+	}
+	
+	public void addStudent(){
+		
 	}
 	
 }
