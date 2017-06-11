@@ -5,13 +5,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import entity.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
 
@@ -19,6 +26,7 @@ public class SecMainGUIController implements Initializable{
 	
 	public static ClientConsole cli;
 	public static Stage primaryStage;
+	private static AnchorPane mainLayout;
 	
 
 	@FXML
@@ -105,9 +113,15 @@ public class SecMainGUIController implements Initializable{
 				+ General + ", Req=" + Req + ", InReqID=" + InReqID + ", Req_ID=" + Req_ID + ", SecName=" + SecName
 				+ ", ReqDes=" + ReqDes + ", Logo=" + Logo + "]";
 	}
-	
-	public void addStudent(){
-		
+	@FXML
+	public void addStudent(ActionEvent event) throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/AddStudentGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage = new Stage();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Parent Connection");
+		primaryStage.show();
 	}
 	
 }

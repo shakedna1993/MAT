@@ -12,7 +12,12 @@ public class IndexList {
 	public static final int Teacherdetails = 5;
 	public static final int LOGOUT=6;
 	public static final int StudentDetails=7;
-
+	
+	
+	
+	//Tzachi: 20-39
+	public static final int StudentExists=20;
+	public static final int ParentExists=21;
 
 	//...........................
 	// insert more index ... 

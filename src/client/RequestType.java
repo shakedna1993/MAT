@@ -9,7 +9,7 @@ public enum RequestType {
 
 	/** Add new request from server */
 	
-	Teacherdetails,UpdateUnit,LOGIN, LOGOUT,StudentDetails;
+	Teacherdetails,UpdateUnit,LOGIN, LOGOUT,StudentDetails,StudentExists,ParentExists;
 	
 	
 	/** TBD */
