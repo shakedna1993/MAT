@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 //import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sun.applet.Main;
+import thred.IndexList;
+import thred.MyThread;
 
 public class connectionmain extends Application {
 	private static Stage primaryStage;
@@ -19,12 +21,20 @@ public class connectionmain extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		connectionmain.primaryStage = primaryStage;
 		showLogin();
-
 	}
+	
+	
 	@Override
 	public void stop(){
-	    System.out.println("Stage is closing");
-	    // Save file
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		if (a.getObj()!=null){
+			a.start();
+			try {
+				a.join();
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 	/**
 	 * show the window of login
