@@ -197,7 +197,7 @@ public class DBC {
 
 		
 	}
-	public static boolean StudentExists(String sid){
+	public static String StudentExists(String sid){
 		Statement stmt;
 		boolean flag=false;
 
@@ -206,7 +206,96 @@ public class DBC {
 			Connection conn = Connect.getConnection();
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM moodle.student where Id='" + sid + "'");
+					"SELECT * FROM moodle.student where sid='" + sid + "'");
+			
+			while (rs.next()) {
+				try {
+					flag=true;	
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+			rs.close();
+			Connect.close();
+			return "" + flag;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "" + false;
+		}
+
+	}
+	public static String ParentExists(String pid){
+		Statement stmt;
+		boolean flag=false;
+
+		try {
+
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.users where Id='" + pid + "' AND Role='6'");
+			
+			while (rs.next()) {
+				try {
+					flag=true;	
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+			rs.close();
+			Connect.close();
+			return ""+flag;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ""+false;
+		}
+	}
+	public static int AddStudent(Student s){
+		Statement stmt;
+		
+
+		try {
+
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			
+			boolean rs = stmt.execute(
+					"INSERT INTO moodle.users (`Id`, `Fullname`, `password`, `UserName`, `Role`, `isBlocked`, `isConnected`) VALUES ('"+s.getId()+"', '"+s.getName()+"', '"+s.getPassword()+
+					"', '"+s.getUserName()+"', '"+"4"+"', '"+0+"', '"+0+"');\n");
+			rs = stmt.execute("INSERT INTO `moodle`.`student` (`parentid`, `avg`, `sid`) VALUES ('"+s.getParentId()+"', '"+0+"', '"+s.getId()+"')");
+			
+			if (rs) {
+				try {
+						
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+			//rs.close();
+			Connect.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return 0;
+	}
+	public static boolean UserNameExists(String name){
+		Statement stmt;
+		boolean flag=false;
+
+		try {
+
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.users where UserName='" + name + "'");
 			
 			while (rs.next()) {
 				try {
@@ -224,37 +313,7 @@ public class DBC {
 			e.printStackTrace();
 			return false;
 		}
-
 	}
-	public static boolean ParentExists(String pid){
-		Statement stmt;
-		boolean flag=false;
-
-		try {
-
-			Connection conn = Connect.getConnection();
-			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"SELECT * FROM moodle.user where Id='" + pid + "'");
-			
-			while (rs.next()) {
-				try {
-					flag=true;	
-				} 
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-
-			}
-			rs.close();
-			Connect.close();
-			return flag;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
 		// TODO Auto-generated method stub

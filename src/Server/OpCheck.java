@@ -49,9 +49,12 @@ public class OpCheck {
 			else
 				return "fail";
 		case StudentExists:
-			return DBC.StudentExists((String)op.getMsg());
+			String id = (String)op.getMsg();
+			return DBC.StudentExists(id);
 		case ParentExists:
 			return DBC.ParentExists((String)op.getMsg());
+		case AddStudent:
+			return DBC.AddStudent((Student)op.getMsg());
 		default:
 			return "null";
 		}

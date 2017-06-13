@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.AddStudentGUIController">
+<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.DefineNewClassGUIController">
    <children>
       <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
       <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
@@ -23,7 +23,7 @@
             <Image url="@LOGO.png" />
          </image>
       </ImageView>
-      <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="27.0" prefWidth="179.0" text="Add Student Menu" textFill="#061880">
+      <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="27.0" prefWidth="179.0" text="Define New Class" textFill="#061880">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -33,7 +33,7 @@
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-      <Button fx:id="add_button" layoutX="281.0" layoutY="495.0" mnemonicParsing="false" onAction="#addButton" prefHeight="25.0" prefWidth="77.0" text="Add" />
+      <Button fx:id="define_button" layoutX="281.0" layoutY="495.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Define" />
       <TextField fx:id="name_field" layoutX="316.0" layoutY="209.0" />
       <TextField fx:id="user_field" layoutX="316.0" layoutY="247.0" />
       <TextField fx:id="password_field" layoutX="316.0" layoutY="285.0" />

@@ -89,12 +89,17 @@ public class MsgFromServer {
 			return;
 		case UpdateUnit:
 			setDataListByIndex(IndexList.UpdateUnit, returnMsg.getMsg());
-	
 		case Teacherdetails:
 			setDataListByIndex(IndexList.Teacherdetails, returnMsg.getMsg());
-			
-			
-			
+		case StudentExists:
+			setDataListByIndex(IndexList.StudentExists, returnMsg.getMsg());
+		case ParentExists:
+			setDataListByIndex(IndexList.ParentExists, returnMsg.getMsg());
+		case AddStudent:
+			setDataListByIndex(IndexList.AddStudent, returnMsg.getMsg());
+		case UserNameExists:
+			setDataListByIndex(IndexList.UserNameExists, returnMsg.getMsg());
+
 		default:
 			break;
 		}

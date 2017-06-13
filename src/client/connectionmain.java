@@ -21,7 +21,11 @@ public class connectionmain extends Application {
 		showLogin();
 
 	}
-
+	@Override
+	public void stop(){
+	    System.out.println("Stage is closing");
+	    // Save file
+	}
 	/**
 	 * show the window of login
 	 */
@@ -35,6 +39,22 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 		 
+	public static Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
+	public static void setPrimaryStage(Stage primaryStage) {
+		connectionmain.primaryStage = primaryStage;
+	}
+
+	public static AnchorPane getMainLayout() {
+		return mainLayout;
+	}
+
+	public static void setMainLayout(AnchorPane mainLayout) {
+		connectionmain.mainLayout = mainLayout;
+	}
+
 	public static void showTeacherMain() throws IOException {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));

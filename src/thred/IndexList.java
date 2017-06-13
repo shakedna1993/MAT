@@ -18,7 +18,8 @@ public class IndexList {
 	//Tzachi: 20-39
 	public static final int StudentExists=20;
 	public static final int ParentExists=21;
-
+	public static final int AddStudent=22;
+	public static final int UserNameExists=23;
 	//...........................
 	// insert more index ... 
 	// 

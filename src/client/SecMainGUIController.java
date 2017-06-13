@@ -25,8 +25,6 @@ import thred.MyThread;
 public class SecMainGUIController implements Initializable{
 	
 	public static ClientConsole cli;
-	public static Stage primaryStage;
-	private static AnchorPane mainLayout;
 	
 
 	@FXML
@@ -115,12 +113,52 @@ public class SecMainGUIController implements Initializable{
 	}
 	@FXML
 	public void addStudent(ActionEvent event) throws IOException{
+		Stage primaryStage = connectionmain.getPrimaryStage();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/AddStudentGUI.fxml"));
-		mainLayout = loader.load();
-		primaryStage = new Stage();
-		primaryStage.setScene(new Scene(mainLayout));
-		primaryStage.setTitle("M.A.T- Parent Connection");
+		Pane root = loader.load();		
+		primaryStage.setScene(new Scene(root));		
+		primaryStage.setTitle("M.A.T- Add Student");
+		primaryStage.show();
+	}
+	@FXML
+	public void newClass(ActionEvent event) throws IOException{
+		Stage primaryStage = connectionmain.getPrimaryStage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/DefineNewClassGUI.fxml"));
+		Pane root = loader.load();		
+		primaryStage.setScene(new Scene(root));		
+		primaryStage.setTitle("M.A.T- Add Student");
+		primaryStage.show();
+	}
+	@FXML
+	public void editClass(ActionEvent event) throws IOException{
+		Stage primaryStage = connectionmain.getPrimaryStage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/EditClassGUI.fxml"));
+		Pane root = loader.load();		
+		primaryStage.setScene(new Scene(root));		
+		primaryStage.setTitle("M.A.T- Add Student");
+		primaryStage.show();
+	}
+	@FXML
+	public void removeClass(ActionEvent event) throws IOException{
+		Stage primaryStage = connectionmain.getPrimaryStage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/RemoveClassGUI.fxml"));
+		Pane root = loader.load();		
+		primaryStage.setScene(new Scene(root));		
+		primaryStage.setTitle("M.A.T- Add Student");
+		primaryStage.show();
+	}
+	@FXML
+	public void defineClass4Course(ActionEvent event) throws IOException{
+		Stage primaryStage = connectionmain.getPrimaryStage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/DefineClass4CourseGUI.fxml"));
+		Pane root = loader.load();		
+		primaryStage.setScene(new Scene(root));		
+		primaryStage.setTitle("M.A.T- Add Student");
 		primaryStage.show();
 	}
 	
