@@ -44,7 +44,7 @@ public class DBC {
 					lst.setIsConnected(Integer.parseInt(rs.getString(7)));
 				}
 				catch (Exception e) {
-					lst.setId(null);
+					lst.setId("-1");
 					e.printStackTrace();
 				}
 
@@ -59,12 +59,26 @@ public class DBC {
 			return lst;
 
 		} catch (SQLException e) {
-			lst.setId(null);
+			lst.setId("-1");
 			e.printStackTrace();
 		}
 		return lst;
 	}
 	
+	public static void ResetServer() {
+		Statement stmt;
+
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			String Query = ("UPDATE moodle.users set IsConnected = " + 0 + " where IsConnected =" + 1);
+			stmt.executeUpdate(Query);
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 	public static Student StudentDetails(String Id) {
 		Statement stmt;
 		Student stud = new Student();
@@ -83,7 +97,7 @@ public class DBC {
 					stud.setId(rs.getString(3) == null ? "-1" : rs.getString(3));
 				}
 				catch (Exception e) {
-					stud.setId(null);
+					stud.setId("-1");
 					e.printStackTrace();
 				}
 
@@ -93,7 +107,7 @@ public class DBC {
 			return stud;
 
 		} catch (SQLException e) {
-			stud.setId(null);
+			stud.setId("-1");
 			e.printStackTrace();
 		}
 		return stud;
@@ -138,7 +152,7 @@ public class DBC {
 					
 				} 
 				catch (Exception e) {
-					lst.setId(null);
+					lst.setId("-1");
 					e.printStackTrace();
 				}
 
@@ -148,7 +162,7 @@ public class DBC {
 			return lst;
 
 		} catch (SQLException e) {
-			lst.setId(null);
+			lst.setId("-1");
 			e.printStackTrace();
 		}
 
@@ -173,7 +187,7 @@ public class DBC {
 					flag=true;	
 				} 
 				catch (Exception e) {
-					lst.setId("0");
+					lst.setId("-1");
 					e.printStackTrace();
 				}
 
