@@ -84,7 +84,7 @@ public class LoginGUIcontroller {
 			a.join();
 			//
 	
-			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getId()==null) {
+			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getId().equals("-1")) {
  				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Wrong details");
 				alert.setHeaderText(null);

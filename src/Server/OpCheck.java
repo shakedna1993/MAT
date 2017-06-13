@@ -9,6 +9,7 @@ import client.Op;
 import entity.Student;
 import entity.Teacher;
 import entity.User;
+import Server.DBC;
 /**
  * 
  * This class handles with all the functionality of the server.
@@ -35,6 +36,10 @@ public class OpCheck {
 			User User2 = (User) op.getMsg();
 			std=DBC.StudentDetails(User2.getId());
 			return std;
+			
+		case ResetServer:
+			DBC.ResetServer();
+			return 1;
 			
 		case Teacherdetails:
 			User User3 = (User) op.getMsg();

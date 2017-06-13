@@ -33,7 +33,7 @@ public class ServerGUIController {
 
 	public static EchoServer sv;
 	public static Stage primaryStage;
-	//DBC check=new DBC();
+	DBC check=new DBC();
 	
 	@FXML
 	Button CloseServerBtn;
@@ -93,10 +93,11 @@ public class ServerGUIController {
 	void startServer() {
 		Connect con= new Connect();
 		sv = new EchoServer(Integer.valueOf(PortText.getText()), this);
-		//check.ResetServer();
 		con.password=Pass.getText();
 		con.username=username.getText();
 		con.DB=DB1.getText();
+		check.ResetServer();
+	
 		try {
 			sv.listen(); // Start listening for connections
 			StartServerBtn.setDisable(true);
