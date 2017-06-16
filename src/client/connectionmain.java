@@ -118,6 +118,26 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	public static void ShowCourseList() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/CourseListGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Course List");
+		primaryStage.show();
+	}
+	
+	public static void ShowGradeList() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/GradeListGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Grade List");
+		primaryStage.show();
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

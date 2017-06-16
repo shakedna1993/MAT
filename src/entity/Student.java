@@ -10,7 +10,7 @@ public class Student extends User implements Serializable{
 	private static final long serialVersionUID = -5638726927853322152L;
 //	private String Name,Password,UserName,Id;
 //	private int isConnected,Role,Blocked;
-	private String ParentId;
+	private String ParentId,Classid;
 	private float avg;
 	
 	public Student() {
@@ -18,8 +18,9 @@ public class Student extends User implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	public Student(String name, String password, String userName, String id, String parentId, int isConnected, int role,
-			int blocked, float avg) {
+			int blocked, float avg, String Classid) {
 		super(name, password, userName, id, isConnected, role, blocked);
+		Classid=this.Classid;
 		ParentId = parentId;
 		this.avg = avg;
 		// TODO Auto-generated constructor stub
@@ -46,6 +47,12 @@ public class Student extends User implements Serializable{
 		this.avg = avg;
 	}
 	
+	public String getClassid() {
+		return Classid;
+	}
+	public void setClassid(String classid) {
+		Classid = classid;
+	}
 	@Override
 	public String toString() {
 		return "Student [ParentId=" + ParentId + ", avg=" + avg + "]";

@@ -60,6 +60,9 @@ public class OpCheck {
 			return DBC.ParentExists((String)op.getMsg());
 		case AddStudent:
 			return DBC.AddStudent((Student)op.getMsg());
+		case StudentCourse:
+			User stud = (User) op.getMsg();
+			return DBC.StudentCourse(stud.getId());
 		default:
 			return "null";
 		}

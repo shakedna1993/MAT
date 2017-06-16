@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.CourseListGUIController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="639.0">
+         <children>
+            <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+            <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
+               <image>
+                  <Image url="@LOGO.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="20.0" prefWidth="56.0" text="Hello!" textFill="#061880">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="stuName" layoutX="102.0" layoutY="67.0" prefHeight="21.0" prefWidth="200.0" text="Student Name" textFill="#061880">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="back" layoutX="291.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
+            <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
+            <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
+            <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
+            <Separator layoutX="326.0" layoutY="133.0" orientation="VERTICAL" prefHeight="231.0" prefWidth="5.0" />
+            <TableView fx:id="table" layoutX="194.0" layoutY="168.0" prefHeight="338.0" prefWidth="275.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

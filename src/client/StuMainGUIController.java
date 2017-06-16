@@ -67,6 +67,26 @@ public class StuMainGUIController implements Initializable{
 	}
 	
 	@FXML
+	public void CourseList() {
+		try {
+			connectionmain.ShowCourseList();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void GradeList() {
+		try {
+			connectionmain.ShowGradeList();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
 	public void clsStudentMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
