@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Course implements Serializable{
 
@@ -8,19 +9,23 @@ public class Course implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 7643170416233054127L;
-	private String courseId, name, unit;
+	private String courseId, name, unit,Semid;
 	private int Hours;
+	private float grade;
+	private ArrayList<Float> GradeList = new ArrayList<>();
 	
 	public Course() {
 		super();
 	}
 	
-	public Course(String courseId, String name, String unit, int hours) {
+	public Course(String courseId, String name, String unit,String Semid, int hours, Float grade) {
 		super();
 		this.courseId = courseId;
 		this.name = name;
 		this.unit = unit;
 		Hours = hours;
+		this.Semid=Semid;
+		this.setGrade(grade);
 	}
 
 	public String getCourseId() {
@@ -54,9 +59,35 @@ public class Course implements Serializable{
 	public void setHours(int hours) {
 		Hours = hours;
 	}
+	
 
+	public String getSemid() {
+		return Semid;
+	}
+
+	public void setSemid(String semid) {
+		Semid = semid;
+	}
+	public Float getGrade() {
+		return grade;
+	}
+
+	public void setGrade(float grade) {
+		this.grade = grade;
+	}
+	
+	public ArrayList<Float> getGradeList() {
+		return GradeList;
+	}
+	
+	public void addGrade(Float s) {
+		this.GradeList.add(s) ;
+	}
 	@Override
 	public String toString() {
-		return "Course [courseId=" + courseId + ", name=" + name + ", unit=" + unit + ", Hours=" + Hours + "]";
+		return "Course [courseId=" + courseId + ", name=" + name + ", unit=" + unit + ", Semid=" + Semid + ", Hours="
+				+ Hours + ", grade=" + grade + "]";
 	}
+
+
 }

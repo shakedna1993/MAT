@@ -32,9 +32,9 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="GradeL" layoutX="81.0" layoutY="202.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Grades List" />
+      <Button fx:id="GradeL" layoutX="81.0" layoutY="202.0" mnemonicParsing="false" onAction="#GradeList" prefHeight="25.0" prefWidth="146.0" text="Grades List" />
       <Button fx:id="Evalu" layoutX="81.0" layoutY="295.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Evaluations" />
-      <Button fx:id="CourseL" layoutX="81.0" layoutY="250.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Course List" />
+      <Button fx:id="CourseL" layoutX="81.0" layoutY="250.0" mnemonicParsing="false" onAction="#CourseList" prefHeight="25.0" prefWidth="146.0" text="Course List" />
       <Button fx:id="Ass_Sub" layoutX="394.0" layoutY="202.0" mnemonicParsing="false" text="Assignment Submission " />
             <Label fx:id="Ass" layoutX="428.0" layoutY="163.0" text="Assignments" underline="true">
          <font>

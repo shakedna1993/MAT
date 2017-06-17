@@ -66,6 +66,9 @@ public class OpCheck {
 			return DBC.classNameExists((String)op.getMsg());
 		case DefineClass:
 			return DBC.DefineClass((entity.Class)op.getMsg());
+		case StudentCourse:
+			User stud = (User) op.getMsg();
+			return DBC.StudentCourse(stud.getId());
 		default:
 			return "null";
 		}

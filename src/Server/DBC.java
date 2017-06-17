@@ -5,6 +5,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import entity.Course;
 import entity.Student;
 import entity.Teacher;
 import entity.User;
@@ -95,6 +96,7 @@ public class DBC {
 					stud.setParentId(rs.getString(1));
 					stud.setAvg(rs.getFloat(2));
 					stud.setId(rs.getString(3) == null ? "-1" : rs.getString(3));
+					stud.setClassid(rs.getString(4));
 				}
 				catch (Exception e) {
 					stud.setId("-1");
@@ -401,6 +403,46 @@ public class DBC {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	/**This method will search for a specific course in the DB
+	 * @param cid-will hold the id number of the course that been searched
+	 * @return return the course that been searched if it found
+	 */
+	public static ArrayList<Course> StudentCourse(String Sid) {
+		Statement stmt;
+		ArrayList<Course> lst = new ArrayList<>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			String Quary = "SELECT moodle.studentcourse.* FROM moodle.studentcourse WHERE moodle.studentcourse.studid='" + Sid + "'" ;
+
+			ResultSet rs = stmt.executeQuery(Quary);
+
+			while (rs.next()) {
+				// Print out the values
+				Course cu = new Course();
+				try {
+					cu.setSemid((rs.getString(2)));
+					cu.setCourseId(rs.getString(3));
+					cu.setGrade(Float.parseFloat(rs.getString(4)));
+					cu.setName((rs.getString(5)));
+					lst.add(cu);
+				}
+
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			rs.close();
+			Connect.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lst;
 	}
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {

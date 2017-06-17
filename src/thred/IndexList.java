@@ -29,5 +29,6 @@ public class IndexList {
 	// 
 	//
 	//Shaked: 60-79
+	public static final int StudentCourse=60;
 	
 }
