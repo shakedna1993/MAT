@@ -129,7 +129,7 @@ public class SecMainGUIController implements Initializable{
 		loader.setLocation(Main.class.getResource("/client/DefineNewClassGUI.fxml"));
 		Pane root = loader.load();		
 		primaryStage.setScene(new Scene(root));		
-		primaryStage.setTitle("M.A.T- Add Student");
+		primaryStage.setTitle("M.A.T- Define a New Class");
 		primaryStage.show();
 	}
 	@FXML

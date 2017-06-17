@@ -60,6 +60,12 @@ public class OpCheck {
 			return DBC.ParentExists((String)op.getMsg());
 		case AddStudent:
 			return DBC.AddStudent((Student)op.getMsg());
+		case classIDExists:
+			return DBC.classIDExists((String)op.getMsg());
+		case classNameExists:
+			return DBC.classNameExists((String)op.getMsg());
+		case DefineClass:
+			return DBC.DefineClass((entity.Class)op.getMsg());
 		default:
 			return "null";
 		}

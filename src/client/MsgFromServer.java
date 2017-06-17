@@ -99,7 +99,12 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.AddStudent, returnMsg.getMsg());
 		case UserNameExists:
 			setDataListByIndex(IndexList.UserNameExists, returnMsg.getMsg());
-
+		case classIDExists:
+			setDataListByIndex(IndexList.classIDExists, returnMsg.getMsg());
+		case classNameExists:
+			setDataListByIndex(IndexList.classNameExists, returnMsg.getMsg());
+		case DefineClass:
+			setDataListByIndex(IndexList.DefineClass, returnMsg.getMsg());
 		default:
 			break;
 		}

@@ -112,7 +112,7 @@ public class DBC {
 		}
 		return stud;
 	}
-	
+
 	public static void LOGOUT(String userName) {
 		Statement stmt;
 
@@ -128,8 +128,7 @@ public class DBC {
 		}
 
 	}
-	
-	
+
 	public static Teacher Teacherdetails(String id) {
 		Statement stmt;
 		Teacher lst = new Teacher();
@@ -268,6 +267,25 @@ public class DBC {
 			return ""+false;
 		}
 	}
+
+	public static int DefineClass(entity.Class c){
+		Statement stmt;
+		try {
+
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			
+			boolean rs = stmt.execute(
+					"INSERT INTO `moodle`.`class` (`Classid`, `name`, `MAXStudent`) VALUES ('"+c.getClassId()+"', '"+c.getName()+"', '"+c.getMAXStudent()+"');");
+
+			Connect.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return 0;
+	}
 	public static int AddStudent(Student s){
 		Statement stmt;
 		
@@ -310,6 +328,62 @@ public class DBC {
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
 					"SELECT * FROM moodle.users where UserName='" + name + "'");
+			
+			while (rs.next()) {
+				try {
+					flag=true;	
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+			rs.close();
+			Connect.close();
+			return flag;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public static boolean classIDExists (String id){
+		Statement stmt;
+		boolean flag=false;
+
+		try {
+
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.class where Classid='" + id + "'");
+			
+			while (rs.next()) {
+				try {
+					flag=true;	
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+			rs.close();
+			Connect.close();
+			return flag;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public static boolean classNameExists (String name){
+		Statement stmt;
+		boolean flag=false;
+		try {
+
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.class where name='" + name + "'");
 			
 			while (rs.next()) {
 				try {
