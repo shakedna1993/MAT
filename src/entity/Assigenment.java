@@ -8,7 +8,63 @@ public class Assigenment implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 9149522994876793152L;
-	private String AssId, UserId, Fileid;
+	private String AssId, UserId, Fileid, courseid, coursename, classid, classname, teacherid, techername,assname;
+	public String getCourseid() {
+		return courseid;
+	}
+
+	public String getAssname() {
+		return assname;
+	}
+
+	public void setAssname(String assname) {
+		this.assname = assname;
+	}
+
+	public void setCourseid(String courseid) {
+		this.courseid = courseid;
+	}
+
+	public String getCoursename() {
+		return coursename;
+	}
+
+	public void setCoursename(String coursename) {
+		this.coursename = coursename;
+	}
+
+	public String getClassid() {
+		return classid;
+	}
+
+	public void setClassid(String classid) {
+		this.classid = classid;
+	}
+
+	public String getClassname() {
+		return classname;
+	}
+
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
+
+	public String getTeacherid() {
+		return teacherid;
+	}
+
+	public void setTeacherid(String teacherid) {
+		this.teacherid = teacherid;
+	}
+
+	public String getTechername() {
+		return techername;
+	}
+
+	public void setTechername(String techername) {
+		this.techername = techername;
+	}
+
 	private int state;
 	private Date DueDate;
 
@@ -30,6 +86,7 @@ public class Assigenment implements Serializable{
 		Fileid = fileid;
 		this.state = state;
 		DueDate = dueDate;
+		
 	}
 
 	public String getAssId() {

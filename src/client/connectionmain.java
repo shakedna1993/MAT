@@ -146,6 +146,26 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	public static void showTeacherGUIAssWindow() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/addNewAssingmentGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Parent Connection");
+		primaryStage.show();
+	}
+	
+	
+	
+	public static void showTeacherEditAssGUI() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/teacherEditAssGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Parent Connection");
+		primaryStage.show();
+	}
+	
 	
 	
 	public static void main(String[] args) {

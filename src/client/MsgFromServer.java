@@ -108,6 +108,18 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.classNameExists, returnMsg.getMsg());
 		case DefineClass:
 			setDataListByIndex(IndexList.DefineClass, returnMsg.getMsg());
+		case setComboBoxTeacherCourse:
+			setDataListByIndex(IndexList.setComboBoxTeacherCourse, returnMsg.getMsg());
+		case createCourseEntity:
+			setDataListByIndex(IndexList.createCourseEntity, returnMsg.getMsg());	
+		case setTableViewTeacherCourseAssigenment:
+			setDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment, returnMsg.getMsg());		
+		case getWeeklyHours:
+			setDataListByIndex(IndexList.getWeeklyHours, returnMsg.getMsg());
+		case allAssForTeacher:
+			setDataListByIndex(IndexList.allAssForTeacher, returnMsg.getMsg());
+		case insertNewAss:
+			setDataListByIndex(IndexList.insertNewAss, returnMsg.getMsg());
 		default:
 			break;
 		}

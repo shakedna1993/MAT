@@ -26,6 +26,15 @@ public class IndexList {
 	
 	//...........................
 	// insert more index ... 
+	
+	//shahar: 40-59
+	public static final int setComboBoxTeacherCourse = 40;
+	public static final int createCourseEntity = 41;
+	public static int setTableViewTeacherCourseAssigenment= 42;
+	public static int getWeeklyHours = 43;
+	public static int getAssArreyList = 44;
+	public static int allAssForTeacher = 45;
+	public static int insertNewAss = 46;
 	// 
 	//
 	//Shaked: 60-79
