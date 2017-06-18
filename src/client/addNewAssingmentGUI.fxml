@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="561.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newAssTeacher">
+   <children>
+      <TextField fx:id="AssingmentidTEXT" layoutX="167.0" layoutY="75.0" />
+      <TextField fx:id="AssingmentnameTEXT" layoutX="167.0" layoutY="106.0" />
+      <TextField fx:id="DaySubmissionTEXT" layoutX="167.0" layoutY="141.0" prefHeight="25.0" prefWidth="27.0" text="day">
+         <font>
+            <Font size="10.0" />
+         </font></TextField>
+      <TextField fx:id="CourseidTEXT" layoutX="167.0" layoutY="174.0" />
+      <TextField fx:id="ClassidTEXT" layoutX="167.0" layoutY="207.0" />
+      <TextField fx:id="FileidTEXT" layoutX="167.0" layoutY="241.0" />
+      <Label fx:id="detlabel" layoutX="42.0" layoutY="37.0" text="Please insert assingment deatails:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="42.0" layoutY="79.0" text="Assingment id:" />
+      <Label layoutX="42.0" layoutY="110.0" text="Assingment name:" />
+      <Label layoutX="42.0" layoutY="145.0" text="Date of Submission:" />
+      <Label fx:id="CoursenameTEXT" layoutX="42.0" layoutY="178.0" text="Course ID" />
+      <Label layoutX="42.0" layoutY="211.0" />
+      <Label layoutX="42.0" layoutY="211.0" text="Class id:" />
+      <Label layoutX="42.0" layoutY="245.0" text="File id:?????" />
+      <Button fx:id="sendBtn" layoutX="213.0" layoutY="378.0" mnemonicParsing="false" onAction="#newAss" text="SEND" />
+      <TextArea fx:id="showWarningField" layoutX="142.0" layoutY="291.0" prefHeight="72.0" prefWidth="200.0" />
+      <Button fx:id="backBtn" layoutX="216.0" layoutY="455.0" mnemonicParsing="false" text="Back" />
+      <TextField fx:id="month" layoutX="207.0" layoutY="141.0" prefHeight="25.0" prefWidth="41.0" text="month" />
+      <TextField fx:id="yearText" layoutX="263.0" layoutY="141.0" prefHeight="25.0" prefWidth="53.0" text="year" />
+      <Label fx:id="label" layoutX="367.0" layoutY="39.0" />
+   </children>
+</AnchorPane>
