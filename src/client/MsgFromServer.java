@@ -120,6 +120,16 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.allAssForTeacher, returnMsg.getMsg());
 		case insertNewAss:
 			setDataListByIndex(IndexList.insertNewAss, returnMsg.getMsg());
+		case setComboBoxStudentCourse:
+			setDataListByIndex(IndexList.setComboBoxStudentCourse, returnMsg.getMsg());
+		case setTableViewStudentCourseAssigenment:
+			setDataListByIndex(IndexList.setTableViewStudentCourseAssigenment, returnMsg.getMsg());	
+		case DownoladFile:
+			setDataListByIndex(IndexList.DownloadFile, returnMsg.getMsg());
+		case ClassCourseDetails:
+			setDataListByIndex(IndexList.ClassCourseDetails, returnMsg.getMsg());
+			
+			
 		default:
 			break;
 		}

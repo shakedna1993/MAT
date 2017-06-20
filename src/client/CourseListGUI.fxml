@@ -27,7 +27,6 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="back" layoutX="291.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
             <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
             <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
             <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
@@ -35,5 +34,7 @@
             <TableView fx:id="table" layoutX="194.0" layoutY="168.0" prefHeight="338.0" prefWidth="275.0" />
          </children>
       </AnchorPane>
+      <Button fx:id="LogOut" layoutX="368.0" layoutY="571.0" mnemonicParsing="false" onAction="#clsCourseList" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
+      <Button fx:id="back" layoutX="240.0" layoutY="571.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
    </children>
 </AnchorPane>

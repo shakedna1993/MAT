@@ -166,6 +166,26 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	public static void ShowAssOptions() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/AssMainGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Assignment");
+		primaryStage.show();
+	}
+	
+	public static void ShowStudentUploadAss() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/StudentUploadAssGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Assignment Submission");
+		primaryStage.show();
+	}
+	
+	
+	
 	
 	
 	public static void main(String[] args) {

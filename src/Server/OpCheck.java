@@ -11,6 +11,8 @@ import entity.Course;
 import entity.Student;
 import entity.Teacher;
 import entity.User;
+import entity.Class;
+import Server.DownloadFileServer;
 import Server.DBC;
 /**
  * 
@@ -58,20 +60,25 @@ public class OpCheck {
 		case StudentExists:
 			String id = (String)op.getMsg();
 			return DBC.StudentExists(id);
+			
 		case ParentExists:
 			return DBC.ParentExists((String)op.getMsg());
+			
 		case AddStudent:
 			return DBC.AddStudent((Student)op.getMsg());
+			
 		case classIDExists:
 			return DBC.classIDExists((String)op.getMsg());
+			
 		case classNameExists:
 			return DBC.classNameExists((String)op.getMsg());
+			
 		case DefineClass:
 			return DBC.DefineClass((entity.Class)op.getMsg());
+			
 		case StudentCourse:
 			User stud = (User) op.getMsg();
-			return DBC.StudentCourse(stud.getId());
-			
+			return DBC.StudentCourse(stud.getId());	
 			
 			case setComboBoxTeacherCourse:
 				ArrayList<String> al = new ArrayList<String>();
@@ -82,11 +89,6 @@ public class OpCheck {
 				Course Course = new Course();
 				Course=DBC.createCourseEntity((String)op.getMsg());
 				return Course;
-				
-				
-				
-				
-				
 				
 			case setTableViewTeacherCourseAssigenment:
 				ArrayList<Assigenment> lst = new ArrayList<>();
@@ -102,10 +104,29 @@ public class OpCheck {
 				ArrayList<Assigenment> lst1 = new ArrayList<>();
 				lst1 =  DBC.allAssForTeacher((String)op.getMsg());
 				return lst1;
+				
 			case insertNewAss:
 			int flag = 0;
 			flag =  DBC.insertNewAss((Assigenment)op.getMsg());
 				return flag;
+				
+			case setComboBoxStudentCourse:
+				ArrayList<String> a2 = new ArrayList<String>();
+				User stu = (User) op.getMsg();
+				a2 = DBC.setComboBoxStudentCourse(stu.getId());
+				return a2;
+				
+			case setTableViewStudentCourseAssigenment:
+				 Assigenment ass1 = new Assigenment();
+			     ass1 = (Assigenment) op.getMsg();
+				return DBC.setTableViewStudentCourseAssigenment(ass1.getUserId(),ass1.getCoursename());
+			case DownoladFile:
+				return DownloadFileServer.sendFile((String) op.getMsg());
+			case ClassCourseDetails:
+				String Classid = (String) op.getMsg();
+				return DBC.ClassCourseDetails(Classid);
+			
+				
 		default:
 			return "null";
 		}

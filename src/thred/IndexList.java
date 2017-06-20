@@ -39,5 +39,9 @@ public class IndexList {
 	//
 	//Shaked: 60-79
 	public static final int StudentCourse=60;
+	public static final int setComboBoxStudentCourse=61;
+	public static final int setTableViewStudentCourseAssigenment=62;
+	public static final int DownloadFile = 63;
+	public static final int ClassCourseDetails=64;
 	
 }

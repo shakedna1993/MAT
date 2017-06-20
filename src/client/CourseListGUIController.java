@@ -1,5 +1,6 @@
 package client;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,6 +30,9 @@ public class CourseListGUIController implements Initializable {
 	Button back;
 	@FXML
 	Label stuName;
+	@FXML
+	Button LogOut;
+	
 	@FXML
 	TableView<Course> table = new TableView<>();
 	private ObservableList<Course> data;
@@ -62,7 +66,21 @@ public class CourseListGUIController implements Initializable {
 		table.getColumns().addAll(c1, c2, c3);
 		table.setItems(data);
 	}
-	
+	@FXML
+	public void clsCourseList() {
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		a.start();
+		try {
+			a.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			connectionmain.showLogin();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	@FXML
 	private void backButton(ActionEvent event) throws Exception{
 		connectionmain.showStudentMain();

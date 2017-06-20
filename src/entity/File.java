@@ -41,6 +41,7 @@ public class File implements Serializable{
 	public void setFile(File file) {
 		File = file;
 	}
+	
 	@Override
 	public String toString() {
 		return "File [Fileid=" + Fileid + ", FileType=" + FileType + "]";
