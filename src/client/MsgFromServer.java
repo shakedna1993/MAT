@@ -128,6 +128,8 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.DownloadFile, returnMsg.getMsg());
 		case ClassCourseDetails:
 			setDataListByIndex(IndexList.ClassCourseDetails, returnMsg.getMsg());
+		case UpdateAss:
+			setDataListByIndex(IndexList.UpdateAss, returnMsg.getMsg());
 			
 			
 		default:

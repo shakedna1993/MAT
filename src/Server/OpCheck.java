@@ -125,7 +125,10 @@ public class OpCheck {
 			case ClassCourseDetails:
 				String Classid = (String) op.getMsg();
 				return DBC.ClassCourseDetails(Classid);
-			
+			case UpdateAss:
+				int flag1 = 0;
+				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
+				return flag1;
 				
 		default:
 			return "null";

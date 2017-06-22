@@ -2,6 +2,7 @@ package Server;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -711,15 +712,15 @@ public class DBC {
 
 
 	public static int insertNewAss(Assigenment ass){
-
+	
 	Statement stmt;
 	try {
 
 		Connection conn = Connect.getConnection();
 		stmt = conn.createStatement();
 
-		String Quary = "INSERT INTO moodle.teacherass (assId,assName,fileId,state,courseId) VALUES ('"
-				+ ass.getAssId()+ "','" + ass.getAssname() + "','" + ass.getFileid() +  "','" + ass.getCheck() + "','" + ass.getCourseid() + "')";
+		String Quary = "INSERT INTO moodle.teacherassingment (Assid,Fileid,DueDate,tecid,CourseId,SemId) VALUES ('"
+				+ ass.getAssId()+  "','" + ass.getFileid() +  "','" + "2020-01-01" +  "','" + ass.getUserId() + "','" + ass.getCourseid() + "','" + ass.getSemester() + "')";
 		stmt.executeUpdate(Quary);
 
 		}
@@ -878,6 +879,25 @@ public class DBC {
 		return cl;
 	}
 	
+	public static int UpdateAss(Assigenment ass){
+	Statement stmt;
+	try {
+
+		Connection conn = Connect.getConnection();
+		stmt = conn.createStatement();
+		String Quary = "update moodle.teacherassingment set Fileid= '" + ass.getFileid()+ "', DueDate= '" +  "2020-01-01" +
+				 "' where Assid= '" + ass.getAssId() + "' AND CourseId= '" + ass.getCourseid() + "'";
+		stmt.executeUpdate(Quary);
+
+		}
+			catch (Exception e) {
+					e.printStackTrace();
+					return 0;
+				}
+		return 1;
+	}
+	
+
 	
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
