@@ -805,9 +805,8 @@ public class DBC {
 
 		return lst;
 	}
-	
 	/*
-	public static ArrayList<Course> ClassCourseDetails(String Cid) {
+	public static Class ClassCourseDetails(String Cid) {
 		Statement stmt;
 		Course cl = new Course();
 		ArrayList<Course> clst=new ArrayList<>();
@@ -839,7 +838,6 @@ public class DBC {
 		}
 		return clst;
 	}
-<<<<<<< HEAD
 	*/
 
 	public static int UploadFile(File file) throws Exception {
@@ -861,7 +859,6 @@ public class DBC {
 		return 1;
 	}
 
-=======
 	
 	public static int UpdateAss(Assigenment ass){
 	Statement stmt;
@@ -883,7 +880,6 @@ public class DBC {
 	
 
 	
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
 		// TODO Auto-generated method stub
