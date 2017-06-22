@@ -42,6 +42,6 @@
       <Label fx:id="selectAss" layoutX="14.0" layoutY="223.0" text="Select Assignment:" />
       <Label fx:id="selectC" layoutX="14.0" layoutY="183.0" text="Select Course:" />
       <Button fx:id="selectBtn" layoutX="386.0" layoutY="179.0" mnemonicParsing="false" onAction="#setTableViewStudentCourseAssigenment" text="select" />
-      <ListView fx:id="listview" layoutX="155.0" layoutY="214.0" prefHeight="200.0" prefWidth="221.0" />
+      <TableView fx:id="table" layoutX="165.0" layoutY="223.0" prefHeight="200.0" prefWidth="220.0" />
    </children>
 </AnchorPane>

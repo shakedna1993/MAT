@@ -1,7 +1,11 @@
 package Server;
 
+import java.io.File;
+//import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import javax.swing.JFileChooser;
 
 import client.MsgFromServer;
 import thred.IndexList;
@@ -14,6 +18,7 @@ import entity.User;
 import entity.Class;
 import Server.DownloadFileServer;
 import Server.DBC;
+import entity.FileEnt;
 /**
  * 
  * This class handles with all the functionality of the server.
@@ -117,14 +122,25 @@ public class OpCheck {
 				return a2;
 				
 			case setTableViewStudentCourseAssigenment:
-				 Assigenment ass1 = new Assigenment();
-			     ass1 = (Assigenment) op.getMsg();
-				return DBC.setTableViewStudentCourseAssigenment(ass1.getUserId(),ass1.getCoursename());
+				ArrayList<Assigenment> lst2 = new ArrayList<>();
+				String cid;
+				cid=(String)op.getMsg();
+				lst2= DBC.setTableViewStudentCourseAssigenment(cid);
+				return lst2;
 			case DownoladFile:
 				return DownloadFileServer.sendFile((String) op.getMsg());
-			case ClassCourseDetails:
-				String Classid = (String) op.getMsg();
-				return DBC.ClassCourseDetails(Classid);
+			case UploadFile:
+				int check = 0;
+				File f=(File)(op.getMsg());
+				try {
+					check= DBC.UploadFile(f);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return check;
+				
+				
 			
 				
 		default:

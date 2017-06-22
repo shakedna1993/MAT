@@ -43,5 +43,6 @@ public class IndexList {
 	public static final int setTableViewStudentCourseAssigenment=62;
 	public static final int DownloadFile = 63;
 	public static final int ClassCourseDetails=64;
+	public static final int UploadFile=65;
 	
 }

@@ -8,19 +8,19 @@ public class Class implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 117905001325117180L;
-	private String classId, name, teachid;
+	private String classId, name, Teachid;
 	private int MAXStudent;
 	
 	public Class() {
 		super();
 	}
 
-	public Class(String classId, String name,String teachid, int mAXStudent) {
+	public Class(String classId, String name,String Teachid, int mAXStudent) {
 		super();
 		this.classId = classId;
 		this.name = name;
 		MAXStudent = mAXStudent;
-		this.teachid=teachid;
+		this.Teachid=Teachid;
 	}
 
 	public String getClassId() {
@@ -47,19 +47,20 @@ public class Class implements Serializable{
 		MAXStudent = mAXStudent;
 	}
 	
-	
+
+
 
 	public String getTeachid() {
-		return teachid;
+		return Teachid;
 	}
 
 	public void setTeachid(String teachid) {
-		this.teachid = teachid;
+		Teachid = teachid;
 	}
 
 	@Override
 	public String toString() {
-		return "Class [classId=" + classId + ", name=" + name + ", teachid=" + teachid + ", MAXStudent=" + MAXStudent
+		return "Class [classId=" + classId + ", name=" + name + ", Teachid=" + Teachid + ", MAXStudent=" + MAXStudent
 				+ "]";
 	}
 	

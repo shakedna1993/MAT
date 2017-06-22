@@ -4,9 +4,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.*;
+
+import javax.sql.rowset.serial.SerialBlob;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import entity.Assigenment;
 import entity.Course;
+import entity.FileEnt;
 import entity.Student;
 import entity.Teacher;
 import entity.User;
@@ -16,6 +22,9 @@ import Server.Connect;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  * This class contains all the interaction with the Data-Base *
@@ -760,73 +769,23 @@ public class DBC {
 		return al;
 	}
 
-	public static ArrayList<Assigenment> setTableViewStudentCourseAssigenment(String teacherid,String coursename) {
+	public static ArrayList<Assigenment> setTableViewStudentCourseAssigenment(String courseid) {
 		Statement stmt;
-		ArrayList<String> a1 = new ArrayList<>();
-		ArrayList<String> a2 = new ArrayList<>();
 		ArrayList<Assigenment> lst = new ArrayList<>();
 		try {
 			Connection conn = Connect.getConnection();
 			stmt = conn.createStatement();
-
-			ResultSet rs = stmt.executeQuery("SELECT * FROM moodle.classcourse where tid='" + teacherid +"'");
-
-			while (rs.next()) {
-				// Print out the values
-			//	Assigenment ass = new Assigenment();
-				try {
-					
-					a1.add(rs.getString(1));
-					/*
-					ass.setAssId(rs.getString(1));
-					ass.setFileid(rs.getString(2));
-					ass.setDueDate(rs.getDate(3));
-					ass.setUserId(rs.getString(4));
-					ass.setState(rs.getInt(5));
-					ass.setAssname(rs.getString(6));
-					ass.setCourseid(rs.getString(7));
-					ass.setClassid(rs.getString(8));
-					ass.setTeacherid(rs.getString(9));
-					ass.setCoursename(rs.getString(10));
-					lst.add(ass);
-					*/
-				}
-
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-				for(int i = 0; i<a1.size();i++ ){
-					ResultSet rs1 = stmt.executeQuery( "SELECT * FROM moodle.course where Courseid='" + a1.get(i) +"'");
-					while (rs1.next()) {
-						
-						try {
-							if(coursename.equals(rs1.getString(2))) {
-								a2.add(rs1.getString(1));
-							}	
-								
-						}
-						catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-					rs1.close();
-				}
-				
-				for(int i = 0; i<a2.size();i++ ){
-				ResultSet rs2 = stmt.executeQuery( "SELECT * FROM moodle.teacherassingment where CourseId='" + a2.get(i) +"'");
-				
-				while (rs2.next()) {
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM moodle.teacherassingment where CourseId='" + courseid +"'");
+				while (rs.next()) {
 					// Print out the values
 					Assigenment ass = new Assigenment();
 					try {
 						
-						ass.setAssId(rs2.getString(1));
-						ass.setFileid(rs2.getString(2));
-						ass.setDueDate(rs2.getDate(3));
-						ass.setUserId(rs2.getString(4));
-						//ass.setCheck(rs2.getInt(5));
-						ass.setCourseid(rs2.getString(5));
+						ass.setAssId(rs.getString(1));
+						ass.setFileid(rs.getString(2));
+						ass.setDueDate(rs.getDate(3));
+						ass.setUserId(rs.getString(4));
+						ass.setCourseid(rs.getString(5));
 						lst.add(ass);				
 					}
 
@@ -834,9 +793,7 @@ public class DBC {
 						e.printStackTrace();
 					}
 				}
-				rs2.close();
-			}
-			rs.close();					
+			rs.close();						
 			Connect.close();
 			return lst;
 
@@ -847,9 +804,12 @@ public class DBC {
 
 		return lst;
 	}
-	public static Class ClassCourseDetails(String Cid) {
+	
+	/*
+	public static ArrayList<Course> ClassCourseDetails(String Cid) {
 		Statement stmt;
-		Class cl = new Class();
+		Course cl = new Course();
+		ArrayList<Course> clst=new ArrayList<>();
 
 		try {
 			Connection conn = Connect.getConnection();
@@ -860,8 +820,9 @@ public class DBC {
 				// Print out the values
 
 				try {
-					cl.setClassId(rs.getString(2));
+					cl.setCourseId(rs.getString(2));
 					cl.setTeachid(rs.getString(3));
+					clst.add(cl);
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -870,15 +831,34 @@ public class DBC {
 			}
 			rs.close();
 			Connect.close();
-			return cl;
+			return clst;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return cl;
+		return clst;
 	}
-	
-	
+	*/
+
+	public static int UploadFile(File file) throws Exception {
+		try {
+			Connection conn = Connect.getConnection();
+			//stmt = conn.createStatement();
+	        String Quary = "INSERT INTO moodle.studentassignment (File) VALUES (?)";
+	        PreparedStatement stmt = conn.prepareStatement(Quary);
+//	        File File = new File(ent.getFilePath());// get path and file name from text fields
+		    InputStream fIn = new FileInputStream(file);
+		    stmt.setBlob(1, fIn);
+	        stmt.executeUpdate(Quary);
+	        JOptionPane.showMessageDialog(null, "File stored successfully!");
+			}
+		catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+			}
+		return 1;
+	}
+
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
 		// TODO Auto-generated method stub

@@ -2,8 +2,11 @@ package client;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import com.sun.glass.ui.Pixels.Format;
 
 import entity.Assigenment;
 import entity.Course;
@@ -20,10 +23,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.ir.Assignment;
 import thred.IndexList;
 import thred.MyThread;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AssMainGUIController implements Initializable {
 	
@@ -54,12 +64,11 @@ public class AssMainGUIController implements Initializable {
 	@FXML
 	javafx.scene.control.Label StuName;
 	@FXML
-	ListView<String> PubAss; 
-	@FXML
-	ListView<String> listview; 
+	TableView<Assigenment> table = new TableView<>();
 	@FXML
 	ImageView Logo;
 	
+	private ObservableList<Assigenment> data;
 	static String assToChoose;
 	public void initialize(URL location, ResourceBundle resources) {
 		User s =new User();
@@ -92,7 +101,7 @@ public class AssMainGUIController implements Initializable {
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-		course = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntity);
+			course = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntity);
 			a2.add(course.getName());
 		}
 		ObservableList<String> list = FXCollections.observableArrayList(a2);
@@ -100,39 +109,43 @@ public class AssMainGUIController implements Initializable {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void	setTableViewStudentCourseAssigenment( ){
-		listview.getItems().clear();
-		Student stud =new Student();
-		stud=(Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
-		String Classid = stud.getClassid();
-		MyThread b1 = new MyThread(RequestType.ClassCourseDetails, IndexList.ClassCourseDetails, Classid);
-		b1.start();
-		try {
-			b1.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-		
+	public void	setTableViewStudentCourseAssigenment(){	 
+		table.getColumns().clear();
 		Object st= STC.getValue();
 		String  CourseName=st.toString();
-		Class cl =new Class();
-		cl=(Class) (MsgFromServer.getDataListByIndex(IndexList.ClassCourseDetails));
-		String teacherid=cl.getTeachid();
-		Assigenment ass = new Assigenment();
-		 ass.setCoursename(CourseName);
-		 ass.setUserId(teacherid);
-		MyThread C = new MyThread(RequestType.setTableViewStudentCourseAssigenment, IndexList.setTableViewStudentCourseAssigenment, ass);
-		C.start();
+
+		ArrayList<String> a1 = new ArrayList<String>();
+		MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		a.start();
 		try {
-			C.join();
+			a.join();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		
-		ArrayList<Assigenment> b=(ArrayList<Assigenment>)MsgFromServer.getDataListByIndex(IndexList.setTableViewStudentCourseAssigenment);
+		ArrayList<Course>course=(ArrayList<Course>) MsgFromServer.getDataListByIndex(IndexList.StudentCourse);
+		for(int i=0;i<course.size();i++){
+			if(course.get(i).getName().equals(CourseName)){
+				MyThread b = new MyThread(RequestType.setTableViewStudentCourseAssigenment, IndexList.setTableViewStudentCourseAssigenment,course.get(i).getCourseId());
+				b.start();
+				try {
+					b.join();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				break;
+			}
+		}
+		ArrayList<Assigenment>b=(ArrayList<Assigenment>) MsgFromServer.getDataListByIndex(IndexList.setTableViewStudentCourseAssigenment);
+		data = FXCollections.observableArrayList();
 		for(int i =0; i<b.size();i++)
-			listview.getItems().add(b.get(i).getAssId());
-		listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);	
+			data.add(b.get(i));
+		TableColumn<Assigenment, String> c1 = new TableColumn<>("Assigenment Id");
+		c1.setCellValueFactory(new PropertyValueFactory<>("AssId"));
+		TableColumn<Assigenment, String> c2 = new TableColumn<>("Due Date");
+		c2.setCellValueFactory(new PropertyValueFactory<>("DueDate"));
+		table.getColumns().addAll(c1, c2);
+		table.setItems(data);
+		b.clear();
 	}
 	
 	@FXML
@@ -151,7 +164,7 @@ public class AssMainGUIController implements Initializable {
 		}
 	}
 	
-	public void DownloadAss(){
+	public void UploadAss(){
 		try {
 			connectionmain.ShowStudentUploadAss();
 		} catch (IOException e) {
@@ -160,7 +173,7 @@ public class AssMainGUIController implements Initializable {
 		}
 	}
 	
-	public void UploadAss(){
+	public void DownloadAss(){
 		
 	}
 	
@@ -168,12 +181,13 @@ public class AssMainGUIController implements Initializable {
 	private void backButton(ActionEvent event) throws Exception{
 		connectionmain.showStudentMain();
 	}
+	
 	@Override
 	public String toString() {
 		return "AssMainGUIController [STC=" + STC + ", Upload_Ass=" + Upload_Ass + ", selectBtn=" + selectBtn
 				+ ", Down_Ass=" + Down_Ass + ", CourseL=" + CourseL + ", Back=" + Back + ", LogOut=" + LogOut
 				+ ", Hello=" + Hello + ", selectAss=" + selectAss + ", selectC=" + selectC + ", Ass=" + Ass
-				+ ", StuName=" + StuName + ", PubAss=" + PubAss + ", listview=" + listview + ", Logo=" + Logo + "]";
+				+ ", StuName=" + StuName + ", table=" + table + ", Logo=" + Logo + ", data=" + data + "]";
 	}
 	
 	
