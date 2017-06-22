@@ -128,9 +128,14 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.DownloadFile, returnMsg.getMsg());
 		case ClassCourseDetails:
 			setDataListByIndex(IndexList.ClassCourseDetails, returnMsg.getMsg());
+<<<<<<< HEAD
 		case UploadFile:
 			setDataListByIndex(IndexList.UploadFile, returnMsg.getMsg());
 			
+=======
+		case UpdateAss:
+			setDataListByIndex(IndexList.UpdateAss, returnMsg.getMsg());
+>>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 			
 			
 		default:

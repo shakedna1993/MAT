@@ -139,8 +139,10 @@ public class TchMainGUIController implements Initializable{
 	}
 	
 	public void editAss() throws IOException{
+		if(listview.getSelectionModel().getSelectedItem()!= null){
 		assToChoose = listview.getSelectionModel().getSelectedItem() ;
 		connectionmain.showTeacherEditAssGUI();
+		}
 	}
 	
 	

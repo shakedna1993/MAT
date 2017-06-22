@@ -35,6 +35,7 @@ public class IndexList {
 	public static int getAssArreyList = 44;
 	public static int allAssForTeacher = 45;
 	public static int insertNewAss = 46;
+	public static final int UpdateAss = 47;
 	// 
 	//
 	//Shaked: 60-79
@@ -44,5 +45,6 @@ public class IndexList {
 	public static final int DownloadFile = 63;
 	public static final int ClassCourseDetails=64;
 	public static final int UploadFile=65;
+	
 	
 }

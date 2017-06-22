@@ -129,6 +129,7 @@ public class OpCheck {
 				return lst2;
 			case DownoladFile:
 				return DownloadFileServer.sendFile((String) op.getMsg());
+<<<<<<< HEAD
 			case UploadFile:
 				int check = 0;
 				File f=(File)(op.getMsg());
@@ -142,6 +143,15 @@ public class OpCheck {
 				
 				
 			
+=======
+			case ClassCourseDetails:
+				String Classid = (String) op.getMsg();
+				return DBC.ClassCourseDetails(Classid);
+			case UpdateAss:
+				int flag1 = 0;
+				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
+				return flag1;
+>>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 				
 		default:
 			return "null";

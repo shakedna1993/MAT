@@ -2,6 +2,8 @@ package client;
 
 import java.net.URL;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -9,8 +11,11 @@ import com.sun.xml.internal.ws.org.objectweb.asm.Label;
 
 import entity.Assigenment;
 import entity.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -18,6 +23,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
 
@@ -28,9 +36,10 @@ public class newAssTeacher implements Initializable {
 	Button sendBtn;
 	@FXML
 	Button backBtn;
-	
 	@FXML
-	TextArea showWarningField;
+	Button LogOut;
+	
+
 	
 	@FXML
 	TextField AssingmentidTEXT;
@@ -52,16 +61,18 @@ public class newAssTeacher implements Initializable {
 	javafx.scene.control.Label detlabel;
 	
 	@FXML
-	javafx.scene.control.Label label;
+	javafx.scene.control.Label tecName;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	
+		User s =new User();
+		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		tecName.setText(s.getName());
 	}
 	
 	
 	@SuppressWarnings({ "unchecked" })
-	public void newAss(){
+	public void newAss() throws ParseException{
 		int flag = 0;
 	User s = new User();
 	s =  (User) MsgFromServer.getDataListByIndex(IndexList.LOGIN);
@@ -72,12 +83,21 @@ public class newAssTeacher implements Initializable {
 		ass.setAssId(AssingmentidTEXT.getText());
 		ass.setAssname(AssingmentnameTEXT.getText());
 		ass.setFileid(FileidTEXT.getText());
+		ass.setUserId(s.getId());
+		ass.setCourseid(CourseidTEXT.getText());
+		ass.setSemester("011");
+		
+	/*	String data =   ""+yearText.getText()+"-"+month.getText()+"-"+DaySubmissionTEXT.getText()+"";
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date date = fmt.parse(data);
+		System.out.println(data);
+		ass.setDueDate(date);    */
 		//date = "" + yearText.getText() + "-" + month.getText()+"-" + DaySubmissionTEXT.getText()+"";
 	/*	date.setYear(Integer.parseInt(yearText.getText()));
 		date.setMonth(Integer.parseInt(month.getText()));
 		date.setDate(Integer.parseInt(DaySubmissionTEXT.getText()));  
 		ass.setDueDate(date);  */
-		ass.setCourseid(CourseidTEXT.getText());
+		
 		
 		if(ass.getAssId().length()==0 || ass.getAssname().length()==0 || ass.getFileid().length()==0 || ass.getCourseid().length()==0){
 			Alert alert = new Alert(AlertType.WARNING);
@@ -139,8 +159,40 @@ public class newAssTeacher implements Initializable {
 			e1.printStackTrace();
 		}
 		
+		if((int) MsgFromServer.getDataListByIndex(IndexList.insertNewAss)==1){
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("New assignment");
+			alert.setHeaderText(null);
+			alert.setContentText("Task # "+ass.getAssname()+" was successfully added");
+			alert.show();
+			return;
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("New assignment");
+			alert.setHeaderText(null);
+			alert.setContentText("Something went wrong, please try again");
+			alert.show();
+			return;
+		}
+		
+		
+		
+		
 	}
 	
+	@FXML
+	private void backButton(ActionEvent event) throws Exception{
+		Stage primaryStage = connectionmain.getPrimaryStage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));
+		Pane root = loader.load();		
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setTitle("M.A.T- Secretary Connection");
+		primaryStage.show();
+	}
+	
+
 	
 
 }
