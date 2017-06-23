@@ -114,18 +114,10 @@ public class AssMainGUIController implements Initializable {
 	@SuppressWarnings("unchecked")
 	public void setTableViewStudentCourseAssigenment() {
 		table.getColumns().clear();
-<<<<<<< HEAD
+
 		Object st= STC.getValue();
 		String  CourseName=st.toString();
 		MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-=======
-		Object st = STC.getValue();
-		String CourseName = st.toString();
-
-		ArrayList<String> a1 = new ArrayList<String>();
-		MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
-				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 		a.start();
 		try {
 			a.join();

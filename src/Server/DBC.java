@@ -917,7 +917,6 @@ public class DBC {
 		return rep;
 	}
 	
-<<<<<<< HEAD
 	public static ArrayList<Teacher> createTeacherEntity() {
 		Statement stmt;
 		ArrayList<Teacher> tec =new ArrayList<Teacher>();
@@ -1031,7 +1030,7 @@ public class DBC {
 		return se;
 	}
 	
-=======
+
 //*******************
 	/**Bar Parent
 	 * 	
@@ -1160,7 +1159,7 @@ public class DBC {
 
 		}
 		
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
+
 	
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {

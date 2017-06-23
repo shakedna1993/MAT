@@ -152,7 +152,6 @@ public class OpCheck {
 				int flag1 = 0;
 				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
 				return flag1;
-<<<<<<< HEAD
 			case createReportEntity:
 				return DBC.createReportEntity();
 			case createTeacherEntity:
@@ -165,8 +164,6 @@ public class OpCheck {
 				
 				
 				
-=======
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 		default:
 			return "null";
 		}

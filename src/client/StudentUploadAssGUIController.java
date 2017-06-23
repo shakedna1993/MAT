@@ -59,7 +59,7 @@ public class StudentUploadAssGUIController implements Initializable {
 	}
 
 	@FXML
-<<<<<<< HEAD
+
 	public void UploadAss(){
 		
 		try{
@@ -72,31 +72,10 @@ public class StudentUploadAssGUIController implements Initializable {
 				e1.printStackTrace();
 			}
 		}catch(Exception e){
-=======
-	public void UploadAss() {
-		File f;
-		try {
-			f = new File(chooser.getSelectedFile().getPath());
-		} catch (Exception e) {
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
-			// Do something
-			return;
-		}
-<<<<<<< HEAD
-
-	}	
-	
-	
-=======
-		MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile, f);
-		try {
-			C.start();
-			C.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
 	}
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
+
 
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {

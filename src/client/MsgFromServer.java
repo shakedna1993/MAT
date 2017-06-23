@@ -12,8 +12,7 @@ public class MsgFromServer {
 	public static ArrayList<Object> dataList = new ArrayList<>();
 
 	/**
-	 * This method creates new data list for all the info that returns from the
-	 * server
+	 * This method creates new data list for all the info that returns from the server
 	 */
 	public static void initiazlizeData() {
 		dataList = new ArrayList<>();
@@ -22,10 +21,8 @@ public class MsgFromServer {
 	/**
 	 * This method sets the data in the data list by int index to be obj value.
 	 * 
-	 * @param index
-	 *            where to insert data in list.
-	 * @param obj
-	 *            what data to insert/change.
+	 * @param index where to insert data in list.
+	 * @param obj what data to insert/change.
 	 */
 	public static void setDataListByIndex(int index, Object obj) {
 		while (index >= dataList.size())
@@ -55,8 +52,7 @@ public class MsgFromServer {
 	/**
 	 * This method sets the data in the data list by int index to be null.
 	 * 
-	 * @param index
-	 *            where to insert data in list.
+	 * @param index where to insert data in list.
 	 */
 	public static void deleteDataListByIndex(int index) {
 		if (index >= dataList.size())
@@ -128,9 +124,9 @@ public class MsgFromServer {
 		case setComboBoxTeacherCourse:
 			setDataListByIndex(IndexList.setComboBoxTeacherCourse, returnMsg.getMsg());
 		case createCourseEntity:
-			setDataListByIndex(IndexList.createCourseEntity, returnMsg.getMsg());
+			setDataListByIndex(IndexList.createCourseEntity, returnMsg.getMsg());	
 		case setTableViewTeacherCourseAssigenment:
-			setDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment, returnMsg.getMsg());
+			setDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment, returnMsg.getMsg());		
 		case getWeeklyHours:
 			setDataListByIndex(IndexList.getWeeklyHours, returnMsg.getMsg());
 		case allAssForTeacher:
@@ -140,20 +136,15 @@ public class MsgFromServer {
 		case setComboBoxStudentCourse:
 			setDataListByIndex(IndexList.setComboBoxStudentCourse, returnMsg.getMsg());
 		case setTableViewStudentCourseAssigenment:
-			setDataListByIndex(IndexList.setTableViewStudentCourseAssigenment, returnMsg.getMsg());
+			setDataListByIndex(IndexList.setTableViewStudentCourseAssigenment, returnMsg.getMsg());	
 		case DownoladFile:
 			setDataListByIndex(IndexList.DownloadFile, returnMsg.getMsg());
 		case ClassCourseDetails:
 			setDataListByIndex(IndexList.ClassCourseDetails, returnMsg.getMsg());
 		case UploadFile:
 			setDataListByIndex(IndexList.UploadFile, returnMsg.getMsg());
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 		case UpdateAss:
 			setDataListByIndex(IndexList.UpdateAss, returnMsg.getMsg());
-<<<<<<< HEAD
 		case createReportEntity:
 			setDataListByIndex(IndexList.createReportEntity, returnMsg.getMsg());
 		case createTeacherEntity:
@@ -165,9 +156,6 @@ public class MsgFromServer {
 			
 			
 			
-=======
-
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 		default:
 			break;
 		}

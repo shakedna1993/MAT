@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -36,38 +37,31 @@
       </Label>
       <Button fx:id="LogOut" layoutX="348.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsManagerMain" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
       
-      <Separator layoutX="3.0" layoutY="102.0" prefHeight="17.0" prefWidth="639.0" />
-      <Separator layoutY="117.0" prefHeight="5.0" prefWidth="639.0" />
+      <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
+      <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
       <Button fx:id="Back" layoutX="212.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Back" />
-      <Label fx:id="Reps" layoutX="121.0" layoutY="463.0" text="Reports" underline="true">
+      <Label fx:id="Reps" layoutX="465.0" layoutY="146.0" text="Reports" underline="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Separator layoutX="2.0" layoutY="449.0" prefHeight="5.0" prefWidth="367.0" />
+      <Separator layoutX="9.0" layoutY="367.0" prefHeight="5.0" prefWidth="630.0" />
       <Label fx:id="Reqs" layoutX="145.0" layoutY="146.0" text="Requests" underline="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
       <Button fx:id="CheckReq" layoutX="24.0" layoutY="180.0" mnemonicParsing="false" text="Check For New Requests:" />
-      <TableView fx:id="Open_req" layoutX="182.0" layoutY="180.0" prefHeight="221.0" prefWidth="178.0">
+      <TableView fx:id="Open_req" layoutX="182.0" layoutY="180.0" prefHeight="136.0" prefWidth="159.0">
         <columns>
           <TableColumn prefWidth="158.0" text="Requests" />
         </columns>
       </TableView>
-<<<<<<< HEAD
       <Button fx:id="OpenReq" layoutX="216.0" layoutY="327.0" mnemonicParsing="false" text="Open Request" />
       <Button fx:id="GenRep" layoutX="410.0" layoutY="181.0" mnemonicParsing="false" onAction="#GenrateReports" text="Generate Statistical Reports" />
       <Separator layoutX="369.0" layoutY="134.0" orientation="VERTICAL" prefHeight="234.0" prefWidth="6.0" />
       <Label fx:id="BlockLabel" layoutX="285.0" layoutY="400.0" text="Block Parent" underline="true">
-=======
-      <Button fx:id="OpenReq" layoutX="200.0" layoutY="409.0" mnemonicParsing="false" text="Open Request" />
-      <Button fx:id="GenRep" layoutX="71.0" layoutY="507.0" mnemonicParsing="false" text="Generate Statistical Reports" />
-      <Separator layoutX="366.0" layoutY="121.0" orientation="VERTICAL" prefHeight="425.0" prefWidth="7.0" />
-      <Label fx:id="BlockLabel" layoutX="465.0" layoutY="137.0" text="Block Parent" underline="true">
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
