@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import entity.Assigenment;
 import entity.Course;
 import entity.FileEnt;
+import entity.Reports;
+import entity.Semester;
 import entity.Student;
 import entity.Teacher;
 import entity.User;
@@ -843,13 +845,21 @@ public class DBC {
 	public static int UploadFile(File file) throws Exception {
 		try {
 			Connection conn = Connect.getConnection();
-			//stmt = conn.createStatement();
-	        String Quary = "INSERT INTO moodle.studentassignment (File) VALUES (?)";
+	        String Quary = "INSERT INTO moodle.studentassignment (Assid,Studid,Courseid,Semid,Date,Fileid,path) VALUES (?,?,?,?,?,?,?)";
+	        InputStream InputStream =new FileInputStream(file.getPath());
 	        PreparedStatement stmt = conn.prepareStatement(Quary);
-//	        File File = new File(ent.getFilePath());// get path and file name from text fields
-		    InputStream fIn = new FileInputStream(file);
-		    stmt.setBlob(1, fIn);
-	        stmt.executeUpdate(Quary);
+	        String Assid="test",Studid="11111",Courseid="1201",Semid="011",Date="2017-06-22";
+	        
+	        stmt.setString(1,Assid );
+	        stmt.setString(2,Studid );
+	        stmt.setString(3,Courseid );
+	        stmt.setString(4,Semid );
+	        stmt.setString(6,"1234" );
+	      //  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	       // java.util.Date date=sdf.parse(Date);
+	        //stmt.setDate(5,"2017-06-22");
+	        stmt.setBinaryStream(7,InputStream,(long)file.length());
+	        stmt.executeUpdate();
 	        JOptionPane.showMessageDialog(null, "File stored successfully!");
 			}
 		catch (Exception e) {
@@ -877,8 +887,149 @@ public class DBC {
 				}
 		return 1;
 	}
+	public static ArrayList<Reports> createReportEntity() {
+		Statement stmt;
+		ArrayList<Reports> rep =new ArrayList<Reports>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.reports");
+			while (rs.next()) {
+				Reports re=new Reports();
+				try {
+					re.setRepId(rs.getString(1));
+					re.setType(Integer.parseInt(rs.getString(2)));
+					re.setRepName(rs.getString(3));
+					rep.add(re);
+				} 
+				catch (Exception e) {
+					re.setRepId("-1");
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			Connect.close();
+			return rep;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rep;
+	}
 	
-
+	public static ArrayList<Teacher> createTeacherEntity() {
+		Statement stmt;
+		ArrayList<Teacher> tec =new ArrayList<Teacher>();
+		ArrayList<Teacher> tecup =new ArrayList<Teacher>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.teachers");
+			while (rs.next()) {
+				Teacher teacher=new Teacher();
+				try {
+					teacher.setTecId(rs.getString(3));
+					tec.add(teacher);
+				} 
+				catch (Exception e) {
+					teacher.setTecId("-1");
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			for(int j=0; j<tec.size();j++){
+				ResultSet rs = stmt.executeQuery(
+						"SELECT * FROM moodle.users where Id='" + tec.get(j).getTecId() +"'");
+				while (rs.next()) {
+					Teacher teacher=new Teacher();
+					try {
+						teacher.setTecId(tec.get(j).getTecId());
+						teacher.setTecName(rs.getString(2));
+						tecup.add(teacher);
+					} 
+					catch (Exception e) {
+						teacher.setTecId("-1");
+						e.printStackTrace();
+					}
+				}
+				rs.close();
+				Connect.close();
+			}
+			return tecup;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tecup;
+	}
+	
+	public static ArrayList<Class> createClassEntity() {
+		Statement stmt;
+		ArrayList<Class> cla =new ArrayList<Class>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.class");
+			while (rs.next()) {
+				Class c1 = new Class();
+				try {
+					c1.setClassId(rs.getString(1));
+					c1.setName(rs.getString(2));
+					c1.setMAXStudent(Integer.parseInt(rs.getString(3)));
+					cla.add(c1);
+				} 
+				catch (Exception e) {
+					c1.setClassId("-1");
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			Connect.close();
+			return cla;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cla;
+	}
+	
+	public static ArrayList<Semester> createSemesterEntity() {
+		Statement stmt;
+		ArrayList<Semester> se =new ArrayList<Semester>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.semester");
+			while (rs.next()) {
+				Semester sem = new Semester();
+				try {
+					sem.setSemId(rs.getString(1));
+					sem.setCurrentStatus(Integer.parseInt(rs.getString(2)));
+					sem.setNo_week(Integer.parseInt(rs.getString(3)));
+					se.add(sem);
+				} 
+				catch (Exception e) {
+					sem.setSemId("-1");
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			Connect.close();
+			return se;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return se;
+	}
+	
 	
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {

@@ -62,6 +62,15 @@ public class ManMainGUIController implements Initializable{
 		}
 	
 	@FXML
+	public void GenrateReports() {
+		try {
+			connectionmain.ShowReportSection();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@FXML
 	public void clsManagerMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

@@ -130,9 +130,17 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.ClassCourseDetails, returnMsg.getMsg());
 		case UploadFile:
 			setDataListByIndex(IndexList.UploadFile, returnMsg.getMsg());
-			
 		case UpdateAss:
 			setDataListByIndex(IndexList.UpdateAss, returnMsg.getMsg());
+		case createReportEntity:
+			setDataListByIndex(IndexList.createReportEntity, returnMsg.getMsg());
+		case createTeacherEntity:
+			setDataListByIndex(IndexList.createTeacherEntity, returnMsg.getMsg());
+		case createClassEntity:
+			setDataListByIndex(IndexList.createClassEntity, returnMsg.getMsg());
+		case createSemesterEntity:
+			setDataListByIndex(IndexList.createSemesterEntity, returnMsg.getMsg());
+			
 			
 			
 		default:

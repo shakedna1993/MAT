@@ -139,12 +139,21 @@ public class OpCheck {
 					e.printStackTrace();
 				}
 				return check;
-				
-				
 			case UpdateAss:
 				int flag1 = 0;
 				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
 				return flag1;
+			case createReportEntity:
+				return DBC.createReportEntity();
+			case createTeacherEntity:
+				return DBC.createTeacherEntity();
+			case createClassEntity:
+				return DBC.createClassEntity();
+			case createSemesterEntity:
+				return DBC.createSemesterEntity();
+				
+				
+				
 				
 		default:
 			return "null";

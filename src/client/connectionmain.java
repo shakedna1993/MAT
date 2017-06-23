@@ -184,7 +184,41 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	public static void ShowReportSection() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/ReportsMainGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Genrate Reports");
+		primaryStage.show();
+	}
 	
+	public static void ShowStatisticReportClassTec() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/StatisticReportTCGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Teacher classes grades");
+		primaryStage.show();
+	}
+	
+	public static void ShowStatisticReportTecClass() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/StatisticReportCTGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Class teachers grades");
+		primaryStage.show();
+	}
+	
+	public static void ShowStatisticReportCourseClass() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/StatisticReportCCGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Class courses grades");
+		primaryStage.show();
+	}
 	
 	
 	

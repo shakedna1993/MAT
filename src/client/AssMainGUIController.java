@@ -113,8 +113,6 @@ public class AssMainGUIController implements Initializable {
 		table.getColumns().clear();
 		Object st= STC.getValue();
 		String  CourseName=st.toString();
-
-		ArrayList<String> a1 = new ArrayList<String>();
 		MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="802.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.StatisticReportCCGuIController">
+   <children>
+      <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+      <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="733.0" layoutY="-1.0">
+         <image>
+            <Image url="@LOGO.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="20.0" prefWidth="56.0" text="Hello!" textFill="#061880">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="ManName" layoutX="102.0" layoutY="67.0" prefHeight="21.0" prefWidth="200.0" text="Manager Name" textFill="#061880">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="LogOut" layoutX="634.0" layoutY="748.0" mnemonicParsing="false" onAction="#clsReportCC" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
+      <Separator layoutY="95.0" prefHeight="17.0" prefWidth="1082.0" />
+      <Separator layoutY="132.0" prefHeight="5.0" prefWidth="1082.0" />
+      <Separator layoutY="721.0" prefHeight="5.0" prefWidth="1082.0" />
+      <Button fx:id="Back" layoutX="351.0" layoutY="748.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
+      <ComboBox fx:id="STC" layoutX="175.0" layoutY="149.0" prefHeight="25.0" prefWidth="200.0" promptText="Classes" />
+      <Label fx:id="selecttec" layoutX="22.0" layoutY="151.0" text="Select Class:" />
+      <Button fx:id="selectBtn" layoutX="246.0" layoutY="403.0" mnemonicParsing="false" text="select" />
+      <Label fx:id="choosenum" layoutX="26.0" layoutY="237.0" text="Start Semester:" />
+      <ComboBox fx:id="STC1" layoutX="175.0" layoutY="232.0" prefHeight="25.0" prefWidth="200.0" promptText="Start semester" />
+      <Label fx:id="choosenum1" layoutX="25.0" layoutY="325.0" text="End Semester:" />
+      <ComboBox fx:id="STC11" layoutX="175.0" layoutY="323.0" prefHeight="25.0" prefWidth="200.0" promptText="End semester" />
+   </children>
+</AnchorPane>

@@ -58,20 +58,21 @@ public class StudentUploadAssGUIController implements Initializable {
      }
 	@FXML
 	public void UploadAss(){
-		File f;
+		
 		try{
-			f = new File(chooser.getSelectedFile().getPath());
+			File f = chooser.getSelectedFile();
+			MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile,f) ;
+			try {
+				C.start();
+				C.join();
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
 		}catch(Exception e){
 			// Do something
 			return;
 		}
-		MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile,f) ;
-		try {
-			C.start();
-			C.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+
 	}	
 	
 	
