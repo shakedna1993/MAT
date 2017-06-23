@@ -45,8 +45,26 @@ public class IndexList {
 	public static final int DownloadFile = 63;
 	public static final int ClassCourseDetails=64;
 	public static final int UploadFile=65;
+<<<<<<< HEAD
 	public static final int createReportEntity=66;
 	public static final int createTeacherEntity=67;
 	public static final int createClassEntity=68;
 	public static final int createSemesterEntity= 69;
+=======
+	
+	
+	
+	//Bar: 100
+	public static final int parSetStudentComboBox=100;
+	public static final int ChoChild=101;
+	public static final int avgOneStudent=102;
+	public static final int BlockParent = 103;
+	public static final int unBlockParent=104;
+	public static final int StudentsList = 105;
+
+
+
+
+	
+>>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 }

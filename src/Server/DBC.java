@@ -917,6 +917,7 @@ public class DBC {
 		return rep;
 	}
 	
+<<<<<<< HEAD
 	public static ArrayList<Teacher> createTeacherEntity() {
 		Statement stmt;
 		ArrayList<Teacher> tec =new ArrayList<Teacher>();
@@ -1030,6 +1031,136 @@ public class DBC {
 		return se;
 	}
 	
+=======
+//*******************
+	/**Bar Parent
+	 * 	
+	 * @param Sid
+	 * @return
+	 */
+		
+		public static ArrayList<Student> parSetStudentComboBox(String Pid) {
+			Statement stmt;
+			ArrayList<Student> lst = new ArrayList<Student>();
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT moodle.student.sid, moodle.users.Fullname, moodle.student.avg, moodle.student.classid FROM "
+						+ "moodle.student, moodle.users WHERE moodle.student.parentid='" + Pid +"' AND moodle.users.Id=moodle.student.sid");
+		
+
+				while (rs.next()) {
+					// Print out the values
+					try {
+						Student stu = new Student();	
+						stu.setId(rs.getString(1));
+						stu.setName(rs.getString(2));
+						stu.setAvg(rs.getFloat(3));
+						stu.setClassid(rs.getString(4));
+						stu.setParentId(Pid);
+						lst.add(stu);
+					}
+
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+				rs.close();
+				Connect.close();
+				return lst;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return lst;
+		}
+		public static ArrayList<Student> StudentsList(){
+			Statement stmt;
+			ArrayList<Student> lst = new ArrayList<Student>();
+
+			try {			
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM moodle.student");
+
+				while (rs.next()) {
+					try {
+						Student stu = new Student();	
+						stu.setParentId(rs.getString(1));
+						stu.setAvg(rs.getFloat(2));
+						stu.setId(rs.getString(3));
+						stu.setClassid(rs.getString(4));
+
+						lst.add(stu);
+						}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				rs.close();
+				Connect.close();
+				return lst;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return lst;
+		}
+		public static float avgOneStudent(String Sid) {
+			
+			float sum=0;
+			ArrayList<Course> lst=StudentCourse(Sid);
+			for(Course c:lst)
+				sum+=c.getGrade();
+			float avg= sum/(float)lst.size();
+
+			
+			Statement stmt;
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String Query = "UPDATE moodle.student SET avg='"+avg+"' WHERE sid='"+Sid+"'";
+				stmt.executeUpdate(Query);
+				Connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return avg;
+		}
+		
+		public static void BlockParent(String Pid) {
+			Statement stmt;
+			int one=1;
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String Query = "UPDATE moodle.users SET isBlocked =1 WHERE Id ='"+Pid+"'";
+				stmt.executeUpdate(Query);
+				Connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		public static void unBlockParent(String Pid) {
+			Statement stmt;
+			
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String Query = "UPDATE moodle.users SET isBlocked = 0 WHERE Id ='"+Pid+"'";
+				stmt.executeUpdate(Query);
+				Connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+>>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {

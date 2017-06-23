@@ -4,13 +4,12 @@ package client;
 import java.io.Serializable;
 
 /**
- * This class is used for transferring massages for the server.
- * The attribute "op" contains which functionality is needed.
- * The attribute "msg" contatins the object/s that being send.
+ * This class is used for transferring massages for the server. The attribute
+ * "op" contains which functionality is needed. The attribute "msg" contatins
+ * the object/s that being send.
  */
-public class Op implements Serializable{
+public class Op implements Serializable {
 
-	
 	Object msg;
 	RequestType op;
 
@@ -18,7 +17,7 @@ public class Op implements Serializable{
 		this.msg = msg;
 		this.op = op;
 	}
-	
+
 	public Op() {
 		super();
 	}

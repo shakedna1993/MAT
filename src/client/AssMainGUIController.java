@@ -36,10 +36,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AssMainGUIController implements Initializable {
-	
+
 	public static ClientConsole cli;
 	public static Stage primaryStage;
-	
+
 	@FXML
 	ComboBox<String> STC;
 	@FXML
@@ -67,24 +67,27 @@ public class AssMainGUIController implements Initializable {
 	TableView<Assigenment> table = new TableView<>();
 	@FXML
 	ImageView Logo;
-	
+
 	private ObservableList<Assigenment> data;
 	static String assToChoose;
+
 	public void initialize(URL location, ResourceBundle resources) {
-		User s =new User();
-		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		User s = new User();
+		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		StuName.setText(s.getName());
 		String id = s.getId();
-	
-		setComboBoxStudentCourse(id);	
-		
+
+		setComboBoxStudentCourse(id);
+
 	}
+
 	@SuppressWarnings("unchecked")
-	public void setComboBoxStudentCourse(String id){
+	public void setComboBoxStudentCourse(String id) {
 		ArrayList<String> a1 = new ArrayList<String>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Course course = new Course();
-		MyThread C = new MyThread(RequestType.setComboBoxStudentCourse, IndexList.setComboBoxStudentCourse, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		MyThread C = new MyThread(RequestType.setComboBoxStudentCourse, IndexList.setComboBoxStudentCourse,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		C.start();
 		try {
 			C.join();
@@ -93,7 +96,7 @@ public class AssMainGUIController implements Initializable {
 		}
 		a1 = (ArrayList<String>) MsgFromServer.getDataListByIndex(IndexList.setComboBoxStudentCourse);
 
-		for(int i = 0;i<a1.size();i++){
+		for (int i = 0; i < a1.size(); i++) {
 			MyThread a = new MyThread(RequestType.createCourseEntity, IndexList.createCourseEntity, a1.get(i));
 			a.start();
 			try {
@@ -107,23 +110,33 @@ public class AssMainGUIController implements Initializable {
 		ObservableList<String> list = FXCollections.observableArrayList(a2);
 		STC.setItems(list);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public void	setTableViewStudentCourseAssigenment(){	 
+	public void setTableViewStudentCourseAssigenment() {
 		table.getColumns().clear();
+<<<<<<< HEAD
 		Object st= STC.getValue();
 		String  CourseName=st.toString();
 		MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+=======
+		Object st = STC.getValue();
+		String CourseName = st.toString();
+
+		ArrayList<String> a1 = new ArrayList<String>();
+		MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+>>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 		a.start();
 		try {
 			a.join();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		ArrayList<Course>course=(ArrayList<Course>) MsgFromServer.getDataListByIndex(IndexList.StudentCourse);
-		for(int i=0;i<course.size();i++){
-			if(course.get(i).getName().equals(CourseName)){
-				MyThread b = new MyThread(RequestType.setTableViewStudentCourseAssigenment, IndexList.setTableViewStudentCourseAssigenment,course.get(i).getCourseId());
+		ArrayList<Course> course = (ArrayList<Course>) MsgFromServer.getDataListByIndex(IndexList.StudentCourse);
+		for (int i = 0; i < course.size(); i++) {
+			if (course.get(i).getName().equals(CourseName)) {
+				MyThread b = new MyThread(RequestType.setTableViewStudentCourseAssigenment,
+						IndexList.setTableViewStudentCourseAssigenment, course.get(i).getCourseId());
 				b.start();
 				try {
 					b.join();
@@ -133,9 +146,10 @@ public class AssMainGUIController implements Initializable {
 				break;
 			}
 		}
-		ArrayList<Assigenment>b=(ArrayList<Assigenment>) MsgFromServer.getDataListByIndex(IndexList.setTableViewStudentCourseAssigenment);
+		ArrayList<Assigenment> b = (ArrayList<Assigenment>) MsgFromServer
+				.getDataListByIndex(IndexList.setTableViewStudentCourseAssigenment);
 		data = FXCollections.observableArrayList();
-		for(int i =0; i<b.size();i++)
+		for (int i = 0; i < b.size(); i++)
 			data.add(b.get(i));
 		TableColumn<Assigenment, String> c1 = new TableColumn<>("Assigenment Id");
 		c1.setCellValueFactory(new PropertyValueFactory<>("AssId"));
@@ -145,10 +159,11 @@ public class AssMainGUIController implements Initializable {
 		table.setItems(data);
 		b.clear();
 	}
-	
+
 	@FXML
 	public void clsAssMain() {
-		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
 			a.join();
@@ -161,8 +176,8 @@ public class AssMainGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public void UploadAss(){
+
+	public void UploadAss() {
 		try {
 			connectionmain.ShowStudentUploadAss();
 		} catch (IOException e) {
@@ -170,16 +185,16 @@ public class AssMainGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public void DownloadAss(){
-		
+
+	public void DownloadAss() {
+
 	}
-	
+
 	@FXML
-	private void backButton(ActionEvent event) throws Exception{
+	private void backButton(ActionEvent event) throws Exception {
 		connectionmain.showStudentMain();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "AssMainGUIController [STC=" + STC + ", Upload_Ass=" + Upload_Ass + ", selectBtn=" + selectBtn
@@ -187,6 +202,5 @@ public class AssMainGUIController implements Initializable {
 				+ ", Hello=" + Hello + ", selectAss=" + selectAss + ", selectC=" + selectC + ", Ass=" + Ass
 				+ ", StuName=" + StuName + ", table=" + table + ", Logo=" + Logo + ", data=" + data + "]";
 	}
-	
-	
+
 }
