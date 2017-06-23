@@ -20,11 +20,11 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
-public class SysManMainGUIController implements Initializable{
-	
+public class SysManMainGUIController implements Initializable {
+
 	public static ClientConsole cli;
 	public static Stage primaryStage;
-	
+
 	@FXML
 	Label Hello;
 	@FXML
@@ -87,20 +87,21 @@ public class SysManMainGUIController implements Initializable{
 	Label CID_Remove;
 	@FXML
 	TextField CIDT_Remove;
-	
+
 	@FXML
 	ImageView Logo;
-	
-	
+
 	public void initialize(URL location, ResourceBundle resources) {
-		User s =new User();
-		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		User s = new User();
+		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		SysName.setText(s.getName());
 
 	}
+
 	@FXML
 	public void clsSysManMain() {
-		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
 			a.join();
@@ -113,6 +114,7 @@ public class SysManMainGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+
 	@Override
 	public String toString() {
 		return "SysManMainGUIController [Hello=" + Hello + ", SysName=" + SysName + ", LogOut=" + LogOut + ", Main="
@@ -126,6 +128,5 @@ public class SysManMainGUIController implements Initializable{
 				+ PR_Edit + ", CIDT_Edit=" + CIDT_Edit + ", WHT_Edit=" + WHT_Edit + ", PRT_Edit=" + PRT_Edit
 				+ ", CID_Remove=" + CID_Remove + ", CIDT_Remove=" + CIDT_Remove + ", Logo=" + Logo + "]";
 	}
-	
+
 }
-	

@@ -38,59 +38,53 @@ public class StudentUploadAssGUIController implements Initializable {
 	TextField description;
 	@FXML
 	Label filename;
-	
+
 	JFileChooser chooser = new JFileChooser();
+
 	public void initialize(URL location, ResourceBundle resources) {
-		User s =new User();
-		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		User s = new User();
+		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		stuName.setText(s.getName());
 	}
-	
+
 	@FXML
 	public void OpenFolder() {
-	    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-	             "PDF & DOC & DOCX & XSLS", "pdf", "doc","xsls","docx");
-	    chooser.setFileFilter(filter);
-	    int returnVal = chooser.showOpenDialog(null);
-	    if(returnVal == JFileChooser.APPROVE_OPTION) {
-	    	filename.setText(chooser.getSelectedFile().getName());
-	        }
-     }
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls",
+				"docx");
+		chooser.setFileFilter(filter);
+		int returnVal = chooser.showOpenDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			filename.setText(chooser.getSelectedFile().getName());
+		}
+	}
+
 	@FXML
-	public void UploadAss(){
+	public void UploadAss() {
 		File f;
-		try{
+		try {
 			f = new File(chooser.getSelectedFile().getPath());
-		}catch(Exception e){
+		} catch (Exception e) {
 			// Do something
 			return;
 		}
-		MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile,f) ;
+		MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile, f);
 		try {
 			C.start();
 			C.join();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-	}	
-	
-	
+	}
 
-	
-	
-	
-	
-	
-	
-	
 	@FXML
-	private void backButton(ActionEvent event) throws Exception{
+	private void backButton(ActionEvent event) throws Exception {
 		connectionmain.ShowAssOptions();
 	}
-	
+
 	@FXML
 	public void clsUploadAss() {
-		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
 			a.join();

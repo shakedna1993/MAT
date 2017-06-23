@@ -15,19 +15,19 @@ import thred.MyThread;
 public class connectionmain extends Application {
 	private static Stage primaryStage;
 	private static AnchorPane mainLayout;
-//	private static VBox vbox;
+	// private static VBox vbox;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		connectionmain.primaryStage = primaryStage;
 		showLogin();
 	}
-	
-	
+
 	@Override
-	public void stop(){
-		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-		if (a.getObj()!=null){
+	public void stop() {
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		if (a.getObj() != null) {
 			a.start();
 			try {
 				a.join();
@@ -36,10 +36,11 @@ public class connectionmain extends Application {
 			}
 		}
 	}
+
 	/**
 	 * show the window of login
 	 */
-	
+
 	public static void showLogin() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/LoginGUI.fxml"));
@@ -48,7 +49,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T");
 		primaryStage.show();
 	}
-		 
+
 	public static Stage getPrimaryStage() {
 		return primaryStage;
 	}
@@ -66,14 +67,14 @@ public class connectionmain extends Application {
 	}
 
 	public static void showTeacherMain() throws IOException {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));
-			mainLayout = loader.load();
-			primaryStage.setScene(new Scene(mainLayout));
-			primaryStage.setTitle("M.A.T- Teacher Connection");
-			primaryStage.show();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Teacher Connection");
+		primaryStage.show();
 	}
-	
+
 	public static void showStudentMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/StudentMainGUI.fxml"));
@@ -82,7 +83,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Student Connection");
 		primaryStage.show();
 	}
-	
+
 	public static void showSysManMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/SystemManMainGUI.fxml"));
@@ -91,7 +92,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- System Manager Connection");
 		primaryStage.show();
 	}
-	
+
 	public static void showSecretaryMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/SecretaryMainGUI.fxml"));
@@ -100,7 +101,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Secretary Connection");
 		primaryStage.show();
 	}
-	
+
 	public static void showManagerMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/ManagerMainGUI.fxml"));
@@ -109,7 +110,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- School Manager Connection");
 		primaryStage.show();
 	}
-	
+
 	public static void showTch_ManMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/Tch&ManGUI.fxml"));
@@ -117,8 +118,8 @@ public class connectionmain extends Application {
 		primaryStage.setScene(new Scene(mainLayout));
 		primaryStage.setTitle("M.A.T");
 		primaryStage.show();
-		}
-	
+	}
+
 	public static void showParentMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/ParentMainGUI.fxml"));
@@ -127,7 +128,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Parent Connection");
 		primaryStage.show();
 	}
-	
+
 	public static void ShowCourseList() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/CourseListGUI.fxml"));
@@ -136,7 +137,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Course List");
 		primaryStage.show();
 	}
-	
+
 	public static void ShowGradeList() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/GradeListGUI.fxml"));
@@ -145,7 +146,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Grade List");
 		primaryStage.show();
 	}
-	
+
 	public static void showTeacherGUIAssWindow() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/addNewAssingmentGUI.fxml"));
@@ -154,9 +155,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Parent Connection");
 		primaryStage.show();
 	}
-	
-	
-	
+
 	public static void showTeacherEditAssGUI() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/teacherEditAssGUI.fxml"));
@@ -165,7 +164,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Parent Connection");
 		primaryStage.show();
 	}
-	
+
 	public static void ShowAssOptions() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/AssMainGUI.fxml"));
@@ -174,7 +173,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Assignment");
 		primaryStage.show();
 	}
-	
+
 	public static void ShowStudentUploadAss() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/StudentUploadAssGUI.fxml"));
@@ -183,12 +182,18 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Assignment Submission");
 		primaryStage.show();
 	}
-	
-	
-	
-	
-	
+
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public static void BlockedParentMain() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/BlockedParentMain.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Grade List");
+		primaryStage.show();
+
 	}
 }

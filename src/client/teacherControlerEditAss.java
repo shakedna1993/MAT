@@ -21,7 +21,7 @@ import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
 
-public class teacherControlerEditAss implements Initializable{
+public class teacherControlerEditAss implements Initializable {
 	@FXML
 	javafx.scene.control.Label courseTxt;
 	@FXML
@@ -36,80 +36,75 @@ public class teacherControlerEditAss implements Initializable{
 	TextField month;
 	@FXML
 	TextField yearText;
-	
+
 	@FXML
 	Button backBtn;
 	@FXML
 	Button editBtn;
 	Course c;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	 c = new Course();
-	assTxt.setText(TchMainGUIController.assToChoose);
-	ArrayList<Assigenment> b=(ArrayList<Assigenment>)MsgFromServer.getDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment);
-	
-	MyThread a = new MyThread(RequestType.createCourseEntity, IndexList.createCourseEntity, b.get(0).getCourseid());
-	a.start();
-	try {
+		c = new Course();
+		assTxt.setText(TchMainGUIController.assToChoose);
+		ArrayList<Assigenment> b = (ArrayList<Assigenment>) MsgFromServer
+				.getDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment);
+
+		MyThread a = new MyThread(RequestType.createCourseEntity, IndexList.createCourseEntity, b.get(0).getCourseid());
+		a.start();
+		try {
 			a.join();
-	} catch (InterruptedException e1) {
+		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-	c = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntity);
-	courseTxt.setText(c.getName());
+		c = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntity);
+		courseTxt.setText(c.getName());
 	}
-	
-	
-	
-	public void editAss(){
+
+	public void editAss() {
 		Assigenment ass = new Assigenment();
 		ass.setAssId(assTxt.getText());
 		ass.setCoursename(courseTxt.getText());
 		ass.setCourseid(c.getCourseId());
 		ass.setFileid(fileidTxt.getText());
 		ass.setSemester(stateTxt.getText());
-		
+
 		MyThread a = new MyThread(RequestType.UpdateAss, IndexList.UpdateAss, ass);
 		a.start();
 		try {
-				a.join();
+			a.join();
 		} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-		
-		if((int) MsgFromServer.getDataListByIndex(IndexList.UpdateAss)==1){
+			e1.printStackTrace();
+		}
+
+		if ((int) MsgFromServer.getDataListByIndex(IndexList.UpdateAss) == 1) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Edit assignment");
 			alert.setHeaderText(null);
-			alert.setContentText("Task # "+ass.getAssname()+" edit successfully ");
+			alert.setContentText("Task # " + ass.getAssname() + " edit successfully ");
 			alert.show();
 			return;
-		}
-		else {
+		} else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Edit assignment");
 			alert.setHeaderText(null);
 			alert.setContentText("Something went wrong, please try again");
 			alert.show();
 			return;
-		
+
+		}
 	}
-} 
-	
-	
+
 	@FXML
-	private void backButton(ActionEvent event) throws Exception{
+	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));
-		Pane root = loader.load();		
+		Pane root = loader.load();
 		primaryStage.setScene(new Scene(root));
 		primaryStage.setTitle("M.A.T- Secretary Connection");
 		primaryStage.show();
 	}
-	
-	
-
 
 }

@@ -47,4 +47,17 @@ public class IndexList {
 	public static final int UploadFile=65;
 	
 	
+	
+	//Bar: 100
+	public static final int parSetStudentComboBox=100;
+	public static final int ChoChild=101;
+	public static final int avgOneStudent=102;
+	public static final int BlockParent = 103;
+	public static final int unBlockParent=104;
+	public static final int StudentsList = 105;
+
+
+
+
+	
 }

@@ -1,7 +1,5 @@
 package client;
 
-
-
 import java.io.IOException;
 
 import client.MsgFromServer;
@@ -34,7 +32,6 @@ public class LoginGUIcontroller {
 	public static ClientConsole cli;
 	public static Stage primaryStage;
 
-
 	@FXML
 	Button Login;
 	@FXML
@@ -52,22 +49,24 @@ public class LoginGUIcontroller {
 
 	@FXML
 	public void initialize() {
+		Login.setDefaultButton(true);
 	}
 
-	/**This method check few things when member trying to login
-	 * 1.if there are Empty Fields 
-	 * 2.if the The username or password are wrong
-	 * 3.if the username is already connected
-	 * 4.if The user is banned from the system
-	 * @throws IOException throw exception in any of the cases above
+	/**
+	 * This method check few things when member trying to login 1.if there are
+	 * Empty Fields 2.if the The username or password are wrong 3.if the
+	 * username is already connected 4.if The user is banned from the system
+	 * 
+	 * @throws IOException
+	 *             throw exception in any of the cases above
 	 */
 	@FXML
 	public void Login() throws IOException {
 		try {
 
-			cli = new ClientConsole(IP_text.getText(), Integer.valueOf(PortText.getText())); 
+			cli = new ClientConsole(IP_text.getText(), Integer.valueOf(PortText.getText()));
 			User mem = new User(username.getText(), password.getText());
-			
+
 			if (mem.getUserName().length() == 0 || mem.getPassword().length() == 0) {
 
 				Alert alert = new Alert(AlertType.WARNING);
@@ -78,14 +77,14 @@ public class LoginGUIcontroller {
 				alert.show();
 				return;
 			}
-			
+
 			MyThread a = new MyThread(RequestType.LOGIN, IndexList.LOGIN, mem);
 			a.start();
 			a.join();
 			//
-	
-			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getId().equals("-1")) {
- 				Alert alert = new Alert(AlertType.WARNING);
+
+			if (((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getId().equals("-1")) {
+				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Wrong details");
 				alert.setHeaderText(null);
 				alert.setContentText("The username or password are wrong");
@@ -93,8 +92,8 @@ public class LoginGUIcontroller {
 				alert.show();
 				return;
 			}
-			
-			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getIsConnected() == 1) {
+
+			if (((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getIsConnected() == 1) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Connection details");
 				alert.setHeaderText(null);
@@ -103,7 +102,7 @@ public class LoginGUIcontroller {
 				alert.show();
 				return;
 			}
-			if(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getBlocked() == 1) {
+			if (((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getBlocked() == 1) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Ban");
 				alert.setHeaderText(null);
@@ -111,16 +110,18 @@ public class LoginGUIcontroller {
 				alert.show();
 				return;
 			}
-			// Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager, 6- Parent, 7- Manager&Teacher}
-			switch(((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getRole()){
+			// Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System
+			// manager, 6- Parent, 7- Manager&Teacher}
+			switch (((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getRole()) {
 			case 1:
 				connectionmain.showSecretaryMain();
 				break;
 			case 2:
 				connectionmain.showManagerMain();
-				break;	
+				break;
 			case 3:
-				MyThread C = new MyThread(RequestType.Teacherdetails, IndexList.Teacherdetails, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+				MyThread C = new MyThread(RequestType.Teacherdetails, IndexList.Teacherdetails,
+						MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 				C.start();
 				try {
 					C.join();
@@ -130,7 +131,8 @@ public class LoginGUIcontroller {
 				connectionmain.showTeacherMain();
 				break;
 			case 4:
-				MyThread b = new MyThread(RequestType.StudentDetails, IndexList.StudentDetails, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+				MyThread b = new MyThread(RequestType.StudentDetails, IndexList.StudentDetails,
+						MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 				b.start();
 				try {
 					b.join();
@@ -138,36 +140,35 @@ public class LoginGUIcontroller {
 					e1.printStackTrace();
 				}
 				connectionmain.showStudentMain();
-				break;	
+				break;
 			case 5:
 				connectionmain.showSysManMain();
 				break;
 			case 6:
-				connectionmain.showParentMain();
+				if (mem.getBlocked() == 0)
+					connectionmain.showParentMain();
+				else
+					connectionmain.BlockedParentMain();
 				break;
 			case 7:
 				connectionmain.showTch_ManMain();
-				break;	
+				break;
 			}
-			
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-	/*	try {
-			Stage stage = (Stage) Logcancel.getScene().getWindow();
-			stage.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
-		
-	//	connectionmain.showMainMenu();
+		/*
+		 * try { Stage stage = (Stage) Logcancel.getScene().getWindow();
+		 * stage.close(); } catch (Exception e) { e.printStackTrace(); }
+		 */
+
+		// connectionmain.showMainMenu();
 	}
 
-
 	/**
-	 * This method cancel the login 
+	 * This method cancel the login
 	 */
 	public void clsLogin() {
 		try {
@@ -176,7 +177,7 @@ public class LoginGUIcontroller {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -185,5 +186,4 @@ public class LoginGUIcontroller {
 				+ ", password=" + password + ", IP_text=" + IP_text + ", PortText=" + PortText + "]";
 	}
 
-	
 }

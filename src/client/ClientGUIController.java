@@ -4,7 +4,6 @@ package client;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -59,7 +58,7 @@ public class ClientGUIController {
 	Tab DB_Tab;
 
 	/**
-	 * initialize- initialize the 
+	 * initialize- initialize the
 	 */
 	@FXML
 	void initialize() {
@@ -77,8 +76,8 @@ public class ClientGUIController {
 	 * cli.client.sendToServer((Object) (new Op(tmp,
 	 * request.get(ArrSelectedIndex)))); cli.controller.addTextToLog(
 	 * "\nmassege sended:" + tmp + "  op" + request.get(ArrSelectedIndex)); }
-	 * catch (IOException e) { 
-	 * e.printStackTrace(); } // send to // server // } // }.start();
+	 * catch (IOException e) { e.printStackTrace(); } // send to // server // }
+	 * // }.start();
 	 * 
 	 * 
 	 * 
@@ -112,7 +111,7 @@ public class ClientGUIController {
 	}
 
 	/**
-	 * this method starting the server by getting ip text 
+	 * this method starting the server by getting ip text
 	 */
 	@FXML
 	void startServer() {
@@ -125,7 +124,8 @@ public class ClientGUIController {
 	}
 
 	/**
-	 * @param msg- show the hour that the client logged in
+	 * @param msg-
+	 *            show the hour that the client logged in
 	 */
 	public void addTextToLog(String msg) {
 		Logger.appendText("[" + Calendar.HOUR + ":" + Calendar.MINUTE + ":" + Calendar.SECOND + "] : " + msg + "\n");
@@ -133,7 +133,7 @@ public class ClientGUIController {
 	}
 
 	/**
-	 * this method cleaning the field of the logText 
+	 * this method cleaning the field of the logText
 	 */
 	public void cleanLogText() {
 		Logger.setText("");
@@ -141,7 +141,8 @@ public class ClientGUIController {
 
 	/**
 	 * this getter method return the clientConsole
-	 * @return return client console 
+	 * 
+	 * @return return client console
 	 */
 	public static ClientConsole getCli() {
 		return cli;
@@ -149,14 +150,17 @@ public class ClientGUIController {
 
 	/**
 	 * set clientConsole
-	 * @param cli-client console
+	 * 
+	 * @param cli-client
+	 *            console
 	 */
 	public static void setCli(ClientConsole cli) {
 		ClientGUIController.cli = cli;
 	}
 
 	/**
-	 * this method get the PrimaryStage 
+	 * this method get the PrimaryStage
+	 * 
 	 * @return the primary stage
 	 */
 	public static Stage getPrimaryStage() {
@@ -164,23 +168,29 @@ public class ClientGUIController {
 	}
 
 	/**
-	 * set  the PrimaryStage
-	 * @param primaryStage-will represent the PrimaryStage
+	 * set the PrimaryStage
+	 * 
+	 * @param primaryStage-will
+	 *            represent the PrimaryStage
 	 */
 	public static void setPrimaryStage(Stage primaryStage) {
 		ClientGUIController.primaryStage = primaryStage;
 	}
 
 	/**
-	 * this method get the close button server 
+	 * this method get the close button server
+	 * 
 	 * @return the close server button
 	 */
 	public Button getCloseServerBtn() {
 		return CloseServerBtn;
 	}
 
-	/**this method set close button server
-	 * @param closeServerBtn-will hold the close button server
+	/**
+	 * this method set close button server
+	 * 
+	 * @param closeServerBtn-will
+	 *            hold the close button server
 	 */
 	public void setCloseServerBtn(Button closeServerBtn) {
 		CloseServerBtn = closeServerBtn;
@@ -188,6 +198,7 @@ public class ClientGUIController {
 
 	/**
 	 * get the connect button server
+	 * 
 	 * @return the connect button server
 	 */
 	public Button getConnectToServerBtn() {
@@ -196,7 +207,9 @@ public class ClientGUIController {
 
 	/**
 	 * set the connect button server
-	 * @param connectToServerBtn-will hold the connect button server
+	 * 
+	 * @param connectToServerBtn-will
+	 *            hold the connect button server
 	 */
 	public void setConnectToServerBtn(Button connectToServerBtn) {
 		ConnectToServerBtn = connectToServerBtn;
@@ -204,6 +217,7 @@ public class ClientGUIController {
 
 	/**
 	 * get the IP_text
+	 * 
 	 * @return the IP_text
 	 */
 	public TextField getIP_text() {
@@ -212,7 +226,9 @@ public class ClientGUIController {
 
 	/**
 	 * will set the ip text
-	 * @param iP_text-hold the ip text 
+	 * 
+	 * @param iP_text-hold
+	 *            the ip text
 	 */
 	public void setIP_text(TextField iP_text) {
 		IP_text = iP_text;
@@ -220,6 +236,7 @@ public class ClientGUIController {
 
 	/**
 	 * getting the logger id
+	 * 
 	 * @return logger id
 	 */
 	public TextArea getLogger() {
@@ -228,7 +245,9 @@ public class ClientGUIController {
 
 	/**
 	 * will set the the logger id
-	 * @param logger-will hold the logger id
+	 * 
+	 * @param logger-will
+	 *            hold the logger id
 	 */
 	public void setLogger(TextArea logger) {
 		Logger = logger;
@@ -236,14 +255,18 @@ public class ClientGUIController {
 
 	/**
 	 * get the port text
+	 * 
 	 * @return the portText
 	 */
 	public TextField getPortText() {
 		return PortText;
 	}
 
-	/**setting the portText
-	 * @param portText-will hold the portText  
+	/**
+	 * setting the portText
+	 * 
+	 * @param portText-will
+	 *            hold the portText
 	 */
 	public void setPortText(TextField portText) {
 		PortText = portText;

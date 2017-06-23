@@ -7,9 +7,6 @@ package client;
 
 import ocsf.client.*;
 
-
-
-
 import java.io.*;
 
 import thred.ChatIF;
@@ -82,11 +79,14 @@ public class ChatClient extends AbstractClient {
 		}
 	}
 
-
 	/**
 	 * Method to send a message from the client UI to the server
-	 * @param op which operation is needed
-	 * @param message  object message that contain all the relevant info for the operation
+	 * 
+	 * @param op
+	 *            which operation is needed
+	 * @param message
+	 *            object message that contain all the relevant info for the
+	 *            operation
 	 */
 	public void handleMessageFromClientUI(RequestType op, Object message) {
 		Op oper = new Op(message, op);

@@ -37,15 +37,31 @@ public class GradeListGUIController implements Initializable {
 		User s =new User();
 		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		stuName.setText(s.getName());
-		try {
-			MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
+	
+		if (s.getRole()==4)
+		{
+			try {
+				MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
 					MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			a.start();
-			a.join();
-		} catch (Exception e) {
-			e.printStackTrace();
+				a.start();
+				a.join();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-
+		else if (s.getRole()==6)
+		{
+			try {
+				MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
+					ParMainGUIController.getSelectedSon());
+				a.start();
+				a.join();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
 		data = FXCollections.observableArrayList();
 		ArrayList<Course> b = (ArrayList<Course>) MsgFromServer.getDataListByIndex(IndexList.StudentCourse);
 		for (int i = 0; i < b.size(); i++) {
@@ -64,6 +80,7 @@ public class GradeListGUIController implements Initializable {
 		table.getColumns().addAll(c1, c2, c3, c4);
 		table.setItems(data);
 	}
+
 	@FXML
 	public void clsGradeList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -79,9 +96,16 @@ public class GradeListGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+
 	@FXML
 	private void backButton(ActionEvent event) throws Exception{
-		connectionmain.showStudentMain();
+		User s =new User();
+		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		int a=s.getRole();
+		if (a==4)
+			connectionmain.showStudentMain();
+		else if (a==6) 
+			connectionmain.showParentMain();
 	}
 
 }

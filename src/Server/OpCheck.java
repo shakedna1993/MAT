@@ -82,9 +82,18 @@ public class OpCheck {
 			return DBC.DefineClass((entity.Class)op.getMsg());
 			
 		case StudentCourse:
-			User stud = (User) op.getMsg();
-			return DBC.StudentCourse(stud.getId());	
-			
+			User stud = (User)op.getMsg();
+			return DBC.StudentCourse(stud.getId());
+		case parSetStudentComboBox:
+			 return DBC.parSetStudentComboBox((String)op.getMsg());
+		case avgOneStudent:
+			 return DBC.avgOneStudent((String)op.getMsg());
+		case BlockParent:
+			 DBC.BlockParent((String)op.getMsg());
+		case unBlockParent:
+			 DBC.unBlockParent((String)op.getMsg());
+		case StudentsList:
+			return (ArrayList<Student>)DBC.StudentsList();
 			case setComboBoxTeacherCourse:
 				ArrayList<String> al = new ArrayList<String>();
 				al = DBC.setComboBoxTeacherCourse((String)op.getMsg());
@@ -145,7 +154,6 @@ public class OpCheck {
 				int flag1 = 0;
 				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
 				return flag1;
-				
 		default:
 			return "null";
 		}
