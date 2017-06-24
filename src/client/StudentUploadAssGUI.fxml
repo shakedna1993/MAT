@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.StudentUploadAssGUIController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="639.0">
+         <children>
+            <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+            <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
+               <image>
+                  <Image url="@LOGO.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="20.0" prefWidth="56.0" text="Hello!" textFill="#061880">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="stuName" layoutX="102.0" layoutY="67.0" prefHeight="21.0" prefWidth="200.0" text="User Name" textFill="#061880">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="LogOut" layoutX="348.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsUploadAss" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
+            <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
+            <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
+            <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
+            <Button fx:id="Back" layoutX="212.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
+            <Separator layoutX="451.0" layoutY="133.0" orientation="VERTICAL" prefHeight="416.0" prefWidth="9.0" />
+            <Label fx:id="selectAss" layoutX="14.0" layoutY="260.0" prefHeight="21.0" prefWidth="96.0" text="Description:" />
+            <Label fx:id="selectC" layoutX="14.0" layoutY="183.0" text="Select file to upload:" />
+            <Button fx:id="Upload_Ass" layoutX="289.0" layoutY="347.0" mnemonicParsing="false" onAction="#UploadAss" prefHeight="25.0" prefWidth="77.0" text="Upload" />
+            <Button fx:id="ChooseFile" layoutX="198.0" layoutY="178.0" mnemonicParsing="false" onAction="#OpenFolder" prefHeight="31.0" prefWidth="106.0" text="Choose File" />
+            <TextField fx:id="description" layoutX="158.0" layoutY="255.0" prefHeight="31.0" prefWidth="337.0" />
+            <Label fx:id="filename" layoutX="329.0" layoutY="181.0" prefHeight="25.0" prefWidth="303.0" text="File Name" textFill="#061880">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

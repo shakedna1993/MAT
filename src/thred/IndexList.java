@@ -35,9 +35,31 @@ public class IndexList {
 	public static int getAssArreyList = 44;
 	public static int allAssForTeacher = 45;
 	public static int insertNewAss = 46;
+	public static final int UpdateAss = 47;
 	// 
 	//
 	//Shaked: 60-79
 	public static final int StudentCourse=60;
+	public static final int setComboBoxStudentCourse=61;
+	public static final int setTableViewStudentCourseAssigenment=62;
+	public static final int DownloadFile = 63;
+	public static final int ClassCourseDetails=64;
+	public static final int UploadFile=65;
+	public static final int createReportEntity=66;
+	public static final int createTeacherEntity=67;
+	public static final int createClassEntity=68;
+	public static final int createSemesterEntity= 69;
+	
+	//Bar: 100
+	public static final int parSetStudentComboBox=100;
+	public static final int ChoChild=101;
+	public static final int avgOneStudent=102;
+	public static final int BlockParent = 103;
+	public static final int unBlockParent=104;
+	public static final int StudentsList = 105;
+
+
+
+
 	
 }

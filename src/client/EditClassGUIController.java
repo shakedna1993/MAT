@@ -42,24 +42,21 @@ public class EditClassGUIController implements Initializable {
 	
 	@FXML
 	private TableView studentListTable;
-	
 	@FXML
 	private Button back_button;
-	
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
 	}
 
-	
 	@FXML
-	private void backButton(ActionEvent event) throws Exception{
+	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/SecretaryMainGUI.fxml"));
-		Pane root = loader.load();		
+		Pane root = loader.load();
 		primaryStage.setScene(new Scene(root));
 		primaryStage.setTitle("M.A.T- Secretary Connection");
 		primaryStage.show();

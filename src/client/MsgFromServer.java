@@ -102,6 +102,19 @@ public class MsgFromServer {
 		case StudentCourse:
 			setDataListByIndex(IndexList.StudentCourse, returnMsg.getMsg());
 			return;
+		case parSetStudentComboBox:
+			setDataListByIndex(IndexList.parSetStudentComboBox, returnMsg.getMsg());
+			return;
+		case avgOneStudent:
+			setDataListByIndex(IndexList.avgOneStudent, returnMsg.getMsg());
+		case BlockParent:
+			setDataListByIndex(IndexList.BlockParent, returnMsg.getMsg());
+		case unBlockParent:
+			setDataListByIndex(IndexList.unBlockParent, returnMsg.getMsg());
+		case StudentsList:
+			setDataListByIndex(IndexList.StudentsList, returnMsg.getMsg());
+			return;
+
 		case classIDExists:
 			setDataListByIndex(IndexList.classIDExists, returnMsg.getMsg());
 		case classNameExists:
@@ -120,6 +133,29 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.allAssForTeacher, returnMsg.getMsg());
 		case insertNewAss:
 			setDataListByIndex(IndexList.insertNewAss, returnMsg.getMsg());
+		case setComboBoxStudentCourse:
+			setDataListByIndex(IndexList.setComboBoxStudentCourse, returnMsg.getMsg());
+		case setTableViewStudentCourseAssigenment:
+			setDataListByIndex(IndexList.setTableViewStudentCourseAssigenment, returnMsg.getMsg());	
+		case DownoladFile:
+			setDataListByIndex(IndexList.DownloadFile, returnMsg.getMsg());
+		case ClassCourseDetails:
+			setDataListByIndex(IndexList.ClassCourseDetails, returnMsg.getMsg());
+		case UploadFile:
+			setDataListByIndex(IndexList.UploadFile, returnMsg.getMsg());
+		case UpdateAss:
+			setDataListByIndex(IndexList.UpdateAss, returnMsg.getMsg());
+		case createReportEntity:
+			setDataListByIndex(IndexList.createReportEntity, returnMsg.getMsg());
+		case createTeacherEntity:
+			setDataListByIndex(IndexList.createTeacherEntity, returnMsg.getMsg());
+		case createClassEntity:
+			setDataListByIndex(IndexList.createClassEntity, returnMsg.getMsg());
+		case createSemesterEntity:
+			setDataListByIndex(IndexList.createSemesterEntity, returnMsg.getMsg());
+			
+			
+			
 		default:
 			break;
 		}

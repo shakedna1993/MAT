@@ -23,10 +23,9 @@ import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
 
-public class SecMainGUIController implements Initializable{
-	
+public class SecMainGUIController implements Initializable {
+
 	public static ClientConsole cli;
-	
 
 	@FXML
 	Button NewSem;
@@ -40,7 +39,7 @@ public class SecMainGUIController implements Initializable{
 	Button RemoveCl;
 	@FXML
 	Button add_student_btn;
-	
+
 	@FXML
 	Button Req_Regi;
 	@FXML
@@ -69,7 +68,7 @@ public class SecMainGUIController implements Initializable{
 	Label Req;
 	@FXML
 	Label InReqID;
-	
+
 	@FXML
 	TextField Req_ID;
 	@FXML
@@ -79,17 +78,17 @@ public class SecMainGUIController implements Initializable{
 
 	@FXML
 	ImageView Logo;
-	
-	
+
 	public void initialize(URL location, ResourceBundle resources) {
-			User s =new User();
-			s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			SecName.setText(s.getName());
-		}
-	
+		User s = new User();
+		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		SecName.setText(s.getName());
+	}
+
 	@FXML
 	public void clsSecretaryMain() {
-		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
 			a.join();
@@ -108,29 +107,34 @@ public class SecMainGUIController implements Initializable{
 		return "SecMainGUIController [NewSem=" + NewSem + ", DefCl_Cs=" + DefCl_Cs + ", DefineCl=" + DefineCl
 				+ ", EditCl=" + EditCl + ", RemoveCl=" + RemoveCl + ", Req_Regi=" + Req_Regi + ", Req_Remo=" + Req_Remo
 				+ ", Req_Tch=" + Req_Tch + ", Regi=" + Regi + ", Remo=" + Remo + ", TchAp=" + TchAp + ", Check=" + Check
-				+ ", LogOut=" + LogOut + ", Hello=" + Hello + ", ReqD=" + ReqD + ", General="
-				+ General + ", Req=" + Req + ", InReqID=" + InReqID + ", Req_ID=" + Req_ID + ", SecName=" + SecName
-				+ ", ReqDes=" + ReqDes + ", Logo=" + Logo + "]";
+				+ ", LogOut=" + LogOut + ", Hello=" + Hello + ", ReqD=" + ReqD + ", General=" + General + ", Req=" + Req
+				+ ", InReqID=" + InReqID + ", Req_ID=" + Req_ID + ", SecName=" + SecName + ", ReqDes=" + ReqDes
+				+ ", Logo=" + Logo + "]";
 	}
+
 	@FXML
-	public void addStudent(ActionEvent event) throws IOException{
+	public void addStudent(ActionEvent event) throws IOException {
 		connectionmain.addStudent(event);
 	}
+
 	@FXML
-	public void newClass(ActionEvent event) throws IOException{
+	public void newClass(ActionEvent event) throws IOException {
 		connectionmain.newClass(event);
 	}
+
 	@FXML
-	public void editClass(ActionEvent event) throws IOException{
+	public void editClass(ActionEvent event) throws IOException {
 		connectionmain.editClass(event);
 	}
+
 	@FXML
-	public void removeClass(ActionEvent event) throws IOException{
+	public void removeClass(ActionEvent event) throws IOException {
 		connectionmain.removeClass(event);
 	}
+
 	@FXML
-	public void defineClass4Course(ActionEvent event) throws IOException{
+	public void defineClass4Course(ActionEvent event) throws IOException {
 		connectionmain.defineClass4Course(event);
 	}
-	
+
 }

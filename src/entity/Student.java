@@ -1,6 +1,9 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import Server.DBC;
 
 public class Student extends User implements Serializable{
 
@@ -43,11 +46,13 @@ public class Student extends User implements Serializable{
 	public float getAvg() {
 		return avg;
 	}
+	
 	public void setAvg(float avg) {
 		this.avg = avg;
 	}
 	
 	public String getClassid() {
+		
 		return Classid;
 	}
 	public void setClassid(String classid) {

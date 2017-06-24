@@ -1,5 +1,6 @@
 package client;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -30,21 +31,38 @@ public class CourseListGUIController implements Initializable {
 	@FXML
 	Label stuName;
 	@FXML
+	Button LogOut;
+
+	@FXML
 	TableView<Course> table = new TableView<>();
+
 	private ObservableList<Course> data;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		User s =new User();
-		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		User s = new User();
+		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		stuName.setText(s.getName());
-		try {
-			MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
-					MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			a.start();
-			a.join();
-		} catch (Exception e) {
-			e.printStackTrace();
+
+		if (s.getRole() == 4) {
+			try {
+				MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
+						MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+				a.start();
+				a.join();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (s.getRole() == 6) {
+			try {
+				MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
+						ParMainGUIController.getSelectedSon());
+				a.start();
+				a.join();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		data = FXCollections.observableArrayList();
@@ -52,21 +70,44 @@ public class CourseListGUIController implements Initializable {
 		for (int i = 0; i < b.size(); i++) {
 			data.add(b.get(i));
 		}
+
 		TableColumn<Course, String> c1 = new TableColumn<>("Course Id");
 		c1.setCellValueFactory(new PropertyValueFactory<>("courseId"));
 		TableColumn<Course, String> c2 = new TableColumn<>("Course Name");
 		c2.setCellValueFactory(new PropertyValueFactory<>("name"));
 		TableColumn<Course, String> c3 = new TableColumn<>("Semester");
 		c3.setCellValueFactory(new PropertyValueFactory<>("semid"));
-		
+
 		table.getColumns().addAll(c1, c2, c3);
 		table.setItems(data);
 	}
-	
+
 	@FXML
-	private void backButton(ActionEvent event) throws Exception{
-		connectionmain.showStudentMain();
+	public void clsCourseList() {
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		a.start();
+		try {
+			a.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			connectionmain.showLogin();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
+	@FXML
+	private void backButton(ActionEvent event) throws Exception {
+		User s = new User();
+		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		int a = s.getRole();
+		if (a == 4)
+			connectionmain.showStudentMain();
+		else if (a == 6)
+			connectionmain.showParentMain();
+	}
 
 }

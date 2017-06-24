@@ -18,11 +18,11 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
-public class StuMainGUIController implements Initializable{
-	
+public class StuMainGUIController implements Initializable {
+
 	public static ClientConsole cli;
 	public static Stage primaryStage;
-	
+
 	@FXML
 	Button Ass_Sub;
 	@FXML
@@ -46,26 +46,25 @@ public class StuMainGUIController implements Initializable{
 	Label AvgC;
 	@FXML
 	javafx.scene.control.Label stuName;
-	
+
 	@FXML
 	ImageView Logo;
-	
-	
+
 	public void initialize(URL location, ResourceBundle resources) {
-			User s =new User();
-			s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
-			stuName.setText(s.getName());
-		}
-	
+		User s = new User();
+		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		stuName.setText(s.getName());
+	}
+
 	@FXML
 	public void Avgset() {
-		String avg;		
-		Student stud =new Student();
-		stud=(Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
-		avg=Float.toString(stud.getAvg());
+		String avg;
+		Student stud = new Student();
+		stud = (Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
+		avg = Float.toString(stud.getAvg());
 		AvgC.setText(avg);
 	}
-	
+
 	@FXML
 	public void CourseList() {
 		try {
@@ -75,7 +74,7 @@ public class StuMainGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	public void GradeList() {
 		try {
@@ -85,10 +84,21 @@ public class StuMainGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
+
+	@FXML
+	public void AssignmentWin() {
+		try {
+			connectionmain.ShowAssOptions();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@FXML
 	public void clsStudentMain() {
-		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
+				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();
 		try {
 			a.join();
@@ -108,5 +118,5 @@ public class StuMainGUIController implements Initializable{
 				+ Evalu + ", Avg=" + Avg + ", LogOut=" + LogOut + ", Hello=" + Hello + ", Per_File=" + Per_File
 				+ ", Ass=" + Ass + ", AvgC=" + AvgC + ", stuName=" + stuName + ", Logo=" + Logo + "]";
 	}
-	
+
 }

@@ -7,9 +7,7 @@ package client;
 import java.io.*;
 import java.util.ArrayList;
 
-
 import thred.*;
-
 
 /**
  * This class constructs the UI for a chat client. It implements the chat
@@ -48,11 +46,14 @@ public class ClientConsole implements ChatIF {
 	 * @param port
 	 *            The port to connect on.
 	 */
-	
+
 	/**
-	 * checking the host and the port of the client 
-	 * @param host the current host
-	 * @param port  the current p
+	 * checking the host and the port of the client
+	 * 
+	 * @param host
+	 *            the current host
+	 * @param port
+	 *            the current p
 	 */
 	public ClientConsole(String host, int port) {
 		try {
@@ -64,10 +65,14 @@ public class ClientConsole implements ChatIF {
 	}
 
 	/**
-	 * checking the host and the port of the client 
-	 * @param host the current host
-	 * @param port the current p
-	 * @param controller which controller
+	 * checking the host and the port of the client
+	 * 
+	 * @param host
+	 *            the current host
+	 * @param port
+	 *            the current p
+	 * @param controller
+	 *            which controller
 	 */
 	public ClientConsole(String host, int port, ClientGUIController controller) {
 		this.controller = controller;
@@ -78,7 +83,7 @@ public class ClientConsole implements ChatIF {
 			controller.addTextToLog("Error: Can't setup connection!" + " Terminating client.");
 
 		}
-		
+
 	}
 
 	// Instance methods ************************************************
@@ -87,7 +92,8 @@ public class ClientConsole implements ChatIF {
 	 * This method waits for input from the console. Once it is received, it
 	 * sends it to the client's message handler.
 	 * 
-	 * @param message the message that received from server 
+	 * @param message
+	 *            the message that received from server
 	 */
 	public void accept(Object message) {
 		try {
@@ -141,18 +147,21 @@ public class ClientConsole implements ChatIF {
 	}
 
 	/**
-	 * @param conectedFlag-put 1 if connected and 0 if not 
+	 * @param conectedFlag-put
+	 *            1 if connected and 0 if not
 	 */
 	public void setConectedFlag(boolean conectedFlag) {
 		this.conectedFlag = conectedFlag;
 	}
 
 	/**
-	 * @param op-this is the request type that client chose
-	 * @param obj- the object that we get from the server 
+	 * @param op-this
+	 *            is the request type that client chose
+	 * @param obj-
+	 *            the object that we get from the server
 	 */
 	public static void getFromServer(RequestType op, Object obj) {
-		client.handleMessageFromClientUI(op, obj);	
+		client.handleMessageFromClientUI(op, obj);
 	}
 
 }
