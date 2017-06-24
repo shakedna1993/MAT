@@ -22,7 +22,12 @@ import thred.MyThread;
 
 public class DefineNewClassGUIController implements Initializable {
 
+	private entity.Class tempClass;
 	
+	public entity.Class getTempClass() {
+		return tempClass;
+	}
+
 	@FXML
 	private Button back_button;
 	@FXML
@@ -71,6 +76,8 @@ public class DefineNewClassGUIController implements Initializable {
 		}
 		try {
 			defineClass(id_field.getText(),name_field.getText(),Integer.parseInt(max_field.getText()));
+			
+			connectionmain.editClass(null);
 		}
 		catch (Exception e) {
 			System.out.println(e);
@@ -104,6 +111,7 @@ public class DefineNewClassGUIController implements Initializable {
 		c.setClassId(cid);
 		c.setName(name);
 		c.setMAXStudent(max);
+		tempClass = c;
 		MyThread a = new MyThread(RequestType.DefineClass, IndexList.DefineClass, c);
 		a.start();
 		try {
