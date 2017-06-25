@@ -3,10 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/OCSF"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="C:/Users/Rinat/Downloads/mysql-connector-java-3.1.11-bin.jar"/>
-=======
 	<classpathentry kind="lib" path="D:/Project/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar"/>
->>>>>>> branch 'master' of https://github.com/shakedna1993/MAT.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>

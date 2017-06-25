@@ -18,6 +18,7 @@ import entity.Reports;
 import entity.Semester;
 import entity.Student;
 import entity.Teacher;
+import entity.Unit;
 import entity.User;
 import entity.Class;
 import Server.Connect;
