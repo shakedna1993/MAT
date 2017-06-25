@@ -180,9 +180,36 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.createClassEntity, returnMsg.getMsg());
 		case createSemesterEntity:
 			setDataListByIndex(IndexList.createSemesterEntity, returnMsg.getMsg());
+		case TeacherClassList:
+			setDataListByIndex(IndexList.TeacherClassList, returnMsg.getMsg());
+		case TecNameToId:
+			setDataListByIndex(IndexList.TecNameToId, returnMsg.getMsg());
+		case ClassNameToId:
+			setDataListByIndex(IndexList.ClassNameToId, returnMsg.getMsg());
+		case ClassTeacherList:
+			setDataListByIndex(IndexList.ClassTeacherList, returnMsg.getMsg());
 			
-			
-			
+		case UnitExists:
+			setDataListByIndex(IndexList.UnitExists, returnMsg.getMsg());
+		case CourseExists:
+			setDataListByIndex(IndexList.CourseExists, returnMsg.getMsg());
+		case DefineNewCourse:
+			setDataListByIndex(IndexList.DefineNewCourse, returnMsg.getMsg());
+		case CoursesList:
+			setDataListByIndex(IndexList.CoursesList, returnMsg.getMsg());
+		case DefinePreReq:
+			setDataListByIndex(IndexList.DefinePreReq, returnMsg.getMsg());
+		case RemoveCourse:
+			setDataListByIndex(IndexList.RemoveCourse, returnMsg.getMsg());
+		case RenameCourse:
+			setDataListByIndex(IndexList.RenameCourse, returnMsg.getMsg());
+		case WeeklyHoursUpdate:
+			setDataListByIndex(IndexList.WeeklyHoursUpdate, returnMsg.getMsg());
+		case PreReqList:
+			setDataListByIndex(IndexList.PreReqList, returnMsg.getMsg());	
+		case RemovePreReq:
+			setDataListByIndex(IndexList.RemovePreReq, returnMsg.getMsg());	
+		
 		default:
 			break;
 		}

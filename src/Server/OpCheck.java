@@ -10,13 +10,14 @@ import javax.swing.JFileChooser;
 import client.MsgFromServer;
 import thred.IndexList;
 import client.Op;
+import entity.Course;
 import entity.Assigenment;
 import entity.Course;
 import entity.Student;
 import entity.Teacher;
+import entity.Unit;
 import entity.User;
 import entity.Class;
-import Server.DownloadFileServer;
 import Server.DBC;
 import entity.FileEnt;
 /**
@@ -114,14 +115,49 @@ public class OpCheck {
 		case StudentCourse:
 			User stud = (User)op.getMsg();
 			return DBC.StudentCourse(stud.getId());
+			
+		case UnitExists:
+			Unit Unit1 = (Unit) op.getMsg();
+			return DBC.UnitExists(Unit1.getUnitId());
+		case CourseExists:
+			Course Course1 = (Course) op.getMsg();
+			return DBC.CourseExists(Course1.getCourseId());
+		case DefineNewCourse:
+			Course Course2 = (Course) op.getMsg();
+			return DBC.DefineNewCourse(Course2);
+		case CoursesList:
+			Course Course3 = (Course) op.getMsg();
+			return DBC.CoursesList(Course3.getCourseId());
+		case DefinePreReq:
+			Course Course4=(Course) op.getMsg();
+			return DBC.DefinePreReq(Course4.getCourseId(), Course4.getPreReqId());
+		case RemoveCourse:
+			Course Course5 = (Course) op.getMsg();
+			return DBC.RemoveCourse(Course5.getCourseId());	
+		case RenameCourse:
+			Course Course6 = (Course) op.getMsg();
+			return DBC.RenameCourse(Course6);
+		case WeeklyHoursUpdate:
+			Course Course7 = (Course) op.getMsg();
+			return DBC.WeeklyHoursUpdate(Course7);
+		case PreReqList:
+			Course Course8 = (Course) op.getMsg();
+			return DBC.PreReqList(Course8.getCourseId());
+		case RemovePreReq:
+			Course Course9=(Course) op.getMsg();
+			return DBC.RemovePreReq(Course9.getCourseId(), Course9.getPreReqId());
+			
+
 		case parSetStudentComboBox:
 			 return DBC.parSetStudentComboBox((String)op.getMsg());
 		case avgOneStudent:
 			 return DBC.avgOneStudent((String)op.getMsg());
 		case BlockParent:
 			 DBC.BlockParent((String)op.getMsg());
+			 
 		case unBlockParent:
 			 DBC.unBlockParent((String)op.getMsg());
+			 
 		case StudentsList:
 			return (ArrayList<Student>)DBC.StudentsList();
 			case setComboBoxTeacherCourse:
@@ -166,8 +202,6 @@ public class OpCheck {
 				cid=(String)op.getMsg();
 				lst2= DBC.setTableViewStudentCourseAssigenment(cid);
 				return lst2;
-			case DownoladFile:
-				return DownloadFileServer.sendFile((String) op.getMsg());
 			case UploadFile:
 				int check = 0;
 				File f=(File)(op.getMsg());
@@ -190,6 +224,20 @@ public class OpCheck {
 				return DBC.createClassEntity();
 			case createSemesterEntity:
 				return DBC.createSemesterEntity();
+			case TeacherClassList:
+				Teacher tec =(Teacher)op.getMsg();
+				return DBC.TeacherClassList(tec.getTecId());
+			case TecNameToId:
+				Teacher tec1 =(Teacher)op.getMsg();
+				return DBC.TecNameToId(tec1.getTecName());
+			case ClassNameToId:
+				Class cl1 =(Class)op.getMsg();
+				return DBC.ClassNameToId(cl1.getName());
+			case ClassTeacherList:
+				Class cla =(Class)op.getMsg();
+				return DBC.ClassTeacherList(cla.getClassId());
+				
+				
 				
 				
 				

@@ -61,9 +61,8 @@ public class StudentUploadAssGUIController implements Initializable {
 	@FXML
 
 	public void UploadAss(){
-		
 		try{
-			File f = chooser.getSelectedFile();
+			File f =new File( chooser.getSelectedFile().getPath());
 			MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile,f) ;
 			try {
 				C.start();

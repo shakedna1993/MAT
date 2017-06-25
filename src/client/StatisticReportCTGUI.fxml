@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -7,10 +8,10 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="802.0" prefWidth="1028.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.StatisticReportCTGuIController">
+<AnchorPane prefHeight="802.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.StatisticReportCTGuIController">
    <children>
       <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
-      <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="733.0" layoutY="-1.0">
+      <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="856.0" layoutY="-1.0">
          <image>
             <Image url="@LOGO.png" />
          </image>
@@ -26,16 +27,26 @@
          </font>
       </Label>
       <Button fx:id="LogOut" layoutX="634.0" layoutY="748.0" mnemonicParsing="false" onAction="#clsReportCT" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
-      <Separator layoutY="95.0" prefHeight="17.0" prefWidth="1082.0" />
-      <Separator layoutY="132.0" prefHeight="5.0" prefWidth="1082.0" />
-      <Separator layoutY="721.0" prefHeight="5.0" prefWidth="1082.0" />
+      <Separator layoutY="95.0" prefHeight="17.0" prefWidth="1190.0" />
+      <Separator layoutY="132.0" prefHeight="5.0" prefWidth="1190.0" />
+      <Separator layoutY="721.0" prefHeight="5.0" prefWidth="1190.0" />
       <Button fx:id="Back" layoutX="351.0" layoutY="748.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
       <ComboBox fx:id="STC" layoutX="175.0" layoutY="149.0" prefHeight="25.0" prefWidth="200.0" promptText="Classes" />
       <Label fx:id="selecttec" layoutX="22.0" layoutY="151.0" text="Select Class:" />
-      <Button fx:id="selectBtn" layoutX="246.0" layoutY="403.0" mnemonicParsing="false" text="select" />
+      <Button fx:id="selectBtn" layoutX="399.0" layoutY="146.0" mnemonicParsing="false" onAction="#setComboBoxStartSem" text="select" />
       <Label fx:id="choosenum" layoutX="26.0" layoutY="237.0" text="Start Semester:" />
       <ComboBox fx:id="STC1" layoutX="175.0" layoutY="232.0" prefHeight="25.0" prefWidth="200.0" promptText="Start semester" />
       <Label fx:id="choosenum1" layoutX="25.0" layoutY="325.0" text="End Semester:" />
-      <ComboBox fx:id="STC11" layoutX="175.0" layoutY="323.0" prefHeight="25.0" prefWidth="200.0" promptText="End semester" />
+      <ComboBox fx:id="STC2" layoutX="175.0" layoutY="323.0" prefHeight="25.0" prefWidth="200.0" promptText="End semester" />
+      <Button fx:id="selectBtn1" layoutX="399.0" layoutY="229.0" mnemonicParsing="false" onAction="#setComboBoxEndSem" text="select" />
+      <Button fx:id="selectBtn2" layoutX="399.0" layoutY="320.0" mnemonicParsing="false" onAction="#setDiagram" text="select" />
+      <BarChart fx:id="diagram" layoutX="520.0" layoutY="190.0" prefHeight="495.0" prefWidth="634.0" title="Teachers grades per Class">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </BarChart>
    </children>
 </AnchorPane>

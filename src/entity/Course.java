@@ -12,12 +12,29 @@ public class Course implements Serializable{
 	private String courseId, name, unit,Semid;
 	private int Hours;
 	private float grade;
+	private String preReqId;
 	private ArrayList<Float> GradeList = new ArrayList<>();
 	
 	public Course() {
 		super();
+		courseId="-1";
+		preReqId="-1";
+		Hours=-1;
 	}
 	
+	public Course(String courseId, String name, String unit, String semid, int hours, float grade, String preReqId,
+			ArrayList<Float> gradeList) {
+		super();
+		this.courseId = courseId;
+		this.name = name;
+		this.unit = unit;
+		Semid = semid;
+		Hours = hours;
+		this.grade = grade;
+		this.preReqId = preReqId;
+		GradeList = gradeList;
+	}
+
 	public Course(String courseId, String name, String unit,String Semid, int hours, Float grade) {
 		super();
 		this.courseId = courseId;
@@ -26,6 +43,25 @@ public class Course implements Serializable{
 		Hours = hours;
 		this.Semid=Semid;
 		this.setGrade(grade);
+	}
+
+	public Course(String courseId, String name, String unit, int hours) {
+		super();
+		this.courseId = courseId;
+		this.name = name;
+		this.unit = unit;
+		Hours = hours;
+	}
+	
+	public Course(String courseId, String preReqId) {
+		super();
+		this.courseId = courseId;
+		this.preReqId = preReqId;
+	}
+
+	public Course(String courseId) {
+		super();
+		this.courseId = courseId;
 	}
 
 	public String getCourseId() {
@@ -83,11 +119,18 @@ public class Course implements Serializable{
 	public void addGrade(Float s) {
 		this.GradeList.add(s) ;
 	}
+
+	public String getPreReqId() {
+		return preReqId;
+	}
+
+	public void setPreReqId(String preReqId) {
+		this.preReqId = preReqId;
+	}
+
 	@Override
 	public String toString() {
 		return "Course [courseId=" + courseId + ", name=" + name + ", unit=" + unit + ", Semid=" + Semid + ", Hours="
-				+ Hours + ", grade=" + grade + "]";
+				+ Hours + ", grade=" + grade + ", preReqId=" + preReqId + ", GradeList=" + GradeList + "]";
 	}
-
-
 }
