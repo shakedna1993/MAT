@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import client.MsgFromServer;
 import thred.IndexList;
 import client.Op;
+import entity.Course;
 import entity.Assigenment;
 import entity.Course;
 import entity.Student;
@@ -83,6 +84,39 @@ public class OpCheck {
 		case StudentCourse:
 			User stud = (User)op.getMsg();
 			return DBC.StudentCourse(stud.getId());
+			
+		case UnitExists:
+			Unit Unit1 = (Unit) op.getMsg();
+			return DBC.UnitExists(Unit1.getUnitId());
+		case CourseExists:
+			Course Course1 = (Course) op.getMsg();
+			return DBC.CourseExists(Course1.getCourseId());
+		case DefineNewCourse:
+			Course Course2 = (Course) op.getMsg();
+			return DBC.DefineNewCourse(Course2);
+		case CoursesList:
+			Course Course3 = (Course) op.getMsg();
+			return DBC.CoursesList(Course3.getCourseId());
+		case DefinePreReq:
+			Course Course4=(Course) op.getMsg();
+			return DBC.DefinePreReq(Course4.getCourseId(), Course4.getPreReqId());
+		case RemoveCourse:
+			Course Course5 = (Course) op.getMsg();
+			return DBC.RemoveCourse(Course5.getCourseId());	
+		case RenameCourse:
+			Course Course6 = (Course) op.getMsg();
+			return DBC.RenameCourse(Course6);
+		case WeeklyHoursUpdate:
+			Course Course7 = (Course) op.getMsg();
+			return DBC.WeeklyHoursUpdate(Course7);
+		case PreReqList:
+			Course Course8 = (Course) op.getMsg();
+			return DBC.PreReqList(Course8.getCourseId());
+		case RemovePreReq:
+			Course Course9=(Course) op.getMsg();
+			return DBC.RemovePreReq(Course9.getCourseId(), Course9.getPreReqId());
+			
+
 		case parSetStudentComboBox:
 			 return DBC.parSetStudentComboBox((String)op.getMsg());
 		case avgOneStudent:

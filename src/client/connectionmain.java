@@ -146,6 +146,14 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	public static void showDefineWindow() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/DefineCourseGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Define Course");
+		primaryStage.show();	
+	}
 	public static void showTeacherGUIAssWindow() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/addNewAssingmentGUI.fxml"));
@@ -211,6 +219,33 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	public static void showDefineCourseAddPre() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/DefineCourseAddPreGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Define Course ADD Pre Requisite");
+		primaryStage.show();	
+	}
+
+	public static void showEditWindow() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/EditCourseGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Edit Course");
+		primaryStage.show();
+	}
+	
+	public static void showRemoveWindow() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/RemoveCourseGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Remove Course");
+		primaryStage.show();
+	}
+
 	public static void ShowStatisticReportCourseClass() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/StatisticReportCCGUI.fxml"));
