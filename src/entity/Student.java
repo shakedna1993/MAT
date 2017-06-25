@@ -58,9 +58,10 @@ public class Student extends User implements Serializable{
 	public void setClassid(String classid) {
 		Classid = classid;
 	}
+	
 	@Override
 	public String toString() {
-		return "Student [ParentId=" + ParentId + ", avg=" + avg + "]";
+		return "Student [ParentId=" + ParentId + ", Classid=" + Classid + ", avg=" + avg + "]";
 	}
 	
 }

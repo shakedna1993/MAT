@@ -16,7 +16,6 @@ import entity.Student;
 import entity.Teacher;
 import entity.User;
 import entity.Class;
-import Server.DownloadFileServer;
 import Server.DBC;
 import entity.FileEnt;
 /**
@@ -90,8 +89,10 @@ public class OpCheck {
 			 return DBC.avgOneStudent((String)op.getMsg());
 		case BlockParent:
 			 DBC.BlockParent((String)op.getMsg());
+			 
 		case unBlockParent:
 			 DBC.unBlockParent((String)op.getMsg());
+			 
 		case StudentsList:
 			return (ArrayList<Student>)DBC.StudentsList();
 			case setComboBoxTeacherCourse:
@@ -136,8 +137,6 @@ public class OpCheck {
 				cid=(String)op.getMsg();
 				lst2= DBC.setTableViewStudentCourseAssigenment(cid);
 				return lst2;
-			case DownoladFile:
-				return DownloadFileServer.sendFile((String) op.getMsg());
 			case UploadFile:
 				int check = 0;
 				File f=(File)(op.getMsg());
@@ -160,6 +159,13 @@ public class OpCheck {
 				return DBC.createClassEntity();
 			case createSemesterEntity:
 				return DBC.createSemesterEntity();
+			case TeacherClassList:
+				Teacher tec =(Teacher)op.getMsg();
+				return DBC.TeacherClassList(tec.getTecId());
+			case TecNameToId:
+				Teacher tec1 =(Teacher)op.getMsg();
+				return DBC.TecNameToId(tec1.getTecName());
+				
 				
 				
 				

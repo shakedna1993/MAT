@@ -1136,7 +1136,7 @@ public class DBC {
 			try {
 				Connection conn = Connect.getConnection();
 				stmt = conn.createStatement();
-				String Query = "UPDATE moodle.users SET isBlocked =1 WHERE Id ='"+Pid+"'";
+				String Query = "UPDATE moodle.users SET isBlocked =" + 1 + " WHERE Id ='"+Pid+"'";
 				stmt.executeUpdate(Query);
 				Connect.close();
 			} catch (SQLException e) {
@@ -1150,7 +1150,7 @@ public class DBC {
 			try {
 				Connection conn = Connect.getConnection();
 				stmt = conn.createStatement();
-				String Query = "UPDATE moodle.users SET isBlocked = 0 WHERE Id ='"+Pid+"'";
+				String Query = "UPDATE moodle.users SET isBlocked = " + 0 + " WHERE Id ='"+Pid+"'";
 				stmt.executeUpdate(Query);
 				Connect.close();
 			} catch (SQLException e) {
@@ -1159,7 +1159,66 @@ public class DBC {
 
 		}
 		
-
+		public static ArrayList<Class> TeacherClassList(String teacherid) {
+			Statement stmt;
+			ArrayList<Class> se =new ArrayList<Class>();
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT * FROM moodle.classcourse where tid='" + teacherid +"'");
+				while (rs.next()) {
+					Class c = new Class();
+					try {
+						c.setCourseid(rs.getString(1));
+						c.setClassId(rs.getString(2));
+						c.setTeachid(rs.getString(3));
+						c.setSemid(rs.getString(4));
+						se.add(c);
+					} 
+					catch (Exception e) {
+						c.setClassId("-1");
+						e.printStackTrace();
+					}
+				}
+				rs.close();
+				Connect.close();
+				return se;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return se;
+		}
+		
+		public static Teacher TecNameToId(String tecname) {
+			Statement stmt;
+			Teacher t = new Teacher();
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT * FROM moodle.users where FullName='" + tecname + "'");
+				while (rs.next()) {
+					try {
+						t.setTecId(rs.getString(1));
+	
+					} 
+					catch (Exception e) {
+						t.setTecId("-1");
+						e.printStackTrace();
+					}
+				}
+				rs.close();
+				Connect.close();
+				return t;
+			} catch (SQLException e) {
+				t.setTecId("-1");
+				e.printStackTrace();
+			}
+			return t;
+		}
+		
+		
 	
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
