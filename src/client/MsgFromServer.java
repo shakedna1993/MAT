@@ -102,7 +102,32 @@ public class MsgFromServer {
 		case StudentCourse:
 			setDataListByIndex(IndexList.StudentCourse, returnMsg.getMsg());
 			return;
-
+		case UnitExists:
+			setDataListByIndex(IndexList.UnitExists, returnMsg.getMsg());
+		case CourseExists:
+			setDataListByIndex(IndexList.CourseExists, returnMsg.getMsg());
+		case DefineNewCourse:
+			setDataListByIndex(IndexList.DefineNewCourse, returnMsg.getMsg());
+		case CoursesList:
+			setDataListByIndex(IndexList.CoursesList, returnMsg.getMsg());
+		case DefinePreReq:
+			setDataListByIndex(IndexList.DefinePreReq, returnMsg.getMsg());
+		case RemoveCourse:
+			setDataListByIndex(IndexList.RemoveCourse, returnMsg.getMsg());
+		case RenameCourse:
+			setDataListByIndex(IndexList.RenameCourse, returnMsg.getMsg());
+		case WeeklyHoursUpdate:
+			setDataListByIndex(IndexList.WeeklyHoursUpdate, returnMsg.getMsg());
+		case PreReqList:
+			setDataListByIndex(IndexList.PreReqList, returnMsg.getMsg());	
+		case RemovePreReq:
+			setDataListByIndex(IndexList.RemovePreReq, returnMsg.getMsg());		
+			
+			
+			
+			
+			
+			
 		default:
 			break;
 		}
