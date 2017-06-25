@@ -51,6 +51,8 @@ public class IndexList {
 	public static final int createSemesterEntity= 69;
 	public static final int TeacherClassList=70;
 	public static final int TecNameToId=71;
+	public static final int ClassNameToId=72;
+	public static final int ClassTeacherList=73;
 	
 	//Bar: 100
 	public static final int parSetStudentComboBox=100;

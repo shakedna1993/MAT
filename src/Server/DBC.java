@@ -845,7 +845,7 @@ public class DBC {
 	public static int UploadFile(File file) throws Exception {
 		try {
 			Connection conn = Connect.getConnection();
-	        String Quary = "INSERT INTO moodle.studentassignment (Assid,Studid,Courseid,Semid,Date,Fileid,path) VALUES (?,?,?,?,?,?,?)";
+	        String Quary = "INSERT INTO moodle.studentassignment (Assid,Studid,Courseid,Semid,Fileid,path) VALUES (?,?,?,?,?,?)";
 	        InputStream InputStream =new FileInputStream(file.getPath());
 	        PreparedStatement stmt = conn.prepareStatement(Quary);
 	        String Assid="test",Studid="11111",Courseid="1201",Semid="011",Date="2017-06-22";
@@ -857,9 +857,9 @@ public class DBC {
 	        stmt.setString(6,"1234" );
 	      //  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	       // java.util.Date date=sdf.parse(Date);
-	        //stmt.setDate(5,"2017-06-22");
+	       // stmt.setDate(5,Date);
 	        stmt.setBinaryStream(7,InputStream,(long)file.length());
-	        stmt.executeUpdate();
+	        stmt.executeUpdate(Quary);
 	        JOptionPane.showMessageDialog(null, "File stored successfully!");
 			}
 		catch (Exception e) {
@@ -1218,7 +1218,65 @@ public class DBC {
 			return t;
 		}
 		
+		public static Class ClassNameToId(String classname) {
+			Statement stmt;
+			Class c = new Class();
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT * FROM moodle.class where name='" + classname + "'");
+				while (rs.next()) {
+					try {
+						c.setClassId(rs.getString(1));
+	
+					} 
+					catch (Exception e) {
+						c.setClassId("-1");
+						e.printStackTrace();
+					}
+				}
+				rs.close();
+				Connect.close();
+				return c;
+			} catch (SQLException e) {
+				c.setClassId("-1");
+				e.printStackTrace();
+			}
+			return c;
+		}
 		
+		public static Class ClassTeacherList(String classid) {
+			Statement stmt;
+			ArrayList<String> tec =new ArrayList<String>();
+			ArrayList<String> course=new ArrayList<String>();
+			Class c = new Class();
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT * FROM moodle.classcourse where classid='" + classid +"'");
+				while (rs.next()) {
+					try {
+						c.setClassId(rs.getString(2));
+						tec.add(rs.getString(3));
+						course.add(rs.getString(1));
+					} 
+					catch (Exception e) {
+						c.setClassId("-1");
+						e.printStackTrace();
+					}
+				}
+				rs.close();
+				Connect.close();
+				c.setCourseList(course);
+				c.setTecList(tec);
+				return c;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return c;
+		}
 	
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {

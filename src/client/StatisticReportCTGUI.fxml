@@ -39,7 +39,7 @@
       <Label fx:id="choosenum1" layoutX="25.0" layoutY="325.0" text="End Semester:" />
       <ComboBox fx:id="STC2" layoutX="175.0" layoutY="323.0" prefHeight="25.0" prefWidth="200.0" promptText="End semester" />
       <Button fx:id="selectBtn1" layoutX="399.0" layoutY="229.0" mnemonicParsing="false" onAction="#setComboBoxEndSem" text="select" />
-      <Button fx:id="selectBtn2" layoutX="399.0" layoutY="320.0" mnemonicParsing="false" text="select" />
+      <Button fx:id="selectBtn2" layoutX="399.0" layoutY="320.0" mnemonicParsing="false" onAction="#setDiagram" text="select" />
       <BarChart fx:id="diagram" layoutX="520.0" layoutY="190.0" prefHeight="495.0" prefWidth="634.0" title="Teachers grades per Class">
          <xAxis>
             <CategoryAxis side="BOTTOM" />

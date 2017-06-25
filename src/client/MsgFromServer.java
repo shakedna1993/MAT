@@ -157,6 +157,10 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.TeacherClassList, returnMsg.getMsg());
 		case TecNameToId:
 			setDataListByIndex(IndexList.TecNameToId, returnMsg.getMsg());
+		case ClassNameToId:
+			setDataListByIndex(IndexList.ClassNameToId, returnMsg.getMsg());
+		case ClassTeacherList:
+			setDataListByIndex(IndexList.ClassTeacherList, returnMsg.getMsg());
 			
 			
 			

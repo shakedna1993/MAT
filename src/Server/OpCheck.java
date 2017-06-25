@@ -165,6 +165,13 @@ public class OpCheck {
 			case TecNameToId:
 				Teacher tec1 =(Teacher)op.getMsg();
 				return DBC.TecNameToId(tec1.getTecName());
+			case ClassNameToId:
+				Class cl1 =(Class)op.getMsg();
+				return DBC.ClassNameToId(cl1.getName());
+			case ClassTeacherList:
+				Class cla =(Class)op.getMsg();
+				return DBC.ClassTeacherList(cla.getClassId());
+				
 				
 				
 				
