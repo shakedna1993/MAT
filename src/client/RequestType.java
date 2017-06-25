@@ -13,9 +13,8 @@ public enum RequestType {
 	StudentCourse,setComboBoxStudentCourse,setTableViewStudentCourseAssigenment,DownoladFile,ClassCourseDetails,UploadFile,createReportEntity,createTeacherEntity,createClassEntity,createSemesterEntity,TeacherClassList,TecNameToId,
 	setComboBoxTeacherCourse,createCourseEntity, setTableViewTeacherCourseAssigenment, getWeeklyHours, getAssArreyList, allAssForTeacher, insertNewAss, UpdateAss,
 	parSetStudentComboBox, avgOneStudent, BlockParent, unBlockParent,
-	StudentsList,
-	UnitExists, CourseExists, DefineNewCourse, CoursesList, DefinePreReq, RemoveCourse,RenameCourse,WeeklyHoursUpdate,PreReqList,RemovePreReq		// Rinat
-	;
+	UnitExists, CourseExists, DefineNewCourse, CoursesList, DefinePreReq, RemoveCourse,RenameCourse,WeeklyHoursUpdate,PreReqList,RemovePreReq,		// Rinat
+	StudentsList;
 	
 	/** TBD */
 }
