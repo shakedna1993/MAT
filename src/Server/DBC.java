@@ -334,17 +334,448 @@ public class DBC {
 		}
 		return 0;
 	}
+	public static boolean AddStudentToClass(String par[]){
+		Statement stmt;
+		boolean flag = false;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			boolean rs = stmt.execute(
+					"UPDATE `moodle`.`student` SET `classid`='"+par[1]+"' WHERE `sid`='"+par[0]+"'");
+			flag = true;
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	public static boolean RemoveStudentFromClass(String par[]){
+		Statement stmt;
+		boolean flag = false;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			boolean rs = stmt.execute(
+					"UPDATE `moodle`.`student` SET classid=NULL WHERE `sid`='"+par[0]+"'");
+			flag = true;
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	public static ArrayList<Course> getAvailableCoursesForClass(Class c){
+		Statement stmt;
+		ArrayList<Course> courseList = new ArrayList<Course>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.course");
+			while (rs.next()) {
+				try {
+					Course c1 = new Course();
+					c1.setCourseId(rs.getString(1));
+					c1.setName(rs.getString(2));
+					courseList.add(c1);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			rs = stmt.executeQuery(
+					"SELECT * FROM moodle.classcourse where classid='"+c.getClassId()+"'");
+			while (rs.next()) {
+				try {
+					Course c1 = new Course();
+					c1.setCourseId((rs.getString(1)));
+					for (int i=0; i<courseList.size(); i++){
+						if (courseList.get(i).getCourseId().equals(c1.getCourseId())){
+							courseList.remove(courseList.get(i));
+							break;
+						}
+					}
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			Connect.close();
+			return courseList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static Object[] getClassCourses(entity.Class c){
+		Statement stmt;
+		ArrayList<Course> courseList = new ArrayList<Course>();
+		ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
+		String semid = getCurrentSemesterID();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.classcourse where classid='"+c.getClassId()+"' and semid= '" + semid + "';");
+			while (rs.next()) {
+				try {
+					Course c1 = new Course();
+					c1.setCourseId((rs.getString(1)));
+					Teacher t = new Teacher();
+					t.setId(rs.getString(3));
+					c1.setSemid(rs.getString(4));
+					teacherList.add(t);
+					courseList.add(c1);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			for (int i=0; i<courseList.size(); i++){
+				rs = stmt.executeQuery(
+						"SELECT * FROM moodle.course where Courseid='" + courseList.get(i).getCourseId() + "'");
+				while (rs.next()) {
+					try {
+						courseList.get(i).setName((rs.getString(2)));
+						courseList.get(i).setUnit(rs.getString(3));
+						courseList.get(i).setHours(rs.getInt(4));
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				rs = stmt.executeQuery(
+						"SELECT * FROM moodle.users where Id='" + teacherList.get(i).getId() + "'");
+				while (rs.next()) {
+					try {
+						teacherList.get(i).setName((rs.getString(2)));
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+			rs.close();
+			Connect.close();
+			Object o[] = {courseList,teacherList};
+			return o;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static ArrayList<Student> getStudentInNoClass(String classId){
+		Statement stmt;
+		ArrayList<Student> studList = new ArrayList<Student>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.student where classid is NULL");
+			while (rs.next()) {
+				try {
+					Student s = new Student();
+					s.setParentId((rs.getString(1)));
+					s.setAvg((rs.getFloat(2)));
+					s.setId(rs.getString(3));
+					s.setClassid(classId);
+					studList.add(s);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			for (int i=0; i<studList.size(); i++){
+				rs = stmt.executeQuery(
+						"SELECT * FROM moodle.users where Id='" + studList.get(i).getId() + "'");
+				while (rs.next()) {
+					try {
+						studList.get(i).setName((rs.getString(2)));
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			rs.close();
+			Connect.close();
+			return studList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static ArrayList<Teacher> getTeachersForCourse(String courseid){
+		Statement stmt;
+		ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.teachers");// where classid='" + classId + "'");
+			while (rs.next()) {
+				try {
+					Teacher t = new Teacher();
+					t.setMaxHours(rs.getInt(1));
+					t.setIntership(rs.getString(2));
+					t.setId(rs.getString(3));
+					t.setUnit(rs.getString(4));
+					teacherList.add(t);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			for (int i=0; i<teacherList.size(); i++){
+				rs = stmt.executeQuery(
+						"SELECT * FROM moodle.users where Id='" + teacherList.get(i).getId() + "'");
+				while (rs.next()) {
+					try {
+						teacherList.get(i).setName((rs.getString(2)));
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			rs.close();
+			Connect.close();
+			return teacherList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static boolean RemoveClassFromCourse(String par[]){
+		Statement stmt;
+		boolean flag = false;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			boolean rs = stmt.execute(
+					"DELETE FROM `moodle`.`classcourse` WHERE `courseid`='"+par[0]+"' and`classid`='" + par[1] + "' and`semid`='"+par[2]+"'");
+			flag = true;
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	public static boolean OpenNewSemester(){
+		Statement stmt;
+		boolean flag = false;
+		String currsem = getCurrentSemesterID();
+		int currsemint = Integer.parseInt(currsem);
+		currsemint++;
+		String newsem = ""+currsemint;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			boolean rs = stmt.execute(
+					"UPDATE `moodle`.`semester` SET `currentStatus`='0' WHERE `semid`='" + currsem + "';");
+			rs = stmt.execute(
+					"INSERT INTO `moodle`.`semester` (`semid`, `currentStatus`, `week`) VALUES ('" + newsem + "', '1', '0');");
+			
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ArrayList<Course> courseList = new ArrayList<Course>();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.managercourses");
+			while (rs.next()) {
+				try {
+					Course c = new Course();
+					c.setCourseId(rs.getString(1));
+					c.setName(rs.getString(2));
+					c.setUnit(rs.getString(3));
+					c.setHours(rs.getInt(4));
+					courseList.add(c);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			for (int i=0; i<courseList.size(); i++){
+				Course c = courseList.get(i);
+				try{
+					boolean rs2 = stmt.execute(
+						"INSERT INTO `moodle`.`course` (`Courseid`, `CourseName`, `unit`, `hours`) VALUES ('" + c.getCourseId() + "', '"+c.getName() +"', '"+ c.getUnit() +"', '"+c.getHours()+"');");
+				}catch (SQLException e) {
+					try{
+						boolean rs2 = stmt.execute(
+					
+							"UPDATE `moodle`.`course` SET `CourseName`='"+c.getName()+"', `hours`='" + c.getHours() + "'WHERE `Courseid`='"+c.getCourseId() +"';");
+					}catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+
+				}
+			}
+			flag = true;
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	public static boolean AddStudentToCourse(String par[]){
+		//par = {studentid,semid,courseid,coursename}
+		Statement stmt;
+		boolean flag = false;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			boolean rs = stmt.execute(
+					"INSERT INTO `moodle`.`studentcourse` (`studid`, `semid`, `courseid`, `grade`, `cname`) VALUES ('"+par[0]+"', '" + par[1] + "', '"+ par[2] + "', '"+"0"+"', '"+par[3]+"')");
+
+			flag = true;
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	public static boolean AddClassToCourse(String par[]){
+		//par = {courseid,classid,tid,semid}
+		Statement stmt;
+		boolean flag = false;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			boolean rs = stmt.execute(
+					"INSERT INTO `moodle`.`classcourse` (`courseid`, `classid`, `tid`, `semid`) VALUES ('"+par[0]+"', '" + par[1] + "', '"+ par[2] + "', '"+par[3]+"')");
+			flag = true;
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	public static boolean RemoveStudentFromCourse(String par[]){
+		// par = {studid,courseid,semid}
+		Statement stmt;
+		boolean flag = false;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			boolean rs = stmt.execute(
+					"DELETE FROM `moodle`.`studentcourse` WHERE `studid`='"+par[0]+"' and`semid`='" + par[2] + "' and`courseid`='"+par[1]+"'");
+			flag = true;
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	public static String getCurrentSemesterID(){
+		Statement stmt;
+		String res;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.semester where currentStatus='1'");
+			while (rs.next()) {
+				try {
+					res = rs.getString(1);
+					return res;
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			Connect.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static ArrayList<Student> getStudentInClass(String classId){
+		Statement stmt;
+		ArrayList<Student> studList = new ArrayList<Student>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.student where classid='" + classId + "'");
+			while (rs.next()) {
+				try {
+					Student s = new Student();
+					s.setParentId((rs.getString(1)));
+					s.setAvg((rs.getFloat(2)));
+					s.setId(rs.getString(3));
+					s.setClassid(classId);
+					studList.add(s);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			for (int i=0; i<studList.size(); i++){
+				rs = stmt.executeQuery(
+						"SELECT * FROM moodle.users where Id='" + studList.get(i).getId() + "'");
+				while (rs.next()) {
+					try {
+						studList.get(i).setName((rs.getString(2)));
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			rs.close();
+			Connect.close();
+			return studList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static ArrayList<entity.Class> getAllClasses(){
+		Statement stmt;
+		ArrayList<entity.Class> classList = new ArrayList<entity.Class>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.class");
+			while (rs.next()) {
+				try {
+					entity.Class c = new Class();
+					c.setClassId((rs.getString(1)));
+					c.setName((rs.getString(2)));
+					c.setMAXStudent(rs.getInt(3));
+					classList.add(c);
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			Connect.close();
+			return classList;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public static boolean UserNameExists(String name){
 		Statement stmt;
 		boolean flag=false;
-
 		try {
-
 			Connection conn = Connect.getConnection();
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
 					"SELECT * FROM moodle.users where UserName='" + name + "'");
-			
 			while (rs.next()) {
 				try {
 					flag=true;	
@@ -352,7 +783,6 @@ public class DBC {
 				catch (Exception e) {
 					e.printStackTrace();
 				}
-
 			}
 			rs.close();
 			Connect.close();

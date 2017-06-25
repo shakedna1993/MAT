@@ -135,9 +135,9 @@ public class AddStudentGUIController implements Initializable {
 			alert.show();
 			return;
 		}
-		if (!userNameExists(user_field.getText())) {
+		if (userNameExists(user_field.getText())) {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("PUsername Already Exists!");
+			alert.setTitle("Username Already Exists!");
 			alert.setHeaderText(null);
 			alert.setContentText("Username Already Exists!");
 
@@ -200,7 +200,7 @@ public class AddStudentGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		return ((String) MsgFromServer.getDataListByIndex(IndexList.UserNameExists)).equals("true");
+		return ((boolean) MsgFromServer.getDataListByIndex(IndexList.UserNameExists));
 	}
 
 	private boolean parentExists(String pid) {

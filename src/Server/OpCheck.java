@@ -62,6 +62,36 @@ public class OpCheck {
 				return "Success";
 			else
 				return "fail";
+		case getAllClasses:
+			return DBC.getAllClasses();
+		case getStudentInClass:
+			return DBC.getStudentInClass((String)op.getMsg());
+		case getStudentInNoClass:
+			return DBC.getStudentInNoClass((String)op.getMsg());
+		case RemoveStudentFromClass:
+			return DBC.RemoveStudentFromClass((String[])op.getMsg());
+		case AddStudentToClass:
+			return DBC.AddStudentToClass((String[])op.getMsg());
+		case getClassCourses:
+			return DBC.getClassCourses((Class)op.getMsg());
+		case getTeachersForCourse:
+			return DBC.getTeachersForCourse((String)op.getMsg());
+		case OpenNewSemester:
+			return DBC.OpenNewSemester();
+		case getCurrentSemesterID:
+			return DBC.getCurrentSemesterID(); 
+		case RemoveStudentFromCourse:
+			return DBC.RemoveStudentFromCourse((String[])op.getMsg());
+		case AddClassToCourse:
+			return DBC.AddClassToCourse((String[])op.getMsg());
+		case AddStudentToCourse:
+			return DBC.AddStudentToCourse((String[])op.getMsg());
+		case RemoveClassFromCourse:
+			return DBC.RemoveClassFromCourse((String[])op.getMsg()); 
+		case getAvailableCoursesForClass:
+			return DBC.getAvailableCoursesForClass((Class)op.getMsg());
+		case UserNameExists:
+			return DBC.UserNameExists((String)op.getMsg());
 		case StudentExists:
 			String id = (String)op.getMsg();
 			return DBC.StudentExists(id);

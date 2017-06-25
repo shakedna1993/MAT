@@ -2,8 +2,10 @@ package client;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import entity.Teacher;
 import entity.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -12,7 +14,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -135,6 +140,23 @@ public class SecMainGUIController implements Initializable {
 	@FXML
 	public void defineClass4Course(ActionEvent event) throws IOException {
 		connectionmain.defineClass4Course(event);
+	}
+	
+	@FXML
+	public void openNewSemester(ActionEvent event) throws IOException {
+		Alert alert = new Alert(AlertType.CONFIRMATION, "This action will open a new semester.\nThe current semester will be set inactive and some courses may change.\nAre you sure you want to open a new semester?", ButtonType.YES, ButtonType.NO);
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.YES) {
+			MyThread a = new MyThread(RequestType.OpenNewSemester, IndexList.OpenNewSemester, null);
+			a.start();
+			try {
+				a.join();
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+	
+			boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.OpenNewSemester));
+		}
 	}
 
 }

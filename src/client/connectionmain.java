@@ -258,6 +258,7 @@ public class connectionmain extends Application {
 		primaryStage.setScene(new Scene(mainLayout));
 		primaryStage.setTitle("M.A.T- Grade List");
 		primaryStage.show();
-
+		
 	}
+
 }

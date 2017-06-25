@@ -23,6 +23,21 @@ public class IndexList {
 	public static final int classIDExists = 24;
 	public static final int classNameExists = 25;
 	public static final int DefineClass = 26;
+	public static final int getAllClasses = 27;
+	public static final int getStudentInClass = 28;
+	public static final int RemoveStudentFromClass = 29;
+	public static final int getStudentInNoClass = 30;
+	public static final int AddStudentToClass = 31;
+	public static final int getClassCourses = 32;
+	public static final int getAvailableCoursesForClass = 33;
+	public static final int getTeachersForCourse = 34;
+	public static final int RemoveClassFromCourse = 35;
+	public static final int getCurrentSemesterID = 36;
+	public static final int RemoveStudentFromCourse = 37;
+	public static final int AddClassToCourse = 38;
+	public static final int AddStudentToCourse = 39;
+	public static final int OpenNewSemester = 120;
+	
 	
 	//...........................
 	// insert more index ... 

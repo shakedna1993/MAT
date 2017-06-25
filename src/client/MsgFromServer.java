@@ -114,7 +114,34 @@ public class MsgFromServer {
 		case StudentsList:
 			setDataListByIndex(IndexList.StudentsList, returnMsg.getMsg());
 			return;
-
+		case getAllClasses:
+			setDataListByIndex(IndexList.getAllClasses, returnMsg.getMsg());
+		case getStudentInClass:
+			setDataListByIndex(IndexList.getStudentInClass, returnMsg.getMsg());
+		case getAvailableCoursesForClass:
+			setDataListByIndex(IndexList.getAvailableCoursesForClass, returnMsg.getMsg());
+		case RemoveStudentFromCourse:
+			setDataListByIndex(IndexList.RemoveStudentFromCourse, returnMsg.getMsg());
+		case AddClassToCourse:
+			setDataListByIndex(IndexList.AddClassToCourse, returnMsg.getMsg());
+		case AddStudentToCourse:
+			setDataListByIndex(IndexList.AddStudentToCourse, returnMsg.getMsg());
+		case getCurrentSemesterID:
+			setDataListByIndex(IndexList.getCurrentSemesterID, returnMsg.getMsg());
+		case RemoveClassFromCourse:
+			setDataListByIndex(IndexList.RemoveClassFromCourse, returnMsg.getMsg());
+		case getTeachersForCourse:
+			setDataListByIndex(IndexList.getTeachersForCourse, returnMsg.getMsg());
+		case OpenNewSemester:
+			setDataListByIndex(IndexList.OpenNewSemester, returnMsg.getMsg());
+		case getStudentInNoClass:
+			setDataListByIndex(IndexList.getStudentInNoClass, returnMsg.getMsg());
+		case RemoveStudentFromClass:
+			setDataListByIndex(IndexList.RemoveStudentFromClass, returnMsg.getMsg());
+		case AddStudentToClass:
+			setDataListByIndex(IndexList.AddStudentToClass, returnMsg.getMsg());
+		case getClassCourses:
+			setDataListByIndex(IndexList.getClassCourses, returnMsg.getMsg());
 		case classIDExists:
 			setDataListByIndex(IndexList.classIDExists, returnMsg.getMsg());
 		case classNameExists:
