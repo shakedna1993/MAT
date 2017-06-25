@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="538.0" prefWidth="468.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.teacherControlerEditAss">
+   <children>
+      <AnchorPane prefHeight="538.0" prefWidth="481.0">
+         <children>
+            <Label fx:id="courseTxt" layoutX="46.0" layoutY="31.0" prefHeight="34.0" prefWidth="126.0" text="courseTxt">
+               <font>
+                  <Font size="23.0" />
+               </font></Label>
+            <Label fx:id="assTxt" layoutX="45.0" layoutY="65.0" prefHeight="34.0" prefWidth="92.0" text="assTxt">
+               <font>
+                  <Font size="23.0" />
+               </font></Label>
+            <TextField fx:id="fileidTxt" layoutX="172.0" layoutY="113.0" />
+            <TextField fx:id="stateTxt" layoutX="172.0" layoutY="159.0" />
+            <Label layoutX="23.0" layoutY="117.0" text="file id" />
+            <Label layoutX="21.0" layoutY="163.0" prefHeight="17.0" prefWidth="49.0" text="state" />
+            <Button fx:id="editBtn" layoutX="228.0" layoutY="257.0" mnemonicParsing="false" onAction="#editAss" text="Edit" />
+            <Button fx:id="backBtn" layoutX="226.0" layoutY="323.0" mnemonicParsing="false" onAction="#backButton" text="Back" />
+            <Label layoutX="23.0" layoutY="210.0" text="Date of Submission" />
+            <TextField fx:id="DaySubmissionTEXT" layoutX="166.0" layoutY="209.0" prefHeight="25.0" prefWidth="37.0" text="Day" />
+            <TextField fx:id="month" layoutX="210.0" layoutY="209.0" prefHeight="25.0" prefWidth="49.0" text="Mounth" />
+            <TextField fx:id="yearText" layoutX="267.0" layoutY="209.0" prefHeight="25.0" prefWidth="71.0" text="Year" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

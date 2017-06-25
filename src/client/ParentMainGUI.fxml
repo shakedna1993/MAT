@@ -28,10 +28,10 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="CalcAvg" layoutX="492.0" layoutY="348.0" text="Student Avg" textFill="#1815d0" />
-      <Button fx:id="GradeL" layoutX="320.0" layoutY="202.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Grades List" />
-      <Button fx:id="Evalu" layoutX="320.0" layoutY="295.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Evaluations" />
-      <Button fx:id="CourseL" layoutX="320.0" layoutY="250.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Course List" />
+      <Label fx:id="CalcAvg" layoutX="488.0" layoutY="431.0" prefHeight="27.0" prefWidth="77.0" text="Student Avg" textFill="#1815d0" />
+      <Button fx:id="GradeL" layoutX="325.0" layoutY="275.0" mnemonicParsing="false" onAction="#GradeList" prefHeight="25.0" prefWidth="106.0" text="Grades List" />
+      <Button fx:id="Evalu" layoutX="327.0" layoutY="360.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Evaluations" />
+      <Button fx:id="CourseL" layoutX="327.0" layoutY="318.0" mnemonicParsing="false" onAction="#CourseList" prefHeight="25.0" prefWidth="106.0" text="Course List" />
       <Label fx:id="Per_File" layoutX="277.0" layoutY="149.0" text="Personal File" underline="true">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -41,7 +41,12 @@
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-      <ComboBox fx:id="StuN" layoutX="102.0" layoutY="202.0" prefWidth="150.0" promptText="Student Name" />
-      <Button fx:id="AvgBtn" layoutX="319.0" layoutY="344.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Calculate Average" />
+      <ComboBox fx:id="StuN" layoutX="58.0" layoutY="210.0" prefHeight="25.0" prefWidth="163.0" promptText="Student Name" />
+      <Button fx:id="AvgBtn" layoutX="330.0" layoutY="432.0" mnemonicParsing="false" onAction="#Avgset" prefHeight="25.0" prefWidth="146.0" text="Calculate Average" />
+      <Label fx:id="Hello1" alignment="CENTER" layoutX="58.0" layoutY="175.0" prefHeight="27.0" prefWidth="163.0" text="choose your child:" textFill="#061880">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

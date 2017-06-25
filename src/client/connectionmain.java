@@ -154,6 +154,70 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Define Course");
 		primaryStage.show();	
 	}
+	public static void showTeacherGUIAssWindow() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/addNewAssingmentGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Parent Connection");
+		primaryStage.show();
+	}
+	
+	
+	
+	public static void showTeacherEditAssGUI() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/teacherEditAssGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Parent Connection");
+		primaryStage.show();
+	}
+	
+	public static void ShowAssOptions() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/AssMainGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Assignment");
+		primaryStage.show();
+	}
+	
+	public static void ShowStudentUploadAss() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/StudentUploadAssGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Assignment Submission");
+		primaryStage.show();
+	}
+	
+	public static void ShowReportSection() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/ReportsMainGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Genrate Reports");
+		primaryStage.show();
+	}
+	
+	public static void ShowStatisticReportClassTec() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/StatisticReportTCGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Teacher classes grades");
+		primaryStage.show();
+	}
+	
+	public static void ShowStatisticReportTecClass() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/StatisticReportCTGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Class teachers grades");
+		primaryStage.show();
+	}
 	
 	public static void showDefineCourseAddPre() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
@@ -182,8 +246,28 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 
+	public static void ShowStatisticReportCourseClass() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/StatisticReportCCGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Class courses grades");
+		primaryStage.show();
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public static void BlockedParentMain() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/BlockedParentMain.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Grade List");
+		primaryStage.show();
+
 	}
 }
