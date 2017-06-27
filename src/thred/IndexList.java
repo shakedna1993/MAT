@@ -78,4 +78,10 @@ public class IndexList {
 	public static final int WeeklyHoursUpdate = 87;
 	public static final int PreReqList = 88;
 	public static final int RemovePreReq = 89;
+	public static final int StudentEvaluations = 90;
+	public static final int DownloadAssigenment = 91;
+	public static final int DownloadStuEvaluation = 92;
+	
+	public static final int DownloadStuGradeFile = 93;
+	
 }

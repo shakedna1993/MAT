@@ -1,6 +1,7 @@
 package Server;
 
 import java.io.File;
+import java.io.IOException;
 //import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,12 +15,13 @@ import entity.Course;
 import entity.Assigenment;
 import entity.Course;
 import entity.Student;
+import entity.Studentass;
 import entity.Teacher;
 import entity.Unit;
 import entity.User;
 import entity.Class;
 import Server.DBC;
-import entity.FileEnt;
+
 /**
  * 
  * This class handles with all the functionality of the server.
@@ -168,15 +170,14 @@ public class OpCheck {
 				
 			case setTableViewStudentCourseAssigenment:
 				ArrayList<Assigenment> lst2 = new ArrayList<>();
-				String cid;
-				cid=(String)op.getMsg();
-				lst2= DBC.setTableViewStudentCourseAssigenment(cid);
+				Studentass asud=(Studentass)op.getMsg();
+				lst2= DBC.setTableViewStudentCourseAssigenment(asud);
 				return lst2;
 			case UploadFile:
 				int check = 0;
-				File f=(File)(op.getMsg());
+				Studentass sa=(Studentass)(op.getMsg());
 				try {
-					check= DBC.UploadFile(f);
+					check= DBC.UploadFile(sa);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -207,8 +208,33 @@ public class OpCheck {
 				Class cla =(Class)op.getMsg();
 				return DBC.ClassTeacherList(cla.getClassId());
 				
-				
-				
+			case StudentEvaluations:
+				User studEv = (User)op.getMsg();
+				return DBC.StudentEvaluations(studEv.getId());
+			case DownloadAssigenment:
+				Assigenment DownAss = (Assigenment)op.getMsg();
+				try {
+					return DBC.DownloadAssigenment(DownAss);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+			case DownloadStuEvaluation:
+				Studentass DownEva1 = (Studentass)op.getMsg();
+				try {
+					return DBC.DownloadStuEvaluation(DownEva1);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			case DownloadStuGradeFile:
+				Studentass DownEva2 = (Studentass)op.getMsg();
+				try {
+					return DBC.DownloadStuGradeFile(DownEva2);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 				
 				
 				

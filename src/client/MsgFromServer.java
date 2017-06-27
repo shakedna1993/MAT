@@ -182,6 +182,16 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.PreReqList, returnMsg.getMsg());	
 		case RemovePreReq:
 			setDataListByIndex(IndexList.RemovePreReq, returnMsg.getMsg());	
+		case StudentEvaluations:
+			setDataListByIndex(IndexList.StudentEvaluations, returnMsg.getMsg());
+		case DownloadAssigenment:
+			setDataListByIndex(IndexList.DownloadAssigenment, returnMsg.getMsg());	
+		case DownloadStuEvaluation:
+			setDataListByIndex(IndexList.DownloadStuEvaluation, returnMsg.getMsg());	
+		case DownloadStuGradeFile:
+			setDataListByIndex(IndexList.DownloadStuGradeFile, returnMsg.getMsg());	
+			
+			
 		
 		default:
 			break;

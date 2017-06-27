@@ -35,9 +35,9 @@ public class DefineCourseGUIController implements Initializable{
 	@FXML
 	ImageView BackIcon;
 	@FXML
-	ImageView AddIcon;
-	@FXML
 	ImageView LogOutIcon;
+	@FXML
+	ImageView AddIcon;
 	@FXML
 	Button DefineButton;
 	@FXML

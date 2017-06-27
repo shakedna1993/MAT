@@ -13,10 +13,12 @@ import javax.swing.JOptionPane;
 
 import entity.Assigenment;
 import entity.Course;
-import entity.FileEnt;
+import entity.Evaluation;
+//import entity.FileEnt;
 import entity.Reports;
 import entity.Semester;
 import entity.Student;
+import entity.Studentass;
 import entity.Teacher;
 import entity.Unit;
 import entity.User;
@@ -28,6 +30,8 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -108,6 +112,7 @@ public class DBC {
 				// Print out the values
 
 				try {
+					avgOneStudent(Id);
 					stud.setParentId(rs.getString(1));
 					stud.setAvg(rs.getFloat(2));
 					stud.setId(rs.getString(3) == null ? "-1" : rs.getString(3));
@@ -910,7 +915,7 @@ public class DBC {
 					Assigenment ass = new Assigenment();
 					try {
 						
-						ass.setAssId(rs2.getString(1));
+						ass.setAssId(rs2.getInt(1));
 						ass.setFileid(rs2.getString(2));
 						ass.setDueDate(rs2.getDate(3));
 						ass.setUserId(rs2.getString(4));
@@ -1017,7 +1022,7 @@ public class DBC {
 					Assigenment ass = new Assigenment();
 					try {
 						
-						ass.setAssId(rs1.getString(1));
+						ass.setAssId(rs1.getInt(1));
 						ass.setFileid(rs1.getString(2));
 						ass.setDueDate(rs1.getDate(3));
 						ass.setUserId(rs1.getString(4));
@@ -1098,24 +1103,35 @@ public class DBC {
 		return al;
 	}
 
-	public static ArrayList<Assigenment> setTableViewStudentCourseAssigenment(String courseid) {
+	public static ArrayList<Assigenment> setTableViewStudentCourseAssigenment(Studentass asud ) {
 		Statement stmt;
+		int flag=0;
 		ArrayList<Assigenment> lst = new ArrayList<>();
 		try {
 			Connection conn = Connect.getConnection();
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery( "SELECT * FROM moodle.teacherassingment where CourseId='" + courseid +"'");
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM moodle.teacherassingment where CourseId='" + asud.getCourseid() +"'");
 				while (rs.next()) {
 					// Print out the values
 					Assigenment ass = new Assigenment();
 					try {
 						
-						ass.setAssId(rs.getString(1));
+						ass.setAssId(rs.getInt(1));
 						ass.setFileid(rs.getString(2));
 						ass.setDueDate(rs.getDate(3));
 						ass.setUserId(rs.getString(4));
 						ass.setCourseid(rs.getString(5));
-						lst.add(ass);				
+						ass.setAssname(rs.getString(8));
+						ResultSet rs1 = stmt.executeQuery( "SELECT * FROM moodle.studentassignment where "
+								+ "CourseId='" + asud.getCourseid() +
+								"' AND Studid='"+ asud.getStudid()+
+								"' AND TechAssId='"+ ass.getAssId()+"'");
+						while (rs1.next()){
+							flag=1;
+						}
+						if (flag==0){
+							lst.add(ass);
+						}
 					}
 
 					catch (Exception e) {
@@ -1168,31 +1184,75 @@ public class DBC {
 	}
 	*/
 
-	public static int UploadFile(File file) throws Exception {
+	public static int UploadFile(Studentass stuass) throws Exception {
 		try {
 			Connection conn = Connect.getConnection();
-	        String Quary = "INSERT INTO moodle.studentassignment (Assid,Studid,Courseid,Semid,Fileid,path) VALUES (?,?,?,?,?,?)";
-	        InputStream InputStream =new FileInputStream(file.getPath());
+			FileInputStream InputStream =new FileInputStream(stuass.getPath());
+	        String Quary = "INSERT INTO moodle.studentassignment" + "(Studid,Courseid,Date,Fileid,path,FileName,subDelay,TechAssId) VALUES(?,?,?,?,?,?,?,?)";
 	        PreparedStatement stmt = conn.prepareStatement(Quary);
-	        String Assid="test",Studid="11111",Courseid="1201",Semid="011",Date="2017-06-22";
+	        Date datenow=java.sql.Date.valueOf(java.time.LocalDate.now());
 	        
-	        stmt.setString(1,Assid );
-	        stmt.setString(2,Studid );
-	        stmt.setString(3,Courseid );
-	        stmt.setString(4,Semid );
-	        stmt.setString(6,"1234" );
-	      //  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	       // java.util.Date date=sdf.parse(Date);
-	       // stmt.setDate(5,Date);
-	        stmt.setBinaryStream(7,InputStream,(long)file.length());
-	        stmt.executeUpdate(Quary);
-	        JOptionPane.showMessageDialog(null, "File stored successfully!");
+	        stmt.setString(1,stuass.getStudid() );
+	        stmt.setString(2,stuass.getCourseid() );
+	        stmt.setDate(3,datenow);
+	        stmt.setString(4,stuass.getFileid() );
+	        stmt.setBinaryStream(5,(InputStream)InputStream,(long)stuass.getPath().length());
+	        stmt.setString(6,stuass.getFname() );
+	        stmt.setInt(8,stuass.getAssid() );
+	        if (datenow.after(stuass.getDate())){
+	        	stmt.setInt(7,1);
+	        	stmt.executeUpdate();
+	        	return 1;
+	        }
+	        else{
+		        stmt.setInt(7,0);
+		        stmt.executeUpdate();
+		        return 0;
+		    }
 			}
 		catch (Exception e) {
 			e.printStackTrace();
-			return 0;
+			return -1;
 			}
-		return 1;
+	}
+	
+	public static int DownloadAssigenment(Assigenment ass) throws IOException{
+		Statement stmt = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		int flag = 1;
+		InputStream input = null;
+		FileOutputStream output = null;
+		
+		try {
+			 conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			String sql = "select * from moodle.teacherassingment where Assid= '"+ ass.getAssId() + "'";
+			rs = stmt.executeQuery(sql);
+			while (rs.next()){
+			String home= System.getProperty("user.home");
+			File theFile = new File( home+"\\Downloads\\" + rs.getString(2));
+			output = new FileOutputStream(theFile);
+			input = rs.getBinaryStream(7);
+				
+			byte[] buffer = new byte[1024];
+			while(input.read(buffer)>0){
+				output.write(buffer);
+			}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			flag = 0;
+		}
+		finally{
+			if(input != null){ 
+				input.close();
+			}
+			if(output != null){ 
+				output.close();
+			}
+		}
+		return flag;
 	}
 
 	
@@ -1603,7 +1663,190 @@ public class DBC {
 			}
 			return c;
 		}
+		
+		/**
+		 */
+		
+		public static ArrayList<Studentass> StudentEvaluations(String Sid) {
+			Statement stmt;
+			ArrayList<Studentass> lst =new ArrayList<Studentass>();
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery( 
+						"SELECT * FROM moodle.studentassignment WHERE Studid='" + Sid + "'") ;
+				while (rs.next()) {
+					try {
+						Studentass ev = new Studentass();
+						String crs= createCourseEntity(rs.getString(3)).getName();
+						ev.setCourseName(crs);
+						if (rs.getString(11)!=null){
+							ev.setEvaFileName(rs.getString(11));
+							String s1=GetAssName(rs.getInt(9));
+							ev.setAssiName(s1);
+							ev.setAssid(rs.getInt(1));
+
+							lst.add(ev);
+							}
+						
+					}catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					rs.close();
+					Connect.close();
+					return lst;
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return lst;
+			}
+		
+		public static String GetAssName(int assid){
+			Statement stmt;
+			String s = null;
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery( 
+						"SELECT * FROM moodle.teacherassingment WHERE Assid='" + assid + "'" );
+				while (rs.next()){
+					s=rs.getString(8);
+					return s;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+			return s;
+		}
+				
+			
+		
+		public static int DownloadStuEvaluation(Studentass ass) throws IOException{
+			Statement stmt = null;
+			Connection conn = null;
+			ResultSet rs = null;
+			int flag = 1;
+			InputStream input = null;
+			FileOutputStream output = null;
+			
+			try {
+				 conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String sql = "select * from moodle.studentassignment where Assid= '"+ ass.getAssid() + "'";
+				rs = stmt.executeQuery(sql);
+				while (rs.next()){
+				String home= System.getProperty("user.home");
+				File theFile = new File( home+"\\Downloads\\" + rs.getString(11));
+				output = new FileOutputStream(theFile);
+				input = rs.getBinaryStream(10);
+					
+				byte[] buffer = new byte[1024];
+				while(input.read(buffer)>0){
+					output.write(buffer);
+				}
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+				flag = 0;
+			}
+			finally{
+				if(input != null){ 
+					input.close();
+				}
+				if(output != null){ 
+					output.close();
+				}
+			}
+			return flag;
+		}
+		
+		public static int DownloadStuGradeFile(Studentass ass) throws IOException{
+			Statement stmt = null;
+			Connection conn = null;
+			ResultSet rs = null;
+			int flag = 1;
+			InputStream input = null;
+			FileOutputStream output = null;
+			
+			try {
+				 conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String sql = "select * from moodle.studentassignment where Assid= '"+ ass.getAssid() + "'";
+				rs = stmt.executeQuery(sql);
+				while (rs.next()){
+				String home= System.getProperty("user.home");
+				File theFile = new File( home+"\\Downloads\\" + rs.getString(13));
+				output = new FileOutputStream(theFile);
+				input = rs.getBinaryStream(12);
+					
+				byte[] buffer = new byte[1024];
+				while(input.read(buffer)>0){
+					output.write(buffer);
+				}
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+				flag = 0;
+			}
+			finally{
+				if(input != null){ 
+					input.close();
+				}
+				if(output != null){ 
+					output.close();
+				}
+			}
+			return flag;
+		}
 	
+		
+	/*	public static ArrayList<Studentass>	StudentEvaluations(String id){
+			ArrayList<Studentass> al = new ArrayList<Studentass>();
+			ArrayList<Studentass> lst = new ArrayList<>();
+			Statement stmt;
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(
+						"SELECT * FROM moodle.studentassignment where Studid='" + id + "' AND evaluationName!='"+null+"'");
+				while (rs.next()) {
+					try {
+						
+						
+						al.set(rs.getInt(9));		
+					}
+					catch (Exception e) {
+			
+						e.printStackTrace();
+					}
+				}
+			
+				for(int i = 0;i< al.size(); i++){
+					ResultSet rs1 = stmt.executeQuery(	"SELECT * FROM moodle.teacherassingment where Assid='" + al.get(i) + "'");
+					while(rs1.next()){
+							Studentass ev = new Studentass();
+							String crs= createCourseEntity(rs1.getString(5)).getName();
+							ev.setCourseName(crs);
+							ev.setAssid(rs1.getInt(1));
+							ev.setAssiName(rs1.getString(8));
+							lst.add(ev);
+						}
+				}
+				
+				rs.close();
+				Connect.close();
+			
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return lst;
+		}
+		
+		*/
+		
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
 		// TODO Auto-generated method stub
