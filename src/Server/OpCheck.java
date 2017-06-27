@@ -21,7 +21,7 @@ import entity.Unit;
 import entity.User;
 import entity.Class;
 import Server.DBC;
-
+import entity.Requests;
 /**
  * 
  * This class handles with all the functionality of the server.
@@ -65,6 +65,68 @@ public class OpCheck {
 				return "Success";
 			else
 				return "fail";
+		case getActiveClasses:
+			return DBC.getActiveClasses();
+		case getUsersByRole:
+			return DBC.getUsersByRole((int)op.getMsg());
+		case getUserCoursesInCurrSemester:
+			return DBC.getUserCoursesInCurrSemester((User)op.getMsg());
+		case getAllCoursesInCurrSemester:
+			return DBC.getAllCoursesInCurrSemester();
+		case UserIdExists:
+			return DBC.UserIdExists((String)op.getMsg());
+		case AddNewRequest:
+			return DBC.AddNewRequest((Requests)op.getMsg());
+		case getActiveRequests:
+			return DBC.getActiveRequests();
+		case getCourseByID:
+			return DBC.getCourseByID((String)op.getMsg());
+		case getUserByID:
+			return DBC.getUserByID((String)op.getMsg());
+		case getStudentInClass:
+			return DBC.getStudentInClass((String)op.getMsg());
+		case getStudentInNoClass:
+			return DBC.getStudentInNoClass((String)op.getMsg());
+		case RemoveStudentFromClass:
+			return DBC.RemoveStudentFromClass((String[])op.getMsg());
+		case AddStudentToClass:
+			return DBC.AddStudentToClass((String[])op.getMsg());
+		case getClassCourses:
+			return DBC.getClassCourses((Class)op.getMsg());
+		case getTeachersForCourse:
+			return DBC.getTeachersForCourse((String)op.getMsg());
+		case getClassListForTeacherInCourse:
+			return DBC.getClassListForTeacherInCourse((Object[])op.getMsg());
+		case getClassByID:
+			return DBC.getClassByID((String)op.getMsg());
+		case getRequestByID:
+			return DBC.getRequestByID((String)op.getMsg());
+		case ChangeTeacherAppointment:
+			return DBC.ChangeTeacherAppointment((String[])op.getMsg());
+		case DeActivateRequest:
+			return DBC.DeActivateRequest((String)op.getMsg());
+		case UpdateMaxStudents:
+			return DBC.UpdateMaxStudents((Object [])op.getMsg());
+		case OpenNewSemester:
+			return DBC.OpenNewSemester();
+		case getCurrentSemesterID:
+			return DBC.getCurrentSemesterID(); 
+		case RemoveStudentFromCourse:
+			return DBC.RemoveStudentFromCourse((String[])op.getMsg());
+		case AddClassToCourse:
+			return DBC.AddClassToCourse((String[])op.getMsg());
+		case CheckStudentPreReq:
+			return DBC.CheckStudentPreReq((String[])op.getMsg());
+		case AddStudentToCourse:
+			return DBC.AddStudentToCourse((String[])op.getMsg());
+		case DeleteClass:
+			return DBC.DeleteClass((Class)op.getMsg());
+		case RemoveClassFromCourse:
+			return DBC.RemoveClassFromCourse((String[])op.getMsg()); 
+		case getAvailableCoursesForClass:
+			return DBC.getAvailableCoursesForClass((Class)op.getMsg());
+		case UserNameExists:
+			return DBC.UserNameExists((String)op.getMsg());
 		case StudentExists:
 			String id = (String)op.getMsg();
 			return DBC.StudentExists(id);
