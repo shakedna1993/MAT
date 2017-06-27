@@ -125,10 +125,10 @@ public class EditClassGUIController implements Initializable {
 					boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.DeleteClass));
 					if (b) {
 						getClasslessStudents();
-						initialize(null, null);
-						/*studentListTable.setItems(null);
+						//initialize(null, null);
+						studentListTable.setItems(null);
 						numField.setText("");
-						maxField.setText("");*/
+						maxField.setText("");
 					}
 				}
 			}
