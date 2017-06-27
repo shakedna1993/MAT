@@ -22,10 +22,13 @@ import thred.MyThread;
 
 public class DefineNewClassGUIController implements Initializable {
 
-	private entity.Class tempClass;
+	private static entity.Class tempClass;
 	
-	public entity.Class getTempClass() {
+	public static entity.Class getTempClass() {
 		return tempClass;
+	}
+	public static void setTempClass(entity.Class c) {
+		tempClass = c;
 	}
 
 	@FXML
@@ -56,6 +59,15 @@ public class DefineNewClassGUIController implements Initializable {
 
 	@FXML
 	private void defineClassBtn(){
+		if (id_field.getText().equals("") || name_field.getText().equals("") || max_field.getText().equals("")){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Empty Fields");
+			alert.setHeaderText(null);
+			alert.setContentText("Please fill all fields");
+
+			alert.show();
+			return;
+		}
 		if (classIDExists(id_field.getText())) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Class already exsists");
@@ -70,6 +82,15 @@ public class DefineNewClassGUIController implements Initializable {
 			alert.setTitle("Class already exsists");
 			alert.setHeaderText(null);
 			alert.setContentText("Class Name already exists in DB");
+
+			alert.show();
+			return;
+		}
+		if (Integer.parseInt(max_field.getText())<1){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Max Number Error");
+			alert.setHeaderText(null);
+			alert.setContentText("Max number must be greater than 0");
 
 			alert.show();
 			return;

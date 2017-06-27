@@ -33,9 +33,8 @@
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-      <Button fx:id="define_button" layoutX="275.0" layoutY="495.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="Save Changes" />
       <TextField fx:id="numField" editable="false" layoutX="149.0" layoutY="230.0" prefHeight="25.0" prefWidth="156.0" />
-      <TextField fx:id="maxField" layoutX="149.0" layoutY="268.0" prefHeight="25.0" prefWidth="156.0" />
+      <TextField fx:id="maxField" editable="false" layoutX="149.0" layoutY="268.0" onAction="#updateMax" prefHeight="25.0" prefWidth="156.0" />
       <Label fx:id="classNameLabel" layoutX="44.0" layoutY="196.0" text="Class Name:" />
       <Label fx:id="numOfStudentsLabel" layoutX="43.0" layoutY="234.0" text="Num of Students:" />
       <Label fx:id="maxStudentsLabel" layoutX="44.0" layoutY="272.0" text="Max Students:" />
@@ -58,6 +57,7 @@
         </columns>
       </TableView>
       <Label fx:id="studentListLabel2" layoutX="339.0" layoutY="161.0" text="Out of class Students:" />
+      <Button fx:id="deleteClass_button" layoutX="273.0" layoutY="493.0" mnemonicParsing="false" onAction="#deleteClass" prefHeight="25.0" prefWidth="93.0" text="Delete Class" textFill="RED" />
 
 
    </children>

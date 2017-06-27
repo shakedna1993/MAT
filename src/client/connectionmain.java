@@ -288,7 +288,14 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Class courses grades");
 		primaryStage.show();
 	}
-	
+	public static void showTeacherEditAssGUI() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/teacherEditAssGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Parent Connection");
+		primaryStage.show();
+	}
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -302,6 +309,26 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Grade List");
 		primaryStage.show();
 		
+	}
+
+
+	public static void newRequest() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/NewRequestGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- New Request Form");
+		primaryStage.show();
+	}
+
+
+	public static void openRequest() throws IOException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/OpenRequestGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Open Request Form");
+		primaryStage.show();
 	}
 
 }

@@ -18,12 +18,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -77,11 +79,28 @@ public class DefineClass4CourseGUIController implements Initializable {
 	private void defineButton(ActionEvent e) throws Exception{
 		String semid = getCurrentSemesterID();
 		String str = (String) courseCombo.getValue();
+		if (str == null){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Empty Fields");
+			alert.setHeaderText(null);
+			alert.setContentText("Please fill all fields before defining courses!");
+
+			alert.show();
+			return;
+		}
 		String courseid = str.substring(0,str.indexOf('-')-1);
 		String coursename = str.substring(str.indexOf('-')+2, str.length());
 		String classid = (String)idCombo.getValue();
 		str = (String) teacherCombo.getValue();
-		if (str == null) return;
+		if (str == null){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Empty Fields");
+			alert.setHeaderText(null);
+			alert.setContentText("Please fill all fields before defining courses!");
+
+			alert.show();
+			return;
+		}
 		String teacherid = str.substring(0,str.indexOf('-')-1);
 		String par[] = {courseid,classid,teacherid,semid};
 		MyThread a = new MyThread(RequestType.AddClassToCourse, IndexList.AddClassToCourse, par);
@@ -99,25 +118,50 @@ public class DefineClass4CourseGUIController implements Initializable {
 		par[3] = coursename;
 		for (int i=0; i<classStudentList.size(); i++){
 			par[0] = classStudentList.get(i).getId();
-			a = new MyThread(RequestType.AddStudentToCourse, IndexList.AddStudentToCourse, par);
+			//boolean preFlag = false;
+			a = new MyThread(RequestType.CheckStudentPreReq, IndexList.CheckStudentPreReq, par);
 			a.start();
 			try {
 				a.join();
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			if ((boolean)MsgFromServer.getDataListByIndex(IndexList.AddStudentToCourse)) {
-				//selectByID(null);
+			//if ((boolean)MsgFromServer.getDataListByIndex(IndexList.CheckStudentPreReq)) {
+				boolean preFlag =(boolean)MsgFromServer.getDataListByIndex(IndexList.CheckStudentPreReq);
+			//}
+			if (preFlag){
+				a = new MyThread(RequestType.AddStudentToCourse, IndexList.AddStudentToCourse, par);
+				a.start();
+				try {
+					a.join();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				if ((boolean)MsgFromServer.getDataListByIndex(IndexList.AddStudentToCourse)) {
+					//selectByID(null);
+				}
 			}
 		}
 		
 	}
 	@FXML
 	private void removeButton(ActionEvent e) throws Exception{
-		String courseid = ((CourseClassView)classCoursesTable.getSelectionModel().getSelectedItem()).getCourseid();
+		CourseClassView ccv = (CourseClassView)classCoursesTable.getSelectionModel().getSelectedItem();
+		if (ccv == null){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("No Course Selected");
+			alert.setHeaderText(null);
+			alert.setContentText("Please a course from the table");
+
+			alert.show();
+			return;
+		}
+		String courseid = ccv.getCourseid();
 		
 		String semid = getCurrentSemesterID();
-		if (semid == null) return;
+		if (semid == null) {
+			return;
+		}
 		
 		String classid = (String)idCombo.getValue();
 		String par[] = {courseid,classid,semid};
@@ -198,7 +242,7 @@ public class DefineClass4CourseGUIController implements Initializable {
 	}
 
 	private void fillComboBox() {
-		MyThread a = new MyThread(RequestType.getAllClasses, IndexList.getAllClasses, null);
+		MyThread a = new MyThread(RequestType.getActiveClasses, IndexList.getActiveClasses, null);
 		a.start();
 		try {
 			a.join();
@@ -206,7 +250,7 @@ public class DefineClass4CourseGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 
-		classList = (ArrayList<entity.Class>) (MsgFromServer.getDataListByIndex(IndexList.getAllClasses));
+		classList = (ArrayList<entity.Class>) (MsgFromServer.getDataListByIndex(IndexList.getActiveClasses));
 		if (classList == null) return;
 		ArrayList<String> idList = new ArrayList<String>();
 		ArrayList<String> nameList = new ArrayList<String>();

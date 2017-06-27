@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -67,12 +68,25 @@ public class EditClassGUIController implements Initializable {
 	private Button add_button;
 	@FXML
 	private Button remove_button;
+	@FXML
+	private Button deleteClass_button;
 	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		getClasslessStudents();
 		fillComboBox();
+		entity.Class c = DefineNewClassGUIController.getTempClass();
+		if (c!=null){
+			idCombo.setValue(c.getClassId());
+			nameCombo.setValue(c.getName());
+			try {
+				selectByID(null);
+				DefineNewClassGUIController.setTempClass(null);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void getClasslessStudents() {
@@ -90,8 +104,38 @@ public class EditClassGUIController implements Initializable {
 		studentListTable2.setItems(FXCollections.observableArrayList(studentList));
 	}
 
+	
+	@FXML
+	private void deleteClass(){
+		Alert alert = new Alert(AlertType.CONFIRMATION, "This will delete the class.\nIt will remove the class from the DB along with the courses the class is registered to, as well as all the courses the students are registered to(of this class).\nAre you sure you want to delete the class?", ButtonType.YES, ButtonType.NO);
+		alert.showAndWait();
+		if (alert.getResult() == ButtonType.YES) {
+			entity.Class c = new entity.Class();
+			for (int i = 0; i<classList.size(); i++){
+				if (idCombo.getValue().equals(classList.get(i).getClassId())){
+					c = classList.get(i);
+					MyThread a = new MyThread(RequestType.DeleteClass, IndexList.DeleteClass, c);
+					a.start();
+					try {
+						a.join();
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+			
+					boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.DeleteClass));
+					if (b) {
+						getClasslessStudents();
+						initialize(null, null);
+						/*studentListTable.setItems(null);
+						numField.setText("");
+						maxField.setText("");*/
+					}
+				}
+			}
+		}
+	}
 	private void fillComboBox() {
-		MyThread a = new MyThread(RequestType.getAllClasses, IndexList.getAllClasses, null);
+		MyThread a = new MyThread(RequestType.getActiveClasses, IndexList.getActiveClasses, null);
 		a.start();
 		try {
 			a.join();
@@ -99,7 +143,7 @@ public class EditClassGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 
-		classList = (ArrayList<entity.Class>) (MsgFromServer.getDataListByIndex(IndexList.getAllClasses));
+		classList = (ArrayList<entity.Class>) (MsgFromServer.getDataListByIndex(IndexList.getActiveClasses));
 		if (classList == null) return;
 		ArrayList<String> idList = new ArrayList<String>();
 		ArrayList<String> nameList = new ArrayList<String>();
@@ -133,15 +177,13 @@ public class EditClassGUIController implements Initializable {
 				c2.setCellValueFactory(new PropertyValueFactory<>("name"));
 				TableColumn<Student, String> c3 = new TableColumn<>("Parent");
 				c3.setCellValueFactory(new PropertyValueFactory<>("ParentId"));
-				TableColumn<Student, String> c4 = new TableColumn<>("Class");
-				c4.setCellValueFactory(new PropertyValueFactory<>("ClassId"));
-				TableColumn<Student, String> c5 = new TableColumn<>("avg");
-				c5.setCellValueFactory(new PropertyValueFactory<>("avg"));
+				TableColumn<Student, String> c4 = new TableColumn<>("avg");
+				c4.setCellValueFactory(new PropertyValueFactory<>("avg"));
 				
 
-				studentListTable.getColumns().addAll(c1, c2, c3, c4,c5);
+				studentListTable.getColumns().addAll(c1, c2, c3, c4);
 				studentListTable.setItems(FXCollections.observableArrayList(studentList));
-				
+				maxField.setEditable(true);
 				break;
 			}
 		}
@@ -168,15 +210,13 @@ public class EditClassGUIController implements Initializable {
 				c2.setCellValueFactory(new PropertyValueFactory<>("name"));
 				TableColumn<Student, String> c3 = new TableColumn<>("Parent");
 				c3.setCellValueFactory(new PropertyValueFactory<>("ParentId"));
-				TableColumn<Student, String> c4 = new TableColumn<>("Class");
-				c4.setCellValueFactory(new PropertyValueFactory<>("class"));
-				TableColumn<Student, String> c5 = new TableColumn<>("avg");
-				c5.setCellValueFactory(new PropertyValueFactory<>("avg"));
+				TableColumn<Student, String> c4 = new TableColumn<>("avg");
+				c4.setCellValueFactory(new PropertyValueFactory<>("avg"));
 				
 
-				studentListTable.getColumns().addAll(c1, c2, c3, c4, c5);
+				studentListTable.getColumns().addAll(c1, c2, c3, c4);
 				studentListTable.setItems(FXCollections.observableArrayList(studentList));
-				
+				maxField.setEditable(true);
 				break;
 			}
 		}
@@ -209,6 +249,32 @@ public class EditClassGUIController implements Initializable {
 	}
 	
 	@FXML
+	private void updateMax(ActionEvent event) throws Exception{
+		int newMax = Integer.parseInt(maxField.getText());
+		String cid = (String) idCombo.getValue();
+		Object par[] = {cid,newMax};
+		MyThread a = new MyThread(RequestType.UpdateMaxStudents, IndexList.UpdateMaxStudents, par);
+		a.start();
+		try {
+			a.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		if ((boolean)MsgFromServer.getDataListByIndex(IndexList.UpdateMaxStudents)) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Success!");
+			alert.setHeaderText(null);
+			alert.setContentText("Max student number updated");
+			alert.show();
+			for (entity.Class c: classList){
+				if (c.getClassId().equals(cid)){
+					c.setMAXStudent(newMax);
+				}
+			}
+		}
+	}
+	
+	@FXML
 	private void addButton(ActionEvent event) throws Exception {
 		if (studentListTable2.getSelectionModel().getSelectedItem()==null) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -225,6 +291,15 @@ public class EditClassGUIController implements Initializable {
 			alert.setTitle("No class selected");
 			alert.setHeaderText(null);
 			alert.setContentText("Please Select a class first");
+
+			alert.show();
+			return;
+		}
+		if (Integer.parseInt(maxField.getText()) <= Integer.parseInt(numField.getText())){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Class Full!");
+			alert.setHeaderText(null);
+			alert.setContentText("The Class is full!\nUnable to add more students!");
 
 			alert.show();
 			return;

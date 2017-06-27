@@ -147,6 +147,13 @@ public class AddStudentGUIController implements Initializable {
 		try {
 			addStudent(id_field.getText(), name_field.getText(), user_field.getText(), password_field.getText(),
 					parentid_field.getText());
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Student added!");
+			alert.setHeaderText(null);
+			alert.setContentText("Student added successfully!");
+
+			alert.show();
+			return;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
