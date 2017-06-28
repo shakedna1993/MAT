@@ -78,6 +78,10 @@ public class ManMainGUIController implements Initializable {
 		ManName.setText(s.getName());
 		studentParentInfo();
 		numReq.setText(Integer.toString(re()));
+		int role;
+		role=((User) MsgFromServer.getDataListByIndex(IndexList.LOGIN)).getRole();
+		if(role==2)
+			Back.setDisable(true);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -253,6 +257,10 @@ public class ManMainGUIController implements Initializable {
 	}
 	
 	
+	@FXML
+	private void backButton(ActionEvent event) throws Exception{
+		connectionmain.showTch_ManMain();
+	}
 	
 	
 	

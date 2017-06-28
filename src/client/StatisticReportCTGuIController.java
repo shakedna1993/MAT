@@ -37,7 +37,7 @@ import thred.MyThread;
 
 public class StatisticReportCTGuIController implements Initializable {
 	@FXML 
-	Label ManName,selectclass,choosenum;
+	Label ManName,selectclass,choosenum, grade_label;
 	@FXML
 	ComboBox<String> STC;
 	@FXML

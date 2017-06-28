@@ -28,18 +28,18 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="back_button" layoutX="281.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
       
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-      <Button fx:id="define_button" layoutX="281.0" layoutY="495.0" mnemonicParsing="false" onAction="#defineClassBtn" prefHeight="25.0" prefWidth="77.0" text="Define" />
+      <TextField fx:id="id_field" layoutX="316.0" layoutY="174.0" />
       <TextField fx:id="name_field" layoutX="316.0" layoutY="209.0" />
       <TextField fx:id="max_field" layoutX="316.0" layoutY="247.0" />
       <Label fx:id="name_label" layoutX="211.0" layoutY="213.0" text="Name:" />
       <Label fx:id="max_label" layoutX="210.0" layoutY="251.0" text="Max Student:" />
       <Label fx:id="id_label" layoutX="212.0" layoutY="178.0" text="ID:" />
-      <TextField fx:id="id_field" layoutX="316.0" layoutY="174.0" />
+      <Button fx:id="define_button" layoutX="281.0" layoutY="495.0" mnemonicParsing="false" onAction="#defineClassBtn" prefHeight="25.0" prefWidth="77.0" text="Define" />
+      <Button fx:id="back_button" layoutX="281.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
 
 
    </children>

@@ -13,6 +13,7 @@ import entity.Teacher;
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -51,7 +52,6 @@ public class TchMainGUIController implements Initializable {
 	Button Back;
 	@FXML
 	Button LogOut;
-
 	@FXML
 	Label Hello, selectAss, WeekTH;
 	@FXML
@@ -90,6 +90,10 @@ public class TchMainGUIController implements Initializable {
 
 		String maxHours = Integer.toString(getWeeklyHours(id));
 		WeekHours.setText(maxHours);
+		int role;
+		role=((User) MsgFromServer.getDataListByIndex(IndexList.LOGIN)).getRole();
+		if(role==3)
+			Back.setDisable(true);
 
 		setComboBoxTeacherCourse(id);
 
@@ -167,13 +171,6 @@ public class TchMainGUIController implements Initializable {
 		}
 		ObservableList<String> list = FXCollections.observableArrayList(a2);
 		listviewClass.setItems(list);
-		
-		
-		
-		
-		
-		
-		
 		listview.getItems().clear();
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -264,6 +261,10 @@ public class TchMainGUIController implements Initializable {
 		}
 	}
 	
+	@FXML
+	private void backButton(ActionEvent event) throws Exception{
+		connectionmain.showTch_ManMain();
+	}
 	
 
 	@Override

@@ -217,5 +217,7 @@ public class SecMainGUIController implements Initializable {
 			boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.OpenNewSemester));
 		}
 	}
+	
+	
 
 }

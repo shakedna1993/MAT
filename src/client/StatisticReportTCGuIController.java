@@ -42,7 +42,7 @@ import javafx.scene.control.TextField;
  */
 public class StatisticReportTCGuIController implements Initializable {
 	@FXML
-	Label ManName, selecttec, choosenum;
+	Label ManName, selecttec, choosenum,grade_label;
 	@FXML
 	ComboBox<String> STC;
 	@FXML

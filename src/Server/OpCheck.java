@@ -202,48 +202,27 @@ public class OpCheck {
 		case ApprovalRequest:
 			return DBC.ApprovalRequest((String)op.getMsg());
 		case RejectRequest:
-			return DBC.RejectRequest((String)op.getMsg());
-			
-
-				
-			case getWeeklyHours:
-				return DBC.getWeeklyHours((String)op.getMsg());
-				
-			case allAssForTeacher:
-				ArrayList<Assigenment> lst1 = new ArrayList<>();
-				lst1 =  DBC.allAssForTeacher((String)op.getMsg());
-				return lst1;
-				
-			case insertNewAss:
-			int flag = 0;
-			flag =  DBC.insertNewAss((Assigenment)op.getMsg());
-				return flag;
-				
-			case setComboBoxStudentCourse:
-				ArrayList<String> a2 = new ArrayList<String>();
-				User stu = (User) op.getMsg();
-				a2 = DBC.setComboBoxStudentCourse(stu.getId());
-				return a2;
-				
-			case setTableViewStudentCourseAssigenment:
-				ArrayList<Assigenment> lst2 = new ArrayList<>();
-				Studentass asud=(Studentass)op.getMsg();
-				lst2= DBC.setTableViewStudentCourseAssigenment(asud);
-				return lst2;
-			case UploadFile:
-				int check = 0;
-				Studentass sa=(Studentass)(op.getMsg());
-				try {
-					check= DBC.UploadFile(sa);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return check;
-			case UpdateAss:
-				int flag1 = 0;
-				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
-				return flag1;
+			return DBC.RejectRequest((String)op.getMsg());		
+		case setComboBoxStudentCourse:
+			ArrayList<String> a2 = new ArrayList<String>();
+			User stu = (User) op.getMsg();
+			a2 = DBC.setComboBoxStudentCourse(stu.getId());
+			return a2;
+		case setTableViewStudentCourseAssigenment:
+			ArrayList<Assigenment> lst2 = new ArrayList<>();
+			Studentass asud=(Studentass)op.getMsg();
+			lst2= DBC.setTableViewStudentCourseAssigenment(asud);
+			return lst2;
+		case UploadFile:
+			int check = 0;
+			Studentass sa=(Studentass)(op.getMsg());
+			try {
+				check= DBC.UploadFile(sa);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return check;
 			case createReportEntity:
 				return DBC.createReportEntity();
 			case createTeacherEntity:
@@ -265,8 +244,8 @@ public class OpCheck {
 				Class cla =(Class)op.getMsg();
 				return DBC.ClassTeacherList(cla.getClassId());
 			case CourseGradeList:
-				String courseid =(String)op.getMsg();
-				return DBC.CourseGradeList(courseid);
+				String courseid1=(String)op.getMsg();
+				return DBC.CourseGradeList(courseid1);
 			case ClassCourseDetails:
 				String classid =(String)op.getMsg();
 				return DBC.ClassCourseDetails(classid);
@@ -300,15 +279,7 @@ public class OpCheck {
 					e.printStackTrace();
 				}	
 				
-				
-				
-				
-				
-				
-				
-				
 		
-				
 			case setComboBoxTeacherCourse:
 				ArrayList<Assigenment> al = new ArrayList<Assigenment>();
 				al = DBC.setComboBoxTeacherCourse((String)op.getMsg());
