@@ -68,6 +68,15 @@ public class IndexList {
 	public static int allAssForTeacher = 45;
 	public static int insertNewAss = 46;
 	public static final int UpdateAss = 47;
+	public static int uploadTeacherAss=48;
+	public static int allCourseForTeacher=49;
+	public static int downloadStudentAssForTeacher= 50;
+	public static int createCourseEntityByName= 51;
+	public static int listOfStudentForAssCourse = 52;
+	public static int downloadOneFileStud=53;
+	public static int uploadEvaluation= 54;
+	public static int uploadGradeFile=55;
+	public static int assCourseTeach=59;
 	// 
 	//
 	//Shaked: 60-79

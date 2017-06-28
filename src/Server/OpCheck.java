@@ -206,35 +206,6 @@ public class OpCheck {
 			return DBC.RejectRequest((String)op.getMsg());
 			
 
-			case setComboBoxTeacherCourse:
-				ArrayList<String> al = new ArrayList<String>();
-				al = DBC.setComboBoxTeacherCourse((String)op.getMsg());
-				return al;
-				
-			case createCourseEntity:
-				Course Course = new Course();
-				Course=DBC.createCourseEntity((String)op.getMsg());
-				return Course;
-				
-			case setTableViewTeacherCourseAssigenment:
-				ArrayList<Assigenment> lst = new ArrayList<>();
-				 Assigenment ass = new Assigenment();
-					 ass = (Assigenment) op.getMsg();
-				lst=DBC.setTableViewTeacherCourseAssigenment(ass.getCoursename(),ass.getTeacherid());
-				return lst;
-				
-			case getWeeklyHours:
-				return DBC.getWeeklyHours((String)op.getMsg());
-				
-			case allAssForTeacher:
-				ArrayList<Assigenment> lst1 = new ArrayList<>();
-				lst1 =  DBC.allAssForTeacher((String)op.getMsg());
-				return lst1;
-				
-			case insertNewAss:
-			int flag = 0;
-			flag =  DBC.insertNewAss((Assigenment)op.getMsg());
-				return flag;
 				
 			case setComboBoxStudentCourse:
 				ArrayList<String> a2 = new ArrayList<String>();
@@ -257,10 +228,7 @@ public class OpCheck {
 					e.printStackTrace();
 				}
 				return check;
-			case UpdateAss:
-				int flag1 = 0;
-				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
-				return flag1;
+
 			case createReportEntity:
 				return DBC.createReportEntity();
 			case createTeacherEntity:
@@ -309,6 +277,119 @@ public class OpCheck {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}	
+				
+				
+				
+				
+				
+				
+				
+				
+		
+				
+			case setComboBoxTeacherCourse:
+				ArrayList<Assigenment> al = new ArrayList<Assigenment>();
+				al = DBC.setComboBoxTeacherCourse((String)op.getMsg());
+				return al;
+				
+			case createCourseEntity:
+				Course Course = new Course();
+				Course=DBC.createCourseEntity((String)op.getMsg());
+				return Course;
+				
+			case setTableViewTeacherCourseAssigenment:
+				ArrayList<Assigenment> lst = new ArrayList<>();
+				 Assigenment ass = new Assigenment();
+					 ass = (Assigenment) op.getMsg();
+				lst=DBC.setTableViewTeacherCourseAssigenment(ass.getCoursename(),ass.getTeacherid());
+				return lst;
+				
+			case getWeeklyHours:
+				return DBC.getWeeklyHours((String)op.getMsg());
+				
+				
+				//	public static int getAssArreyList = 44;
+				//where is it
+				
+				
+			case allAssForTeacher:
+				ArrayList<Assigenment> lst1 = new ArrayList<>();
+				lst1 =  DBC.allAssForTeacher((ArrayList<String>)op.getMsg());
+				return lst1;
+				
+			case insertNewAss:
+			int flag = 0;
+			try {
+				flag =  DBC.insertNewAss((Assigenment)op.getMsg());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+				return flag;
+					
+				
+			case UpdateAss:
+				int flag1 = 0;
+				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
+				return flag1;
+				
+			//	public static int uploadTeacherAss=48;
+				//where is it
+				
+				
+			case allCourseForTeacher:
+				String courseid;
+				courseid=(String)op.getMsg();
+				return DBC.allCourseForTeacher(courseid);
+				
+			case downloadStudentAssForTeacher:
+			try {
+				return DBC.downloadStudentAssForTeacher((Assigenment)op.getMsg());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			case createCourseEntityByName:
+				return DBC.createCourseEntityByName((String) op.getMsg());
+		
+				
+			case listOfStudentForAssCourse:
+				return DBC.listOfStudentForAssCourse((Assigenment) op.getMsg());
+		
+					
+			case downloadOneFileStud:
+			try {
+				return DBC.downloadOneFileStud((Assigenment) op.getMsg());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+					
+			case uploadEvaluation:
+			try {
+				return DBC.uploadEvaluation((Assigenment) op.getMsg());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+							
+			case uploadGradeFile:
+				try {
+					return DBC.uploadGradeFile((Assigenment) op.getMsg());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+				
+			case assCourseTeach:
+				return DBC.assCourseTeach((Assigenment) op.getMsg());
+				
+				
+						
+				
 				
 				
 				

@@ -68,14 +68,7 @@ public class connectionmain extends Application {
 		connectionmain.mainLayout = mainLayout;
 	}
 
-	public static void showTeacherMain() throws IOException {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));
-			mainLayout = loader.load();
-			primaryStage.setScene(new Scene(mainLayout));
-			primaryStage.setTitle("M.A.T- Teacher Connection");
-			primaryStage.show();
-	}
+
 	
 	public static void showStudentMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
@@ -157,14 +150,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Define Course");
 		primaryStage.show();	
 	}
-	public static void showTeacherGUIAssWindow() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/client/addNewAssingmentGUI.fxml"));
-		mainLayout = loader.load();
-		primaryStage.setScene(new Scene(mainLayout));
-		primaryStage.setTitle("M.A.T- Parent Connection");
-		primaryStage.show();
-	}
+
 	public static void addStudent(ActionEvent event) throws IOException{
 		Stage primaryStage = connectionmain.getPrimaryStage();
 		FXMLLoader loader = new FXMLLoader();
@@ -288,14 +274,7 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Class courses grades");
 		primaryStage.show();
 	}
-	public static void showTeacherEditAssGUI() throws IOException {
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/client/teacherEditAssGUI.fxml"));
-		mainLayout = loader.load();
-		primaryStage.setScene(new Scene(mainLayout));
-		primaryStage.setTitle("M.A.T- Parent Connection");
-		primaryStage.show();
-	}
+
 	
 	
 	public static void main(String[] args) {
@@ -348,5 +327,58 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Evaluations");
 		primaryStage.show();
 	}
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	public static void showTeacherMain() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Teacher Connection");
+		primaryStage.show();
+}
+	
+	
+	public static void showTeacherGUIAssWindow() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/addNewAssingmentGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Teacher Connection");
+		primaryStage.show();
+	}
+	
+	
+	public static void showTeacherEditAssGUI() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/teacherEditAssGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Teacher Connection");
+		primaryStage.show();
+	}
+	
+	
+	
+	public static void showTeacherDownloadAssStudent() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/teacherDownloadAssStu.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Teacher Connection");
+		primaryStage.show();
+	}
+	
+	
 
 }

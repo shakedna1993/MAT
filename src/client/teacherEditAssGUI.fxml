@@ -18,16 +18,18 @@
                <font>
                   <Font size="23.0" />
                </font></Label>
-            <TextField fx:id="fileidTxt" layoutX="172.0" layoutY="113.0" />
-            <TextField fx:id="stateTxt" layoutX="172.0" layoutY="159.0" />
-            <Label layoutX="23.0" layoutY="117.0" text="file id" />
-            <Label layoutX="21.0" layoutY="163.0" prefHeight="17.0" prefWidth="49.0" text="state" />
+            <TextField fx:id="assNameTxt" layoutX="172.0" layoutY="159.0" />
+            <Label layoutX="23.0" layoutY="117.0" text="Select file to upload:" />
+            <Label layoutX="21.0" layoutY="163.0" prefHeight="17.0" prefWidth="104.0" text="Assigenment name:" />
             <Button fx:id="editBtn" layoutX="228.0" layoutY="257.0" mnemonicParsing="false" onAction="#editAss" text="Edit" />
             <Button fx:id="backBtn" layoutX="226.0" layoutY="323.0" mnemonicParsing="false" onAction="#backButton" text="Back" />
             <Label layoutX="23.0" layoutY="210.0" text="Date of Submission" />
             <TextField fx:id="DaySubmissionTEXT" layoutX="166.0" layoutY="209.0" prefHeight="25.0" prefWidth="37.0" text="Day" />
             <TextField fx:id="month" layoutX="210.0" layoutY="209.0" prefHeight="25.0" prefWidth="49.0" text="Mounth" />
             <TextField fx:id="yearText" layoutX="267.0" layoutY="209.0" prefHeight="25.0" prefWidth="71.0" text="Year" />
+            <Button fx:id="chooseFileBTN" layoutX="172.0" layoutY="113.0" mnemonicParsing="false" onAction="#OpenFolder" text="Choose File" />
+            <Label fx:id="filename" layoutX="275.0" layoutY="117.0" />
+            <Label fx:id="fname" layoutX="310.0" layoutY="117.0" prefHeight="17.0" prefWidth="126.0" />
          </children>
       </AnchorPane>
    </children>
