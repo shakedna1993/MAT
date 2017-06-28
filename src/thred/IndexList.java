@@ -55,6 +55,10 @@ public class IndexList {
 	public static final int BlockParent = 103;
 	public static final int unBlockParent=104;
 	public static final int StudentsList = 105;
+	public static final int RequestsInfo = 106;
+	public static final int getUserDetailsById=107;
+	public static final int ApprovalRequest = 108;
+	public static final int RejectRequest = 109;
 
 
 

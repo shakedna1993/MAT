@@ -20,6 +20,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import thred.IndexList;
 import thred.MyThread;
 
+
+/**
+ * d
+ * 
+ *	
+ */
 public class GradeListGUIController implements Initializable {
 	@FXML
 	Button back;
@@ -27,13 +33,20 @@ public class GradeListGUIController implements Initializable {
 	Label stuName;
 	@FXML
 	Button LogOut;
-	
 	@FXML
 	TableView<Course> table = new TableView<>();
+
 	private ObservableList<Course> data;
 	
+	
+	
+	
+	/**
+	 * d
+	 * 
+	 *	
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		User s =new User();
 		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		stuName.setText(s.getName());
@@ -64,9 +77,9 @@ public class GradeListGUIController implements Initializable {
 		}
 		data = FXCollections.observableArrayList();
 		ArrayList<Course> b = (ArrayList<Course>) MsgFromServer.getDataListByIndex(IndexList.StudentCourse);
-		for (int i = 0; i < b.size(); i++) {
+		for (int i = 0; i < b.size(); i++) 
 			data.add(b.get(i));
-		}
+		
 		TableColumn<Course, String> c1 = new TableColumn<>("Course Id");
 		c1.setCellValueFactory(new PropertyValueFactory<>("courseId"));
 		TableColumn<Course, String> c2 = new TableColumn<>("Course Name");
@@ -76,11 +89,12 @@ public class GradeListGUIController implements Initializable {
 		TableColumn<Course, String> c4 = new TableColumn<>("Grade");
 		c4.setCellValueFactory(new PropertyValueFactory<>("grade"));
 		
-		
 		table.getColumns().addAll(c1, c2, c3, c4);
 		table.setItems(data);
 	}
 
+	
+	
 	@FXML
 	public void clsGradeList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -97,6 +111,9 @@ public class GradeListGUIController implements Initializable {
 		}
 	}
 
+	
+	
+	
 	@FXML
 	private void backButton(ActionEvent event) throws Exception{
 		User s =new User();

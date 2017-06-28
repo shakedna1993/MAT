@@ -16,7 +16,8 @@ public enum RequestType {
 	DefineClass,StudentCourse,setComboBoxStudentCourse,
 	setTableViewStudentCourseAssigenment,DownoladFile,ClassCourseDetails,UploadFile,
 	setComboBoxTeacherCourse,createCourseEntity,setTableViewTeacherCourseAssigenment,
-	getWeeklyHours,getAssArreyList,allAssForTeacher,insertNewAss,UpdateAss;
+	getWeeklyHours,getAssArreyList,allAssForTeacher,insertNewAss,UpdateAss,
+	RequestsInfo,getUserDetailsById, ApprovalRequest, RejectRequest;
 
 	/** TBD */
 }

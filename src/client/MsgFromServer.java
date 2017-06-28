@@ -34,7 +34,7 @@ public class MsgFromServer {
 	}
 
 	/**
-	 * This method returns the wanted data from the data list by int index.
+	 * This method returns the wanted data from the data list by index.
 	 * 
 	 * @param index
 	 * @return the data from dataList in wanted index
@@ -103,12 +103,11 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.AddStudent, returnMsg.getMsg());
 		case UserNameExists:
 			setDataListByIndex(IndexList.UserNameExists, returnMsg.getMsg());
+		
 		case StudentCourse:
 			setDataListByIndex(IndexList.StudentCourse, returnMsg.getMsg());
-			return;
 		case parSetStudentComboBox:
 			setDataListByIndex(IndexList.parSetStudentComboBox, returnMsg.getMsg());
-			return;
 		case avgOneStudent:
 			setDataListByIndex(IndexList.avgOneStudent, returnMsg.getMsg());
 		case BlockParent:
@@ -117,8 +116,16 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.unBlockParent, returnMsg.getMsg());
 		case StudentsList:
 			setDataListByIndex(IndexList.StudentsList, returnMsg.getMsg());
-			return;
-
+		case RequestsInfo:
+			setDataListByIndex(IndexList.RequestsInfo, returnMsg.getMsg());
+		case getUserDetailsById:
+			setDataListByIndex(IndexList.getUserDetailsById, returnMsg.getMsg());
+		case ApprovalRequest:
+			setDataListByIndex(IndexList.ApprovalRequest, returnMsg.getMsg());
+		case RejectRequest:
+			setDataListByIndex(IndexList.RejectRequest, returnMsg.getMsg());
+			
+		
 		case classIDExists:
 			setDataListByIndex(IndexList.classIDExists, returnMsg.getMsg());
 		case classNameExists:

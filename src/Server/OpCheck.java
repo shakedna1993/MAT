@@ -19,6 +19,7 @@ import entity.Class;
 import Server.DownloadFileServer;
 import Server.DBC;
 import entity.FileEnt;
+import entity.Requests;
 /**
  * 
  * This class handles with all the functionality of the server.
@@ -81,6 +82,7 @@ public class OpCheck {
 		case DefineClass:
 			return DBC.DefineClass((entity.Class)op.getMsg());
 			
+			
 		case StudentCourse:
 			User stud = (User)op.getMsg();
 			return DBC.StudentCourse(stud.getId());
@@ -89,11 +91,21 @@ public class OpCheck {
 		case avgOneStudent:
 			 return DBC.avgOneStudent((String)op.getMsg());
 		case BlockParent:
-			 DBC.BlockParent((String)op.getMsg());
+			return DBC.BlockParent((String)op.getMsg());
 		case unBlockParent:
-			 DBC.unBlockParent((String)op.getMsg());
+			return DBC.unBlockParent((String)op.getMsg());
 		case StudentsList:
-			return (ArrayList<Student>)DBC.StudentsList();
+			return DBC.StudentsList();
+		case RequestsInfo:
+			return DBC.RequestsInfo();
+		case getUserDetailsById:
+			return DBC.getUserDetailsById((String)op.getMsg());
+		case ApprovalRequest:
+			return DBC.ApprovalRequest((String)op.getMsg());
+		case RejectRequest:
+			return DBC.RejectRequest((String)op.getMsg());
+			
+
 			case setComboBoxTeacherCourse:
 				ArrayList<String> al = new ArrayList<String>();
 				al = DBC.setComboBoxTeacherCourse((String)op.getMsg());

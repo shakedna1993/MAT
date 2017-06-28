@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import entity.Assigenment;
 import entity.Course;
 import entity.FileEnt;
+import entity.Requests;
 import entity.Student;
 import entity.Teacher;
 import entity.User;
@@ -30,6 +31,7 @@ import java.io.InputStream;
 /**
  * This class contains all the interaction with the Data-Base *
  */
+
 
 public class DBC {
 
@@ -417,22 +419,20 @@ public class DBC {
 		}
 	}
 	
-	/**This method will search for a specific course in the DB
-	 * @param cid-will hold the id number of the course that been searched
+	/**This method will give all the information in the DB about all the courses of specific student 
+	 * @param cid	will hold the id number of the course that been searched
 	 * @return return the course that been searched if it found
 	 */
 	public static ArrayList<Course> StudentCourse(String Sid) {
 		Statement stmt;
-		ArrayList<Course> lst = new ArrayList<>();
+		ArrayList<Course> lst = new ArrayList<Course>();
 		try {
 			Connection conn = Connect.getConnection();
 			stmt = conn.createStatement();
 			String Quary = "SELECT moodle.studentcourse.* FROM moodle.studentcourse WHERE moodle.studentcourse.studid='" + Sid + "'" ;
-
 			ResultSet rs = stmt.executeQuery(Quary);
 
 			while (rs.next()) {
-				// Print out the values
 				Course cu = new Course();
 				try {
 					cu.setSemid((rs.getString(2)));
@@ -441,27 +441,21 @@ public class DBC {
 					cu.setName((rs.getString(5)));
 					lst.add(cu);
 				}
-
 				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-
 			rs.close();
 			Connect.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return lst;
 	}
 	
-	
-	
+
 	public static ArrayList<String>	setComboBoxTeacherCourse(String id){
 		ArrayList<String> al = new ArrayList<String>();
-		ArrayList<String> a2 = new ArrayList<String>();
 		Statement stmt;
 		try {
 			Connection conn = Connect.getConnection();
@@ -469,26 +463,18 @@ public class DBC {
 			ResultSet rs = stmt.executeQuery(
 					"SELECT * FROM moodle.classcourse where tid='" + id + "'");
 			while (rs.next()) {
-				// Print out the values
-
 				try {
 					al.add(rs.getString(1));		
 				}
-				catch (Exception e) {
-		
-					e.printStackTrace();
-				}
+				catch (Exception e) {e.printStackTrace();}
 			}
 			rs.close();
 			Connect.close();
-			return al;
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return al;
 	}
-
 
 
 	public static Course createCourseEntity(String id) {
@@ -863,29 +849,26 @@ public class DBC {
 	public static int UpdateAss(Assigenment ass){
 	Statement stmt;
 	try {
-
 		Connection conn = Connect.getConnection();
 		stmt = conn.createStatement();
 		String Quary = "update moodle.teacherassingment set Fileid= '" + ass.getFileid()+ "', DueDate= '" +  "2020-01-01" +
 				 "' where Assid= '" + ass.getAssId() + "' AND CourseId= '" + ass.getCourseid() + "'";
 		stmt.executeUpdate(Quary);
-
 		}
-			catch (Exception e) {
-					e.printStackTrace();
-					return 0;
-				}
+		catch (Exception e) {
+				e.printStackTrace();
+				return 0;
+			}
 		return 1;
 	}
 	
-//*******************
-	/**Bar Parent
-	 * 	
-	 * @param Sid
-	 * @return
+
+	
+	/**This method will give all the students in the DB that belong to specific parent 
+	 *	@param Pid	will hold the id of the parent
+	 *	@return list of parent's child (students)
 	 */
-		
-		public static ArrayList<Student> parSetStudentComboBox(String Pid) {
+	public static ArrayList<Student> parSetStudentComboBox(String Pid) {
 			Statement stmt;
 			ArrayList<Student> lst = new ArrayList<Student>();
 			try {
@@ -895,9 +878,7 @@ public class DBC {
 						"SELECT moodle.student.sid, moodle.users.Fullname, moodle.student.avg, moodle.student.classid FROM "
 						+ "moodle.student, moodle.users WHERE moodle.student.parentid='" + Pid +"' AND moodle.users.Id=moodle.student.sid");
 		
-
 				while (rs.next()) {
-					// Print out the values
 					try {
 						Student stu = new Student();	
 						stu.setId(rs.getString(1));
@@ -907,26 +888,28 @@ public class DBC {
 						stu.setParentId(Pid);
 						lst.add(stu);
 					}
-
 					catch (Exception e) {
-						e.printStackTrace();
-					}
+						e.printStackTrace();}
 				}
-
 				rs.close();
 				Connect.close();
 				return lst;
 				
 			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+				e.printStackTrace();	}
 
 			return lst;
 		}
+		
+		
+		/**
+		 *	This method Accessing to data base and take all the student table to list of student
+		 *
+		 *	@return list of student
+		 */
 		public static ArrayList<Student> StudentsList(){
 			Statement stmt;
 			ArrayList<Student> lst = new ArrayList<Student>();
-
 			try {			
 				Connection conn = Connect.getConnection();
 				stmt = conn.createStatement();
@@ -955,15 +938,28 @@ public class DBC {
 			}
 			return lst;
 		}
+				
+		
+		/**
+		 *	This method calculate and update the field avg of specific student
+		 *
+		 *	@param Sid describe the student id.
+		 *	@return the avg number
+		 */
 		public static float avgOneStudent(String Sid) {
-			
-			float sum=0;
+			float sum=0,grade;
+			int count=0;
 			ArrayList<Course> lst=StudentCourse(Sid);
 			for(Course c:lst)
-				sum+=c.getGrade();
-			float avg= sum/(float)lst.size();
+			{
+				grade=c.getGrade();
+				if (grade>=0){
+					sum+=grade;
+					count++;
+				}
+			}
+			float avg= sum/(float)count;
 
-			
 			Statement stmt;
 			try {
 				Connection conn = Connect.getConnection();
@@ -977,40 +973,166 @@ public class DBC {
 			return avg;
 		}
 		
-		public static void BlockParent(String Pid) {
+		
+		/**
+		 *	This method update the field to be 1, it means to blocked the parent
+		 *	@param Pid this describe the parent id.
+		 *	@return if we Successfully update the DB or not
+		 */
+		public static boolean BlockParent(String Pid) {
+			boolean UPDATE=false;
 			Statement stmt;
-			int one=1;
 			try {
 				Connection conn = Connect.getConnection();
 				stmt = conn.createStatement();
-				String Query = "UPDATE moodle.users SET isBlocked =1 WHERE Id ='"+Pid+"'";
+				String Query = "UPDATE moodle.users SET isBlocked = 1 WHERE Id ='"+Pid+"'";
 				stmt.executeUpdate(Query);
 				Connect.close();
+				UPDATE=true;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
+			return UPDATE;
 		}
-		public static void unBlockParent(String Pid) {
+		
+		
+		/**
+		 *	This method update the field to be 0, it means to unblocked the parent
+		 *	@param Pid this describe the parent id.
+		 *	@return if we Successfully update the DB or not
+		 */
+		public static boolean unBlockParent(String Pid) {
 			Statement stmt;
-			
+			boolean UPDATE=false;
 			try {
 				Connection conn = Connect.getConnection();
 				stmt = conn.createStatement();
 				String Query = "UPDATE moodle.users SET isBlocked = 0 WHERE Id ='"+Pid+"'";
 				stmt.executeUpdate(Query);
 				Connect.close();
+				UPDATE=true;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
+			return UPDATE;
 		}
 		
+		/** This method update the field status, in requests table, when the school manger confirmed that specific request
+		 *	@param Rid	will hold the id of this request
+		 *	@return if we Successfully update the DB or not
+		 */
+		public static boolean ApprovalRequest(String Rid) {
+			Statement stmt;
+			boolean UPDATE=false;
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String Query = "UPDATE moodle.requests SET status = 1 WHERE Reqid ='"+Rid+"'";
+				stmt.executeUpdate(Query);
+				Connect.close();
+				UPDATE=true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return UPDATE;
+		}
 	
+		/** This method update the field status, in requests table, when the school manger Rejected that specific request
+		 *	@param Rid	will hold the id of this request
+		 *	@return if we Successfully update the DB or not
+		 */
+	public static boolean RejectRequest(String Rid) {
+			Statement stmt;
+			boolean UPDATE=false;
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String Query = "UPDATE moodle.requests SET status = 2 WHERE Reqid ='"+Rid+"'";
+				stmt.executeUpdate(Query);
+				Connect.close();
+				UPDATE=true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return UPDATE;
+		}
+		
+	/** This method take all the fields in requests table from DB.
+	*
+	*	@return all the Requests in the DB
+	*/
+	public static ArrayList<Requests> RequestsInfo() {
+		Statement stmt;
+		ArrayList<Requests> lst = new ArrayList<Requests>();
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String Quary = "SELECT * FROM moodle.requests";
+				ResultSet rs = stmt.executeQuery(Quary);
+
+				while (rs.next()) {
+					Requests r = new Requests();
+					try {
+						r.setReqId(rs.getString(1));
+						r.setUserId(rs.getString(2));
+						r.setCourseid(rs.getString(3));
+						r.setRequestDescription(rs.getString(4));
+						r.setStatus(rs.getInt(5));
+						r.setReqType(rs.getInt(6));
+						lst.add(r);
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+				rs.close();
+				Connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return lst;
+	}
+
+	/**
+	 *	This method look for the user by some id
+	 *	@param id describe some person which takes part in the system.
+	 *	@return object with the details required to this id
+	 */
+	public static User getUserDetailsById(String id) {
+		Statement stmt;
+		User u = new User();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM moodle.users WHERE moodle.users.Id='" + id +"'");
+
+			while (rs.next()) {
+				try {
+					u.setId(rs.getString(1));
+					u.setName(rs.getString(2));
+					u.setPassword(rs.getString(3));
+					u.setUserName(rs.getString(4));
+					u.setRole(Integer.parseInt(rs.getString(5)));
+					u.setBlocked(Integer.parseInt(rs.getString(6)));
+					u.setIsConnected(Integer.parseInt(rs.getString(7)));
+				}
+				catch (Exception e) {
+					e.printStackTrace();}
+			}
+			rs.close();
+			Connect.close();			
+		} catch (SQLException e) {
+			e.printStackTrace();	}
+
+		return u;
+	}
+
+	
+	
+
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
-		// TODO Auto-generated method stub
-		return null;
+		return null;	
 	}
 	
 }

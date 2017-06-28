@@ -1,16 +1,4 @@
 /*************************************************************************
- * 
- *	Good Reading project
- *	====================
- * 	File		: ServerGUIController.java
- *  Package		: gui.server
- *   
- * 	Author		: Topaz Uliel
- * 	Date		: December 2017
- * 
- * 
- * 	Info		: 
- * 
  **************************************************************************/
 
 package Server;

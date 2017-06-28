@@ -5,6 +5,13 @@ import java.util.ArrayList;
 
 import Server.DBC;
 
+
+
+/**
+ * d
+ * 
+ *	
+ */
 public class Student extends User implements Serializable{
 
 	/**

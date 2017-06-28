@@ -7,8 +7,9 @@ public class Requests implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6190831168060592941L;
-	private String ReqId, RequestDescription;
+	private String ReqId, RequestDescription,UserId,courseid ;
 	private int status, ReqType;
+	
 	
 	/**
 	 * status={0-NotAnswer, 1-Confirmed, 2-Rejected }
@@ -21,12 +22,14 @@ public class Requests implements Serializable{
 		super();
 	}
 
-	public Requests(String reqId, String requestDescription, int status, int reqType) {
+	public Requests(String reqId,String userId,String courseid ,String requestDescription, int status, int reqType) {
 		super();
 		ReqId = reqId;
 		RequestDescription = requestDescription;
 		this.status = status;
 		ReqType = reqType;
+		UserId=userId;
+		this.courseid =courseid ;
 	}
 
 	public String getReqId() {
@@ -37,6 +40,17 @@ public class Requests implements Serializable{
 		ReqId = reqId;
 	}
 
+	
+
+	public String getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(String userid) {
+		UserId = userid;
+	}
+
+	
 	public String getRequestDescription() {
 		return RequestDescription;
 	}
@@ -65,6 +79,14 @@ public class Requests implements Serializable{
 	public String toString() {
 		return "Requests [ReqId=" + ReqId + ", RequestDescription=" + RequestDescription + ", status=" + status
 				+ ", ReqType=" + ReqType + "]";
+	}
+
+	public String getCourseid() {
+		return courseid ;
+	}
+
+	public void setCourseid(String courseid ) {
+		this.courseid  = courseid ;
 	}
 	
 	
