@@ -192,7 +192,7 @@ public class OpCheck {
 			return DBC.BlockParent((String)op.getMsg());
 			 
 		case unBlockParent:
-			 DBC.unBlockParent((String)op.getMsg());
+			 return DBC.unBlockParent((String)op.getMsg());
 			 
 		case StudentsList:
 			return DBC.StudentsList();

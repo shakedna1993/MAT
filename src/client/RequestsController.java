@@ -132,7 +132,7 @@ public class RequestsController implements Initializable{
 	{
 		chooseRequests=ManMainGUIController.getChooseRequests();
 		
-		MyThread b = new MyThread(RequestType.createCourseEntity, IndexList.createCourseEntity,chooseRequests.getCourseid() );
+		MyThread b = new MyThread(RequestType.createCourseEntity, IndexList.createCourseEntity,chooseRequests.getCourseId() );
 		b.start();
 		try {b.join();} 
 		catch (InterruptedException e1) {e1.printStackTrace();}
@@ -148,7 +148,7 @@ public class RequestsController implements Initializable{
 		{
 			textArea.setText("Teacher name:\t"+s2.getName()+"\n"
 					+ "Id:\t"+chooseRequests.getUserId()+"\n"
-					+ "Course:\t"+Cou.getName()+"Course code:\t"+chooseRequests.getCourseid()+"\n\n\n"
+					+ "Course:\t"+Cou.getName()+"Course code:\t"+chooseRequests.getCourseId()+"\n\n\n"
 					+ "description:\t"+chooseRequests.getRequestDescription());
 		}
 		else
@@ -163,7 +163,7 @@ public class RequestsController implements Initializable{
 					+"Id:\t\t\t\t"+chooseRequests.getUserId()+"\n"
 					+"Class:\t\t\t"+stu.getClassid()+"\n"
 					+"Course:\t\t\t"+Cou.getName()+"\n"
-					+"Course code:\t\t\t"+chooseRequests.getCourseid()+"\n"
+					+"Course code:\t\t\t"+chooseRequests.getCourseId()+"\n"
 					+"average:\t\t\t"+stu.getAvg()+"\n\n\n"
 					+"description:\n"+chooseRequests.getRequestDescription());
 		}

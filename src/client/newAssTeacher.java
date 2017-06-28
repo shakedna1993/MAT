@@ -76,7 +76,7 @@ public class newAssTeacher implements Initializable {
 		Assigenment ass = new Assigenment();
 		ArrayList<Assigenment> a1 = new ArrayList<Assigenment>();
 
-		ass.setAssId(AssingmentidTEXT.getText());
+		//ass.setAssId(AssingmentidTEXT.getText());
 		ass.setAssname(AssingmentnameTEXT.getText());
 		ass.setFileid(FileidTEXT.getText());
 		ass.setUserId(s.getId());
@@ -98,7 +98,7 @@ public class newAssTeacher implements Initializable {
 		 * date.setDate(Integer.parseInt(DaySubmissionTEXT.getText()));
 		 * ass.setDueDate(date);
 		 */
-
+/*
 		if (ass.getAssId().length() == 0 || ass.getAssname().length() == 0 || ass.getFileid().length() == 0
 				|| ass.getCourseid().length() == 0) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -109,7 +109,7 @@ public class newAssTeacher implements Initializable {
 			alert.show();
 			return;
 		}
-
+*/
 		MyThread C = new MyThread(RequestType.allAssForTeacher, IndexList.allAssForTeacher, s.getId());
 		C.start();
 		try {
@@ -133,14 +133,14 @@ public class newAssTeacher implements Initializable {
 			alert.show();
 			return;
 		}
-
+/*
 		flag = 0;
 		for (int i = 0; i < a1.size(); i++) {
 			if (ass.getCourseid().equals(a1.get(i).getCourseid()) && ass.getAssId().equals(a1.get(i).getAssId())) {
 				flag = 1;
 			}
 		}
-
+*/
 		if (flag == 1) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Empty Fields");

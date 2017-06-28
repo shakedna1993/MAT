@@ -119,7 +119,7 @@ public class TchMainGUIController implements Initializable {
 		ArrayList<Assigenment> b = (ArrayList<Assigenment>) MsgFromServer
 				.getDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment);
 		for (int i = 0; i < b.size(); i++)
-			listview.getItems().add(b.get(i).getAssId());
+		//	listview.getItems().add(b.get(i).getAssId());
 		listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 	}

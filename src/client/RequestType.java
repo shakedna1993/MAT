@@ -27,7 +27,7 @@ public enum RequestType {
 	getActiveRequests,getCourseByID,getUserByID,getClassListForTeacherInCourse,
 	UnitExists, CourseExists, DefineNewCourse, CoursesList, DefinePreReq, RemoveCourse,RenameCourse,WeeklyHoursUpdate,
 	PreReqList,RemovePreReq,StudentEvaluations,DownloadAssigenment,DownloadStuEvaluation,DownloadStuGradeFile,
-	RequestsInfo,getUserDetailsById, ApprovalRequest, RejectRequest;
+	RequestsInfo,getUserDetailsById, ApprovalRequest, RejectRequest, getActiveClasses;
 	
 
 	/** TBD */

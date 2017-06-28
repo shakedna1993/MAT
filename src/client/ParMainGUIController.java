@@ -199,7 +199,25 @@ public class ParMainGUIController implements Initializable {
 		}
 	}
 
-	
+	@FXML
+	public void EvaluationWin() {
+		selectedChild();
+		if (selectedSon == null) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Incorrect Fields");
+			alert.setHeaderText(null);
+			alert.setContentText("Please select a student");
+
+			alert.show();
+			return;
+		}
+		try {
+			connectionmain.ShowEvaluationList();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	@FXML

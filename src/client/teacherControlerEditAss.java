@@ -64,7 +64,7 @@ public class teacherControlerEditAss implements Initializable {
 
 	public void editAss() {
 		Assigenment ass = new Assigenment();
-		ass.setAssId(assTxt.getText());
+		//ass.setAssId(assTxt.getText());
 		ass.setCoursename(courseTxt.getText());
 		ass.setCourseid(c.getCourseId());
 		ass.setFileid(fileidTxt.getText());
