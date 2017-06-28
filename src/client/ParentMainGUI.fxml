@@ -30,7 +30,7 @@
       </Label>
       <Label fx:id="CalcAvg" layoutX="488.0" layoutY="431.0" prefHeight="27.0" prefWidth="77.0" text="Student Avg" textFill="#1815d0" />
       <Button fx:id="GradeL" layoutX="325.0" layoutY="275.0" mnemonicParsing="false" onAction="#GradeList" prefHeight="25.0" prefWidth="106.0" text="Grades List" />
-      <Button fx:id="Evalu" layoutX="327.0" layoutY="360.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Evaluations" />
+      <Button fx:id="Evalu" layoutX="327.0" layoutY="360.0" mnemonicParsing="false" onAction="#EvaluationWin" prefHeight="25.0" prefWidth="106.0" text="Evaluations" />
       <Button fx:id="CourseL" layoutX="327.0" layoutY="318.0" mnemonicParsing="false" onAction="#CourseList" prefHeight="25.0" prefWidth="106.0" text="Course List" />
       <Label fx:id="Per_File" layoutX="277.0" layoutY="149.0" text="Personal File" underline="true">
          <font>

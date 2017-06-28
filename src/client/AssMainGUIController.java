@@ -6,11 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.JFileChooser;
+
 import com.sun.glass.ui.Pixels.Format;
 
 import entity.Assigenment;
 import entity.Course;
 import entity.Student;
+import entity.Studentass;
 import entity.User;
 import entity.Class;
 import javafx.collections.FXCollections;
@@ -18,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -25,6 +29,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -54,9 +59,12 @@ public class AssMainGUIController implements Initializable {
 	Button Back;
 	@FXML
 	Button LogOut;
-
 	@FXML
 	Label Hello, selectAss;
+	@FXML
+	Label Down;
+	@FXML
+	Label UP;
 	@FXML
 	Label selectC;
 	@FXML
@@ -70,12 +78,14 @@ public class AssMainGUIController implements Initializable {
 
 	private ObservableList<Assigenment> data;
 	static String assToChoose;
+	static String crs, filedir, id;
+
 
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		StuName.setText(s.getName());
-		String id = s.getId();
+		id = s.getId();
 
 		setComboBoxStudentCourse(id);
 
@@ -86,8 +96,7 @@ public class AssMainGUIController implements Initializable {
 		ArrayList<String> a1 = new ArrayList<String>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Course course = new Course();
-		MyThread C = new MyThread(RequestType.setComboBoxStudentCourse, IndexList.setComboBoxStudentCourse,
-				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		MyThread C = new MyThread(RequestType.setComboBoxStudentCourse, IndexList.setComboBoxStudentCourse,MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		C.start();
 		try {
 			C.join();
@@ -127,8 +136,12 @@ public class AssMainGUIController implements Initializable {
 		ArrayList<Course> course = (ArrayList<Course>) MsgFromServer.getDataListByIndex(IndexList.StudentCourse);
 		for (int i = 0; i < course.size(); i++) {
 			if (course.get(i).getName().equals(CourseName)) {
+				crs=course.get(i).getCourseId();
+				Studentass asud=new Studentass();
+				asud.setCourseid(course.get(i).getCourseId());
+				asud.setStudid(id);
 				MyThread b = new MyThread(RequestType.setTableViewStudentCourseAssigenment,
-						IndexList.setTableViewStudentCourseAssigenment, course.get(i).getCourseId());
+						IndexList.setTableViewStudentCourseAssigenment, asud);
 				b.start();
 				try {
 					b.join();
@@ -143,8 +156,8 @@ public class AssMainGUIController implements Initializable {
 		data = FXCollections.observableArrayList();
 		for (int i = 0; i < b.size(); i++)
 			data.add(b.get(i));
-		TableColumn<Assigenment, String> c1 = new TableColumn<>("Assigenment Id");
-		c1.setCellValueFactory(new PropertyValueFactory<>("AssId"));
+		TableColumn<Assigenment, String> c1 = new TableColumn<>("Assigenment Name");
+		c1.setCellValueFactory(new PropertyValueFactory<>("assname"));
 		TableColumn<Assigenment, String> c2 = new TableColumn<>("Due Date");
 		c2.setCellValueFactory(new PropertyValueFactory<>("DueDate"));
 		table.getColumns().addAll(c1, c2);
@@ -152,6 +165,68 @@ public class AssMainGUIController implements Initializable {
 		b.clear();
 	}
 
+
+	public void UploadAss() {
+		try {
+			if (table.getSelectionModel().getSelectedItem() == null)
+			{
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Wrong Choise");
+				alert.setHeaderText(null);
+				alert.setContentText("Please select course and assignment");
+				alert.show();
+				return;
+			}
+			int tmp=table.getSelectionModel().getSelectedItem().getAssId();
+			Date tmp1=table.getSelectionModel().getSelectedItem().getDueDate();
+			
+			
+			StudentUploadAssGUIController.initVariable(crs,tmp,tmp1);
+			connectionmain.ShowStudentUploadAss();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void DownloadAss() throws IOException {
+		if (table.getSelectionModel().getSelectedItem() == null)
+		{
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Wrong Choise");
+			alert.setHeaderText(null);
+			alert.setContentText("Please select course and assignment");
+			alert.show();
+			return;
+		}
+		Assigenment ass= table.getSelectionModel().getSelectedItem();
+		ass.setFileid(filedir);
+
+		MyThread a = new MyThread(RequestType.DownloadAssigenment, IndexList.DownloadAssigenment, ass);
+		a.start();
+		try {
+			a.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		if ((int)MsgFromServer.getDataListByIndex(IndexList.DownloadAssigenment) == 1)
+		{	
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Success");
+			alert.setHeaderText(null);
+			alert.setContentText("Assigenment download successfull");
+			alert.show();
+			return;
+		}
+		else{	
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Fail");
+			alert.setHeaderText(null);
+			alert.setContentText("Download Failed");
+			alert.show();
+			return;
+		}
+	}
 	@FXML
 	public void clsAssMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
@@ -167,19 +242,6 @@ public class AssMainGUIController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void UploadAss() {
-		try {
-			connectionmain.ShowStudentUploadAss();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public void DownloadAss() {
-
 	}
 
 	@FXML

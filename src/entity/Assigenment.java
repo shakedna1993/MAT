@@ -8,8 +8,8 @@ public class Assigenment implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 9149522994876793152L;
-	private String AssId, UserId, Fileid, courseid, coursename, classid, classname, teacherid, techername,assname,grade,semester,comments,evalid,path;
-	private int check;
+	private String  UserId, Fileid, courseid, coursename, classid, classname, teacherid, techername,assname,grade,semester,comments,evalid,path,UserName, late;
+	private int check, AssId, assStudent;
 	private Date DueDate;
 	
 	/**
@@ -21,11 +21,13 @@ public class Assigenment implements Serializable{
 	
 	public Assigenment() {
 		super();
-		AssId = "-1";
+		AssId = -1;
+		late = "";
+		
 	}
 
 
-	public Assigenment(String assId, String userId, String fileid, String courseid, String semester, int check,
+	public Assigenment(int assId, String userId, String fileid, String courseid, String semester, int check,
 			Date dueDate) {
 		super();
 		AssId = assId;
@@ -39,7 +41,7 @@ public class Assigenment implements Serializable{
 	
 	
 
-	public Assigenment(String assId, String userId, String fileid, String courseid, String classid, String grade,
+	public Assigenment(int assId, String userId, String fileid, String courseid, String classid, String grade,
 			String semester, String comments, String evalid, int check, Date dueDate,String path) {
 		super();
 		AssId = assId;
@@ -120,12 +122,12 @@ public class Assigenment implements Serializable{
 	}
 
 
-	public String getAssId() {
+	public int getAssId() {
 		return AssId;
 	}
 
-	public void setAssId(String assId) {
-		AssId = assId;
+	public void setAssId(int i) {
+		AssId = i;
 	}
 
 	public String getUserId() {
@@ -202,7 +204,6 @@ public class Assigenment implements Serializable{
 		this.path = path;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Assigenment [AssId=" + AssId + ", UserId=" + UserId + ", Fileid=" + Fileid + ", courseid=" + courseid
@@ -212,4 +213,33 @@ public class Assigenment implements Serializable{
 				+ ", DueDate=" + DueDate + "]";
 	}
 	
+	
+	
+	
+	public String getUserName() {
+		return UserName;
+	}
+
+
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
+	
+	public int getAssStudent() {
+		return assStudent;
+	}
+
+
+	public void setAssStudent(int assStudent) {
+		this.assStudent = assStudent;
+	}
+
+	public String getLate() {
+		return late;
+	}
+
+
+	public void setLate(String late) {
+		this.late = late;
+	}
 }

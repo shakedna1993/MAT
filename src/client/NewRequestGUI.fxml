@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.NewRequestGUIController">
+   <children>
+      <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+      <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
+         <image>
+            <Image url="@LOGO.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="27.0" prefWidth="179.0" text="New Request" textFill="#061880">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="back_button" layoutX="281.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
+      
+      <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
+      <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
+      <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
+      <ComboBox fx:id="typeCombo" layoutX="185.0" layoutY="163.0" onAction="#typeCombo" prefHeight="25.0" prefWidth="200.0" promptText="Select Type" />
+      <Label fx:id="typeLabel" layoutX="70.0" layoutY="167.0" text="Request Type:" />
+      <TextArea fx:id="descField" layoutX="185.0" layoutY="292.0" prefHeight="144.0" prefWidth="300.0" />
+      <Label fx:id="descriptionLabel" layoutX="72.0" layoutY="292.0" text="Description:" />
+      <Label fx:id="userLabel" layoutX="72.0" layoutY="210.0" text="User:" />
+      <ComboBox fx:id="userCombo" layoutX="186.0" layoutY="205.0" onAction="#userCombo" prefHeight="25.0" prefWidth="200.0" promptText="Select User" />
+      <ComboBox fx:id="courseCombo" layoutX="186.0" layoutY="247.0" onAction="#courseCombo" prefHeight="25.0" prefWidth="200.0" promptText="Select Course" />
+      <Label fx:id="courseLabel" layoutX="72.0" layoutY="251.0" text="Course:" />
+      <Button fx:id="submit_button" layoutX="270.0" layoutY="496.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" />
+      <TextField fx:id="searchField" layoutX="449.0" layoutY="176.0" />
+      <Button fx:id="search_button" layoutX="545.0" layoutY="206.0" mnemonicParsing="false" onAction="#searchButton" text="Search" />
+      <Label fx:id="searchLabel" layoutX="449.0" layoutY="155.0" text="Search User By ID:" />
+      <ComboBox fx:id="classCombo" layoutX="471.0" layoutY="247.0" onAction="#classCombo" prefHeight="25.0" prefWidth="126.0" promptText="Select Class" />
+      <Label fx:id="classLabel" layoutX="406.0" layoutY="251.0" text="In Class:" />
+
+
+   </children>
+</AnchorPane>

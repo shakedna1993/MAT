@@ -135,9 +135,9 @@ public class AddStudentGUIController implements Initializable {
 			alert.show();
 			return;
 		}
-		if (!userNameExists(user_field.getText())) {
+		if (userNameExists(user_field.getText())) {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("PUsername Already Exists!");
+			alert.setTitle("Username Already Exists!");
 			alert.setHeaderText(null);
 			alert.setContentText("Username Already Exists!");
 
@@ -147,6 +147,13 @@ public class AddStudentGUIController implements Initializable {
 		try {
 			addStudent(id_field.getText(), name_field.getText(), user_field.getText(), password_field.getText(),
 					parentid_field.getText());
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Student added!");
+			alert.setHeaderText(null);
+			alert.setContentText("Student added successfully!");
+
+			alert.show();
+			return;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -200,7 +207,7 @@ public class AddStudentGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		return ((String) MsgFromServer.getDataListByIndex(IndexList.UserNameExists)).equals("true");
+		return ((boolean) MsgFromServer.getDataListByIndex(IndexList.UserNameExists));
 	}
 
 	private boolean parentExists(String pid) {

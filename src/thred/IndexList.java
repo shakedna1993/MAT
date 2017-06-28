@@ -23,6 +23,38 @@ public class IndexList {
 	public static final int classIDExists = 24;
 	public static final int classNameExists = 25;
 	public static final int DefineClass = 26;
+	public static final int getActiveClasses = 27;
+	public static final int getStudentInClass = 28;
+	public static final int RemoveStudentFromClass = 29;
+	public static final int getStudentInNoClass = 30;
+	public static final int AddStudentToClass = 31;
+	public static final int getClassCourses = 32;
+	public static final int getAvailableCoursesForClass = 33;
+	public static final int getTeachersForCourse = 34;
+	public static final int RemoveClassFromCourse = 35;
+	public static final int getCurrentSemesterID = 36;
+	public static final int RemoveStudentFromCourse = 37;
+	public static final int AddClassToCourse = 38;
+	public static final int AddStudentToCourse = 39;
+	public static final int OpenNewSemester = 120;
+	public static final int CheckStudentPreReq = 121;
+	public static final int DeleteClass = 122;
+	public static final int getUsersByRole = 123;
+	public static final int getUserCoursesInCurrSemester = 124;
+	public static final int getAllCoursesInCurrSemester = 125;
+	public static final int UserIdExists = 126;
+	public static final int AddNewRequest = 127;
+	public static final int getActiveRequests = 128;
+	public static final int getCourseByID = 129;
+	public static final int getUserByID = 130;
+	public static final int getClassListForTeacherInCourse = 131;
+	public static final int getClassByID = 132;
+	public static final int getRequestByID = 133;
+	public static final int ChangeTeacherAppointment = 134;
+	public static final int DeActivateRequest = 135;
+	public static final int UpdateMaxStudents = 136;
+	
+	
 	
 	//...........................
 	// insert more index ... 
@@ -36,6 +68,15 @@ public class IndexList {
 	public static int allAssForTeacher = 45;
 	public static int insertNewAss = 46;
 	public static final int UpdateAss = 47;
+	public static int uploadTeacherAss=48;
+	public static int allCourseForTeacher=49;
+	public static int downloadStudentAssForTeacher= 50;
+	public static int createCourseEntityByName= 51;
+	public static int listOfStudentForAssCourse = 52;
+	public static int downloadOneFileStud=53;
+	public static int uploadEvaluation= 54;
+	public static int uploadGradeFile=55;
+	public static int assCourseTeach=59;
 	// 
 	//
 	//Shaked: 60-79
@@ -62,12 +103,11 @@ public class IndexList {
 	public static final int BlockParent = 103;
 	public static final int unBlockParent=104;
 	public static final int StudentsList = 105;
+	public static final int RequestsInfo = 106;
+	public static final int getUserDetailsById=107;
+	public static final int ApprovalRequest = 108;
+	public static final int RejectRequest = 109;
 
-
-
-
-	
-	
 	//Rinat 80-99
 	public static final int UnitExists = 80;
 	public static final int CourseExists = 81;
@@ -79,4 +119,10 @@ public class IndexList {
 	public static final int WeeklyHoursUpdate = 87;
 	public static final int PreReqList = 88;
 	public static final int RemovePreReq = 89;
+	public static final int StudentEvaluations = 90;
+	public static final int DownloadAssigenment = 91;
+	public static final int DownloadStuEvaluation = 92;
+	
+	public static final int DownloadStuGradeFile = 93;
+	
 }

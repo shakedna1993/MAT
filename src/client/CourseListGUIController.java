@@ -19,28 +19,54 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
 
+
+
+
+/**
+ * d
+ * 
+ *	
+ */
 public class CourseListGUIController implements Initializable {
 	@FXML
 	Button back;
 	@FXML
 	Label stuName;
 	@FXML
+	Label Hello;
+	@FXML
 	Button LogOut;
+	@FXML
+	ImageView Logo;
+	@FXML
+	ImageView BackGround;
+	@FXML
+	ImageView BackIcon;
+	@FXML
+	ImageView LogOutIcon;
+	@FXML
+	Label courseList;
 
 	@FXML
 	TableView<Course> table = new TableView<>();
 
 	private ObservableList<Course> data;
 
-	@Override
+	
+	
+	/**
+	 * d
+	 * 
+	 *	
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		stuName.setText(s.getName());
@@ -67,9 +93,9 @@ public class CourseListGUIController implements Initializable {
 
 		data = FXCollections.observableArrayList();
 		ArrayList<Course> b = (ArrayList<Course>) MsgFromServer.getDataListByIndex(IndexList.StudentCourse);
-		for (int i = 0; i < b.size(); i++) {
+		for (int i = 0; i < b.size(); i++)
 			data.add(b.get(i));
-		}
+
 
 		TableColumn<Course, String> c1 = new TableColumn<>("Course Id");
 		c1.setCellValueFactory(new PropertyValueFactory<>("courseId"));

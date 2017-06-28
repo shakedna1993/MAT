@@ -27,36 +27,45 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
+
+/**
+ *	
+ */
 public class ParMainGUIController implements Initializable {
 
 	public static ClientConsole cli;
 	public static Stage primaryStage;
+	
 	private ArrayList<Student> DaddyStudent = new ArrayList<Student>();
 	private static Student selectedSon = new Student();
-
-	@FXML
-	Button GradeL;
-	@FXML
-	Button CourseL;
-	@FXML
-	Button Evalu;
-	@FXML
-	Button LogOut;
-	@FXML
-	Button AvgBtn;
-	@FXML
-	Label Hello;
-	@FXML
-	javafx.scene.control.Label parName;
-	@FXML
-	javafx.scene.control.Label CalcAvg;
-	@FXML
-	ComboBox<String> StuN;
-	@FXML
-	ImageView Logo;
 	private ObservableList<String> list;
 
-	@Override
+	@FXML
+	private Button GradeL;
+	@FXML
+	private Button CourseL;
+	@FXML
+	private Button Evalu;
+	@FXML
+	private Button LogOut;
+	@FXML
+	private Button AvgBtn;
+	@FXML
+	private javafx.scene.control.Label parName;
+	@FXML
+	private javafx.scene.control.Label CalcAvg;
+	@FXML
+	private ComboBox<String> StuN;
+
+	
+	/**
+	 * d
+	 * 
+	 *	@param	location an absolute URL giving the base location
+	 *	@param	resources
+	 *
+	 *	@return void
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -65,8 +74,15 @@ public class ParMainGUIController implements Initializable {
 		StuN.getValue();
 	}
 
-	@SuppressWarnings("unchecked")
-	public void parSetStudentComboBox(String id) {
+	
+	/**
+	 * d
+	 * 
+	 *	@param	id
+	 *
+	 *	@return void
+	 */
+	private void parSetStudentComboBox(String id) {
 		MyThread a = new MyThread(RequestType.parSetStudentComboBox, IndexList.parSetStudentComboBox, id);
 		a.start();
 		try {
@@ -83,9 +99,12 @@ public class ParMainGUIController implements Initializable {
 		list = FXCollections.observableArrayList(nameMyStu);
 		StuN.setItems(list);
 	}
+	
+	
+	
 
 	@FXML
-	public void Avgset() {
+	private void Avgset() {
 		selectedChild();
 		if (selectedSon == null) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -109,23 +128,35 @@ public class ParMainGUIController implements Initializable {
 		CalcAvg.setText(avgToScreen);
 	}
 
-	public void selectedChild() {
+	
+	/**
+	 * d
+	 * 
+	 *
+	 *	@return void
+	 */
+	private void selectedChild() {
 		String name = new String();
+		boolean flag=false;
 		name = StuN.getSelectionModel().getSelectedItem();
 		if (name != null) {
 
 			int i;
 			for (i = 0; i < DaddyStudent.size(); i++) {
-				if (name.equals(DaddyStudent.get(i).getName()))
-					break;
+				if (name.equals(DaddyStudent.get(i).getName())){
+					flag=true;
+					break;}
 			}
-			selectedSon = DaddyStudent.get(i);
+			if (flag)
+				selectedSon = DaddyStudent.get(i);
 		} else
 			selectedSon = null;
 	}
 
+	
+	
 	@FXML
-	public void CourseList() {
+	private void CourseList() {
 
 		selectedChild();
 		if (selectedSon == null) {
@@ -145,8 +176,10 @@ public class ParMainGUIController implements Initializable {
 		}
 	}
 
+	
+	
 	@FXML
-	public void GradeList() {
+	private void GradeList() {
 
 		selectedChild();
 		if (selectedSon == null) {
@@ -167,6 +200,27 @@ public class ParMainGUIController implements Initializable {
 	}
 
 	@FXML
+	public void EvaluationWin() {
+		selectedChild();
+		if (selectedSon == null) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Incorrect Fields");
+			alert.setHeaderText(null);
+			alert.setContentText("Please select a student");
+
+			alert.show();
+			return;
+		}
+		try {
+			connectionmain.ShowEvaluationList();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@FXML
 	public void clsParentMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -186,10 +240,12 @@ public class ParMainGUIController implements Initializable {
 	@Override
 	public String toString() {
 		return "StuMainGUIController [GradeL=" + GradeL + ", CourseL=" + CourseL + ", Evalu=" + Evalu + ", Avg="
-				+ AvgBtn + ", LogOut=" + LogOut + ", Hello=" + Hello + ", StuN=" + StuN + ", CalcAvg=" + CalcAvg
-				+ ", parName=" + parName + ", Logo=" + Logo + "]";
+				+ AvgBtn + ", LogOut=" + LogOut + ", StuN=" + StuN + ", CalcAvg=" + CalcAvg
+				+ ", parName=" + parName +"]";
 	}
 
+	
+	
 	public static Student getSelectedSon() {
 		return selectedSon;
 	}

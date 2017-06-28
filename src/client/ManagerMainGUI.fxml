@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="805.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ManMainGUIController">
+<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ManMainGUIController">
    <children>
       <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
       <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
@@ -35,39 +29,44 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="LogOut" layoutX="271.0" layoutY="741.0" mnemonicParsing="false" onAction="#clsManagerMain" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
+      <Button fx:id="LogOut" layoutX="348.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsManagerMain" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
       
-      <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
-      <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
-      <Separator layoutY="723.0" prefHeight="5.0" prefWidth="639.0" />
-      <Label fx:id="Reps" layoutX="465.0" layoutY="146.0" text="Reports" underline="true">
+      <Separator layoutX="3.0" layoutY="102.0" prefHeight="17.0" prefWidth="639.0" />
+      <Separator layoutY="117.0" prefHeight="5.0" prefWidth="639.0" />
+      <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
+      <Button fx:id="Back" layoutX="212.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Back" />
+      <Label fx:id="Reps" layoutX="425.0" layoutY="461.0" text="Reports" textFill="#107826" underline="true">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Separator layoutX="9.0" layoutY="367.0" prefHeight="5.0" prefWidth="630.0" />
-      <Label fx:id="Reqs" layoutX="145.0" layoutY="146.0" text="Requests" underline="true">
+      <Separator layoutX="310.0" layoutY="447.0" prefHeight="5.0" prefWidth="332.0" />
+      <Label fx:id="Reqs" layoutX="97.0" layoutY="134.0" text="Requests" textFill="#107826" underline="true">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="CheckReq" layoutX="24.0" layoutY="180.0" mnemonicParsing="false" text="Check For New Requests:" />
-      <TableView fx:id="Open_req" layoutX="218.0" layoutY="180.0" prefHeight="136.0" prefWidth="159.0">
-        <columns>
-          <TableColumn prefWidth="158.0" text="Requests" />
-        </columns>
-      </TableView>
-      <Button fx:id="OpenReq" layoutX="245.0" layoutY="327.0" mnemonicParsing="false" text="Open Request" />
-      <Button fx:id="GenRep" layoutX="410.0" layoutY="181.0" mnemonicParsing="false" onAction="#GenrateReports" text="Generate Statistical Reports" />
-      <Separator layoutX="394.0" layoutY="131.0" orientation="VERTICAL" prefHeight="234.0" prefWidth="6.0" />
-      <Label fx:id="BlockLabel" layoutX="281.0" layoutY="384.0" text="Block Parent" underline="true">
+      <Button fx:id="OpenReq" layoutX="104.0" layoutY="462.0" mnemonicParsing="false" onAction="#chooseReq" text="Open Request" />
+      <Button fx:id="GenRep" layoutX="362.0" layoutY="507.0" mnemonicParsing="false" onAction="#GenrateReports" text="Generate Statistical Reports">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font size="13.0" />
+         </font></Button>
+      <Separator layoutX="301.0" layoutY="122.0" orientation="VERTICAL" prefHeight="425.0" prefWidth="7.0" />
+      <Label fx:id="BlockLabel" layoutX="418.0" layoutY="134.0" text="Block Parent" textFill="#107826" underline="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="Block" layoutX="214.0" layoutY="658.0" mnemonicParsing="false" onAction="#BlockParent" prefHeight="31.0" prefWidth="75.0" text="Block" />
-      <Button fx:id="UnBlock" layoutX="341.0" layoutY="658.0" mnemonicParsing="false" onAction="#unBlockParent" text="UnBlock" />
-      <TableView fx:id="table" layoutX="192.0" layoutY="416.0" prefHeight="229.0" prefWidth="248.0" />
+      <Button fx:id="Block" layoutX="387.0" layoutY="380.0" mnemonicParsing="false" onAction="#BlockParent" prefHeight="25.0" prefWidth="84.0" text="Block" />
+      <Button fx:id="UnBlock" layoutX="499.0" layoutY="380.0" mnemonicParsing="false" onAction="#unBlockParent" prefHeight="25.0" prefWidth="78.0" text="UnBlock" />
+      <TableView fx:id="table" layoutX="333.0" layoutY="176.0" prefHeight="182.0" prefWidth="284.0" />
+      <Label layoutX="61.0" layoutY="187.0" prefHeight="17.0" prefWidth="55.0" text="you have" />
+      <Label fx:id="numReq" layoutX="127.0" layoutY="186.0" text="0" textFill="#f23838">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font></Label>
+      <Label layoutX="152.0" layoutY="187.0" prefHeight="17.0" prefWidth="101.0" text="waiting Requests" />
+      <ListView fx:id="list" layoutX="30.0" layoutY="235.0" prefHeight="200.0" prefWidth="244.0" />
 
 
    </children>
