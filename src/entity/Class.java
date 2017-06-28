@@ -9,17 +9,60 @@ public class Class implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 117905001325117180L;
-	private String classId, name, Teachid,Courseid,Semid;
+	private String classId, name, Teachid,Courseid,Semid,TecName;
 	private int MAXStudent;
 	private ArrayList<Student> StudentList = new ArrayList<>();
 	private ArrayList<String> TecList = new ArrayList<>();
 	private ArrayList<String> CourseList = new ArrayList<>();
+	private Float avg;
 	
 	public Class() {
 		super();
+		classId="-1";
+		Teachid="-1";
+		Courseid="-1";
+		Semid="-1";
+		name="-1";
+		TecName="-1";
 	}
 	
 	
+
+	public Class(String classId, String name, String teachid, String courseid, String semid, String tecName,
+			int mAXStudent, ArrayList<Student> studentList, ArrayList<String> tecList, ArrayList<String> courseList,
+			Float avg) {
+		super();
+		this.classId = classId;
+		this.name = name;
+		Teachid = teachid;
+		Courseid = courseid;
+		Semid = semid;
+		TecName = tecName;
+		MAXStudent = mAXStudent;
+		StudentList = studentList;
+		TecList = tecList;
+		CourseList = courseList;
+		this.avg = avg;
+	}
+
+
+
+	public Class(String classId, String name, String teachid, String courseid, String semid, int mAXStudent,
+			ArrayList<Student> studentList, ArrayList<String> tecList, ArrayList<String> courseList, Float avg) {
+		super();
+		this.classId = classId;
+		this.name = name;
+		Teachid = teachid;
+		Courseid = courseid;
+		Semid = semid;
+		MAXStudent = mAXStudent;
+		StudentList = studentList;
+		TecList = tecList;
+		CourseList = courseList;
+		this.avg = avg;
+	}
+
+
 
 	public Class(String classId, String name, String teachid, String courseid, String semid, int mAXStudent,
 			ArrayList<Student> studentList, ArrayList<String> tecList, ArrayList<String> courseList) {
@@ -170,14 +213,39 @@ public class Class implements Serializable{
 	public void setCourseList(ArrayList<String> courseList) {
 		CourseList = new ArrayList<String>( courseList);
 	}
+	
+	
+
+
+
+	public Float getAvg() {
+		return avg;
+	}
+
+
+
+	public void setAvg(Float avg) {
+		this.avg = avg;
+	}
+
+
+
+	public String getTecName() {
+		return TecName;
+	}
+
+
+	public void setTecName(String tecName) {
+		TecName = tecName;
+	}
 
 
 
 	@Override
 	public String toString() {
 		return "Class [classId=" + classId + ", name=" + name + ", Teachid=" + Teachid + ", Courseid=" + Courseid
-				+ ", Semid=" + Semid + ", MAXStudent=" + MAXStudent + ", StudentList=" + StudentList + ", TecList="
-				+ TecList + ", CourseList=" + CourseList + "]";
+				+ ", Semid=" + Semid + ", TecName=" + TecName + ", MAXStudent=" + MAXStudent + ", StudentList="
+				+ StudentList + ", TecList=" + TecList + ", CourseList=" + CourseList + ", avg=" + avg + "]";
 	}
 	
 }

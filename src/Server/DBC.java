@@ -420,8 +420,8 @@ public class DBC {
 		}
 	}
 	
-	/**This method will search for a specific course in the DB
-	 * @param cid-will hold the id number of the course that been searched
+	/**This method will search for course student study in the DB
+	 * @param Sid-will hold the id number of the Student that been searched
 	 * @return return the course that been searched if it found
 	 */
 	public static ArrayList<Course> StudentCourse(String Sid) {
@@ -446,6 +446,7 @@ public class DBC {
 				}
 
 				catch (Exception e) {
+					cu.setSemid("-1");
 					e.printStackTrace();
 				}
 			}
@@ -586,6 +587,7 @@ public class DBC {
 					lst.add(cu);
 				}
 				catch (Exception e) {
+					cu.setCourseId("1");
 					e.printStackTrace();
 				}
 			}
@@ -748,6 +750,7 @@ public class DBC {
 					lst.add(cu);
 				}
 				catch (Exception e) {
+					cu.setCourseId("-1");
 					e.printStackTrace();
 				}
 			}
@@ -835,7 +838,7 @@ public class DBC {
 					course.setHours(rs.getInt(4));		
 				} 
 				catch (Exception e) {
-					course.setCourseId(null);
+					course.setCourseId("-1");
 					e.printStackTrace();
 				}
 			}
@@ -843,7 +846,7 @@ public class DBC {
 			Connect.close();
 			return course;
 		} catch (SQLException e) {
-			course.setCourseId(null);
+			course.setCourseId("-1");
 			e.printStackTrace();
 		}
 		return course;
@@ -1069,6 +1072,11 @@ public class DBC {
 		return 1;
 	}
 	
+	/**This method will search for the courses student is learning in the DB
+	 * @param Id-will hold the id number of the Student that we search for his courses.
+	 * @return return list of courses studying buy the student if it found.
+	 */
+	
 	public static ArrayList<String>	setComboBoxStudentCourse(String Id){
 		ArrayList<String> al = new ArrayList<String>();
 		Statement stmt;
@@ -1098,6 +1106,10 @@ public class DBC {
 		return al;
 	}
 
+	/**This method will search for the assignment of a course in the DB
+	 * @param courseid-will hold the id number of the course that we search for his assignments
+	 * @return return list of assignment linked to the course if it found.
+	 */
 	public static ArrayList<Assigenment> setTableViewStudentCourseAssigenment(String courseid) {
 		Statement stmt;
 		ArrayList<Assigenment> lst = new ArrayList<>();
@@ -1133,10 +1145,13 @@ public class DBC {
 
 		return lst;
 	}
-	/*
-	public static Class ClassCourseDetails(String Cid) {
+
+	/**This method will search for courses class study in the DB
+	 * @param Cid-will hold the id number of the class we search courses for.
+	 * @return return list of courses that the class learn if it found
+	 */
+	public static ArrayList<Course> ClassCourseDetails(String Cid) {
 		Statement stmt;
-		Course cl = new Course();
 		ArrayList<Course> clst=new ArrayList<>();
 
 		try {
@@ -1145,14 +1160,14 @@ public class DBC {
 			ResultSet rs = stmt.executeQuery(
 					"SELECT * FROM moodle.classcourse where classid='" + Cid + "'");
 			while (rs.next()) {
-				// Print out the values
-
+				Course cl = new Course();
 				try {
-					cl.setCourseId(rs.getString(2));
-					cl.setTeachid(rs.getString(3));
+					cl.setCourseId(rs.getString(1));
+					cl.setSemid(rs.getString(4));
 					clst.add(cl);
 				}
 				catch (Exception e) {
+					cl.setCourseId("-1");
 					e.printStackTrace();
 				}
 
@@ -1166,7 +1181,7 @@ public class DBC {
 		}
 		return clst;
 	}
-	*/
+
 
 	public static int UploadFile(File file) throws Exception {
 		try {
@@ -1213,6 +1228,11 @@ public class DBC {
 				}
 		return 1;
 	}
+	
+	/**This method will search for Reports in the DB
+	 * @param 
+	 * @return return list of all the reports exists in the DB.
+	 */
 	public static ArrayList<Reports> createReportEntity() {
 		Statement stmt;
 		ArrayList<Reports> rep =new ArrayList<Reports>();
@@ -1243,6 +1263,10 @@ public class DBC {
 		return rep;
 	}
 	
+	/**This method will search for Teachers in the DB
+	 * @param 
+	 * @return return list of all the teachers exists in the DB.
+	 */
 	public static ArrayList<Teacher> createTeacherEntity() {
 		Statement stmt;
 		ArrayList<Teacher> tec =new ArrayList<Teacher>();
@@ -1296,6 +1320,10 @@ public class DBC {
 		return tecup;
 	}
 	
+	/**This method will search for Courses in the DB
+	 * @param 
+	 * @return return list of all the courses exists in the DB.
+	 */
 	public static ArrayList<Class> createClassEntity() {
 		Statement stmt;
 		ArrayList<Class> cla =new ArrayList<Class>();
@@ -1326,6 +1354,10 @@ public class DBC {
 		return cla;
 	}
 	
+	/**This method will search for Semesters in the DB
+	 * @param 
+	 * @return return list of all the semesters exists in the DB.
+	 */
 	public static ArrayList<Semester> createSemesterEntity() {
 		Statement stmt;
 		ArrayList<Semester> se =new ArrayList<Semester>();
@@ -1377,8 +1409,8 @@ public class DBC {
 
 				while (rs.next()) {
 					// Print out the values
+					Student stu = new Student();	
 					try {
-						Student stu = new Student();	
 						stu.setId(rs.getString(1));
 						stu.setName(rs.getString(2));
 						stu.setAvg(rs.getFloat(3));
@@ -1388,6 +1420,7 @@ public class DBC {
 					}
 
 					catch (Exception e) {
+						stu.setId("-1");
 						e.printStackTrace();
 					}
 				}
@@ -1412,8 +1445,8 @@ public class DBC {
 				ResultSet rs = stmt.executeQuery("SELECT * FROM moodle.student");
 
 				while (rs.next()) {
+					Student stu = new Student();	
 					try {
-						Student stu = new Student();	
 						stu.setParentId(rs.getString(1));
 						stu.setAvg(rs.getFloat(2));
 						stu.setId(rs.getString(3));
@@ -1485,6 +1518,10 @@ public class DBC {
 
 		}
 		
+		/**This method will search for classes teacher assign to in the DB
+		 * @param teacherid-will hold the id number of the Teacher we search classes for
+		 * @return return list of the classes that the teacher assign to if it found
+		 */
 		public static ArrayList<Class> TeacherClassList(String teacherid) {
 			Statement stmt;
 			ArrayList<Class> se =new ArrayList<Class>();
@@ -1516,6 +1553,10 @@ public class DBC {
 			return se;
 		}
 		
+		/**This method will search for a Teacher in the DB
+		 * @param tecname-will hold the name of the teacher that been searched
+		 * @return return the id of the teacher that been searched if it found
+		 */
 		public static Teacher TecNameToId(String tecname) {
 			Statement stmt;
 			Teacher t = new Teacher();
@@ -1544,6 +1585,10 @@ public class DBC {
 			return t;
 		}
 		
+		/**This method will search for a Class in the DB
+		 * @param classname-will hold the name of the class that been searched
+		 * @return return the id of the class that been searched if it found
+		 */
 		public static Class ClassNameToId(String classname) {
 			Statement stmt;
 			Class c = new Class();
@@ -1572,21 +1617,27 @@ public class DBC {
 			return c;
 		}
 		
-		public static Class ClassTeacherList(String classid) {
+
+		/**This method will search for the teachers that teach a specific class in the DB
+		 * @param classid-will hold the id number of the class that we search teachers for
+		 * @return return list of classes that holds the course and teacher.
+		 */
+		public static ArrayList<Class> ClassTeacherList(String classid) {
 			Statement stmt;
-			ArrayList<String> tec =new ArrayList<String>();
-			ArrayList<String> course=new ArrayList<String>();
-			Class c = new Class();
+			ArrayList<Class> cla =new ArrayList<Class>();
 			try {
 				Connection conn = Connect.getConnection();
 				stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(
 						"SELECT * FROM moodle.classcourse where classid='" + classid +"'");
 				while (rs.next()) {
+					Class c = new Class();
 					try {
+						c.setCourseid(rs.getString(1));
 						c.setClassId(rs.getString(2));
-						tec.add(rs.getString(3));
-						course.add(rs.getString(1));
+						c.setTeachid(rs.getString(3));
+						c.setSemid(rs.getString(4));
+						cla.add(c);
 					} 
 					catch (Exception e) {
 						c.setClassId("-1");
@@ -1595,15 +1646,53 @@ public class DBC {
 				}
 				rs.close();
 				Connect.close();
-				c.setCourseList(course);
-				c.setTecList(tec);
-				return c;
+				return cla;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			return c;
+			return cla;
 		}
-	
+		
+		/**This method will search for a course students learn in the DB
+		 * @param Cid-will hold the id number of the Course that been searched
+		 * @return return list courses that holds the grade of every student that learn it.
+		 */
+		public static ArrayList<Course> CourseGradeList(String Cid) {
+			Statement stmt;
+			ArrayList<Course> lst = new ArrayList<>();
+			try {
+				Connection conn = Connect.getConnection();
+				stmt = conn.createStatement();
+				String Quary = "SELECT moodle.studentcourse.* FROM moodle.studentcourse WHERE moodle.studentcourse.courseid='" + Cid + "'" ;
+
+				ResultSet rs = stmt.executeQuery(Quary);
+
+				while (rs.next()) {
+					// Print out the values
+					Course cu = new Course();
+					try {
+						cu.setSemid((rs.getString(2)));
+						cu.setCourseId(rs.getString(3));
+						cu.setGrade(Float.parseFloat(rs.getString(4)));
+						cu.setName((rs.getString(5)));
+						lst.add(cu);
+					}
+
+					catch (Exception e) {
+						cu.setSemid("-1");
+						e.printStackTrace();
+					}
+				}
+
+				rs.close();
+				Connect.close();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return lst;
+		}
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
 		// TODO Auto-generated method stub

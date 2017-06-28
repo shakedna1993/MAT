@@ -12,18 +12,24 @@ import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
 
+/**
+ * This class contains all the methods of the opening windows.
+ */
 public class connectionmain extends Application {
 	private static Stage primaryStage;
 	private static AnchorPane mainLayout;
 //	private static VBox vbox;
 
+	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		connectionmain.primaryStage = primaryStage;
 		showLogin();
 	}
 	
-	
+	/**
+	 * This method log out user from the DB.
+	 */
 	@Override
 	public void stop(){
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -65,6 +71,9 @@ public class connectionmain extends Application {
 		connectionmain.mainLayout = mainLayout;
 	}
 
+	/**
+	 * show the window of Teacher
+	 */
 	public static void showTeacherMain() throws IOException {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("/client/TeacherMainGUI.fxml"));
@@ -74,6 +83,9 @@ public class connectionmain extends Application {
 			primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Student
+	 */
 	public static void showStudentMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/StudentMainGUI.fxml"));
@@ -83,6 +95,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of System manager
+	 */
 	public static void showSysManMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/SystemManMainGUI.fxml"));
@@ -92,6 +107,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Secretary
+	 */
 	public static void showSecretaryMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/SecretaryMainGUI.fxml"));
@@ -101,6 +119,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of School manager
+	 */
 	public static void showManagerMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/ManagerMainGUI.fxml"));
@@ -110,6 +131,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Teacher and school manager (special permission)
+	 */
 	public static void showTch_ManMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/Tch&ManGUI.fxml"));
@@ -119,6 +143,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 		}
 	
+	/**
+	 * show the window of Parent
+	 */
 	public static void showParentMain() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/ParentMainGUI.fxml"));
@@ -128,6 +155,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Student- course list
+	 */
 	public static void ShowCourseList() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/CourseListGUI.fxml"));
@@ -137,6 +167,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Student- grade list
+	 */
 	public static void ShowGradeList() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/GradeListGUI.fxml"));
@@ -146,6 +179,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Define course
+	 */
 	public static void showDefineWindow() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/DefineCourseGUI.fxml"));
@@ -154,6 +190,10 @@ public class connectionmain extends Application {
 		primaryStage.setTitle("M.A.T- Define Course");
 		primaryStage.show();	
 	}
+	
+	/**
+	 * show the window of Parent Connection
+	 */
 	public static void showTeacherGUIAssWindow() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/addNewAssingmentGUI.fxml"));
@@ -164,7 +204,9 @@ public class connectionmain extends Application {
 	}
 	
 	
-	
+	/**
+	 * show the window of Edit assignment
+	 */
 	public static void showTeacherEditAssGUI() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/teacherEditAssGUI.fxml"));
@@ -174,6 +216,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Student assignment
+	 */
 	public static void ShowAssOptions() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/AssMainGUI.fxml"));
@@ -183,6 +228,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Assignment Submission
+	 */
 	public static void ShowStudentUploadAss() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/StudentUploadAssGUI.fxml"));
@@ -192,6 +240,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Assignment Submission
+	 */
 	public static void ShowReportSection() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/ReportsMainGUI.fxml"));
@@ -201,6 +252,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Report-Teacher classes grades
+	 */
 	public static void ShowStatisticReportClassTec() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/StatisticReportTCGUI.fxml"));
@@ -210,6 +264,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Report-Class teachers grades
+	 */
 	public static void ShowStatisticReportTecClass() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/StatisticReportCTGUI.fxml"));
@@ -219,6 +276,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Define Course ADD Pre Requisite
+	 */
 	public static void showDefineCourseAddPre() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/DefineCourseAddPreGUI.fxml"));
@@ -228,6 +288,9 @@ public class connectionmain extends Application {
 		primaryStage.show();	
 	}
 
+	/**
+	 * show the window of Edit Course
+	 */
 	public static void showEditWindow() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/EditCourseGUI.fxml"));
@@ -237,6 +300,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Remove Course
+	 */
 	public static void showRemoveWindow() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/RemoveCourseGUI.fxml"));
@@ -246,6 +312,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 
+	/**
+	 * show the window of Report-Class courses grades
+	 */
 	public static void ShowStatisticReportCourseClass() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/StatisticReportCCGUI.fxml"));

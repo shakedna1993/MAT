@@ -53,6 +53,7 @@ public class IndexList {
 	public static final int TecNameToId=71;
 	public static final int ClassNameToId=72;
 	public static final int ClassTeacherList=73;
+	public static final int CourseGradeList=74;
 	
 	//Bar: 100
 	public static final int parSetStudentComboBox=100;

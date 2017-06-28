@@ -31,15 +31,15 @@
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="1190.0" />
       <Separator layoutY="721.0" prefHeight="5.0" prefWidth="1082.0" />
       <Button fx:id="Back" layoutX="351.0" layoutY="748.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
-      <ComboBox fx:id="STC" layoutX="175.0" layoutY="149.0" prefHeight="25.0" prefWidth="200.0" promptText="Teachers" />
+      <ComboBox fx:id="STC" layoutX="175.0" layoutY="149.0" onAction="#setComboBoxStartSem" prefHeight="25.0" prefWidth="200.0" promptText="Select Teacher" />
       <Label fx:id="selecttec" layoutX="22.0" layoutY="151.0" text="Select Teacher:" />
-      <Button fx:id="selectBtn2" layoutX="399.0" layoutY="320.0" mnemonicParsing="false" onAction="#setDiagram" text="select" />
+      <Button fx:id="selectBtn2" layoutX="399.0" layoutY="320.0" mnemonicParsing="false" onAction="#setDiagramInfo" text="select" visible="false" />
       <Label fx:id="choosenum" layoutX="26.0" layoutY="237.0" text="Start Semester:" />
-      <ComboBox fx:id="STC1" layoutX="175.0" layoutY="232.0" prefHeight="25.0" prefWidth="200.0" promptText="Start semester" />
+      <ComboBox fx:id="STC1" layoutX="175.0" layoutY="232.0" onAction="#setComboBoxEndSem" prefHeight="25.0" prefWidth="200.0" promptText="Select start semester" />
       <Label fx:id="choosenum1" layoutX="25.0" layoutY="325.0" text="End Semester:" />
-      <ComboBox fx:id="STC2" layoutX="175.0" layoutY="323.0" prefHeight="25.0" prefWidth="200.0" promptText="End semester" />
-      <Button fx:id="selectBtn1" layoutX="399.0" layoutY="229.0" mnemonicParsing="false" onAction="#setComboBoxEndSem" text="select" />
-      <Button fx:id="selectBtn" layoutX="399.0" layoutY="146.0" mnemonicParsing="false" onAction="#setComboBoxStartSem" text="select" />
+      <ComboBox fx:id="STC2" layoutX="175.0" layoutY="323.0" onAction="#setDiagramInfo" prefHeight="25.0" prefWidth="200.0" promptText="Select end semester" />
+      <Button fx:id="selectBtn1" layoutX="399.0" layoutY="229.0" mnemonicParsing="false" onAction="#setComboBoxEndSem" text="select" visible="false" />
+      <Button fx:id="selectBtn" layoutX="399.0" layoutY="146.0" mnemonicParsing="false" onAction="#setComboBoxStartSem" text="select" visible="false" />
       <BarChart fx:id="diagram" layoutX="510.0" layoutY="180.0" prefHeight="495.0" prefWidth="634.0" title="Classes grades per Teacher">
          <xAxis>
             <CategoryAxis side="BOTTOM" />

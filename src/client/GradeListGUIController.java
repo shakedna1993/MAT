@@ -32,6 +32,7 @@ public class GradeListGUIController implements Initializable {
 	TableView<Course> table = new TableView<>();
 	private ObservableList<Course> data;
 	
+	@SuppressWarnings("unchecked")
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		User s =new User();

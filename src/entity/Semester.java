@@ -17,6 +17,7 @@ public class Semester implements Serializable{
 	
 	public Semester() {
 		super();
+		semId="-1";
 	}
 	
 	public Semester(String semId, int currentStatus, int no_week) {

@@ -17,6 +17,12 @@ public class Teacher extends User implements Serializable {
 	
 	public Teacher() {
 		super();
+		TecId="-1";
+		Unit="-1";
+		intership="-1";
+		TecName="-1";
+		TecId="-1";
+		maxHours=0;
 		// TODO Auto-generated constructor stub
 	}
 

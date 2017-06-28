@@ -14,10 +14,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -74,10 +76,20 @@ public class ReportsMainGUIController implements Initializable {
 	@FXML
 	public void	setStatisticReport(){	 
 		Object st= STC.getValue();
+		if(st==null){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Empty Fields");
+			alert.setHeaderText(null);
+			alert.setContentText("Please Select Report");
+
+			alert.show();
+			return;
+		}
+		
 		String  ReportName=st.toString();
 		ArrayList<Reports> a1 = new ArrayList<Reports>();
 		int a2 = 0;
-
+		
 		Reports rep = new Reports();
 		MyThread a = new MyThread(RequestType.createReportEntity, IndexList.createReportEntity, rep);
 		a.start();

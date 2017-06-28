@@ -137,8 +137,6 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.setComboBoxStudentCourse, returnMsg.getMsg());
 		case setTableViewStudentCourseAssigenment:
 			setDataListByIndex(IndexList.setTableViewStudentCourseAssigenment, returnMsg.getMsg());	
-		case DownoladFile:
-			setDataListByIndex(IndexList.DownloadFile, returnMsg.getMsg());
 		case ClassCourseDetails:
 			setDataListByIndex(IndexList.ClassCourseDetails, returnMsg.getMsg());
 		case UploadFile:
@@ -182,6 +180,9 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.PreReqList, returnMsg.getMsg());	
 		case RemovePreReq:
 			setDataListByIndex(IndexList.RemovePreReq, returnMsg.getMsg());	
+		case CourseGradeList:
+			setDataListByIndex(IndexList.CourseGradeList, returnMsg.getMsg());	
+			
 		
 		default:
 			break;

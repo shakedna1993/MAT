@@ -13,11 +13,15 @@ public class Student extends User implements Serializable{
 	private static final long serialVersionUID = -5638726927853322152L;
 //	private String Name,Password,UserName,Id;
 //	private int isConnected,Role,Blocked;
-	private String ParentId,Classid;
+	private String ParentId,Classid,Id;
 	private float avg;
 	
 	public Student() {
 		super();
+		Id="-1";
+		ParentId="-1";
+		Classid="-1";
+		avg=0;
 		// TODO Auto-generated constructor stub
 	}
 	public Student(String name, String password, String userName, String id, String parentId, int isConnected, int role,
@@ -59,9 +63,17 @@ public class Student extends User implements Serializable{
 		Classid = classid;
 	}
 	
+	
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
+	}
+	
 	@Override
 	public String toString() {
-		return "Student [ParentId=" + ParentId + ", Classid=" + Classid + ", avg=" + avg + "]";
+		return "Student [ParentId=" + ParentId + ", Classid=" + Classid + ", Id=" + Id + ", avg=" + avg + "]";
 	}
 	
 }

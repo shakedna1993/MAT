@@ -10,6 +10,7 @@ import entity.Student;
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -66,6 +67,7 @@ public class ManMainGUIController implements Initializable {
 	@FXML
 	TableView<Student> table = new TableView<>();
 	private ObservableList<Student> data;
+	int num=0;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
@@ -110,6 +112,7 @@ public class ManMainGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
+		num = (int) (MsgFromServer.getDataListByIndex(IndexList.BlockParent));
 	}
 
 	@FXML
@@ -122,6 +125,7 @@ public class ManMainGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
+		num = (int) (MsgFromServer.getDataListByIndex(IndexList.unBlockParent));
 	}
 
 	@FXML
@@ -133,6 +137,7 @@ public class ManMainGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
 	@FXML
 	public void clsManagerMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,

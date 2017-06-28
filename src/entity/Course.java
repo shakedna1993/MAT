@@ -11,7 +11,7 @@ public class Course implements Serializable{
 	private static final long serialVersionUID = 7643170416233054127L;
 	private String courseId, name, unit,Semid;
 	private int Hours;
-	private float grade;
+	private float grade,avg;
 	private String preReqId;
 	private ArrayList<Float> GradeList = new ArrayList<>();
 	
@@ -20,8 +20,30 @@ public class Course implements Serializable{
 		courseId="-1";
 		preReqId="-1";
 		Hours=-1;
+		name="-1";
+		Semid="-1";
+		unit="-1";
+		preReqId="-1";
+		Hours=0;
+		grade=avg=0;
 	}
 	
+	
+	public Course(String courseId, String name, String unit, String semid, int hours, float grade, float avg,
+			String preReqId, ArrayList<Float> gradeList) {
+		super();
+		this.courseId = courseId;
+		this.name = name;
+		this.unit = unit;
+		Semid = semid;
+		Hours = hours;
+		this.grade = grade;
+		this.avg = avg;
+		this.preReqId = preReqId;
+		GradeList = gradeList;
+	}
+
+
 	public Course(String courseId, String name, String unit, String semid, int hours, float grade, String preReqId,
 			ArrayList<Float> gradeList) {
 		super();
@@ -112,10 +134,16 @@ public class Course implements Serializable{
 		this.grade = grade;
 	}
 	
+
+	
 	public ArrayList<Float> getGradeList() {
 		return GradeList;
 	}
-	
+
+	public void setGradeList(ArrayList<Float> gradeList) {
+		GradeList = new ArrayList<Float>(gradeList);
+	}
+
 	public void addGrade(Float s) {
 		this.GradeList.add(s) ;
 	}
@@ -127,10 +155,23 @@ public class Course implements Serializable{
 	public void setPreReqId(String preReqId) {
 		this.preReqId = preReqId;
 	}
+	
+	
+
+	public float getAvg() {
+		return avg;
+	}
+
+
+	public void setAvg(float avg) {
+		this.avg = avg;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Course [courseId=" + courseId + ", name=" + name + ", unit=" + unit + ", Semid=" + Semid + ", Hours="
-				+ Hours + ", grade=" + grade + ", preReqId=" + preReqId + ", GradeList=" + GradeList + "]";
+				+ Hours + ", grade=" + grade + ", avg=" + avg + ", preReqId=" + preReqId + ", GradeList=" + GradeList
+				+ "]";
 	}
 }

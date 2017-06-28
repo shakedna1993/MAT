@@ -23,8 +23,8 @@ import entity.FileEnt;
 /**
  * 
  * This class handles with all the functionality of the server.
- * Each instants gets msg from the clients and translates it for op-code and msg that contains the relevant object/s.
- * Later, for each op-code there is a relevant functionality.  
+ * Each instants gets msg from the clients and translates it for op-type and msg that contains the relevant object/s.
+ * Later, for each op-type there is a relevant functionality.  
  */
 public class OpCheck {
 	public Object CheakOp(Object msg) {
@@ -124,9 +124,11 @@ public class OpCheck {
 			 return DBC.avgOneStudent((String)op.getMsg());
 		case BlockParent:
 			 DBC.BlockParent((String)op.getMsg());
+			 return 0;
 			 
 		case unBlockParent:
 			 DBC.unBlockParent((String)op.getMsg());
+			 return 0;
 			 
 		case StudentsList:
 			return (ArrayList<Student>)DBC.StudentsList();
@@ -195,8 +197,8 @@ public class OpCheck {
 			case createSemesterEntity:
 				return DBC.createSemesterEntity();
 			case TeacherClassList:
-				Teacher tec =(Teacher)op.getMsg();
-				return DBC.TeacherClassList(tec.getTecId());
+				String tec =(String)op.getMsg();
+				return DBC.TeacherClassList(tec);
 			case TecNameToId:
 				Teacher tec1 =(Teacher)op.getMsg();
 				return DBC.TecNameToId(tec1.getTecName());
@@ -206,6 +208,13 @@ public class OpCheck {
 			case ClassTeacherList:
 				Class cla =(Class)op.getMsg();
 				return DBC.ClassTeacherList(cla.getClassId());
+			case CourseGradeList:
+				String courseid =(String)op.getMsg();
+				return DBC.CourseGradeList(courseid);
+			case ClassCourseDetails:
+				String classid =(String)op.getMsg();
+				return DBC.ClassCourseDetails(classid);
+				
 				
 				
 				
