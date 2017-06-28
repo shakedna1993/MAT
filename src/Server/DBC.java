@@ -25,16 +25,16 @@ import entity.User;
 import entity.Class;
 import Server.Connect;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * This class contains all the interaction with the Data-Base *
  */
-
 
 public class DBC {
 
@@ -1427,13 +1427,8 @@ public class DBC {
 		}
 	}
 	
-<<<<<<< HEAD
 	/**This method will search for course student study in the DB
 	 * @param Sid-will hold the id number of the Student that been searched
-=======
-	/**This method will give all the information in the DB about all the courses of specific student 
-	 * @param cid	will hold the id number of the course that been searched
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	 * @return return the course that been searched if it found
 	 */
 	public static ArrayList<Course> StudentCourse(String Sid) {
@@ -1446,6 +1441,7 @@ public class DBC {
 			ResultSet rs = stmt.executeQuery(Quary);
 
 			while (rs.next()) {
+				// Print out the values
 				Course cu = new Course();
 				try {
 					cu.setSemid((rs.getString(2)));
@@ -1454,16 +1450,20 @@ public class DBC {
 					cu.setName((rs.getString(5)));
 					lst.add(cu);
 				}
+
 				catch (Exception e) {
 					cu.setSemid("-1");
 					e.printStackTrace();
 				}
 			}
+
 			rs.close();
 			Connect.close();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
 		return lst;
 	}
 	
@@ -1793,8 +1793,21 @@ public class DBC {
 		}
 	}
 	
+	
+	
+	
+	public static ArrayList<String>	setComboBoxTeacherCourse(String id){
+		ArrayList<String> al = new ArrayList<String>();
+		ArrayList<String> a2 = new ArrayList<String>();
+		Statement stmt;
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT * FROM moodle.classcourse where tid='" + id + "'");
+			while (rs.next()) {
+				// Print out the values
 
-<<<<<<< HEAD
 				try {
 					al.add(rs.getString(1));		
 				}
@@ -1978,9 +1991,6 @@ public class DBC {
 		return cnt;
 		
 	}
-=======
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
-
 
 	public static ArrayList<Assigenment> allAssForTeacher(String teacherid){
 		Statement stmt;
@@ -2047,6 +2057,25 @@ public class DBC {
 
 
 	
+	Statement stmt;
+	try {
+
+		Connection conn = Connect.getConnection();
+		stmt = conn.createStatement();
+
+		String Quary = "INSERT INTO moodle.teacherassingment (Assid,Fileid,DueDate,tecid,CourseId,SemId) VALUES ('"
+				+ ass.getAssId()+  "','" + ass.getFileid() +  "','" + "2020-01-01" +  "','" + ass.getUserId() + "','" + ass.getCourseid() + "','" + ass.getSemester() + "')";
+		stmt.executeUpdate(Quary);
+
+		}
+
+			catch (Exception e) {
+					e.printStackTrace();
+					return 0;
+				}
+		return 1;
+	}
+	
 	/**This method will search for the courses student is learning in the DB
 	 * @param Id-will hold the id number of the Student that we search for his courses.
 	 * @return return list of courses studying buy the student if it found.
@@ -2081,15 +2110,7 @@ public class DBC {
 		return al;
 	}
 
-<<<<<<< HEAD
-	/**This method will search for the assignment of a course in the DB
-	 * @param courseid-will hold the id number of the course that we search for his assignments
-	 * @return return list of assignment linked to the course if it found.
-	 */
 	public static ArrayList<Assigenment> setTableViewStudentCourseAssigenment(String courseid) {
-=======
-	public static ArrayList<Assigenment> setTableViewStudentCourseAssigenment(Studentass asud ) {
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 		Statement stmt;
 		int flag=0;
 		ArrayList<Assigenment> lst = new ArrayList<>();
@@ -2172,8 +2193,7 @@ public class DBC {
 		return clst;
 	}
 
-
-	public static int UploadFile(Studentass stuass) throws Exception {
+	public static int UploadFile(File file) throws Exception {
 		try {
 			Connection conn = Connect.getConnection();
 			FileInputStream InputStream =new FileInputStream(stuass.getPath());
@@ -2243,33 +2263,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
-	
-<<<<<<< HEAD
-	public static int UpdateAss(Assigenment ass){
-	Statement stmt;
-	try {
-
-		Connection conn = Connect.getConnection();
-		stmt = conn.createStatement();
-		String Quary = "update moodle.teacherassingment set Fileid= '" + ass.getFileid()+ "', DueDate= '" +  "2020-01-01" +
-				 "' where Assid= '" + ass.getAssId() + "' AND CourseId= '" + ass.getCourseid() + "'";
-		stmt.executeUpdate(Quary);
-
-		}
-			catch (Exception e) {
-					e.printStackTrace();
-					return 0;
-				}
-		return 1;
-	}
 	
 	/**This method will search for Reports in the DB
 	 * @param 
 	 * @return return list of all the reports exists in the DB.
 	 */
-=======
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	public static ArrayList<Reports> createReportEntity() {
 		Statement stmt;
 		ArrayList<Reports> rep =new ArrayList<Reports>();
@@ -2443,12 +2441,9 @@ public class DBC {
 						+ "moodle.student, moodle.users WHERE moodle.student.parentid='" + Pid +"' AND moodle.users.Id=moodle.student.sid");
 		
 				while (rs.next()) {
-<<<<<<< HEAD
-					// Print out the values
 					Student stu = new Student();	
-=======
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 					try {
+						Student stu = new Student();	
 						stu.setId(rs.getString(1));
 						stu.setName(rs.getString(2));
 						stu.setAvg(rs.getFloat(3));
@@ -2457,20 +2452,18 @@ public class DBC {
 						lst.add(stu);
 					}
 					catch (Exception e) {
-<<<<<<< HEAD
 						stu.setId("-1");
 						e.printStackTrace();
 					}
-=======
-						e.printStackTrace();}
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 				}
+
 				rs.close();
 				Connect.close();
 				return lst;
 				
 			} catch (SQLException e) {
-				e.printStackTrace();	}
+				e.printStackTrace();
+			}
 
 			return lst;
 		}
@@ -2591,12 +2584,6 @@ public class DBC {
 			return UPDATE;
 		}
 		
-<<<<<<< HEAD
-		/**This method will search for classes teacher assign to in the DB
-		 * @param teacherid-will hold the id number of the Teacher we search classes for
-		 * @return return list of the classes that the teacher assign to if it found
-		 */
-=======
 		/** This method update the field status, in requests table, when the school manger confirmed that specific request
 		 *	@param Rid	will hold the id of this request
 		 *	@return if we Successfully update the DB or not
@@ -2637,6 +2624,10 @@ public class DBC {
 			return UPDATE;
 		}
 		
+		/**This method will search for classes teacher assign to in the DB
+		 * @param teacherid-will hold the id number of the Teacher we search classes for
+		 * @return return list of the classes that the teacher assign to if it found
+		 */
 	
 
 	/**
@@ -2672,7 +2663,6 @@ public class DBC {
 
 		return u;
 	}
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 		public static ArrayList<Class> TeacherClassList(String teacherid) {
 			Statement stmt;
 			ArrayList<Class> se =new ArrayList<Class>();
@@ -2703,16 +2693,12 @@ public class DBC {
 			}
 			return se;
 		}
-<<<<<<< HEAD
 		
 		/**This method will search for a Teacher in the DB
 		 * @param tecname-will hold the name of the teacher that been searched
 		 * @return return the id of the teacher that been searched if it found
 		 */
 		public static Teacher TecNameToId(String tecname) {
-=======
-	public static Teacher TecNameToId(String tecname) {
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 			Statement stmt;
 			Teacher t = new Teacher();
 			try {
@@ -2739,16 +2725,12 @@ public class DBC {
 			}
 			return t;
 		}
-<<<<<<< HEAD
 		
 		/**This method will search for a Class in the DB
 		 * @param classname-will hold the name of the class that been searched
 		 * @return return the id of the class that been searched if it found
 		 */
 		public static Class ClassNameToId(String classname) {
-=======
-			public static Class ClassNameToId(String classname) {
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 			Statement stmt;
 			Class c = new Class();
 			try {
@@ -2760,7 +2742,6 @@ public class DBC {
 					try {
 						c.setClassId(rs.getString(1));
 	
-
 					} 
 					catch (Exception e) {
 						c.setClassId("-1");
@@ -2810,7 +2791,6 @@ public class DBC {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-<<<<<<< HEAD
 			return cla;
 		}
 		
@@ -2854,148 +2834,6 @@ public class DBC {
 
 			return lst;
 		}
-=======
-			return c;
-		}
-		
-		/**
-		 */
-		
-		public static ArrayList<Studentass> StudentEvaluations(String Sid) {
-			Statement stmt;
-			ArrayList<Studentass> lst =new ArrayList<Studentass>();
-			try {
-				Connection conn = Connect.getConnection();
-				stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery( 
-						"SELECT * FROM moodle.studentassignment WHERE Studid='" + Sid + "'") ;
-				while (rs.next()) {
-					try {
-						Studentass ev = new Studentass();
-						String crs= createCourseEntity(rs.getString(3)).getName();
-						ev.setCourseName(crs);
-						if (rs.getString(11)!=null){
-							ev.setEvaFileName(rs.getString(11));
-							String s1=GetAssName(rs.getInt(9));
-							ev.setAssiName(s1);
-							ev.setAssid(rs.getInt(1));
-
-							lst.add(ev);
-							}
-						
-					}catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-					rs.close();
-					Connect.close();
-					return lst;
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-				return lst;
-			}
-		
-		public static String GetAssName(int assid){
-			Statement stmt;
-			String s = null;
-			try {
-				Connection conn = Connect.getConnection();
-				stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery( 
-						"SELECT * FROM moodle.teacherassingment WHERE Assid='" + assid + "'" );
-				while (rs.next()){
-					s=rs.getString(8);
-					return s;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return null;
-			}
-			return s;
-		}
-				
-			
-		
-		public static int DownloadStuEvaluation(Studentass ass) throws IOException{
-			Statement stmt = null;
-			Connection conn = null;
-			ResultSet rs = null;
-			int flag = 1;
-			InputStream input = null;
-			FileOutputStream output = null;
-			
-			try {
-				 conn = Connect.getConnection();
-				stmt = conn.createStatement();
-				String sql = "select * from moodle.studentassignment where Assid= '"+ ass.getAssid() + "'";
-				rs = stmt.executeQuery(sql);
-				while (rs.next()){
-				String home= System.getProperty("user.home");
-				File theFile = new File( home+"\\Downloads\\" + rs.getString(11));
-				output = new FileOutputStream(theFile);
-				input = rs.getBinaryStream(10);
-					
-				byte[] buffer = new byte[1024];
-				while(input.read(buffer)>0){
-					output.write(buffer);
-				}
-				}
-			}catch (Exception e) {
-				e.printStackTrace();
-				flag = 0;
-			}
-			finally{
-				if(input != null){ 
-					input.close();
-				}
-				if(output != null){ 
-					output.close();
-				}
-			}
-			return flag;
-		}
-		
-		public static int DownloadStuGradeFile(Studentass ass) throws IOException{
-			Statement stmt = null;
-			Connection conn = null;
-			ResultSet rs = null;
-			int flag = 1;
-			InputStream input = null;
-			FileOutputStream output = null;
-			
-			try {
-				 conn = Connect.getConnection();
-				stmt = conn.createStatement();
-				String sql = "select * from moodle.studentassignment where Assid= '"+ ass.getAssid() + "'";
-				rs = stmt.executeQuery(sql);
-				while (rs.next()){
-				String home= System.getProperty("user.home");
-				File theFile = new File( home+"\\Downloads\\" + rs.getString(13));
-				output = new FileOutputStream(theFile);
-				input = rs.getBinaryStream(12);
-					
-				byte[] buffer = new byte[1024];
-				while(input.read(buffer)>0){
-					output.write(buffer);
-				}
-				}
-			}catch (Exception e) {
-				e.printStackTrace();
-				flag = 0;
-			}
-			finally{
-				if(input != null){ 
-					input.close();
-				}
-				if(output != null){ 
-					output.close();
-				}
-			}
-			return flag;
-		}
-		
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	@SuppressWarnings("unused")
 	private static ResultSet executeUpdate(String quary) {
 		return null;	

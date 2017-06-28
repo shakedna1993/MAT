@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
 import entity.Course;
 import entity.Requests;
 import entity.Student;
@@ -30,13 +29,6 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
-
-
-/**
- * d
- * 
- *	
- */
 public class ManMainGUIController implements Initializable {
 
 	public static ClientConsole cli;
@@ -75,11 +67,8 @@ public class ManMainGUIController implements Initializable {
 	
 	private static Requests chooseRequests=new Requests();
 	private ObservableList<Student> data;
-<<<<<<< HEAD
 	int num=0;
-=======
 	private String[] type={"Register Student to Course","Remove Student from Course","Change Teacher Appointment"};
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 
 	
 	
@@ -91,13 +80,8 @@ public class ManMainGUIController implements Initializable {
 		numReq.setText(Integer.toString(re()));
 	}
 
-	
-	/**
-	 * d
-	 * 
-	 *
-	 */
-	private void studentParentInfo() {
+	@SuppressWarnings("unchecked")
+	public void studentParentInfo() {
 		MyThread a = new MyThread(RequestType.StudentsList, IndexList.StudentsList);
 		a.start();
 		try {
@@ -123,9 +107,6 @@ public class ManMainGUIController implements Initializable {
 		table.setItems(data);
 	}
 
-	
-	
-	
 	@FXML
 	private void BlockParent() {
 		String Pid = table.getSelectionModel().getSelectedItem().getParentId();
@@ -136,9 +117,7 @@ public class ManMainGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-<<<<<<< HEAD
 		num = (int) (MsgFromServer.getDataListByIndex(IndexList.BlockParent));
-=======
 		boolean b = (boolean) MsgFromServer.getDataListByIndex(IndexList.BlockParent);
 		
 		if (b){
@@ -156,13 +135,8 @@ public class ManMainGUIController implements Initializable {
 			alert.show();
 		}
 		
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	}
-	
-	
-	
-	
-	
+
 	@FXML
 	private void unBlockParent() {
 		String Pid = table.getSelectionModel().getSelectedItem().getParentId();
@@ -173,9 +147,7 @@ public class ManMainGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-<<<<<<< HEAD
 		num = (int) (MsgFromServer.getDataListByIndex(IndexList.unBlockParent));
-=======
 		boolean b = (boolean) MsgFromServer.getDataListByIndex(IndexList.unBlockParent);
 		if (b){
 	        Alert alert = new Alert(AlertType.INFORMATION);
@@ -191,7 +163,6 @@ public class ManMainGUIController implements Initializable {
 			alert.setContentText("Not completed successfully");
 			alert.show();
 		}
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	}
 	
 	
@@ -312,9 +283,7 @@ public class ManMainGUIController implements Initializable {
 		}
 	}
 
-	
-	
-
+	@Override
 	public String toString() {
 		return "ManMainGUIController [ Reqs=" + Reqs + ", BlockLabel="
 				+ BlockLabel + ", Ins_PID=" + Ins_PID + ", ManName=" + ManName + ", CheckReq=" + CheckReq + ", OpenReq="

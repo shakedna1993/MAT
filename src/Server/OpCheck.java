@@ -26,8 +26,8 @@ import entity.Requests;
 /**
  * 
  * This class handles with all the functionality of the server.
- * Each instants gets msg from the clients and translates it for op-type and msg that contains the relevant object/s.
- * Later, for each op-type there is a relevant functionality.  
+ * Each instants gets msg from the clients and translates it for op-code and msg that contains the relevant object/s.
+ * Later, for each op-code there is a relevant functionality.  
  */
 public class OpCheck {
 	public Object CheakOp(Object msg) {
@@ -147,7 +147,6 @@ public class OpCheck {
 		case DefineClass:
 			return DBC.DefineClass((entity.Class)op.getMsg());
 			
-			
 		case StudentCourse:
 			User stud = (User)op.getMsg();
 			return DBC.StudentCourse(stud.getId());
@@ -189,20 +188,10 @@ public class OpCheck {
 		case avgOneStudent:
 			 return DBC.avgOneStudent((String)op.getMsg());
 		case BlockParent:
-<<<<<<< HEAD
-			 DBC.BlockParent((String)op.getMsg());
-			 return 0;
-=======
 			return DBC.BlockParent((String)op.getMsg());
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 			 
 		case unBlockParent:
-<<<<<<< HEAD
-			 DBC.unBlockParent((String)op.getMsg());
-			 return 0;
-=======
 			 return DBC.unBlockParent((String)op.getMsg());
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 			 
 		case StudentsList:
 			return DBC.StudentsList();
@@ -216,6 +205,19 @@ public class OpCheck {
 			return DBC.RejectRequest((String)op.getMsg());
 			
 
+				
+			case getWeeklyHours:
+				return DBC.getWeeklyHours((String)op.getMsg());
+				
+			case allAssForTeacher:
+				ArrayList<Assigenment> lst1 = new ArrayList<>();
+				lst1 =  DBC.allAssForTeacher((String)op.getMsg());
+				return lst1;
+				
+			case insertNewAss:
+			int flag = 0;
+			flag =  DBC.insertNewAss((Assigenment)op.getMsg());
+				return flag;
 				
 			case setComboBoxStudentCourse:
 				ArrayList<String> a2 = new ArrayList<String>();
@@ -238,7 +240,10 @@ public class OpCheck {
 					e.printStackTrace();
 				}
 				return check;
-
+			case UpdateAss:
+				int flag1 = 0;
+				flag1 =  DBC.UpdateAss((Assigenment)op.getMsg());
+				return flag1;
 			case createReportEntity:
 				return DBC.createReportEntity();
 			case createTeacherEntity:
@@ -405,7 +410,6 @@ public class OpCheck {
 				return DBC.assCourseTeach((Assigenment) op.getMsg());
 				
 				
-						
 				
 				
 				

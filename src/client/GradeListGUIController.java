@@ -20,12 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import thred.IndexList;
 import thred.MyThread;
 
-
-/**
- * d
- * 
- *	
- */
 public class GradeListGUIController implements Initializable {
 	@FXML
 	Button back;
@@ -33,23 +27,12 @@ public class GradeListGUIController implements Initializable {
 	Label stuName;
 	@FXML
 	Button LogOut;
+	
 	@FXML
 	TableView<Course> table = new TableView<>();
-
 	private ObservableList<Course> data;
 	
-<<<<<<< HEAD
 	@SuppressWarnings("unchecked")
-=======
-	
-	
-	
-	/**
-	 * d
-	 * 
-	 *	
-	 */
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		User s =new User();
 		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -97,8 +80,6 @@ public class GradeListGUIController implements Initializable {
 		table.setItems(data);
 	}
 
-	
-	
 	@FXML
 	public void clsGradeList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -115,9 +96,6 @@ public class GradeListGUIController implements Initializable {
 		}
 	}
 
-	
-	
-	
 	@FXML
 	private void backButton(ActionEvent event) throws Exception{
 		User s =new User();

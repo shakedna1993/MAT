@@ -21,10 +21,8 @@ public class MsgFromServer {
 	/**
 	 * This method sets the data in the data list by int index to be obj value.
 	 * 
-	 * @param index
-	 *            where to insert data in list.
-	 * @param obj
-	 *            what data to insert/change.
+	 * @param index where to insert data in list.
+	 * @param obj what data to insert/change.
 	 */
 	public static void setDataListByIndex(int index, Object obj) {
 		while (index >= dataList.size())
@@ -33,7 +31,7 @@ public class MsgFromServer {
 	}
 
 	/**
-	 * This method returns the wanted data from the data list by index.
+	 * This method returns the wanted data from the data list by int index.
 	 * 
 	 * @param index
 	 * @return the data from dataList in wanted index
@@ -101,9 +99,9 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.AddStudent, returnMsg.getMsg());
 		case UserNameExists:
 			setDataListByIndex(IndexList.UserNameExists, returnMsg.getMsg());
-		
 		case StudentCourse:
 			setDataListByIndex(IndexList.StudentCourse, returnMsg.getMsg());
+			return;
 		case parSetStudentComboBox:
 			setDataListByIndex(IndexList.parSetStudentComboBox, returnMsg.getMsg());
 		case avgOneStudent:
@@ -187,20 +185,30 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.classNameExists, returnMsg.getMsg());
 		case DefineClass:
 			setDataListByIndex(IndexList.DefineClass, returnMsg.getMsg());
-
-		
-			
-	
-
+		case setComboBoxTeacherCourse:
+			setDataListByIndex(IndexList.setComboBoxTeacherCourse, returnMsg.getMsg());
+		case createCourseEntity:
+			setDataListByIndex(IndexList.createCourseEntity, returnMsg.getMsg());	
+		case setTableViewTeacherCourseAssigenment:
+			setDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment, returnMsg.getMsg());		
+		case getWeeklyHours:
+			setDataListByIndex(IndexList.getWeeklyHours, returnMsg.getMsg());
+		case allAssForTeacher:
+			setDataListByIndex(IndexList.allAssForTeacher, returnMsg.getMsg());
+		case insertNewAss:
+			setDataListByIndex(IndexList.insertNewAss, returnMsg.getMsg());
 		case setComboBoxStudentCourse:
 			setDataListByIndex(IndexList.setComboBoxStudentCourse, returnMsg.getMsg());
 		case setTableViewStudentCourseAssigenment:
 			setDataListByIndex(IndexList.setTableViewStudentCourseAssigenment, returnMsg.getMsg());	
+		case DownoladFile:
+			setDataListByIndex(IndexList.DownloadFile, returnMsg.getMsg());
 		case ClassCourseDetails:
 			setDataListByIndex(IndexList.ClassCourseDetails, returnMsg.getMsg());
 		case UploadFile:
 			setDataListByIndex(IndexList.UploadFile, returnMsg.getMsg());
-	
+		case UpdateAss:
+			setDataListByIndex(IndexList.UpdateAss, returnMsg.getMsg());
 		case createReportEntity:
 			setDataListByIndex(IndexList.createReportEntity, returnMsg.getMsg());
 		case createTeacherEntity:
@@ -239,10 +247,9 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.PreReqList, returnMsg.getMsg());	
 		case RemovePreReq:
 			setDataListByIndex(IndexList.RemovePreReq, returnMsg.getMsg());	
-<<<<<<< HEAD
 		case CourseGradeList:
 			setDataListByIndex(IndexList.CourseGradeList, returnMsg.getMsg());	
-=======
+			
 		case StudentEvaluations:
 			setDataListByIndex(IndexList.StudentEvaluations, returnMsg.getMsg());
 		case DownloadAssigenment:
@@ -251,7 +258,6 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.DownloadStuEvaluation, returnMsg.getMsg());	
 		case DownloadStuGradeFile:
 			setDataListByIndex(IndexList.DownloadStuGradeFile, returnMsg.getMsg());	
->>>>>>> branch 'master' of git@github.com:shakedna1993/MAT.git
 			
 		
 			
