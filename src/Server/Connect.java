@@ -30,7 +30,7 @@ public class Connect {
 		}
 
 		try {
-			 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+""+DB+"","'"+username+"'" , password);
+			 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+""+DB+"?useSSL=false","'"+username+"'" , password);
 			
 
 		}

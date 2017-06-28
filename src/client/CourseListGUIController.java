@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sun.applet.Main;
@@ -39,7 +40,19 @@ public class CourseListGUIController implements Initializable {
 	@FXML
 	Label stuName;
 	@FXML
+	Label Hello;
+	@FXML
 	Button LogOut;
+	@FXML
+	ImageView Logo;
+	@FXML
+	ImageView BackGround;
+	@FXML
+	ImageView BackIcon;
+	@FXML
+	ImageView LogOutIcon;
+	@FXML
+	Label courseList;
 
 	@FXML
 	TableView<Course> table = new TableView<>();

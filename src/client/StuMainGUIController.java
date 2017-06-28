@@ -35,6 +35,10 @@ public class StuMainGUIController implements Initializable {
 	Button Avg;
 	@FXML
 	Button LogOut;
+	@FXML
+	ImageView LogOutIcon;
+	@FXML
+	ImageView BackGround;
 
 	@FXML
 	Label Hello;
@@ -89,6 +93,16 @@ public class StuMainGUIController implements Initializable {
 	public void AssignmentWin() {
 		try {
 			connectionmain.ShowAssOptions();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@FXML
+	public void EvaluationWin() {
+		try {
+			connectionmain.ShowEvaluationList();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -9,7 +9,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GradeListGUIController">
    <children>
-      <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="600.0" prefWidth="639.0">
+      <AnchorPane layoutX="4.0" layoutY="4.0" prefHeight="600.0" prefWidth="639.0">
          <children>
             <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
             <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">

@@ -30,7 +30,7 @@ public class Student extends User implements Serializable{
 	public Student(String name, String password, String userName, String id, String parentId, int isConnected, int role,
 			int blocked, float avg, String Classid) {
 		super(name, password, userName, id, isConnected, role, blocked);
-		Classid=this.Classid;
+		this.Classid=Classid;
 		ParentId = parentId;
 		this.avg = avg;
 		// TODO Auto-generated constructor stub
@@ -65,9 +65,10 @@ public class Student extends User implements Serializable{
 	public void setClassid(String classid) {
 		Classid = classid;
 	}
+	
 	@Override
 	public String toString() {
-		return "Student [ParentId=" + ParentId + ", avg=" + avg + "]";
+		return "Student [ParentId=" + ParentId + ", Classid=" + Classid + ", avg=" + avg + "]";
 	}
 	
 }
