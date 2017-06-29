@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -23,6 +24,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -194,7 +196,7 @@ public class TchMainGUIController implements Initializable {
 		for (int i = 0; i < b.size(); i++)
 			listview.getItems().add(b.get(i).getAssname());
 		listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
+		
 	}
 
 	public void editAss() throws IOException {
@@ -211,6 +213,7 @@ public class TchMainGUIController implements Initializable {
 
 	@SuppressWarnings("unchecked")
 	public void setComboBoxTeacherCourse(String id) {
+		
 		ArrayList<Assigenment> a1 = new ArrayList<Assigenment>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Course course = new Course();
@@ -234,8 +237,10 @@ public class TchMainGUIController implements Initializable {
 			course = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntity);
 			a2.add(course.getName());
 		}
-		ObservableList<String> list = FXCollections.observableArrayList(a2);
+	
+		ObservableList<String> list = FXCollections.observableArrayList(a2);	
 		STC.setItems(list);
+
 	}
 	
 	@SuppressWarnings("unchecked")
