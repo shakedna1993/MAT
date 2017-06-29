@@ -4,13 +4,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import entity.Assigenment;
 import entity.Course;
 import entity.Requests;
-import entity.Student;
 import entity.User;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,15 +15,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sun.applet.Main;
@@ -35,15 +29,14 @@ import thred.MyThread;
 
 public class NewRequestGUIController implements Initializable {
 
-	
 	private ArrayList<String> typeList;
 	private ArrayList<User> userList;
 	private Course selectedCourse;
 	private User selectedUser;
 	private entity.Class selectedClass = null;
-	private int typeIndex=0;
+	private int typeIndex = 0;
 	private Alert alert = new Alert(AlertType.WARNING);
-	
+
 	@FXML
 	private Label typeLabel;
 	@FXML
@@ -58,22 +51,22 @@ public class NewRequestGUIController implements Initializable {
 	private Label classLabel;
 
 	@FXML
-	private ComboBox typeCombo;
+	private ComboBox<String> typeCombo;
 	@FXML
-	private ComboBox userCombo;
+	private ComboBox<String> userCombo;
 	@FXML
-	private ComboBox courseCombo;
+	private ComboBox<String> courseCombo;
 	@FXML
-	private ComboBox classCombo;
-	
+	private ComboBox<String> classCombo;
+
 	@FXML
 	private TextArea descField;
-	
+
 	@FXML
 	private TextField searchField;
-	
+
 	@FXML
-	private TableView userListTable;
+	private TableView<?> userListTable;
 
 	@FXML
 	private Button search_button;
@@ -81,8 +74,6 @@ public class NewRequestGUIController implements Initializable {
 	private Button back_button;
 	@FXML
 	private Button submit_button;
-
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -98,36 +89,39 @@ public class NewRequestGUIController implements Initializable {
 
 		typeCombo.setItems(FXCollections.observableArrayList(typeList));
 	}
+
 	@FXML
 	private void typeCombo(ActionEvent event) throws Exception {
 		userCombo.setItems(null);
 		courseCombo.setItems(null);
-		for (int i=0; i<typeList.size(); i++){
-			if (typeList.get(i).equals(typeCombo.getValue())){
-				typeIndex=i+1;
+		for (int i = 0; i < typeList.size(); i++) {
+			if (typeList.get(i).equals(typeCombo.getValue())) {
+				typeIndex = i + 1;
 			}
-		}// 1 = Register Student, 2 = Remove Student from course, 3 = Teacher Appointment;
-		if (typeIndex == 0) return;
-		else populateUserCombo();
+		} // 1 = Register Student, 2 = Remove Student from course, 3 = Teacher
+			// Appointment;
+		if (typeIndex == 0)
+			return;
+		else
+			populateUserCombo();
 	}
-	
+
+	@SuppressWarnings({ "unchecked"})
 	private void populateUserCombo() {
 		userList = new ArrayList<User>();
 		int role;
-		if (typeIndex==3){
+		if (typeIndex == 3) {
 			userLabel.setText("Change Teacher:");
 			searchLabel.setText("Search Teacher By ID:");
 			courseLabel.setText("In Course:");
 			classLabel.setVisible(true);
 			classCombo.setVisible(true);
 			role = 3;
-		}
-		else {
+		} else {
 			if (typeIndex == 1) {
 				userLabel.setText("Register Student:");
 				courseLabel.setText("To Course:");
-			}
-			else {
+			} else {
 				userLabel.setText("Remove Student:");
 				courseLabel.setText("From Course:");
 			}
@@ -145,14 +139,16 @@ public class NewRequestGUIController implements Initializable {
 		}
 		userList = (ArrayList<User>) (MsgFromServer.getDataListByIndex(IndexList.getUsersByRole));
 		ArrayList<String> userStrList = new ArrayList<String>();
-		for (int i=0; i<userList.size(); i++){
+		for (int i = 0; i < userList.size(); i++) {
 			userStrList.add(userList.get(i).getId() + " - " + userList.get(i).getName());
 		}
 		userCombo.setItems(FXCollections.observableArrayList(userStrList));
 	}
+
 	@FXML
 	private void searchButton(ActionEvent event) throws Exception {
-		if (typeIndex==0) return;
+		if (typeIndex == 0)
+			return;
 		String searchValue = searchField.getText().replaceAll(" ", "");
 		MyThread a = new MyThread(RequestType.UserIdExists, IndexList.UserIdExists, searchValue);
 		a.start();
@@ -162,20 +158,25 @@ public class NewRequestGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 		boolean flag = (boolean) (MsgFromServer.getDataListByIndex(IndexList.UserIdExists));
-		if (flag){
-			for (int i=0; i<userList.size(); i++){
+		if (flag) {
+			for (int i = 0; i < userList.size(); i++) {
 				if (userList.get(i).getId().equals(searchValue)) {
 					selectedUser = userList.get(i);
 				}
 			}
-			if (selectedUser == null) return;
-			if (selectedUser.getRole() > 4 || selectedUser.getRole()<3) return;
-			if (selectedUser.getRole() == 4 && typeIndex == 3) return;
-			if (selectedUser.getRole() == 5 && typeIndex != 3) return;
+			if (selectedUser == null)
+				return;
+			if (selectedUser.getRole() > 4 || selectedUser.getRole() < 3)
+				return;
+			if (selectedUser.getRole() == 4 && typeIndex == 3)
+				return;
+			if (selectedUser.getRole() == 5 && typeIndex != 3)
+				return;
 			userCombo.setValue(selectedUser.getId() + " - " + selectedUser.getName());
 			userCombo(null);
 		}
 	}
+
 	@FXML
 	private void submitButton(ActionEvent event) throws Exception {
 		Requests r = new Requests();
@@ -188,8 +189,10 @@ public class NewRequestGUIController implements Initializable {
 		r.setStatus(0);
 		r.setReqType(typeIndex);
 		r.setRequestDescription(descField.getText());
-		if (selectedClass == null) r.setClassId(null);
-		else r.setClassId(selectedClass.getClassId());
+		if (selectedClass == null)
+			r.setClassId(null);
+		else
+			r.setClassId(selectedClass.getClassId());
 		MyThread a = new MyThread(RequestType.AddNewRequest, IndexList.AddNewRequest, r);
 		a.start();
 		try {
@@ -207,36 +210,44 @@ public class NewRequestGUIController implements Initializable {
 			connectionmain.showSecretaryMain();
 		}
 	}
+
 	@FXML
 	private void userCombo(ActionEvent event) throws Exception {
 		String str = (String) userCombo.getValue();
-		if (str == null) return;
+		if (str == null)
+			return;
 		User u = new User();
-		u.setId(str.substring(0,str.indexOf('-')-1));
-		for (int i=0; i<userList.size(); i++){
+		u.setId(str.substring(0, str.indexOf('-') - 1));
+		for (int i = 0; i < userList.size(); i++) {
 			if (userList.get(i).getId().equals(u.getId())) {
 				selectedUser = userList.get(i);
 			}
 		}
-		MyThread a = new MyThread(RequestType.getUserCoursesInCurrSemester, IndexList.getUserCoursesInCurrSemester, selectedUser);
+		MyThread a = new MyThread(RequestType.getUserCoursesInCurrSemester, IndexList.getUserCoursesInCurrSemester,
+				selectedUser);
 		a.start();
 		try {
 			a.join();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		ArrayList<Course> returnedCourseList = (ArrayList<Course>) (MsgFromServer.getDataListByIndex(IndexList.getUserCoursesInCurrSemester));
-		if (typeIndex == 1){
-			a = new MyThread(RequestType.getAllCoursesInCurrSemester, IndexList.getAllCoursesInCurrSemester, selectedUser);
+		@SuppressWarnings("unchecked")
+		ArrayList<Course> returnedCourseList = (ArrayList<Course>) (MsgFromServer
+				.getDataListByIndex(IndexList.getUserCoursesInCurrSemester));
+		if (typeIndex == 1) {
+			a = new MyThread(RequestType.getAllCoursesInCurrSemester, IndexList.getAllCoursesInCurrSemester,
+					selectedUser);
 			a.start();
 			try {
 				a.join();
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			ArrayList<Course> allCourseList = (ArrayList<Course>) (MsgFromServer.getDataListByIndex(IndexList.getAllCoursesInCurrSemester));
-			for (int i=0; i<returnedCourseList.size(); i++){
-				for (int j=0; j<allCourseList.size(); j++){
+			@SuppressWarnings("unchecked")
+			ArrayList<Course> allCourseList = (ArrayList<Course>) (MsgFromServer
+					.getDataListByIndex(IndexList.getAllCoursesInCurrSemester));
+			for (int i = 0; i < returnedCourseList.size(); i++) {
+				for (int j = 0; j < allCourseList.size(); j++) {
 					if (returnedCourseList.get(i).getCourseId().equals(allCourseList.get(j).getCourseId())) {
 						allCourseList.remove(j);
 						break;
@@ -245,44 +256,50 @@ public class NewRequestGUIController implements Initializable {
 			}
 			returnedCourseList = allCourseList;
 		}
-		
+
 		ArrayList<String> courseStrList = new ArrayList<String>();
-		for (int i=0; i<returnedCourseList.size(); i++){
+		for (int i = 0; i < returnedCourseList.size(); i++) {
 			courseStrList.add(returnedCourseList.get(i).getCourseId() + " - " + returnedCourseList.get(i).getName());
 		}
 		courseCombo.setItems(FXCollections.observableArrayList(courseStrList));
 	}
+
 	@FXML
 	private void courseCombo(ActionEvent event) throws Exception {
 		String str = (String) courseCombo.getValue();
 		selectedCourse = new Course();
-		selectedCourse.setCourseId(str.substring(0,str.indexOf('-')-1));
-		selectedCourse.setName(str.substring(str.indexOf('-')+2,str.length()));
-		if (typeIndex == 3){
+		selectedCourse.setCourseId(str.substring(0, str.indexOf('-') - 1));
+		selectedCourse.setName(str.substring(str.indexOf('-') + 2, str.length()));
+		if (typeIndex == 3) {
 			// par = {selectedUser, selectedCourse};
-			Object par[] = {selectedUser, selectedCourse};
-			MyThread a = new MyThread(RequestType.getClassListForTeacherInCourse, IndexList.getClassListForTeacherInCourse, par);
+			Object par[] = { selectedUser, selectedCourse };
+			MyThread a = new MyThread(RequestType.getClassListForTeacherInCourse,
+					IndexList.getClassListForTeacherInCourse, par);
 			a.start();
 			try {
 				a.join();
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			ArrayList<entity.Class> classList = (ArrayList<entity.Class>) (MsgFromServer.getDataListByIndex(IndexList.getClassListForTeacherInCourse));
+			@SuppressWarnings("unchecked")
+			ArrayList<entity.Class> classList = (ArrayList<entity.Class>) (MsgFromServer
+					.getDataListByIndex(IndexList.getClassListForTeacherInCourse));
 			ArrayList<String> classStrList = new ArrayList<String>();
-			for (int i=0; i<classList.size(); i++){
+			for (int i = 0; i < classList.size(); i++) {
 				classStrList.add(classList.get(i).getClassId() + " - " + classList.get(i).getName());
 			}
 			classCombo.setItems(FXCollections.observableArrayList(classStrList));
 		}
 	}
+
 	@FXML
 	private void classCombo(ActionEvent event) throws Exception {
 		String str = (String) classCombo.getValue();
 		selectedClass = new entity.Class();
-		selectedClass.setClassId(str.substring(0,str.indexOf('-')-1));
-		selectedClass.setName(str.substring(str.indexOf('-')+2,str.length()));
+		selectedClass.setClassId(str.substring(0, str.indexOf('-') - 1));
+		selectedClass.setName(str.substring(str.indexOf('-') + 2, str.length()));
 	}
+
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();

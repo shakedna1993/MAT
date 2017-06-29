@@ -1,6 +1,5 @@
 package client;
 
-import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +17,9 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
+/**
+ * This class is the controller for the Student main screen GUI.
+ */
 public class StuMainGUIController implements Initializable {
 
 	public static ClientConsole cli;
@@ -54,12 +56,18 @@ public class StuMainGUIController implements Initializable {
 	@FXML
 	ImageView Logo;
 
+	/**
+	 * initialize-initialize the student name.
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		stuName.setText(s.getName());
 	}
 
+	/**
+	 * This method gets the student average and display it. 
+	 */
 	@FXML
 	public void Avgset() {
 		String avg;
@@ -69,6 +77,9 @@ public class StuMainGUIController implements Initializable {
 		AvgC.setText(avg);
 	}
 
+	/**
+	 * This method shows list of courses the student learning 
+	 */
 	@FXML
 	public void CourseList() {
 		try {
@@ -79,6 +90,9 @@ public class StuMainGUIController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method shows the student grade list 
+	 */
 	@FXML
 	public void GradeList() {
 		try {
@@ -89,6 +103,9 @@ public class StuMainGUIController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method shows the Assignment window
+	 */
 	@FXML
 	public void AssignmentWin() {
 		try {
@@ -99,6 +116,9 @@ public class StuMainGUIController implements Initializable {
 		}
 	}
 	
+	/**
+	 * This method shows the Evaluation window
+	 */
 	@FXML
 	public void EvaluationWin() {
 		try {
@@ -109,6 +129,9 @@ public class StuMainGUIController implements Initializable {
 		}
 	}
 
+	/**
+	 * Logout from the server  
+	 */
 	@FXML
 	public void clsStudentMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,

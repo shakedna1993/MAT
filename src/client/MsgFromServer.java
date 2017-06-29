@@ -12,7 +12,8 @@ public class MsgFromServer {
 	public static ArrayList<Object> dataList = new ArrayList<>();
 
 	/**
-	 * This method creates new data list for all the info that returns from the server
+	 * This method creates new data list for all the info that returns from the
+	 * server
 	 */
 	public static void initiazlizeData() {
 		dataList = new ArrayList<>();
@@ -21,8 +22,10 @@ public class MsgFromServer {
 	/**
 	 * This method sets the data in the data list by int index to be obj value.
 	 * 
-	 * @param index where to insert data in list.
-	 * @param obj what data to insert/change.
+	 * @param index
+	 *            where to insert data in list.
+	 * @param obj
+	 *            what data to insert/change.
 	 */
 	public static void setDataListByIndex(int index, Object obj) {
 		while (index >= dataList.size())
@@ -52,7 +55,8 @@ public class MsgFromServer {
 	/**
 	 * This method sets the data in the data list by int index to be null.
 	 * 
-	 * @param index where to insert data in list.
+	 * @param index
+	 *            where to insert data in list.
 	 */
 	public static void deleteDataListByIndex(int index) {
 		if (index >= dataList.size())
@@ -148,7 +152,7 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.ApprovalRequest, returnMsg.getMsg());
 		case RejectRequest:
 			setDataListByIndex(IndexList.RejectRequest, returnMsg.getMsg());
-			
+
 		case getActiveClasses:
 			setDataListByIndex(IndexList.getActiveClasses, returnMsg.getMsg());
 		case getStudentInClass:
@@ -184,11 +188,11 @@ public class MsgFromServer {
 		case classNameExists:
 			setDataListByIndex(IndexList.classNameExists, returnMsg.getMsg());
 		case DefineClass:
-			setDataListByIndex(IndexList.DefineClass, returnMsg.getMsg());	
+			setDataListByIndex(IndexList.DefineClass, returnMsg.getMsg());
 		case setComboBoxStudentCourse:
 			setDataListByIndex(IndexList.setComboBoxStudentCourse, returnMsg.getMsg());
 		case setTableViewStudentCourseAssigenment:
-			setDataListByIndex(IndexList.setTableViewStudentCourseAssigenment, returnMsg.getMsg());	
+			setDataListByIndex(IndexList.setTableViewStudentCourseAssigenment, returnMsg.getMsg());
 		case DownoladFile:
 			setDataListByIndex(IndexList.DownloadFile, returnMsg.getMsg());
 		case ClassCourseDetails:
@@ -230,70 +234,62 @@ public class MsgFromServer {
 		case WeeklyHoursUpdate:
 			setDataListByIndex(IndexList.WeeklyHoursUpdate, returnMsg.getMsg());
 		case PreReqList:
-			setDataListByIndex(IndexList.PreReqList, returnMsg.getMsg());	
+			setDataListByIndex(IndexList.PreReqList, returnMsg.getMsg());
 		case RemovePreReq:
-			setDataListByIndex(IndexList.RemovePreReq, returnMsg.getMsg());	
+			setDataListByIndex(IndexList.RemovePreReq, returnMsg.getMsg());
 		case CourseGradeList:
-			setDataListByIndex(IndexList.CourseGradeList, returnMsg.getMsg());	
-			
+			setDataListByIndex(IndexList.CourseGradeList, returnMsg.getMsg());
+
 		case StudentEvaluations:
 			setDataListByIndex(IndexList.StudentEvaluations, returnMsg.getMsg());
 		case DownloadAssigenment:
 			setDataListByIndex(IndexList.DownloadAssigenment, returnMsg.getMsg());	
 		case DownloadStuEvaluation:
-			setDataListByIndex(IndexList.DownloadStuEvaluation, returnMsg.getMsg());	
+			setDataListByIndex(IndexList.DownloadStuEvaluation, returnMsg.getMsg());
 		case DownloadStuGradeFile:
-			setDataListByIndex(IndexList.DownloadStuGradeFile, returnMsg.getMsg());	
+			setDataListByIndex(IndexList.DownloadStuGradeFile, returnMsg.getMsg());
 
-		
 		case setComboBoxTeacherCourse:
 			setDataListByIndex(IndexList.setComboBoxTeacherCourse, returnMsg.getMsg());
 		case createCourseEntity:
-			setDataListByIndex(IndexList.createCourseEntity, returnMsg.getMsg());	
+			setDataListByIndex(IndexList.createCourseEntity, returnMsg.getMsg());
 		case setTableViewTeacherCourseAssigenment:
-			setDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment, returnMsg.getMsg());		
+			setDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment, returnMsg.getMsg());
 		case getWeeklyHours:
 			setDataListByIndex(IndexList.getWeeklyHours, returnMsg.getMsg());
 		case allAssForTeacher:
 			setDataListByIndex(IndexList.allAssForTeacher, returnMsg.getMsg());
 		case insertNewAss:
 			setDataListByIndex(IndexList.insertNewAss, returnMsg.getMsg());
-			
+
 		case UpdateAss:
 			setDataListByIndex(IndexList.UpdateAss, returnMsg.getMsg());
 
 		case uploadTeacherAss:
 			setDataListByIndex(IndexList.uploadTeacherAss, returnMsg.getMsg());
-			
-			
+
 		case allCourseForTeacher:
 			setDataListByIndex(IndexList.allCourseForTeacher, returnMsg.getMsg());
-			
+
 		case downloadStudentAssForTeacher:
 			setDataListByIndex(IndexList.downloadStudentAssForTeacher, returnMsg.getMsg());
-			
+
 		case createCourseEntityByName:
 			setDataListByIndex(IndexList.createCourseEntityByName, returnMsg.getMsg());
-		
+
 		case listOfStudentForAssCourse:
 			setDataListByIndex(IndexList.listOfStudentForAssCourse, returnMsg.getMsg());
-			
+
 		case downloadOneFileStud:
 			setDataListByIndex(IndexList.downloadOneFileStud, returnMsg.getMsg());
-			
+
 		case uploadEvaluation:
 			setDataListByIndex(IndexList.uploadEvaluation, returnMsg.getMsg());
 		case uploadGradeFile:
 			setDataListByIndex(IndexList.uploadGradeFile, returnMsg.getMsg());
 		case assCourseTeach:
 			setDataListByIndex(IndexList.assCourseTeach, returnMsg.getMsg());
-					
-		
-			
-			
-			
-			
-			
+
 		default:
 			break;
 		}

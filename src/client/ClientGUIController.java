@@ -21,9 +21,6 @@ public class ClientGUIController {
 	public static Stage primaryStage;
 
 	private ArrayList<CheckBox> ArrOp = new ArrayList<>();
-	private ArrayList<RequestType> request = new ArrayList<>();
-	private int ArrSelectedIndex;
-
 	@FXML
 	Button CloseServerBtn;
 	@FXML
@@ -100,7 +97,7 @@ public class ClientGUIController {
 	void closeBtn() {
 		if (ConnectToServerBtn.isDisable()) {
 			try {
-				cli.client.closeConnection();
+				ClientConsole.client.closeConnection();
 				cli.controller.addTextToLog("Communication with the server stopped");
 				ConnectToServerBtn.setDisable(false);
 			} catch (Exception ex) {
@@ -117,7 +114,7 @@ public class ClientGUIController {
 	void startServer() {
 		cli = new ClientConsole(IP_text.getText(), Integer.valueOf(PortText.getText()), this);
 		ConnectToServerBtn.setDisable(cli.isConectedFlag());
-		if (cli.client.isConnected()) {
+		if (ClientConsole.client.isConnected()) {
 			ConnectToServerBtn.setDisable(true);
 			cli.controller.addTextToLog("the server has connected");
 		}

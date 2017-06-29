@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -197,6 +196,9 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the window of Assignment options
+	 */
 	public static void ShowAssOptions() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/client/AssMainGUI.fxml"));

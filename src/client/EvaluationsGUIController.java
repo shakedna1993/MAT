@@ -3,14 +3,8 @@ package client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.ResourceBundle;
-
 import javax.swing.JFileChooser;
-
-import entity.Assigenment;
-import entity.Course;
-import entity.Evaluation;
 import entity.Studentass;
 import entity.User;
 import javafx.collections.FXCollections;
@@ -58,7 +52,7 @@ public class EvaluationsGUIController implements Initializable {
 	Button downGradeFile;
 	@FXML
 	Button chooseFolder;
-	
+
 	JFileChooser chooser = new JFileChooser();
 
 	@FXML
@@ -66,7 +60,7 @@ public class EvaluationsGUIController implements Initializable {
 
 	private ObservableList<Studentass> data;
 	static String filedir;
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -96,7 +90,8 @@ public class EvaluationsGUIController implements Initializable {
 		}
 
 		data = FXCollections.observableArrayList();
-		ArrayList<Studentass> b = (ArrayList<Studentass>) MsgFromServer.getDataListByIndex(IndexList.StudentEvaluations);
+		ArrayList<Studentass> b = (ArrayList<Studentass>) MsgFromServer
+				.getDataListByIndex(IndexList.StudentEvaluations);
 		for (int i = 0; i < b.size(); i++) {
 			data.add(b.get(i));
 		}
@@ -109,11 +104,9 @@ public class EvaluationsGUIController implements Initializable {
 		table.getColumns().addAll(c1, c2);
 		table.setItems(data);
 	}
-	
-	
+
 	public void DownloadAssigenmentEvaluation() {
-		if (table.getSelectionModel().getSelectedItem() == null)
-		{
+		if (table.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Wrong Choise");
 			alert.setHeaderText(null);
@@ -121,7 +114,7 @@ public class EvaluationsGUIController implements Initializable {
 			alert.show();
 			return;
 		}
-		Studentass ass= table.getSelectionModel().getSelectedItem();
+		Studentass ass = table.getSelectionModel().getSelectedItem();
 		ass.setFileid(filedir);
 
 		MyThread a = new MyThread(RequestType.DownloadStuEvaluation, IndexList.DownloadStuEvaluation, ass);
@@ -131,16 +124,14 @@ public class EvaluationsGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		if ((int)MsgFromServer.getDataListByIndex(IndexList.DownloadStuEvaluation) == 1)
-		{	
+		if ((int) MsgFromServer.getDataListByIndex(IndexList.DownloadStuEvaluation) == 1) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Success");
 			alert.setHeaderText(null);
 			alert.setContentText("Evaluation download successfull");
 			alert.show();
 			return;
-		}
-		else{	
+		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Fail");
 			alert.setHeaderText(null);
@@ -149,10 +140,9 @@ public class EvaluationsGUIController implements Initializable {
 			return;
 		}
 	}
-		
+
 	public void DownloadAssigenmentGradeFile() {
-		if (table.getSelectionModel().getSelectedItem() == null)
-		{
+		if (table.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Wrong Choise");
 			alert.setHeaderText(null);
@@ -160,7 +150,7 @@ public class EvaluationsGUIController implements Initializable {
 			alert.show();
 			return;
 		}
-		Studentass ass= table.getSelectionModel().getSelectedItem();
+		Studentass ass = table.getSelectionModel().getSelectedItem();
 		ass.setFileid(filedir);
 
 		MyThread a = new MyThread(RequestType.DownloadStuGradeFile, IndexList.DownloadStuGradeFile, ass);
@@ -170,16 +160,14 @@ public class EvaluationsGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		if ((int)MsgFromServer.getDataListByIndex(IndexList.DownloadStuGradeFile) == 1)
-		{	
+		if ((int) MsgFromServer.getDataListByIndex(IndexList.DownloadStuGradeFile) == 1) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Success");
 			alert.setHeaderText(null);
 			alert.setContentText("Grade File download successfull");
 			alert.show();
 			return;
-		}
-		else{	
+		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Fail");
 			alert.setHeaderText(null);
@@ -188,7 +176,6 @@ public class EvaluationsGUIController implements Initializable {
 			return;
 		}
 	}
-		
 
 	@FXML
 	public void clsEva() {
@@ -217,5 +204,5 @@ public class EvaluationsGUIController implements Initializable {
 		else if (a == 6)
 			connectionmain.showParentMain();
 	}
-	
+
 }

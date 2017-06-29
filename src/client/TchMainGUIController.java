@@ -1,6 +1,5 @@
 package client;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,23 +8,17 @@ import java.util.ResourceBundle;
 import entity.Assigenment;
 import entity.Course;
 import entity.Class;
-import entity.Teacher;
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import thred.IndexList;
@@ -75,17 +68,17 @@ public class TchMainGUIController implements Initializable {
 	@FXML
 	ImageView Logo;
 
-
 	@FXML
 	Button downAss;
 	static User s;
-	
+
 	ArrayList<Assigenment> b;
-	
+
 	static String assToChoose;
 	static int assId;
+
 	public void initialize(URL location, ResourceBundle resources) {
-	
+
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		TchName.setText(s.getName());
 		String id = s.getId();
@@ -93,19 +86,19 @@ public class TchMainGUIController implements Initializable {
 		String maxHours = Integer.toString(getWeeklyHours(id));
 		WeekHours.setText(maxHours);
 		int role;
-		role=((User) MsgFromServer.getDataListByIndex(IndexList.LOGIN)).getRole();
-		if(role==3)
+		role = ((User) MsgFromServer.getDataListByIndex(IndexList.LOGIN)).getRole();
+		if (role == 3)
 			Back.setDisable(true);
 
 		setComboBoxTeacherCourse(id);
 
 	}
-	
+
 	public void goToDownloadAssStudent() throws IOException {
 		if (listview.getSelectionModel().getSelectedItem() != null) {
 			assToChoose = listview.getSelectionModel().getSelectedItem();
-			for(int i = 0; i<b.size();i++){
-				if(b.get(i).getAssname().equals(assToChoose)){
+			for (int i = 0; i < b.size(); i++) {
+				if (b.get(i).getAssname().equals(assToChoose)) {
 					assId = b.get(i).getAssId();
 				}
 			}
@@ -131,29 +124,26 @@ public class TchMainGUIController implements Initializable {
 
 	@SuppressWarnings("unchecked")
 	public void setTableViewTeacherCourseAssigenment() {
-		
-		
 		listviewClass.getItems().clear();
 		ArrayList<Assigenment> ltd = new ArrayList<Assigenment>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Assigenment a = new Assigenment();
 		String courseName = STC.getValue();
 		a.setCoursename(courseName);
-		
-		MyThread C = new MyThread(RequestType.createCourseEntityByName, IndexList.createCourseEntityByName,courseName);
+
+		MyThread C = new MyThread(RequestType.createCourseEntityByName, IndexList.createCourseEntityByName, courseName);
 		C.start();
 		try {
 			C.join();
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		
-	Course	course = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntityByName);
-		
+
+		Course course = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntityByName);
+
 		ltd = (ArrayList<Assigenment>) MsgFromServer.getDataListByIndex(IndexList.setComboBoxTeacherCourse);
 
-		
-		MyThread B = new MyThread(RequestType.createClassEntity, IndexList.createClassEntity,null);
+		MyThread B = new MyThread(RequestType.createClassEntity, IndexList.createClassEntity, null);
 		B.start();
 		try {
 			B.join();
@@ -161,15 +151,15 @@ public class TchMainGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 		ArrayList<Class> class1 = (ArrayList<Class>) MsgFromServer.getDataListByIndex(IndexList.createClassEntity);
-		
+
 		for (int i = 0; i < ltd.size(); i++) {
-		if(	ltd.get(i).getCourseid().equals(course.getCourseId())){
-			for(int j = 0;j<class1.size();j++){
-				if(ltd.get(i).getClassid().equals(class1.get(j).getClassId())){
-					a2.add(class1.get(j).getName());
+			if (ltd.get(i).getCourseid().equals(course.getCourseId())) {
+				for (int j = 0; j < class1.size(); j++) {
+					if (ltd.get(i).getClassid().equals(class1.get(j).getClassId())) {
+						a2.add(class1.get(j).getName());
+					}
 				}
 			}
-		}
 		}
 		ObservableList<String> list = FXCollections.observableArrayList(a2);
 		listviewClass.setItems(list);
@@ -191,19 +181,17 @@ public class TchMainGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 
-	 b = (ArrayList<Assigenment>) MsgFromServer
-				.getDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment);
+		b = (ArrayList<Assigenment>) MsgFromServer.getDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment);
 		for (int i = 0; i < b.size(); i++)
 			listview.getItems().add(b.get(i).getAssname());
 		listview.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		
 	}
 
 	public void editAss() throws IOException {
 		if (listview.getSelectionModel().getSelectedItem() != null) {
 			assToChoose = listview.getSelectionModel().getSelectedItem();
-			for(int i = 0; i<b.size();i++){
-				if(b.get(i).getAssname().equals(assToChoose)){
+			for (int i = 0; i < b.size(); i++) {
+				if (b.get(i).getAssname().equals(assToChoose)) {
 					assId = b.get(i).getAssId();
 				}
 			}
@@ -213,7 +201,6 @@ public class TchMainGUIController implements Initializable {
 
 	@SuppressWarnings("unchecked")
 	public void setComboBoxTeacherCourse(String id) {
-		
 		ArrayList<Assigenment> a1 = new ArrayList<Assigenment>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Course course = new Course();
@@ -227,7 +214,8 @@ public class TchMainGUIController implements Initializable {
 		a1 = (ArrayList<Assigenment>) MsgFromServer.getDataListByIndex(IndexList.setComboBoxTeacherCourse);
 
 		for (int i = 0; i < a1.size(); i++) {
-			MyThread a = new MyThread(RequestType.createCourseEntity, IndexList.createCourseEntity, a1.get(i).getCourseid());
+			MyThread a = new MyThread(RequestType.createCourseEntity, IndexList.createCourseEntity,
+					a1.get(i).getCourseid());
 			a.start();
 			try {
 				a.join();
@@ -237,17 +225,14 @@ public class TchMainGUIController implements Initializable {
 			course = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntity);
 			a2.add(course.getName());
 		}
-	
-		ObservableList<String> list = FXCollections.observableArrayList(a2);	
+
+		ObservableList<String> list = FXCollections.observableArrayList(a2);
 		STC.setItems(list);
+	}
+
+	public void setComboBoxTeacherClass() {
 
 	}
-	
-	@SuppressWarnings("unchecked")
-	public void setComboBoxTeacherClass() {
-		
-	}
-	
 
 	@FXML
 	public void clsTeacherMain() {
@@ -265,12 +250,11 @@ public class TchMainGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
-	private void backButton(ActionEvent event) throws Exception{
+	private void backButton(ActionEvent event) throws Exception {
 		connectionmain.showTch_ManMain();
 	}
-	
 
 	@Override
 	public String toString() {

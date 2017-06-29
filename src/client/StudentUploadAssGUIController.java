@@ -1,14 +1,9 @@
 package client;
 
-import java.awt.Desktop;
 import java.io.File;
 //import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -16,8 +11,6 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import entity.User;
-import entity.Assigenment;
-import entity.Course;
 import entity.Studentass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import thred.IndexList;
 import thred.MyThread;
@@ -54,8 +46,6 @@ public class StudentUploadAssGUIController implements Initializable {
 	static int ass;
 	static Date duedate;
 
-	
-	
 	public void initialize(URL location, ResourceBundle resources) {
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		stuName.setText(s.getName());
@@ -69,26 +59,24 @@ public class StudentUploadAssGUIController implements Initializable {
 		int returnVal = chooser.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			filename.setText(chooser.getSelectedFile().getName());
-			fname=chooser.getSelectedFile().getName();
+			fname = chooser.getSelectedFile().getName();
 			Upload_Ass.setDisable(false);
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@FXML
-	public void UploadAss(){
-		try{
-			File f =new File(chooser.getSelectedFile().getPath());
-			Studentass SA=new Studentass(ass, s.getId(), crs, "", duedate, f, fname);
-			MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile,SA) ;
+	public void UploadAss() {
+		try {
+			File f = new File(chooser.getSelectedFile().getPath());
+			Studentass SA = new Studentass(ass, s.getId(), crs, "", duedate, f, fname);
+			MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile, SA);
 			try {
 				C.start();
 				C.join();
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			if ((int)MsgFromServer.getDataListByIndex(IndexList.UploadFile) == 1)
-			{	
+			if ((int) MsgFromServer.getDataListByIndex(IndexList.UploadFile) == 1) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Late Submission");
 				alert.setHeaderText(null);
@@ -96,9 +84,7 @@ public class StudentUploadAssGUIController implements Initializable {
 				alert.show();
 				connectionmain.ShowAssOptions();
 				return;
-			}
-			else if((int)MsgFromServer.getDataListByIndex(IndexList.UploadFile) == 0)
-			{	
+			} else if ((int) MsgFromServer.getDataListByIndex(IndexList.UploadFile) == 0) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Success");
 				alert.setHeaderText(null);
@@ -106,9 +92,7 @@ public class StudentUploadAssGUIController implements Initializable {
 				alert.show();
 				connectionmain.ShowAssOptions();
 				return;
-			}
-			else
-			{
+			} else {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Fail");
 				alert.setHeaderText(null);
@@ -116,16 +100,16 @@ public class StudentUploadAssGUIController implements Initializable {
 				alert.show();
 				return;
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void initVariable(String crs2, int tmp, Date tmp1){
-		crs=crs2;
-		ass=tmp;
-		duedate=tmp1;
-		
+	public static void initVariable(String crs2, int tmp, Date tmp1) {
+		crs = crs2;
+		ass = tmp;
+		duedate = tmp1;
+
 	}
 
 	@FXML
@@ -149,7 +133,5 @@ public class StudentUploadAssGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
-
 
 }

@@ -10,6 +10,10 @@ import java.io.Serializable;
  */
 public class Op implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2804063124113141674L;
 	Object msg;
 	RequestType op;
 

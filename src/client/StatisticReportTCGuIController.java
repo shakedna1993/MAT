@@ -7,15 +7,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-
 import entity.Class;
 import entity.Course;
-import entity.Reports;
 import entity.Semester;
 import entity.Student;
 import entity.Teacher;
 import entity.User;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,14 +22,10 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Series;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.util.Callback;
 import thred.IndexList;
 import thred.MyThread;
 import javafx.scene.control.TextField;
@@ -42,7 +35,7 @@ import javafx.scene.control.TextField;
  */
 public class StatisticReportTCGuIController implements Initializable {
 	@FXML
-	Label ManName, selecttec, choosenum,grade_label;
+	Label ManName, selecttec, choosenum, grade_label;
 	@FXML
 	ComboBox<String> STC;
 	@FXML
@@ -68,6 +61,9 @@ public class StatisticReportTCGuIController implements Initializable {
 
 	private ObservableList<String> classes = FXCollections.observableArrayList();
 
+	/**
+	 * initialize-initialize the Manager name.
+	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -76,6 +72,9 @@ public class StatisticReportTCGuIController implements Initializable {
 		setComboBoxChooseTec();
 	}
 
+	/**
+	 * This method Shows a list of the Teachers exist in the system.
+	 */
 	@SuppressWarnings("unchecked")
 	public void setComboBoxChooseTec() {
 		ArrayList<Teacher> a1 = new ArrayList<Teacher>();
@@ -96,14 +95,14 @@ public class StatisticReportTCGuIController implements Initializable {
 		STC.setItems(list);
 	}
 
+	/**
+	 * This method Shows a list of the Semesters exist in the system.
+	 */
 	@FXML
 	@SuppressWarnings("unchecked")
 	public void setComboBoxStartSem() {
-		Object st = STC.getValue();
-
 		ArrayList<Semester> a1 = new ArrayList<Semester>();
 		ArrayList<String> a2 = new ArrayList<String>();
-		ArrayList<Integer> a3 = new ArrayList<Integer>();
 		Semester sem = new Semester();
 		MyThread a = new MyThread(RequestType.createSemesterEntity, IndexList.createSemesterEntity, sem);
 		a.start();
@@ -125,11 +124,15 @@ public class StatisticReportTCGuIController implements Initializable {
 
 	}
 
+	/**
+	 * This method Shows a list of the Semesters after the semester selected
+	 * before that exist in the system.
+	 */
 	@FXML
 	@SuppressWarnings("unchecked")
 	public void setComboBoxEndSem() {
 		Object st = STC1.getValue();
-		if(st == null || STC1.getSelectionModel().getSelectedIndex() < 0)
+		if (st == null || STC1.getSelectionModel().getSelectedIndex() < 0)
 			return;
 		ArrayList<Semester> a1 = new ArrayList<Semester>();
 		ArrayList<String> a2 = new ArrayList<String>();
@@ -163,22 +166,19 @@ public class StatisticReportTCGuIController implements Initializable {
 	}
 
 	/**
-	 * This function gets the details needed for the report getting list of
-	 * classes the teacher assign to. remove class from semesters that not in
-	 * the range selected getting list of students and remove the students not
-	 * in one of the classes adding list of students to the class entity
+	 * This method gets the needed information for the report. The method shows
+	 * the grades of classes the teacher is teaching in the selected semesters.
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
 	@FXML
 	public void setDiagramInfo() {
-			
+
 		String tecname = (String) STC.getValue();
 		Object st = STC2.getValue();
 		Object st1 = STC1.getValue();
-		if(st == null || st1 == null || 
-				STC2.getSelectionModel().getSelectedIndex() < 0 || 
-				STC1.getSelectionModel().getSelectedIndex() < 0)
+		if (st == null || st1 == null || STC2.getSelectionModel().getSelectedIndex() < 0
+				|| STC1.getSelectionModel().getSelectedIndex() < 0)
 			return;
 		int ens = Integer.parseInt(st.toString());
 		int sts = Integer.parseInt(st1.toString());
@@ -310,12 +310,20 @@ public class StatisticReportTCGuIController implements Initializable {
 		setDiagram(a1, classgrade);
 	}
 
+	/**
+	 * This method clears the Graph.
+	 * 
+	 */
 	private void clearGraph() {
 		classes.clear();
 		diagram.getData().clear();
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	/**
+	 * This method Shows the Graph.
+	 * 
+	 */
+	@SuppressWarnings({})
 	public void setDiagram(ArrayList<Class> a1, ArrayList<Float> classgrade) {
 		clearGraph();
 		final CategoryAxis xAxis = new CategoryAxis();
@@ -347,11 +355,17 @@ public class StatisticReportTCGuIController implements Initializable {
 
 	}
 
+	/**
+	 * This method goes back to the last window that been shown
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		connectionmain.ShowReportSection();
 	}
 
+	/**
+	 * Logout from the server
+	 */
 	@FXML
 	public void clsReportTC() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,

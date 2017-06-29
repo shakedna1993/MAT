@@ -2,7 +2,6 @@ package client;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,10 +10,7 @@ import java.util.ResourceBundle;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.sun.xml.internal.ws.org.objectweb.asm.Label;
-
 import entity.Assigenment;
-import entity.Course;
 import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,11 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jdk.nashorn.internal.ir.Assignment;
@@ -36,7 +29,6 @@ import thred.IndexList;
 import thred.MyThread;
 
 public class newAssTeacher implements Initializable {
-
 
 	@FXML
 	Button ChooseFile;
@@ -51,8 +43,6 @@ public class newAssTeacher implements Initializable {
 	TextField description;
 	@FXML
 	javafx.scene.control.Label filename;
-	
-	
 
 	@FXML
 	TextField AssingmentnameTEXT;
@@ -73,7 +63,7 @@ public class newAssTeacher implements Initializable {
 	javafx.scene.control.Label tecName;
 
 	JFileChooser chooser = new JFileChooser();
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
@@ -82,21 +72,21 @@ public class newAssTeacher implements Initializable {
 		DaySubmissionTEXT.setText("");
 		month.setText("");
 		yearText.setText("");
-		
+
 	}
 
 	@FXML
 	public void OpenFolder() {
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls" , "txt", "png",
-				"docx");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls",
+				"txt", "png", "docx");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			filename.setText(chooser.getSelectedFile().getName());
-			sendBtn.setDisable(false);	
+			sendBtn.setDisable(false);
 		}
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void newAss() throws ParseException {
 		int flag = 0;
@@ -114,10 +104,9 @@ public class newAssTeacher implements Initializable {
 		ass.setPath(f.getAbsolutePath());
 		ass.setFileid(filename.getText());
 
-		
-	
-		
-		if (ass.getAssname().length() == 0 || ass.getCourseid().length() == 0 || DaySubmissionTEXT.getText().length()!=2 || month.getText().length()!=2 || yearText.getText().length()!=4 ){
+		if (ass.getAssname().length() == 0 || ass.getCourseid().length() == 0
+				|| DaySubmissionTEXT.getText().length() != 2 || month.getText().length() != 2
+				|| yearText.getText().length() != 4) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Empty Fields");
 			alert.setHeaderText(null);
@@ -125,22 +114,21 @@ public class newAssTeacher implements Initializable {
 			alert.show();
 			return;
 		}
-		String data =   ""+yearText.getText()+"-"+month.getText()+"-"+DaySubmissionTEXT.getText()+"";
+		String data = "" + yearText.getText() + "-" + month.getText() + "-" + DaySubmissionTEXT.getText() + "";
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date date = fmt.parse(data);
-		ass.setDueDate(date);    
+		ass.setDueDate(date);
 
+		// check if date empty
+		/*
+		 * if(DaySubmissionTEXT.getText().length()!=2 ||
+		 * month.getText().length()!=2 || yearText.getText().length()!=4 ){
+		 * Alert alert = new Alert(AlertType.WARNING); alert.setTitle(
+		 * "Empty Fields"); alert.setHeaderText(null); alert.setContentText(
+		 * "please enter for day 2 digit, for month 2 digit and for year 4 digit"
+		 * ); alert.show(); return; }
+		 */
 
-		//check if date empty
-/*	if(DaySubmissionTEXT.getText().length()!=2 || month.getText().length()!=2 || yearText.getText().length()!=4 ){
-		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Empty Fields");
-		alert.setHeaderText(null);
-		alert.setContentText("please enter for day 2 digit, for month 2 digit and for year 4 digit");
-		alert.show();
-		return;                      
-	} */
-		
 		MyThread C = new MyThread(RequestType.allCourseForTeacher, IndexList.allCourseForTeacher, s.getId());
 		C.start();
 		try {
@@ -149,24 +137,22 @@ public class newAssTeacher implements Initializable {
 			e1.printStackTrace();
 		}
 		a1 = (ArrayList<String>) MsgFromServer.getDataListByIndex(IndexList.allCourseForTeacher);
-		
-			Course c1 = new Course();
-			MyThread d = new MyThread(RequestType.allAssForTeacher, IndexList.allAssForTeacher, a1);
-			d.start();
-			try {
-				d.join();
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-			a2 =   (ArrayList<Assignment>) MsgFromServer.getDataListByIndex(IndexList.allAssForTeacher);
-			
-		
-	for (int i = 0; i < a1.size(); i++) {
+
+		MyThread d = new MyThread(RequestType.allAssForTeacher, IndexList.allAssForTeacher, a1);
+		d.start();
+		try {
+			d.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		a2 = (ArrayList<Assignment>) MsgFromServer.getDataListByIndex(IndexList.allAssForTeacher);
+
+		for (int i = 0; i < a1.size(); i++) {
 			if (ass.getCourseid().equals(a1.get(i))) {
 				flag = 1;
 			}
-	}
-		
+		}
+
 		if (flag == 0) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Empty Fields");
@@ -178,7 +164,8 @@ public class newAssTeacher implements Initializable {
 
 		flag = 0;
 		for (int i = 0; i < a2.size(); i++) {
-			if (ass.getCourseid().equals(((Assigenment) a2.get(i)).getCourseid()) &&  ass.getAssname().equals(((Assigenment) a2.get(i)).getAssname())  ) {
+			if (ass.getCourseid().equals(((Assigenment) a2.get(i)).getCourseid())
+					&& ass.getAssname().equals(((Assigenment) a2.get(i)).getAssname())) {
 				flag = 1;
 			}
 		}
@@ -191,8 +178,7 @@ public class newAssTeacher implements Initializable {
 			alert.show();
 			return;
 		}
-		
-		
+
 		MyThread B = new MyThread(RequestType.insertNewAss, IndexList.insertNewAss, ass);
 		B.start();
 		try {
@@ -219,8 +205,6 @@ public class newAssTeacher implements Initializable {
 
 	}
 
-	
-
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();
@@ -231,10 +215,5 @@ public class newAssTeacher implements Initializable {
 		primaryStage.setTitle("M.A.T- Secretary Connection");
 		primaryStage.show();
 	}
-
-
-
-
-
 
 }

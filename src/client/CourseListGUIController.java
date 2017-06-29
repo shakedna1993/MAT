@@ -11,29 +11,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
 
-
-
-
 /**
- * d
- * 
- *	
+ * This class is the controller for the Course list screen GUI.
  */
+
 public class CourseListGUIController implements Initializable {
 	@FXML
 	Button back;
@@ -59,13 +50,10 @@ public class CourseListGUIController implements Initializable {
 
 	private ObservableList<Course> data;
 
-	
-	
 	/**
-	 * d
-	 * 
-	 *	
+	 * initialize-initialize the student name, shows the course list.
 	 */
+	@SuppressWarnings("unchecked")
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -96,7 +84,6 @@ public class CourseListGUIController implements Initializable {
 		for (int i = 0; i < b.size(); i++)
 			data.add(b.get(i));
 
-
 		TableColumn<Course, String> c1 = new TableColumn<>("Course Id");
 		c1.setCellValueFactory(new PropertyValueFactory<>("courseId"));
 		TableColumn<Course, String> c2 = new TableColumn<>("Course Name");
@@ -108,6 +95,9 @@ public class CourseListGUIController implements Initializable {
 		table.setItems(data);
 	}
 
+	/**
+	 * Logout from the server  
+	 */
 	@FXML
 	public void clsCourseList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
@@ -125,6 +115,9 @@ public class CourseListGUIController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method goes back to the last window that been shown 
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		User s = new User();

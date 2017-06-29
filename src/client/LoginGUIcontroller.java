@@ -5,7 +5,6 @@ import java.io.IOException;
 import client.MsgFromServer;
 
 import client.RequestType;
-import entity.Teacher;
 import entity.User;
 import client.ClientConsole;
 import client.connectionmain;
@@ -18,7 +17,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -53,9 +51,12 @@ public class LoginGUIcontroller {
 	}
 
 	/**
-	 * This method check few things when member trying to login 1.if there are
+	 * This method check few things when user trying to login 1.if there are
 	 * Empty Fields 2.if the The username or password are wrong 3.if the
-	 * username is already connected 4.if The user is banned from the system
+	 * username is already connected 4.if The user is banned from the system The
+	 * proper window is opening according to the user role Role={1-Secretary,
+	 * 2-Manager, 3-Teacher, 4-Student, 5-System manager, 6- Parent, 7-
+	 * Manager&Teacher}
 	 * 
 	 * @throws IOException
 	 *             throw exception in any of the cases above
@@ -156,8 +157,13 @@ public class LoginGUIcontroller {
 			}
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText(null);
+			alert.setContentText("The serve seems to be offline, please try again later");
+
+			alert.show();
 		}
 		/*
 		 * try { Stage stage = (Stage) Logcancel.getScene().getWindow();

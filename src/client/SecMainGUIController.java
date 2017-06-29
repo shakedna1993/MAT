@@ -113,6 +113,7 @@ public class SecMainGUIController implements Initializable {
 		getRequests();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void getRequests() {
 		MyThread a = new MyThread(RequestType.getActiveRequests, IndexList.getActiveRequests, null);
 		a.start();
@@ -217,7 +218,5 @@ public class SecMainGUIController implements Initializable {
 			boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.OpenNewSemester));
 		}
 	}
-	
-	
 
 }

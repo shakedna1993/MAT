@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import entity.Course;
 import entity.Requests;
 import entity.Student;
 import entity.User;
@@ -20,22 +19,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
 public class ManMainGUIController implements Initializable {
 
+	/**
+	 * This class is the controller for the Manager main screen GUI.
+	 */
+
 	public static ClientConsole cli;
 	public static Stage primaryStage;
-	private ArrayList<Requests> req=new ArrayList<Requests>();
-	
-	
+	private ArrayList<Requests> req = new ArrayList<Requests>();
+
 	@FXML
 	private Label Reqs;
 	@FXML
@@ -64,14 +63,17 @@ public class ManMainGUIController implements Initializable {
 	private ListView<String> list = new ListView<String>();
 	@FXML
 	private TableView<Student> table = new TableView<>();
-	
-	private static Requests chooseRequests=new Requests();
-	private ObservableList<Student> data;
-	int num=0;
-	private String[] type={"Register Student to Course","Remove Student from Course","Change Teacher Appointment"};
 
-	
-	
+	private static Requests chooseRequests = new Requests();
+	private ObservableList<Student> data;
+	int num = 0;
+	private String[] type = { "Register Student to Course", "Remove Student from Course",
+			"Change Teacher Appointment" };
+
+	/**
+	 * initialize-initialize the manager gui details: name, list of parent,
+	 * request number.
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -79,8 +81,8 @@ public class ManMainGUIController implements Initializable {
 		studentParentInfo();
 		numReq.setText(Integer.toString(re()));
 		int role;
-		role=((User) MsgFromServer.getDataListByIndex(IndexList.LOGIN)).getRole();
-		if(role==2)
+		role = ((User) MsgFromServer.getDataListByIndex(IndexList.LOGIN)).getRole();
+		if (role == 2)
 			Back.setDisable(true);
 	}
 
@@ -94,7 +96,6 @@ public class ManMainGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 
-		@SuppressWarnings("unchecked")
 		ArrayList<Student> b = (ArrayList<Student>) MsgFromServer.getDataListByIndex(IndexList.StudentsList);
 		data = FXCollections.observableArrayList(b);
 
@@ -123,22 +124,21 @@ public class ManMainGUIController implements Initializable {
 		}
 		num = (int) (MsgFromServer.getDataListByIndex(IndexList.BlockParent));
 		boolean b = (boolean) MsgFromServer.getDataListByIndex(IndexList.BlockParent);
-		
-		if (b){
-	        Alert alert = new Alert(AlertType.INFORMATION);
-	        alert.setTitle("Success!");
-	        alert.setHeaderText(null);
-	        alert.setContentText("The selected parent is block successfully");
-	        alert.show();
-		}
-		else {
+
+		if (b) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Success!");
+			alert.setHeaderText(null);
+			alert.setContentText("The selected parent is block successfully");
+			alert.show();
+		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("WARNING");
 			alert.setHeaderText(null);
 			alert.setContentText("Not completed successfully");
 			alert.show();
 		}
-		
+
 	}
 
 	@FXML
@@ -153,14 +153,13 @@ public class ManMainGUIController implements Initializable {
 		}
 		num = (int) (MsgFromServer.getDataListByIndex(IndexList.unBlockParent));
 		boolean b = (boolean) MsgFromServer.getDataListByIndex(IndexList.unBlockParent);
-		if (b){
-	        Alert alert = new Alert(AlertType.INFORMATION);
-	        alert.setTitle("Success!");
-	        alert.setHeaderText(null);
-	        alert.setContentText("Successfully unblocked");
-	        alert.show();
-		}
-		else {
+		if (b) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Success!");
+			alert.setHeaderText(null);
+			alert.setContentText("Successfully unblocked");
+			alert.show();
+		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("WARNING");
 			alert.setHeaderText(null);
@@ -168,12 +167,11 @@ public class ManMainGUIController implements Initializable {
 			alert.show();
 		}
 	}
-	
-	
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	private int re() {
-		int count=0;
+		int count = 0;
 		MyThread a = new MyThread(RequestType.RequestsInfo, IndexList.RequestsInfo);
 		a.start();
 		try {
@@ -182,17 +180,16 @@ public class ManMainGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 
-		req= (ArrayList<Requests>) MsgFromServer.getDataListByIndex(IndexList.RequestsInfo);
-		ArrayList<String> S=new ArrayList<String>();
-		for (int i = 0; i < req.size(); i++)
-		{
-			if(req.get(i).getStatus()==0)
-			{
-				String typeString=new String();
+		req = (ArrayList<Requests>) MsgFromServer.getDataListByIndex(IndexList.RequestsInfo);
+		ArrayList<String> S = new ArrayList<String>();
+		for (int i = 0; i < req.size(); i++) {
+			if (req.get(i).getStatus() == 0) {
+				String typeString = new String();
 
-				typeString=type[req.get(i).getReqType()-1];
+				typeString = type[req.get(i).getReqType() - 1];
 
-				MyThread b = new MyThread(RequestType.getUserDetailsById, IndexList.getUserDetailsById,req.get(i).getUserId());
+				MyThread b = new MyThread(RequestType.getUserDetailsById, IndexList.getUserDetailsById,
+						req.get(i).getUserId());
 				b.start();
 				try {
 					b.join();
@@ -202,10 +199,10 @@ public class ManMainGUIController implements Initializable {
 
 				User u = (User) MsgFromServer.getDataListByIndex(IndexList.getUserDetailsById);
 
-				typeString=typeString+" - "+u.getName();
+				typeString = typeString + " - " + u.getName();
 
 				S.add(typeString);
-				
+
 				count++;
 			}
 		}
@@ -213,20 +210,15 @@ public class ManMainGUIController implements Initializable {
 		list.setItems((ObservableList<String>) FXCollections.observableArrayList(S));
 		return count;
 	}
-	
-	
-	
-	
-	
-	
+
 	@FXML
 	private void chooseReq() {
-		String Selected=list.getSelectionModel().getSelectedItem();
+		String Selected = list.getSelectionModel().getSelectedItem();
 		int i;
-		boolean flag=false;
-		for (i = 0; i < req.size(); i++)
-		{
-			MyThread b = new MyThread(RequestType.getUserDetailsById, IndexList.getUserDetailsById,req.get(i).getUserId());
+		boolean flag = false;
+		for (i = 0; i < req.size(); i++) {
+			MyThread b = new MyThread(RequestType.getUserDetailsById, IndexList.getUserDetailsById,
+					req.get(i).getUserId());
 			b.start();
 			try {
 				b.join();
@@ -235,35 +227,39 @@ public class ManMainGUIController implements Initializable {
 			}
 			User u = (User) MsgFromServer.getDataListByIndex(IndexList.getUserDetailsById);
 
-			if (Selected.contains(u.getName())&&Selected.contains(type[req.get(i).getReqType()-1]))
-			{
-				flag=true;
+			if (Selected.contains(u.getName()) && Selected.contains(type[req.get(i).getReqType() - 1])) {
+				flag = true;
 				break;
-			}	
+			}
 		}
-		if (flag==true)
-		{
+		if (flag == true) {
 			setChooseRequests(req.get(i));
-			try {connectionmain.showRequests();}
-			catch (IOException e){e.printStackTrace();}
-		}
-		else{
-				Alert alert = new Alert(AlertType.WARNING);
-				alert.setTitle("WARNING");
-				alert.setHeaderText(null);
-				alert.setContentText("Oops something went wrong");
-				alert.show();
+			try {
+				connectionmain.showRequests();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("WARNING");
+			alert.setHeaderText(null);
+			alert.setContentText("Oops something went wrong");
+			alert.show();
 		}
 	}
-	
-	
+
+	/**
+	 * This method goes back to the last window that been shown
+	 */
+
 	@FXML
-	private void backButton(ActionEvent event) throws Exception{
+	private void backButton(ActionEvent event) throws Exception {
 		connectionmain.showTch_ManMain();
 	}
-	
-	
-	
+
+	/**
+	 * This method open the reports window
+	 */
 	@FXML
 	public void GenrateReports() {
 		try {
@@ -273,7 +269,10 @@ public class ManMainGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * Logout from the server
+	 */
 	@FXML
 	public void clsManagerMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
@@ -293,17 +292,14 @@ public class ManMainGUIController implements Initializable {
 
 	@Override
 	public String toString() {
-		return "ManMainGUIController [ Reqs=" + Reqs + ", BlockLabel="
-				+ BlockLabel + ", Ins_PID=" + Ins_PID + ", ManName=" + ManName + ", CheckReq=" + CheckReq + ", OpenReq="
-				+ OpenReq + ", GenRep=" + GenRep + ", UnBlock=" + UnBlock + ", Block=" + Block + ", Back=" + Back
-				+ ", LogOut=" + LogOut + "]";
+		return "ManMainGUIController [ Reqs=" + Reqs + ", BlockLabel=" + BlockLabel + ", Ins_PID=" + Ins_PID
+				+ ", ManName=" + ManName + ", CheckReq=" + CheckReq + ", OpenReq=" + OpenReq + ", GenRep=" + GenRep
+				+ ", UnBlock=" + UnBlock + ", Block=" + Block + ", Back=" + Back + ", LogOut=" + LogOut + "]";
 	}
-
 
 	public static Requests getChooseRequests() {
 		return chooseRequests;
 	}
-
 
 	@SuppressWarnings("static-access")
 	public void setChooseRequests(Requests chooseRequests) {

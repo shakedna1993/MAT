@@ -4,11 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import entity.Assigenment;
-import entity.Course;
 import entity.Student;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +29,6 @@ import thred.MyThread;
 
 public class EditClassGUIController implements Initializable {
 
-	
 	private ArrayList<entity.Class> classList;
 	@FXML
 	private Label classIDLabel;
@@ -46,22 +42,22 @@ public class EditClassGUIController implements Initializable {
 	private Label studentListLabel;
 	@FXML
 	private Label studentListLabel2;
-	
+
 	@FXML
-	private ComboBox idCombo;
+	private ComboBox<String> idCombo;
 	@FXML
-	private ComboBox nameCombo;
-	
+	private ComboBox<String> nameCombo;
+
 	@FXML
 	private TextField numField;
 	@FXML
 	private TextField maxField;
-	
+
 	@FXML
-	private TableView studentListTable;
+	private TableView<Student> studentListTable;
 	@FXML
-	private TableView studentListTable2;
-	
+	private TableView<Student> studentListTable2;
+
 	@FXML
 	private Button back_button;
 	@FXML
@@ -70,14 +66,13 @@ public class EditClassGUIController implements Initializable {
 	private Button remove_button;
 	@FXML
 	private Button deleteClass_button;
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		getClasslessStudents();
 		fillComboBox();
 		entity.Class c = DefineNewClassGUIController.getTempClass();
-		if (c!=null){
+		if (c != null) {
 			idCombo.setValue(c.getClassId());
 			nameCombo.setValue(c.getName());
 			try {
@@ -89,9 +84,11 @@ public class EditClassGUIController implements Initializable {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void getClasslessStudents() {
 		ArrayList<Student> studentList = getStudentList(null);
-		if (studentList == null) return;
+		if (studentList == null)
+			return;
 		studentListTable2.getColumns().clear();
 
 		TableColumn<Student, String> c1 = new TableColumn<>("ID");
@@ -104,15 +101,16 @@ public class EditClassGUIController implements Initializable {
 		studentListTable2.setItems(FXCollections.observableArrayList(studentList));
 	}
 
-	
 	@FXML
-	private void deleteClass(){
-		Alert alert = new Alert(AlertType.CONFIRMATION, "This will delete the class.\nIt will remove the class from the DB along with the courses the class is registered to, as well as all the courses the students are registered to(of this class).\nAre you sure you want to delete the class?", ButtonType.YES, ButtonType.NO);
+	private void deleteClass() {
+		Alert alert = new Alert(AlertType.CONFIRMATION,
+				"This will delete the class.\nIt will remove the class from the DB along with the courses the class is registered to, as well as all the courses the students are registered to(of this class).\nAre you sure you want to delete the class?",
+				ButtonType.YES, ButtonType.NO);
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.YES) {
 			entity.Class c = new entity.Class();
-			for (int i = 0; i<classList.size(); i++){
-				if (idCombo.getValue().equals(classList.get(i).getClassId())){
+			for (int i = 0; i < classList.size(); i++) {
+				if (idCombo.getValue().equals(classList.get(i).getClassId())) {
 					c = classList.get(i);
 					MyThread a = new MyThread(RequestType.DeleteClass, IndexList.DeleteClass, c);
 					a.start();
@@ -121,11 +119,11 @@ public class EditClassGUIController implements Initializable {
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
-			
+
 					boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.DeleteClass));
 					if (b) {
 						getClasslessStudents();
-						//initialize(null, null);
+						// initialize(null, null);
 						studentListTable.setItems(null);
 						numField.setText("");
 						maxField.setText("");
@@ -134,6 +132,8 @@ public class EditClassGUIController implements Initializable {
 			}
 		}
 	}
+
+	@SuppressWarnings("unchecked")
 	private void fillComboBox() {
 		MyThread a = new MyThread(RequestType.getActiveClasses, IndexList.getActiveClasses, null);
 		a.start();
@@ -144,7 +144,8 @@ public class EditClassGUIController implements Initializable {
 		}
 
 		classList = (ArrayList<entity.Class>) (MsgFromServer.getDataListByIndex(IndexList.getActiveClasses));
-		if (classList == null) return;
+		if (classList == null)
+			return;
 		ArrayList<String> idList = new ArrayList<String>();
 		ArrayList<String> nameList = new ArrayList<String>();
 		for (int i = 0; i < classList.size(); i++) {
@@ -156,19 +157,21 @@ public class EditClassGUIController implements Initializable {
 		nameCombo.setItems(FXCollections.observableArrayList(nameList));
 	}
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	private void selectByID(ActionEvent e) throws Exception {
 
 		entity.Class c = new entity.Class();
-		for (int i = 0; i<classList.size(); i++){
-			if (idCombo.getValue().equals(classList.get(i).getClassId())){
+		for (int i = 0; i < classList.size(); i++) {
+			if (idCombo.getValue().equals(classList.get(i).getClassId())) {
 				c = classList.get(i);
 
 				nameCombo.setValue(c.getName());
-				maxField.setText(""+c.getMAXStudent());
+				maxField.setText("" + c.getMAXStudent());
 				ArrayList<Student> studentList = getStudentList(c.getClassId());
-				if (studentList == null) return;
-				numField.setText(""+studentList.size());
+				if (studentList == null)
+					return;
+				numField.setText("" + studentList.size());
 				studentListTable.getColumns().clear();
 
 				TableColumn<Student, String> c1 = new TableColumn<>("ID");
@@ -179,7 +182,6 @@ public class EditClassGUIController implements Initializable {
 				c3.setCellValueFactory(new PropertyValueFactory<>("ParentId"));
 				TableColumn<Student, String> c4 = new TableColumn<>("avg");
 				c4.setCellValueFactory(new PropertyValueFactory<>("avg"));
-				
 
 				studentListTable.getColumns().addAll(c1, c2, c3, c4);
 				studentListTable.setItems(FXCollections.observableArrayList(studentList));
@@ -187,21 +189,24 @@ public class EditClassGUIController implements Initializable {
 				break;
 			}
 		}
-		
+
 	}
+
+	@SuppressWarnings("unchecked")
 	@FXML
 	private void selectByName(ActionEvent e) throws Exception {
 
 		entity.Class c = new entity.Class();
-		for (int i = 0; i<classList.size(); i++){
-			if (nameCombo.getValue().equals(classList.get(i).getName())){
+		for (int i = 0; i < classList.size(); i++) {
+			if (nameCombo.getValue().equals(classList.get(i).getName())) {
 				c = classList.get(i);
 
 				idCombo.setValue(c.getClassId());
-				maxField.setText(""+c.getMAXStudent());
+				maxField.setText("" + c.getMAXStudent());
 				ArrayList<Student> studentList = getStudentList(c.getClassId());
-				if (studentList == null) return;
-				numField.setText(""+studentList.size());
+				if (studentList == null)
+					return;
+				numField.setText("" + studentList.size());
 				studentListTable.getColumns().clear();
 
 				TableColumn<Student, String> c1 = new TableColumn<>("ID");
@@ -212,7 +217,6 @@ public class EditClassGUIController implements Initializable {
 				c3.setCellValueFactory(new PropertyValueFactory<>("ParentId"));
 				TableColumn<Student, String> c4 = new TableColumn<>("avg");
 				c4.setCellValueFactory(new PropertyValueFactory<>("avg"));
-				
 
 				studentListTable.getColumns().addAll(c1, c2, c3, c4);
 				studentListTable.setItems(FXCollections.observableArrayList(studentList));
@@ -220,11 +224,12 @@ public class EditClassGUIController implements Initializable {
 				break;
 			}
 		}
-		
+
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	private ArrayList<Student> getStudentList(String classId) {
-		if (classId == null){
+		if (classId == null) {
 			MyThread a = new MyThread(RequestType.getStudentInNoClass, IndexList.getStudentInNoClass, classId);
 			a.start();
 			try {
@@ -232,10 +237,9 @@ public class EditClassGUIController implements Initializable {
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-	
+
 			return (ArrayList<Student>) (MsgFromServer.getDataListByIndex(IndexList.getStudentInNoClass));
-		}
-		else {
+		} else {
 			MyThread a = new MyThread(RequestType.getStudentInClass, IndexList.getStudentInClass, classId);
 			a.start();
 			try {
@@ -243,16 +247,16 @@ public class EditClassGUIController implements Initializable {
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-	
+
 			return (ArrayList<Student>) (MsgFromServer.getDataListByIndex(IndexList.getStudentInClass));
 		}
 	}
-	
+
 	@FXML
-	private void updateMax(ActionEvent event) throws Exception{
+	private void updateMax(ActionEvent event) throws Exception {
 		int newMax = Integer.parseInt(maxField.getText());
 		String cid = (String) idCombo.getValue();
-		Object par[] = {cid,newMax};
+		Object par[] = { cid, newMax };
 		MyThread a = new MyThread(RequestType.UpdateMaxStudents, IndexList.UpdateMaxStudents, par);
 		a.start();
 		try {
@@ -260,23 +264,23 @@ public class EditClassGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		if ((boolean)MsgFromServer.getDataListByIndex(IndexList.UpdateMaxStudents)) {
+		if ((boolean) MsgFromServer.getDataListByIndex(IndexList.UpdateMaxStudents)) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Success!");
 			alert.setHeaderText(null);
 			alert.setContentText("Max student number updated");
 			alert.show();
-			for (entity.Class c: classList){
-				if (c.getClassId().equals(cid)){
+			for (entity.Class c : classList) {
+				if (c.getClassId().equals(cid)) {
 					c.setMAXStudent(newMax);
 				}
 			}
 		}
 	}
-	
+
 	@FXML
 	private void addButton(ActionEvent event) throws Exception {
-		if (studentListTable2.getSelectionModel().getSelectedItem()==null) {
+		if (studentListTable2.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Null selection");
 			alert.setHeaderText(null);
@@ -285,7 +289,7 @@ public class EditClassGUIController implements Initializable {
 			alert.show();
 			return;
 		}
-		String sid = ""+((Student)studentListTable2.getSelectionModel().getSelectedItem()).getId();
+		String sid = "" + ((Student) studentListTable2.getSelectionModel().getSelectedItem()).getId();
 		if (idCombo.getValue().equals("Select Class by ID")) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("No class selected");
@@ -295,7 +299,7 @@ public class EditClassGUIController implements Initializable {
 			alert.show();
 			return;
 		}
-		if (Integer.parseInt(maxField.getText()) <= Integer.parseInt(numField.getText())){
+		if (Integer.parseInt(maxField.getText()) <= Integer.parseInt(numField.getText())) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Class Full!");
 			alert.setHeaderText(null);
@@ -305,7 +309,7 @@ public class EditClassGUIController implements Initializable {
 			return;
 		}
 		String cid = (String) idCombo.getValue();
-		String par[] = {sid,cid};
+		String par[] = { sid, cid };
 		MyThread a = new MyThread(RequestType.AddStudentToClass, IndexList.AddStudentToClass, par);
 		a.start();
 		try {
@@ -313,17 +317,17 @@ public class EditClassGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		if ((boolean)MsgFromServer.getDataListByIndex(IndexList.AddStudentToClass)) {
+		if ((boolean) MsgFromServer.getDataListByIndex(IndexList.AddStudentToClass)) {
 			selectByID(null);
 			getClasslessStudents();
 		}
 	}
-	
+
 	@FXML
 	private void removeButton(ActionEvent event) throws Exception {
-		String sid = ""+((Student)studentListTable.getSelectionModel().getSelectedItem()).getId();
-		String cid = ""+((Student)studentListTable.getSelectionModel().getSelectedItem()).getClassid();
-		String par[] = {sid,cid};
+		String sid = "" + ((Student) studentListTable.getSelectionModel().getSelectedItem()).getId();
+		String cid = "" + ((Student) studentListTable.getSelectionModel().getSelectedItem()).getClassid();
+		String par[] = { sid, cid };
 		MyThread a = new MyThread(RequestType.RemoveStudentFromClass, IndexList.RemoveStudentFromClass, par);
 		a.start();
 		try {
@@ -331,12 +335,12 @@ public class EditClassGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		if ((boolean)MsgFromServer.getDataListByIndex(IndexList.RemoveStudentFromClass)) {
+		if ((boolean) MsgFromServer.getDataListByIndex(IndexList.RemoveStudentFromClass)) {
 			selectByID(null);
 			getClasslessStudents();
 		}
 	}
-	
+
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();
