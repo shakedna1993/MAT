@@ -35,7 +35,9 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
-
+/**
+ * This class is the controller for upload (Evaluation & grade file) and download assigenments.
+ */
 public class teacherDownloadAssStud implements Initializable {
 
 	@FXML
@@ -72,6 +74,10 @@ public class teacherDownloadAssStud implements Initializable {
 	JFileChooser chooser2 = new JFileChooser();
 	private ObservableList<Assigenment> data;
 
+	
+	/**
+	 * initialize-initialize the teacher name, course name,  assignment name and students who submitted the assignment.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -122,9 +128,12 @@ public class teacherDownloadAssStud implements Initializable {
 
 		tabelList.getColumns().addAll(c1, c2, c3);
 		tabelList.setItems(data);
-
 	}
 
+	
+	/**
+	 * This method download solutions  from student in class 
+	 */
 	public void downloadOneStudAss() {
 		if (tabelList.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -163,22 +172,33 @@ public class teacherDownloadAssStud implements Initializable {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Download assignments");
 				alert.setHeaderText(null);
-				alert.setContentText("ALL assigenments class are download");
+				alert.setContentText("The assignment are download");
 				alert.show();
 				return;
 			} else {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Download assignments");
 				alert.setHeaderText(null);
-				alert.setContentText("Someting wrong");
+				alert.setContentText("Something went wrong, please try again");
 				alert.show();
 				return;
 			}
 		}
 	}
 
+	
+	/**
+	 * This method download all student solutions to a specific assigenment
+	 */
 	public void downloadAss() {
-
+if(data.size()==0){
+	Alert alert = new Alert(AlertType.ERROR);
+	alert.setTitle("Download assignments");
+	alert.setHeaderText(null);
+	alert.setContentText("No assignments to download ");
+	alert.show();
+	return;
+}
 		Assigenment ass = new Assigenment();
 		ass.setAssId(TchMainGUIController.assId);
 		ass.setCoursename(courseTxt.getText());
@@ -220,13 +240,17 @@ public class teacherDownloadAssStud implements Initializable {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Download assignments");
 			alert.setHeaderText(null);
-			alert.setContentText("Someting wrong");
+			alert.setContentText("Something went wrong, please try again");
 			alert.show();
 			return;
 		}
 
 	}
 
+	
+	/**
+	 * Back to the last window  
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();
@@ -238,6 +262,10 @@ public class teacherDownloadAssStud implements Initializable {
 		primaryStage.show();
 	}
 
+	
+	/**
+	 * This method teacher choose file to send
+	 */
 	public void OpenFolder() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls",
 				"txt", "png", "docx");
@@ -250,12 +278,16 @@ public class teacherDownloadAssStud implements Initializable {
 		}
 	}
 
+	
+	/**
+	 * This method teacher upload evaluation to student
+	 */
 	public void upEvaluation() {
 		if (tabelList.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Download assignments");
 			alert.setHeaderText(null);
-			alert.setContentText("choose student");
+			alert.setContentText("Choose student");
 			alert.show();
 			return;
 		} else {
@@ -283,16 +315,16 @@ public class teacherDownloadAssStud implements Initializable {
 			int flag = (int) MsgFromServer.getDataListByIndex(IndexList.uploadEvaluation);
 			if (flag == 1) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("upload evaluatin");
+				alert.setTitle("Upload Evaluatin");
 				alert.setHeaderText(null);
-				alert.setContentText("upload successful");
+				alert.setContentText("Upload successful");
 				alert.show();
 				return;
 			} else {
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Download assignments");
+				alert.setTitle("Upload Evaluatin");
 				alert.setHeaderText(null);
-				alert.setContentText("Someting wrong");
+				alert.setContentText("Something went wrong, please try again");
 				alert.show();
 				return;
 			}
@@ -300,12 +332,17 @@ public class teacherDownloadAssStud implements Initializable {
 		}
 	}
 
+	
+	
+	/**
+	 * This method teacher upload grade file to student
+	 */
 	public void upgradeFile() {
 		if (tabelList.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("upload grade file");
+			alert.setTitle("Upload grade file");
 			alert.setHeaderText(null);
-			alert.setContentText("choose student");
+			alert.setContentText("Choose student");
 			alert.show();
 			return;
 		} else {
@@ -332,16 +369,16 @@ public class teacherDownloadAssStud implements Initializable {
 			int flag = (int) MsgFromServer.getDataListByIndex(IndexList.uploadGradeFile);
 			if (flag == 1) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("upload grade file");
+				alert.setTitle("Upload grade file");
 				alert.setHeaderText(null);
-				alert.setContentText("upload successful");
+				alert.setContentText("Upload successful");
 				alert.show();
 				return;
 			} else {
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("upload grade file");
+				alert.setTitle("Upload grade file");
 				alert.setHeaderText(null);
-				alert.setContentText("Someting wrong");
+				alert.setContentText("Something went wrong, please try again");
 				alert.show();
 				return;
 			}

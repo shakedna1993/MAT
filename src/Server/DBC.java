@@ -2668,39 +2668,57 @@ public class DBC {
 		return null;
 	}
 
-	public static ArrayList<Assigenment> setComboBoxTeacherCourse(String id) {
-		ArrayList<Assigenment> al = new ArrayList<Assigenment>();
+	
+	/**
+	 * This method will search all courses for specific teacher in
+	 * the DB
+	 * 
+	 * @param id-will
+	 *            hold the id number of the teacher that we search course for
+	 * @return return list of courses id thet the teacher teach.
+	 */
+	public static ArrayList<String>	setComboBoxTeacherCourse(String id){
+		ArrayList<String> al = new ArrayList<String>();
 		Assigenment ass;
-
+	
 		Statement stmt;
 		try {
 			Connection conn = Connect.getConnection();
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM moodle.classcourse where tid='" + id + "'");
+			ResultSet rs = stmt.executeQuery(
+				"	SELECT distinct (moodle.classcourse.courseid)   FROM moodle.classcourse where tid='"+id+"'"  );
 			while (rs.next()) {
 				// Print out the values
-				ass = new Assigenment();
+			
 				try {
-					ass.setCourseid(rs.getString(1));
-					ass.setClassid(rs.getString(2));
-					ass.setTeacherid(rs.getString(3));
-					ass.setSemester(rs.getString(4));
-					al.add(ass);
-				} catch (Exception e) {
-
+				
+					al.add(rs.getString(1));
+				}
+				catch (Exception e) {
+		
 					e.printStackTrace();
 				}
 			}
 			rs.close();
 			Connect.close();
 			return al;
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return al;
 	}
 
+	
+	
+	/**
+	 * This method will search all the details about a specific course in
+	 * the DB
+	 * 
+	 * @param id -will
+	 *            hold the id number of the course that we create entity for
+	 * @return return course entity
+	 */
 	public static Course createCourseEntity(String id) {
 		Statement stmt;
 		Course course = new Course();
@@ -2729,6 +2747,19 @@ public class DBC {
 		return course;
 	}
 
+	
+	
+	/**
+	 * This method will search all the Assigenment for a specific course with specific teacher in
+	 * the DB
+	 * 
+	 *@param coursename -will
+	 *            hold the name of the course
+	 *            
+	 *@param teacherid -will
+	 *            hold the id number of the techer         
+	 * @return return list of assigenment for this course 
+	 */
 	public static ArrayList<Assigenment> setTableViewTeacherCourseAssigenment(String coursename, String teacherid) {
 		Statement stmt;
 		ArrayList<String> a1 = new ArrayList<>();
@@ -2816,6 +2847,16 @@ public class DBC {
 		return lst;
 	}
 
+	
+	/**
+	 * This method will calculates the number of hours a teacher works per week
+	 * the DB
+	 * 
+
+	 *@param teacherid -will
+	 *            hold the id number of the teacher         
+	 * @return return the number hours
+	 */
 	public static int getWeeklyHours(String teacherId) {
 		ArrayList<String> a1 = new ArrayList<String>();
 		int cnt = 0;
@@ -2859,9 +2900,19 @@ public class DBC {
 
 	}
 
-	////// public static int getAssArreyList = 44;
-	///// not exsist
+	
+	
+	
+	
+	/**
+	 * This method will search all the Assigenment the teacher post in all the courses in
+	 * the DB
+	 * 
 
+	 *@param a1 -will
+	 *            hold all the courses that the teacher is teaching       
+	 * @return return list with all the Assigenment
+	 */
 	public static ArrayList<Assigenment> allAssForTeacher(ArrayList<String> a1) {
 		Statement stmt;
 		ArrayList<Assigenment> lst = new ArrayList<Assigenment>();
@@ -2901,6 +2952,16 @@ public class DBC {
 		return lst;
 	}
 
+	
+	/**
+	 * This method will insert a new Assigenment to 
+	 * the DB
+	 * 
+
+	 *@param ass -will
+	 *            hold all the details about  the new    Assigenment   
+	 * @return return if the upload to the DB succeeded or failed
+	 */
 	public static int insertNewAss(Assigenment ass) throws IOException {
 
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -2948,26 +3009,36 @@ public class DBC {
 		return 1;
 	}
 
+	/**
+	 * This method will edit exist Assigenment to 
+	 * the DB
+	 * 
+
+	 *@param ass -will
+	 *            hold all the details that we want to edit  
+	 * @return return if the upload to the DB succeeded or failed
+	 */
 	public static int UpdateAss(Assigenment ass) {
 
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		String data = fmt.format(ass.getDueDate());
 		PreparedStatement myStmt = null;
 
-		File newFolder = new File("/MAT-LocalFiles/");
-		if (!newFolder.exists()) newFolder.mkdirs();
-		String filePath = newFolder.getAbsolutePath();
-		Path path = Paths.get(filePath+"/" + ass.getFileid());
-		try {
-			Files.write(path, ass.getData());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		filePath = filePath+"/" + ass.getFileid();
-		
-		FileInputStream inputStream = null;
+	
 		if (ass.getPath() != null) {
+			File newFolder = new File("/MAT-LocalFiles/");
+			if (!newFolder.exists()) newFolder.mkdirs();
+			String filePath = newFolder.getAbsolutePath();
+			Path path = Paths.get(filePath+"/" + ass.getFileid());
+			try {
+				Files.write(path, ass.getData());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			filePath = filePath+"/" + ass.getFileid();
+			
+			FileInputStream inputStream = null;
 			try {
 				String Quary = "update moodle.teacherassingment set Fileid=?, DueDate=?, assName=?, path=? where Assid= '"
 						+ ass.getAssId() + "' AND CourseId= '" + ass.getCourseid() + "'";
@@ -3008,9 +3079,16 @@ public class DBC {
 		return 1;
 	}
 
-	/////////////// public static int uploadTeacherAss=48;
-	//////// not exsist
 
+
+	/**
+	 * This method will search the all  courses that the teacher is teaching in
+	 * the DB
+	 * 
+	 *@param teacherid -will
+	 *            hold all the id number of the teacher
+	 * @return return list of courses of the teacher
+	 */
 	public static ArrayList<String> allCourseForTeacher(String teacherid) {
 		Statement stmt;
 		ArrayList<String> a1 = new ArrayList<String>();
@@ -3038,6 +3116,16 @@ public class DBC {
 		return a1;
 	}
 
+	
+	
+	/**
+	 * This method will download all students solution for a specific  Assigenment from 
+	 * the DB
+	 * 
+	 *@param teacherAss -will
+	 *            hold all the details for the Assigenment
+	 * @return return list of students solution
+	 */
 	public static ArrayList<Studentass> downloadStudentAssForTeacher(Assigenment teacherAss) throws IOException {
 		ArrayList<Studentass> ret = new ArrayList<Studentass>();
 		Statement stmt = null;
@@ -3066,6 +3154,16 @@ public class DBC {
 
 	}
 
+	
+	
+	/**
+	 * This method will search students that upload solution for specific Assigenment to course in
+	 * the DB
+	 * 
+	 *@param ass -will
+	 *            hold all the details for the Assigenment
+	 * @return return list of Assigenment that the student upload
+	 */
 	public static ArrayList<Assigenment> listOfStudentForAssCourse(Assigenment ass) {
 
 		Statement stmt;
@@ -3111,7 +3209,14 @@ public class DBC {
 		return lst;
 
 	}
-
+	
+	/**
+	 * This method will download assignment of student
+	 * 
+	 *@param assToDownload -will
+	 *            hold all the details for the assignment of the student
+	 * @return return the student assignment for download
+	 */
 	public static Studentass downloadOneFileStud(Assigenment assToDownload) throws IOException {
 		Studentass ret = null;
 		Statement stmt = null;
@@ -3151,6 +3256,14 @@ public class DBC {
 
 	}
 
+	
+	/**
+	 * This method will upload  evaluation for student solution in DB
+	 * 
+	 *@param assToDownload -will
+	 *            hold all the details for the assignment of the student 
+	 * @return return if the upload to the DB succeeded or failed
+	 */
 	public static int uploadEvaluation(Assigenment ass) throws IOException {
 
 		File newFolder = new File("/MAT-LocalFiles/");
@@ -3191,6 +3304,14 @@ public class DBC {
 		return 1;
 	}
 
+	
+	/**
+	 * This method will upload  Grade File for student solution in DB
+	 * 
+	 *@param ass -will
+	 *            hold all the details for the assignment of the student 
+	 * @return return if the upload to the DB succeeded or failed
+	 */
 	public static int uploadGradeFile(Assigenment ass) throws IOException {
 
 		File newFolder = new File("/MAT-LocalFiles/");
@@ -3230,6 +3351,15 @@ public class DBC {
 		return 1;
 	}
 
+	
+	
+	/**
+	 * This method search all the details from specific assignment
+	 * 
+	 *@param ass -will
+	 *            hold the assignment id and course id
+	 * @return return the assignment with all is details inside
+	 */
 	public static Assigenment assCourseTeach(Assigenment ass) {
 
 		Statement stmt;
@@ -3384,7 +3514,16 @@ public class DBC {
 		
 		return ret;
 	}
-
+	
+	
+	
+	/**
+	 * This method will search all details of specific course
+	 * 
+	 * @param courseName-will
+	 *            hold the name of the course that we want to find
+	 * @return return the course that been checked if it found
+	 */
 	public static Course createCourseEntityByName(String courseName) {
 		Statement stmt;
 		Course course = new Course();
@@ -3411,6 +3550,46 @@ public class DBC {
 			e.printStackTrace();
 		}
 		return course;
+	}
+	
+	
+	
+	
+	/**
+	 * This method will search all details of specific class
+	 * 
+	 * @param ass-will
+	 *            hold the details of course that we want to find is class
+	 * @return return list of class for course
+	 */
+	public static ArrayList<Class> createClassEntityByCourseId(Assigenment ass) {
+		Statement stmt;
+		ArrayList<Class> cla =new ArrayList<Class>();
+		try {
+			Connection conn = Connect.getConnection();
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+				"	SELECT moodle.class.*  FROM moodle.class, moodle.classcourse, moodle.course where   moodle.classcourse.courseid= '" + ass.getCourseid() + "'and moodle.classcourse.classid=moodle.class.Classid AND moodle.course.Courseid= moodle.classcourse.courseid AND moodle.classcourse.tid='"+ass.getTeacherid()+"'");
+			while (rs.next()) {
+				Class c1 = new Class();
+				try {
+					c1.setClassId(rs.getString(1));
+					c1.setName(rs.getString(2));
+					c1.setMAXStudent(Integer.parseInt(rs.getString(3)));
+					cla.add(c1);
+				} 
+				catch (Exception e) {
+					c1.setClassId("-1");
+					e.printStackTrace();
+				}
+			}
+			rs.close();
+			Connect.close();
+			return cla;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cla;
 	}
 
 }

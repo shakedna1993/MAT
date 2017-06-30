@@ -8,7 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
@@ -24,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -32,7 +35,9 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
-
+/**
+ * This class is the controller for the Teacher edit exist assignment screen GUI.
+ */
 public class teacherControlerEditAss implements Initializable{
 	
 	@FXML
@@ -48,12 +53,6 @@ public class teacherControlerEditAss implements Initializable{
 	@FXML
 	TextField fileidTxt;
 	@FXML
-	TextField DaySubmissionTEXT;
-	@FXML
-	TextField month;
-	@FXML
-	TextField yearText;
-	@FXML
 	javafx.scene.control.Label filename;
 	@FXML
 	JFileChooser chooser = new JFileChooser();
@@ -65,9 +64,15 @@ public class teacherControlerEditAss implements Initializable{
 	Button chooseFileBTN;
 	@FXML
 	javafx.scene.control.Label fname;
-	
+	@FXML
+	private DatePicker dp;
 	Course c;
 	
+	
+
+	/**
+	 * initialize-initialize the teacher name, course name and assignment name.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -89,6 +94,10 @@ public class teacherControlerEditAss implements Initializable{
 	courseTxt.setText(c.getName());
 	}
 	
+	
+	/**
+	 * This method teacher choose file to send
+	 */
 	@FXML
 	public void OpenFolder() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls" , "txt", "png",
@@ -100,9 +109,13 @@ public class teacherControlerEditAss implements Initializable{
 		}
 	}
 	
-	public void editAss() throws ParseException{
-		
-		
+	
+	
+	
+	/**
+	 * This method teacher choose what to edit for assignment (name, date or file)
+	 */
+	public void editAss() throws ParseException{	
 		Assigenment ass = new Assigenment();
 		ass.setAssId(TchMainGUIController.assId);
 		ass.setCoursename(courseTxt.getText());
@@ -119,6 +132,18 @@ public class teacherControlerEditAss implements Initializable{
 			}
 		
 		Assigenment newAss = (Assigenment) MsgFromServer.getDataListByIndex(IndexList.assCourseTeach);
+		LocalDate ld = dp.getValue();
+		
+		if(fname.getText().length()==0&assNameTxt.getText().length()==0&&ld==null){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Edit Assignment");
+			alert.setHeaderText(null);
+			alert.setContentText("Fileds Empty ");
+			alert.show();
+			return;
+		}
+		
+		else{	
 		
 		if(fname.getText().length()!=0){
 			
@@ -130,12 +155,12 @@ public class teacherControlerEditAss implements Initializable{
 			newAss.setAssname(assNameTxt.getText());
 		}
 		
-		if(yearText.getText().length()==4 && month.getText().length()==2 && DaySubmissionTEXT.getText().length()==2){
-			String data =   ""+yearText.getText()+"-"+month.getText()+"-"+DaySubmissionTEXT.getText()+"";
-			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date date = fmt.parse(data);
-			newAss.setDueDate(date); 
+	
+		if(ld!=null){
+			Date date = java.sql.Date.valueOf(ld);
+			newAss.setDueDate(date);
 		}
+		if(fname.getText().length()!=0){
 		Path path = Paths.get(f.getAbsolutePath());
 		try {
 			newAss.setData(Files.readAllBytes(path));
@@ -143,7 +168,7 @@ public class teacherControlerEditAss implements Initializable{
 			
 			e.printStackTrace();
 		}
-		
+		}
 		MyThread Q = new MyThread(RequestType.UpdateAss, IndexList.UpdateAss, newAss);
 		Q.start();
 		try {
@@ -154,9 +179,9 @@ public class teacherControlerEditAss implements Initializable{
 		
 		if((int) MsgFromServer.getDataListByIndex(IndexList.UpdateAss)==1){
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Edit assignment");
+			alert.setTitle("Edit Assignment");
 			alert.setHeaderText(null);
-			alert.setContentText("Task # "+newAss.getAssname()+" edit successfully ");
+			alert.setContentText("Task # "+newAss.getAssname()+" Successfully edited ");
 			alert.show();
 			return;
 		}
@@ -169,9 +194,12 @@ public class teacherControlerEditAss implements Initializable{
 			return;
 		
 	}
+		}
 } 
 	
-	
+	/**
+	 * Back to the last window  
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception{
 		Stage primaryStage = connectionmain.getPrimaryStage();
@@ -182,10 +210,6 @@ public class teacherControlerEditAss implements Initializable{
 		primaryStage.setTitle("M.A.T- Secretary Connection");
 		primaryStage.show();
 	}
-
-
-	
-	
 
 
 }

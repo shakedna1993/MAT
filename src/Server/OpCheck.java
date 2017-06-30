@@ -272,7 +272,7 @@ public class OpCheck {
 			}
 
 		case setComboBoxTeacherCourse:
-			ArrayList<Assigenment> al = new ArrayList<Assigenment>();
+			ArrayList<String> al = new ArrayList<String>();
 			al = DBC.setComboBoxTeacherCourse((String) op.getMsg());
 			return al;
 
@@ -362,7 +362,8 @@ public class OpCheck {
 
 		case assCourseTeach:
 			return DBC.assCourseTeach((Assigenment) op.getMsg());
-
+		case createClassEntityByCourseId:
+			return DBC.createClassEntityByCourseId((Assigenment) op.getMsg());
 		default:
 			return "null";
 		}

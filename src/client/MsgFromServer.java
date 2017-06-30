@@ -289,7 +289,9 @@ public class MsgFromServer {
 			setDataListByIndex(IndexList.uploadGradeFile, returnMsg.getMsg());
 		case assCourseTeach:
 			setDataListByIndex(IndexList.assCourseTeach, returnMsg.getMsg());
-
+			
+		case createClassEntityByCourseId:
+			setDataListByIndex(IndexList.createClassEntityByCourseId, returnMsg.getMsg());
 		default:
 			break;
 		}

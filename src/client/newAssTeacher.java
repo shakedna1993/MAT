@@ -9,7 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.JFileChooser;
@@ -24,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
@@ -32,7 +35,9 @@ import jdk.nashorn.internal.ir.Assignment;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
-
+/**
+ * This class is the controller for post a new assigenments.
+ */
 public class newAssTeacher implements Initializable {
 
 	@FXML
@@ -56,30 +61,29 @@ public class newAssTeacher implements Initializable {
 	@FXML
 	TextField ClassidTEXT;
 	@FXML
-	TextField DaySubmissionTEXT;
-	@FXML
-	TextField month;
-	@FXML
-	TextField yearText;
-	@FXML
 	javafx.scene.control.Label detlabel;
 
 	@FXML
 	javafx.scene.control.Label tecName;
-
+	@FXML
+	private DatePicker dp;
 	JFileChooser chooser = new JFileChooser();
 
+	
+	/**
+	 * initialize-initialize the student name.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		tecName.setText(s.getName());
-		DaySubmissionTEXT.setText("");
-		month.setText("");
-		yearText.setText("");
-
 	}
 
+	
+	/**
+	 * This method teacher choose file to send
+	 */
 	@FXML
 	public void OpenFolder() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls",
@@ -92,13 +96,17 @@ public class newAssTeacher implements Initializable {
 		}
 	}
 
+	
+	/**
+	 * This method teacher fill all details and post the new assignment
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void newAss() throws ParseException {
 		int flag = 0;
 		File f = chooser.getSelectedFile();
 		User s = new User();
 		s = (User) MsgFromServer.getDataListByIndex(IndexList.LOGIN);
-		// Date date = new Date(0, 0, 0);
+	
 		Assigenment ass = new Assigenment();
 		ArrayList<String> a1 = new ArrayList<String>();
 		ArrayList<Assignment> a2 = new ArrayList<Assignment>();
@@ -116,30 +124,23 @@ public class newAssTeacher implements Initializable {
 			
 			e.printStackTrace();
 		}
-		if (ass.getAssname().length() == 0 || ass.getCourseid().length() == 0
-				|| DaySubmissionTEXT.getText().length() != 2 || month.getText().length() != 2
-				|| yearText.getText().length() != 4) {
+		
+		
+		LocalDate ld = dp.getValue();
+		
+		
+		
+		if (ass.getAssname().length() == 0 || ass.getCourseid().length() == 0 || ld==null) {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Empty Fields");
+			alert.setTitle("Empty fields");
 			alert.setHeaderText(null);
-			alert.setContentText("Please enter all deatils");
+			alert.setContentText("Please enter all details");
 			alert.show();
 			return;
 		}
-		String data = "" + yearText.getText() + "-" + month.getText() + "-" + DaySubmissionTEXT.getText() + "";
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date date = fmt.parse(data);
+		
+		Date date = java.sql.Date.valueOf(ld);
 		ass.setDueDate(date);
-
-		// check if date empty
-		/*
-		 * if(DaySubmissionTEXT.getText().length()!=2 ||
-		 * month.getText().length()!=2 || yearText.getText().length()!=4 ){
-		 * Alert alert = new Alert(AlertType.WARNING); alert.setTitle(
-		 * "Empty Fields"); alert.setHeaderText(null); alert.setContentText(
-		 * "please enter for day 2 digit, for month 2 digit and for year 4 digit"
-		 * ); alert.show(); return; }
-		 */
 
 		MyThread C = new MyThread(RequestType.allCourseForTeacher, IndexList.allCourseForTeacher, s.getId());
 		C.start();
@@ -167,9 +168,9 @@ public class newAssTeacher implements Initializable {
 
 		if (flag == 0) {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Empty Fields");
+			alert.setTitle("Post New Assignment");
 			alert.setHeaderText(null);
-			alert.setContentText("this course id is not exist for you");
+			alert.setContentText("This course does not exist for you");
 			alert.show();
 			return;
 		}
@@ -184,9 +185,9 @@ public class newAssTeacher implements Initializable {
 
 		if (flag == 1) {
 			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Empty Fields");
+			alert.setTitle(" New Assignment");
 			alert.setHeaderText(null);
-			alert.setContentText("this Assigenment name allready exist for this course");
+			alert.setContentText("This Assignment name already exists for this course");
 			alert.show();
 			return;
 		}
@@ -201,14 +202,14 @@ public class newAssTeacher implements Initializable {
 
 		if ((int) MsgFromServer.getDataListByIndex(IndexList.insertNewAss) == 1) {
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("New assignment");
+			alert.setTitle(" New Assignment");
 			alert.setHeaderText(null);
 			alert.setContentText("Task # " + ass.getAssname() + " was successfully added");
 			alert.show();
 			return;
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("New assignment");
+			alert.setTitle(" New Assignment");
 			alert.setHeaderText(null);
 			alert.setContentText("Something went wrong, please try again");
 			alert.show();
@@ -216,7 +217,9 @@ public class newAssTeacher implements Initializable {
 		}
 
 	}
-
+	/**
+	 * Back to the last window  
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();

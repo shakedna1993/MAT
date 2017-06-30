@@ -28,7 +28,7 @@ public enum RequestType {
 	UnitExists, CourseExists, DefineNewCourse, CoursesList, DefinePreReq, RemoveCourse,RenameCourse,WeeklyHoursUpdate,
 	PreReqList,RemovePreReq,StudentEvaluations,DownloadAssigenment,DownloadStuEvaluation,DownloadStuGradeFile,
 	RequestsInfo,getUserDetailsById, ApprovalRequest, RejectRequest, getActiveClasses,CourseGradeList,
-	uploadTeacherAss,allCourseForTeacher,downloadStudentAssForTeacher,createCourseEntityByName, listOfStudentForAssCourse, downloadOneFileStud, uploadEvaluation, uploadGradeFile, assCourseTeach;
+	uploadTeacherAss,allCourseForTeacher,downloadStudentAssForTeacher,createCourseEntityByName, listOfStudentForAssCourse, downloadOneFileStud, uploadEvaluation, uploadGradeFile, assCourseTeach, createClassEntityByCourseId;
 	
 	/** TBD */
 }

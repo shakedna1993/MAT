@@ -76,7 +76,9 @@ public class IndexList {
 	public static int downloadOneFileStud=53;
 	public static int uploadEvaluation= 54;
 	public static int uploadGradeFile=55;
+	public static int createClassEntityByCourseId=56;
 	public static int assCourseTeach=59;
+	
 	// 
 	//
 	//Shaked: 60-79
