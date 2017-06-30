@@ -1,23 +1,14 @@
 package Server;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.*;
 
-import javax.sql.rowset.serial.SerialBlob;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-
 import entity.Assigenment;
 import entity.Course;
-import entity.Evaluation;
-import entity.MyFile;
-//import entity.FileEnt;
 import entity.Reports;
 import entity.Requests;
 import entity.Semester;
-import entity.Requests;
 import entity.Student;
 import entity.Studentass;
 import entity.Teacher;
@@ -26,13 +17,9 @@ import entity.User;
 import entity.Class;
 import Server.Connect;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -1415,9 +1402,7 @@ public class DBC {
 
 	/**
 	 * This method will search for course student study in the DB
-	 * 
-	 * @param Sid-will
-	 *            hold the id number of the Student that been searched
+	 * @param Sid-will hold the id number of the Student that been searched
 	 * @return return the course that been searched if it found
 	 */
 	public static ArrayList<Course> StudentCourse(String Sid) {
@@ -1459,9 +1444,7 @@ public class DBC {
 
 	/**
 	 * This method will check if specific unit is in the DB
-	 * 
-	 * @param unitid-will
-	 *            hold the id number of the unit that been checked
+	 * @param unitid-will hold the id number of the unit that been checked
 	 * @return return the unit that been checked if it found
 	 */
 	public static Unit UnitExists(String unitid) {
@@ -1493,9 +1476,7 @@ public class DBC {
 
 	/**
 	 * This method will check if specific course is in the DB
-	 * 
-	 * @param coursid-will
-	 *            hold the id number of the course that been checked
+	 * @param coursid-will hold the id number of the course that been checked
 	 * @return return the course that been checked if it found
 	 */
 	public static Course CourseExists(String courseid) {
@@ -1530,11 +1511,9 @@ public class DBC {
 
 	/**
 	 * This method will insert a new course to the DB
-	 * 
-	 * @param crs-will
-	 *            hold the details of the course that we want to insert
-	 * @return return the course that insert to the DB - (-1) in the courseid
-	 *         will testify of failure
+	 * @param crs-will hold the details of the course that we want to insert
+	 * @return return the course that insert to the DB; 
+	 * 				(-1) in the courseidwill testify of failure
 	 */
 	public static Course DefineNewCourse(Course crs) {
 		Statement stmt;
@@ -1567,9 +1546,7 @@ public class DBC {
 
 	/**
 	 * This method will get a list of courses
-	 * 
-	 * @param crsid-will
-	 *            hold the course id that we do not want to return in the list
+	 * @param crsid-will hold the course id that we do not want to return in the list
 	 * @return return list of courses
 	 */
 	public static ArrayList<Course> CoursesList(String crsid) {
@@ -1605,11 +1582,8 @@ public class DBC {
 
 	/**
 	 * This method will insert a new PreRequisite of a course to the DB
-	 * 
-	 * @param crs-will
-	 *            hold the course id that we want to insert
-	 * @param pre-will
-	 *            hold the prerequisite course id that we want to insert
+	 * @param crs-will hold the course id that we want to insert
+	 * @param pre-will hold the prerequisite course id that we want to insert
 	 * @return return 1 for success & (-1) for failure
 	 */
 	public static int DefinePreReq(String crs, String pre) {
@@ -1650,9 +1624,7 @@ public class DBC {
 
 	/**
 	 * This method will remove course from the DB
-	 * 
-	 * @param crs-will
-	 *            hold the course id that we want to remove
+	 * @param crs-will hold the course id that we want to remove
 	 * @return return 1 for success & (-1) for failure
 	 */
 	public static int RemoveCourse(String crs) {
@@ -1673,9 +1645,7 @@ public class DBC {
 
 	/**
 	 * This method will update course name in the DB
-	 * 
-	 * @param crs-will
-	 *            hold the details of the course that we want to update
+	 * @param crs-will hold the details of the course that we want to update
 	 * @return return 1 for success & (-1) for failure
 	 */
 	public static int RenameCourse(Course crs) {
@@ -1708,9 +1678,7 @@ public class DBC {
 
 	/**
 	 * This method will update course Weekly Hours in the DB
-	 * 
-	 * @param crs-will
-	 *            hold the details of the course that we want to update
+	 * @param crs-will hold the details of the course that we want to update
 	 * @return return 1 for success & (-1) for failure
 	 */
 	public static int WeeklyHoursUpdate(Course crs) {
@@ -1743,10 +1711,7 @@ public class DBC {
 
 	/**
 	 * This method will get a list of PreRequisite courses
-	 * 
-	 * @param crsid-will
-	 *            hold the course id that we do not want to return his
-	 *            PreRequisite
+	 * @param crsid-will hold the course id that we do not want to return his PreRequisite
 	 * @return return list of PreRequisite courses
 	 */
 	public static ArrayList<Course> PreReqList(String crsid) {
@@ -1784,11 +1749,8 @@ public class DBC {
 
 	/**
 	 * This method will remove PreRequisite from the DB
-	 * 
-	 * @param crs-will
-	 *            hold the course id that we want to remove
-	 * @param pre-will
-	 *            hold the PreRequisite course id that we want to remove
+	 * @param crs-will hold the course id that we want to remove
+	 * @param pre-will hold the PreRequisite course id that we want to remove
 	 * @return return 1 for success & (-1) for failure
 	 */
 	public static int RemovePreReq(String crs, String pre) {
@@ -1880,7 +1842,6 @@ public class DBC {
 	 *            courses.
 	 * @return return list of courses studying buy the student if it found.
 	 */
-
 	public static ArrayList<String> setComboBoxStudentCourse(String Id) {
 		ArrayList<String> al = new ArrayList<String>();
 		Statement stmt;
@@ -1907,10 +1868,13 @@ public class DBC {
 		}
 		return al;
 	}
-
+	/**
+	 * This method will search for all the assignments course for a student in the DB
+	 * @param asud-will hold the details of the required table- course id, student id
+	 * @return return list of assignment course for a student
+	 */
 	public static ArrayList<Assigenment> setTableViewStudentCourseAssigenment(Studentass asud) {
 		Statement stmt;
-		int flag = 0;
 		ArrayList<Assigenment> lst = new ArrayList<>();
 		try {
 			Connection conn = Connect.getConnection();
@@ -1921,7 +1885,6 @@ public class DBC {
 				// Print out the values
 				Assigenment ass = new Assigenment();
 				try {
-
 					ass.setAssId(rs.getInt(1));
 					ass.setFileid(rs.getString(2));
 					ass.setDueDate(rs.getDate(3));
@@ -1967,9 +1930,7 @@ public class DBC {
 
 	/**
 	 * This method will search for courses class study in the DB
-	 * 
-	 * @param Cid-will
-	 *            hold the id number of the class we search courses for.
+	 * @param Cid-will hold the id number of the class we search courses for.
 	 * @return return list of courses that the class learn if it found
 	 */
 	public static ArrayList<Course> ClassCourseDetails(String Cid) {
@@ -2002,8 +1963,14 @@ public class DBC {
 		return clst;
 	}
 
+	/**
+	 * This method will upload an student assignment submission to the DB. 
+	 * @param asud-will hold the details of the required assignment submission
+	 * @return return 1- for successfully uploaded but delay submission
+	 * 				  0- for successfully uploaded in time
+	 * 				  (-1)- for failed upload
+	 */
 	public static int UploadFile(Studentass stuass) throws Exception {
-		
 		
 		File newFolder = new File("/MAT-LocalFiles/");
 		if (!newFolder.exists()) newFolder.mkdirs();
@@ -2045,12 +2012,16 @@ public class DBC {
 		}
 	}
 
+	/**
+	 * This method will download an assignment from the DB. 
+	 * @param ass-will hold the details of the required assignment
+	 * @return return ret- the download assignment file
+	 */
 	public static Assigenment DownloadAssigenment(Assigenment ass) throws IOException{
 		Assigenment ret = null;
 		Statement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		int flag = 1;
 		
 		try {
 			 conn = Connect.getConnection();
@@ -2070,7 +2041,6 @@ public class DBC {
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			flag = 0;
 		}
 		return ret;
 	}
@@ -2750,15 +2720,15 @@ public class DBC {
 	
 	
 	/**
-	 * This method will search all the Assigenment for a specific course with specific teacher in
+	 * This method will search all the Assignment for a specific course with specific teacher in
 	 * the DB
 	 * 
 	 *@param coursename -will
 	 *            hold the name of the course
 	 *            
 	 *@param teacherid -will
-	 *            hold the id number of the techer         
-	 * @return return list of assigenment for this course 
+	 *            hold the id number of the teacher         
+	 * @return return list of assignment for this course 
 	 */
 	public static ArrayList<Assigenment> setTableViewTeacherCourseAssigenment(String coursename, String teacherid) {
 		Statement stmt;
@@ -2905,13 +2875,12 @@ public class DBC {
 	
 	
 	/**
-	 * This method will search all the Assigenment the teacher post in all the courses in
+	 * This method will search all the Assignment the teacher post in all the courses in
 	 * the DB
 	 * 
-
 	 *@param a1 -will
 	 *            hold all the courses that the teacher is teaching       
-	 * @return return list with all the Assigenment
+	 * @return return list with all the Assignment
 	 */
 	public static ArrayList<Assigenment> allAssForTeacher(ArrayList<String> a1) {
 		Statement stmt;
@@ -2954,12 +2923,10 @@ public class DBC {
 
 	
 	/**
-	 * This method will insert a new Assigenment to 
+	 * This method will insert a new Assignment to 
 	 * the DB
-	 * 
-
 	 *@param ass -will
-	 *            hold all the details about  the new    Assigenment   
+	 *            hold all the details about the new Assignment   
 	 * @return return if the upload to the DB succeeded or failed
 	 */
 	public static int insertNewAss(Assigenment ass) throws IOException {
@@ -3010,12 +2977,8 @@ public class DBC {
 	}
 
 	/**
-	 * This method will edit exist Assigenment to 
-	 * the DB
-	 * 
-
-	 *@param ass -will
-	 *            hold all the details that we want to edit  
+	 * This method will edit exist Assignment to the DB
+	 *@param ass -will hold all the details that we want to edit  
 	 * @return return if the upload to the DB succeeded or failed
 	 */
 	public static int UpdateAss(Assigenment ass) {
@@ -3084,9 +3047,7 @@ public class DBC {
 	/**
 	 * This method will search the all  courses that the teacher is teaching in
 	 * the DB
-	 * 
-	 *@param teacherid -will
-	 *            hold all the id number of the teacher
+	 *@param teacherid -will hold all the id number of the teacher
 	 * @return return list of courses of the teacher
 	 */
 	public static ArrayList<String> allCourseForTeacher(String teacherid) {
@@ -3117,13 +3078,11 @@ public class DBC {
 	}
 
 	
-	
 	/**
-	 * This method will download all students solution for a specific  Assigenment from 
+	 * This method will download all students solution for a specific  Assignment from 
 	 * the DB
-	 * 
 	 *@param teacherAss -will
-	 *            hold all the details for the Assigenment
+	 *            hold all the details for the Assignment
 	 * @return return list of students solution
 	 */
 	public static ArrayList<Studentass> downloadStudentAssForTeacher(Assigenment teacherAss) throws IOException {
@@ -3155,14 +3114,13 @@ public class DBC {
 	}
 
 	
-	
 	/**
-	 * This method will search students that upload solution for specific Assigenment to course in
+	 * This method will search students that upload solution for specific Assignment to course in
 	 * the DB
 	 * 
 	 *@param ass -will
-	 *            hold all the details for the Assigenment
-	 * @return return list of Assigenment that the student upload
+	 *            hold all the details for the Assignment
+	 * @return return list of Assignment that the student upload
 	 */
 	public static ArrayList<Assigenment> listOfStudentForAssCourse(Assigenment ass) {
 
@@ -3398,7 +3356,11 @@ public class DBC {
 		return lst;
 
 	}
-
+	/**
+	 * This method will check for all the evaluations and grade files in the DB. 
+	 * @param Sid-will hold the student id
+	 * @return lst- list of student evaluations.
+	 */
 	public static ArrayList<Studentass> StudentEvaluations(String Sid) {
 		Statement stmt;
 		ArrayList<Studentass> lst = new ArrayList<Studentass>();
@@ -3432,7 +3394,12 @@ public class DBC {
 		}
 		return lst;
 	}
-
+	
+	/**
+	 * This method will get an assignment name from the DB. 
+	 * @param assid-will hold the assignment id
+	 * @return return the assignment name
+	 */
 	public static String GetAssName(int assid) {
 		Statement stmt;
 		String s = null;
@@ -3450,7 +3417,12 @@ public class DBC {
 		}
 		return s;
 	}
-
+	
+	/**
+	 * This method will download an assignment evaluation from the DB. 
+	 * @param ass-will hold the details of the required assignment evaluation
+	 * @return return ret- the assignment details include the download evaluation file
+	 */
 	public static Studentass DownloadStuEvaluation(Studentass ass) throws IOException {
 		Studentass ret = null;
 		Statement stmt = null;
@@ -3483,6 +3455,11 @@ public class DBC {
 		return ret;
 	}
 
+	/**
+	 * This method will download an assignment grade file from the DB. 
+	 * @param ass-will hold the details of the required assignment grade file
+	 * @return return ret- the assignment details include the download grade file
+	 */
 	public static Studentass DownloadStuGradeFile(Studentass ass) throws IOException {
 		Studentass ret = null;
 		Statement stmt = null;
@@ -3514,8 +3491,6 @@ public class DBC {
 		
 		return ret;
 	}
-	
-	
 	
 	/**
 	 * This method will search all details of specific course
@@ -3551,9 +3526,6 @@ public class DBC {
 		}
 		return course;
 	}
-	
-	
-	
 	
 	/**
 	 * This method will search all details of specific class

@@ -3,7 +3,9 @@ package entity;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
-
+/**
+ * This class in charge for all the student assignments details- include evaluations and grade files
+ */
 public class Studentass implements Serializable{ 
 	/**
 	 * 

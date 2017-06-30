@@ -27,6 +27,9 @@ import javafx.scene.image.ImageView;
 import thred.IndexList;
 import thred.MyThread;
 
+/**
+ * This class is the controller for the Evaluations screen GUI.
+ */
 public class EvaluationsGUIController implements Initializable {
 	@FXML
 	Button back;
@@ -65,6 +68,9 @@ public class EvaluationsGUIController implements Initializable {
 	private ObservableList<Studentass> data;
 	static String filedir;
 
+	/**
+	 * initialize-initialize the student name, shows the evaluations and grade files list.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -109,6 +115,9 @@ public class EvaluationsGUIController implements Initializable {
 		table.setItems(data);
 	}
 
+	/**
+	 * DownloadAssigenmentEvaluation-Downloads an assignment evaluation
+	 */
 	public void DownloadAssigenmentEvaluation() {
 		if (table.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -157,7 +166,9 @@ public class EvaluationsGUIController implements Initializable {
 			return;
 		}
 	}
-
+	/**
+	 * DownloadAssigenmentGradeFile-Downloads an assignment grade file
+	 */
 	public void DownloadAssigenmentGradeFile() {
 		if (table.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -206,7 +217,10 @@ public class EvaluationsGUIController implements Initializable {
 			return;
 		}
 	}
-
+	
+	/**
+	 * Logout from the server  
+	 */
 	@FXML
 	public void clsEva() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
@@ -223,7 +237,9 @@ public class EvaluationsGUIController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * This method goes back to the last window that been shown 
+	 */	
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		User s = new User();

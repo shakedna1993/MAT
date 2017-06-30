@@ -3,6 +3,9 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * This class in charge for all the courses details
+ */
 public class Course implements Serializable{
 
 	/**

@@ -1,14 +1,12 @@
 package client;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +34,7 @@ import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
 /**
- * This class is the controller for post a new assigenments.
+ * This class is the controller for post a new assignments.
  */
 public class newAssTeacher implements Initializable {
 

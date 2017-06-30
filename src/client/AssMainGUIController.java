@@ -1,7 +1,6 @@
 package client;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import entity.Assigenment;
 import entity.Course;
-import entity.MyFile;
 import entity.Studentass;
 import entity.User;
 import javafx.collections.FXCollections;

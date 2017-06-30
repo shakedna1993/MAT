@@ -9,11 +9,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.StudentUploadAssGUIController">
+<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.StudentUploadAssGUIController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="639.0">
-         <children>
-            <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+      <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+      <ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/BackGround.png" />
+         </image>
+      </ImageView>
             <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
                <image>
                   <Image url="@LOGO.png" />
@@ -29,21 +32,29 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="LogOut" layoutX="348.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsUploadAss" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
-            <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
-            <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
-            <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-            <Button fx:id="Back" layoutX="212.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
-            <Label fx:id="selectC" layoutX="171.0" layoutY="183.0" text="Select file to upload:" underline="true" />
-            <Button fx:id="Upload_Ass" disable="true" layoutX="283.0" layoutY="347.0" mnemonicParsing="false" onAction="#UploadAss" prefHeight="25.0" prefWidth="77.0" text="Upload" />
-            <Button fx:id="ChooseFile" layoutX="302.0" layoutY="176.0" mnemonicParsing="false" onAction="#OpenFolder" prefHeight="31.0" prefWidth="106.0" text="Choose File" />
-            <Label fx:id="filename" alignment="CENTER" layoutX="67.0" layoutY="275.0" prefHeight="25.0" prefWidth="509.0" text="File Name" textFill="#061880">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="lab1" layoutX="278.0" layoutY="243.0" prefHeight="17.0" prefWidth="93.0" text="The selected file:" underline="true" />
-         </children>
-      </AnchorPane>
+      <Button fx:id="LogOut" layoutX="338.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsUploadAss" prefHeight="25.0" prefWidth="111.0" text="          Log Out" />
+      <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
+      <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
+      <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
+      <Button fx:id="Back" layoutX="184.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="111.0" text="     Back" />
+      <Label fx:id="selectC" layoutX="171.0" layoutY="183.0" text="Select file to upload:" underline="true" />
+      <Button fx:id="Upload_Ass" disable="true" layoutX="283.0" layoutY="347.0" mnemonicParsing="false" onAction="#UploadAss" prefHeight="25.0" prefWidth="77.0" text="Upload" />
+      <Button fx:id="ChooseFile" layoutX="302.0" layoutY="176.0" mnemonicParsing="false" onAction="#OpenFolder" prefHeight="31.0" prefWidth="106.0" text="Choose File" />
+      <Label fx:id="filename" alignment="CENTER" layoutX="67.0" layoutY="275.0" prefHeight="25.0" prefWidth="509.0" text="File Name" textFill="#061880">
+           <font>
+               <Font name="System Bold" size="16.0" />
+           </font>
+      </Label>
+      <Label fx:id="lab1" layoutX="278.0" layoutY="243.0" prefHeight="17.0" prefWidth="93.0" text="The selected file:" underline="true" />
+      <ImageView fx:id="BackIcon" fitHeight="20.0" fitWidth="25.0" layoutX="206.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="LogOutIcon" fitHeight="20.0" fitWidth="25.0" layoutX="360.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Logout.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

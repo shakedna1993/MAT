@@ -11,6 +11,15 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.RequestsController">
    <children>
+      <Label fx:id="textArea" layoutX="104.0" layoutY="161.0" prefHeight="279.0" prefWidth="425.0" text="Label" wrapText="true">
+         <opaqueInsets>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </opaqueInsets></Label>
+      <ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/BackGround.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
          <image>
             <Image url="@LOGO.png" />
@@ -26,16 +35,23 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="LogOut" layoutX="348.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsRequestList" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
+      <Button fx:id="LogOut" layoutX="338.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsRequestList" prefHeight="25.0" prefWidth="111.0" text="          Log Out" />
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-      <Button fx:id="Back" layoutX="212.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
+      <Button fx:id="Back" layoutX="184.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="111.0" text="     Back" />
       <Button fx:id="Rejection" layoutX="332.0" layoutY="440.0" mnemonicParsing="false" onAction="#RejectRequest" prefHeight="25.0" prefWidth="186.0" text="Rejection" />
       <Button fx:id="Approval" layoutX="109.0" layoutY="440.0" mnemonicParsing="false" onAction="#ApprovalRequest" prefHeight="25.0" prefWidth="186.0" text="Approval" />
-      <Label fx:id="textArea" layoutX="104.0" layoutY="161.0" prefHeight="279.0" prefWidth="425.0" text="Label" wrapText="true">
-         <opaqueInsets>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-         </opaqueInsets></Label>
+         
+      <ImageView fx:id="BackIcon" fitHeight="20.0" fitWidth="25.0" layoutX="206.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="LogOutIcon" fitHeight="20.0" fitWidth="25.0" layoutX="360.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Logout.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

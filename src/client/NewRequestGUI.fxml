@@ -23,12 +23,17 @@
             <Image url="@LOGO.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/BackGround.png" />
+         </image>
+      </ImageView>
       <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="27.0" prefWidth="179.0" text="New Request" textFill="#061880">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="back_button" layoutX="281.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
+      <Button fx:id="back_button" layoutX="272.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="111.0" text="     Back" />      
       
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
@@ -47,7 +52,11 @@
       <Label fx:id="searchLabel" layoutX="449.0" layoutY="155.0" text="Search User By ID:" />
       <ComboBox fx:id="classCombo" layoutX="471.0" layoutY="247.0" onAction="#classCombo" prefHeight="25.0" prefWidth="126.0" promptText="Select Class" />
       <Label fx:id="classLabel" layoutX="406.0" layoutY="251.0" text="In Class:" />
-
+      <ImageView fx:id="BackIcon" fitHeight="20.0" fitWidth="25.0" layoutX="285.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Back.png" />
+         </image>
+      </ImageView>
 
    </children>
 </AnchorPane>

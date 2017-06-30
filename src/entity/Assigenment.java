@@ -3,10 +3,11 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * This class in charge for all the teacher assignments details
+ */
 public class Assigenment implements Serializable{
-	/**
-	 * 
-	 */
+	 
 	private static final long serialVersionUID = 9149522994876793152L;
 	private String  UserId, Fileid, courseid, coursename, classid, classname, teacherid, techername,assname,grade,semester,comments,evalid,path,UserName, late;
 	private int check, AssId, assStudent;
@@ -214,6 +215,32 @@ public class Assigenment implements Serializable{
 	public void setPath(String path) {
 		this.path = path;
 	}
+	public String getUserName() {
+		return UserName;
+	}
+	
+	
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
+	
+	public int getAssStudent() {
+		return assStudent;
+	}
+	
+	
+	public void setAssStudent(int assStudent) {
+		this.assStudent = assStudent;
+	}
+	
+	public String getLate() {
+		return late;
+	}
+	
+	
+	public void setLate(String late) {
+		this.late = late;
+	}
 
 	@Override
 	public String toString() {
@@ -227,30 +254,4 @@ public class Assigenment implements Serializable{
 	
 	
 	
-	public String getUserName() {
-		return UserName;
-	}
-
-
-	public void setUserName(String userName) {
-		UserName = userName;
-	}
-	
-	public int getAssStudent() {
-		return assStudent;
-	}
-
-
-	public void setAssStudent(int assStudent) {
-		this.assStudent = assStudent;
-	}
-
-	public String getLate() {
-		return late;
-	}
-
-
-	public void setLate(String late) {
-		this.late = late;
-	}
 }

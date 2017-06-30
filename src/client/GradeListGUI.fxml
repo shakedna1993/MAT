@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GradeListGUIController">
-   <children>
-      <AnchorPane layoutX="4.0" layoutY="4.0" prefHeight="600.0" prefWidth="639.0">
-         <children>
-            <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
-            <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
-               <image>
-                  <Image url="@LOGO.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="20.0" prefWidth="56.0" text="Hello!" textFill="#061880">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="stuName" layoutX="102.0" layoutY="67.0" prefHeight="21.0" prefWidth="200.0" text="Student Name" textFill="#061880">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            <Button fx:id="back" layoutX="251.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
-            <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
-            <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
-            <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-            <Separator layoutX="326.0" layoutY="133.0" orientation="VERTICAL" prefHeight="231.0" prefWidth="5.0" />
-            <TableView fx:id="table" layoutX="194.0" layoutY="168.0" prefHeight="338.0" prefWidth="335.0" />
-            <Button fx:id="LogOut" layoutX="379.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsGradeList" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.GradeListGUIController">
+	<children>
+		<ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@Icons/BackGround.png" />
+			</image>
+		</ImageView>
+		<Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+		<ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
+			<image>
+				<Image url="@LOGO.png" />
+			</image>
+		</ImageView>
+		<Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="20.0" prefWidth="56.0" text="Hello!" textFill="#061880">
+			<font>
+				<Font name="System Bold" size="18.0" />
+			</font>
+		</Label>
+		<Label fx:id="stuName" layoutX="102.0" layoutY="67.0" prefHeight="21.0" prefWidth="200.0" text="Student Name" textFill="#061880">
+			<font>
+				<Font name="System Bold" size="16.0" />
+			</font>
+		</Label>
+		<Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
+		<Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
+		<Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
+		<TableView fx:id="table" layoutX="170.0" layoutY="168.0" prefHeight="338.0" prefWidth="289.0" />
+		<Button fx:id="LogOut" layoutX="338.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsGradeList" prefHeight="25.0" prefWidth="111.0" text="          Log Out" />
+		<Button fx:id="back" layoutX="184.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="111.0" text="     Back" />
+		<ImageView fx:id="BackIcon" fitHeight="20.0" fitWidth="25.0" layoutX="206.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@Icons/Back.png" />
+			</image>
+		</ImageView>
+		<ImageView fx:id="LogOutIcon" fitHeight="20.0" fitWidth="25.0" layoutX="360.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@Icons/Logout.png" />
+			</image>
+		</ImageView>
+      <Label layoutX="282.0" layoutY="144.0" prefHeight="17.0" prefWidth="77.0" text="Grade List" underline="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+	</children>
 </AnchorPane>

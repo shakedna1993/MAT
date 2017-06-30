@@ -1,6 +1,7 @@
 package client;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -25,6 +26,9 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
+/**
+ * This class is the controller for the Edit Course screen GUI.
+ */
 public class EditCourseGUIController implements Initializable{
 	
 	public static ClientConsole cli;
@@ -96,13 +100,18 @@ public class EditCourseGUIController implements Initializable{
 	private ObservableList<Course> data1;
 	private String crs_id="-1";
 
-	
+	/**
+	 * initialize-initialize the system manager name
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		User s =new User();
 		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		SysName.setText(s.getName());
 	}
 	
+	/**
+	 * EnterCourseID- get the course id and initialize the prerequisite table
+	 */
 	@SuppressWarnings("unchecked")
 	public void EnterCourseID() throws IOException {
 		try {
@@ -187,8 +196,6 @@ public class EditCourseGUIController implements Initializable{
 					
 				TableColumn<Course, String> c11 = new TableColumn<>("Pre Requisite Course ID");
 				c11.setCellValueFactory(new PropertyValueFactory<>("courseId"));
-			//	TableColumn<Course, String> c22 = new TableColumn<>("  Course Name ");
-			//	c22.setCellValueFactory(new PropertyValueFactory<>("name"));
 
 				RemovePreReq.getColumns().addAll(c11);
 				RemovePreReq.setItems(data1);
@@ -198,6 +205,10 @@ public class EditCourseGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * RenameCourse- get the new course name
+	 */
 	public void RenameCourse() throws IOException {
 		try {
 			if (CourseName.getText().replaceAll("\\s","").length() == 0) {
@@ -249,6 +260,9 @@ public class EditCourseGUIController implements Initializable{
 		}
 	}
 	
+	/**
+	 * WeeklyHoursUpdateButton- get the new course weekly hours
+	 */
 	public void WeeklyHoursUpdateButton() throws IOException {
 		try {
 			for (char c : Week.getText().toCharArray())
@@ -302,6 +316,10 @@ public class EditCourseGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * AddPreReq- add new prerequisite for the course
+	 */
 	public void AddPreReq() {
 		if (ADDPreReq.getSelectionModel().getSelectedItem() == null)
 		{
@@ -342,6 +360,9 @@ public class EditCourseGUIController implements Initializable{
 		}
 	}
 	
+	/**
+	 * RemovePreReq- remove prerequisite of a course
+	 */
 	public void RemovePreReq() {
 		if (RemovePreReq.getSelectionModel().getSelectedItem() == null)
 		{
@@ -382,20 +403,22 @@ public class EditCourseGUIController implements Initializable{
 			return;
 		}
 	}
-		
+	
+	/**
+	 * This method goes back to the last window that been shown 
+	 */	
 	public void back() {
 		try {
-			Stage stage = (Stage) BackButton.getScene().getWindow();
-			stage.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
 			connectionmain.showSysManMain();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Logout from the server  
+	 */
 	@FXML
 	public void clsSysMan() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));

@@ -2,6 +2,9 @@ package entity;
 
 import java.io.Serializable;
 
+/**
+ * This class in charge for all the evaluation details
+ */
 public class Evaluation implements Serializable{
 
 	/**

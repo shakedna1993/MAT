@@ -16,6 +16,11 @@
 <AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.BlockedParentMain">
    <children>
       <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+      <ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/BackGround.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
          <image>
             <Image url="@LOGO.png" />
@@ -31,12 +36,12 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="LogOut" layoutX="278.0" layoutY="544.0" mnemonicParsing="false" onAction="#clsParentMain" prefHeight="42.0" prefWidth="94.0" text="Log Out" />
+      <Button fx:id="LogOut" layoutX="276.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsParentMain" prefHeight="25.0" prefWidth="111.0" text="          Log Out" />
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
-      <Separator layoutY="500.0" prefHeight="51.0" prefWidth="639.0" />
+      <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
       <Accordion layoutX="118.0" layoutY="187.0" />
-      <Label alignment="CENTER" layoutX="102.0" layoutY="187.0" prefHeight="266.0" prefWidth="458.0" text="Sorry. &#10;&#10;Access is now blocked. &#10;&#10;Please check it out at the school." textFill="#d92e18" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+      <Label alignment="CENTER" layoutX="102.0" layoutY="187.0" prefHeight="266.0" prefWidth="458.0" text="Sorry. &#10;&#10;Access is now blocked. &#10;&#10;Please check it out at the school." textAlignment="CENTER" textFill="#d92e18" textOverrun="CENTER_ELLIPSIS" wrapText="true">
          <font>
             <Font name="Arial" size="30.0" />
          </font>
@@ -50,5 +55,10 @@
             <Glow />
          </effect>
       </Label>
+      <ImageView fx:id="LogOutIcon" fitHeight="20.0" fitWidth="25.0" layoutX="298.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Logout.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -1,16 +1,9 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-
-import Server.DBC;
-
-
 
 /**
- * d
- * 
- *	
+ * This class in charge for all the student details
  */
 public class Student extends User implements Serializable{
 
@@ -18,8 +11,6 @@ public class Student extends User implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -5638726927853322152L;
-//	private String Name,Password,UserName,Id;
-//	private int isConnected,Role,Blocked;
 	private String ParentId,Classid,Id;
 	private float avg;
 	

@@ -23,6 +23,9 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
+/**
+ * This class is the controller for the System Manager main screen GUI.
+ */
 public class SysManMainGUIController implements Initializable{
 	
 	public static ClientConsole cli;
@@ -58,7 +61,9 @@ public class SysManMainGUIController implements Initializable{
 	TableView<Course> CourseLIST = new TableView<>();
 	private ObservableList<Course> data;
 	
-	
+	/**
+	 * initialize-initialize the system manager name and a list of existing course in the DB
+	 */
 	@SuppressWarnings("unchecked")
 	public void initialize(URL location, ResourceBundle resources) {
 		User s =new User();
@@ -98,20 +103,33 @@ public class SysManMainGUIController implements Initializable{
 		c4.setStyle("-fx-alignment: CENTER;");
 	}
 	
+	/**
+	 * DefineWindow-shows the Define course window
+	 */
 	@FXML
 	public void DefineWindow() throws IOException{
 		connectionmain.showDefineWindow();
 	}
 	
+	/**
+	 * EditWindow-shows the Edit course window
+	 */
 	@FXML
 	public void EditWindow() throws IOException{
 		connectionmain.showEditWindow();
 	}
+	
+	/**
+	 * RemoveWindow-shows the Remove course window
+	 */
 	@FXML
 	public void RemoveWindow() throws IOException{
 		connectionmain.showRemoveWindow();
 	}
 	
+	/**
+	 * Logout from the server  
+	 */
 	@FXML
 	public void clsSysManMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));

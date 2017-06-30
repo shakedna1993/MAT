@@ -12,9 +12,6 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.EvaluationsGUIController">
      <children>
-            
-            
-     
 	      <ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
 	         <image>
 	            <Image url="@Icons/BackGround.png" />
@@ -39,7 +36,7 @@
             <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
             <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
             <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-            <TableView fx:id="table" layoutX="202.0" layoutY="198.0" prefHeight="235.0" prefWidth="236.0" />
+            <TableView fx:id="table" layoutX="202.0" layoutY="198.0" prefHeight="235.0" prefWidth="225.0" />
             <Label fx:id="Eva_label" layoutX="243.0" layoutY="157.0" text="Evaluations &amp; Grade Files" underline="true">
                <font>
                   <Font name="System Bold" size="13.0" />

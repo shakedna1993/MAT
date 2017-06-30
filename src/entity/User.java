@@ -2,18 +2,15 @@ package entity;
 
 import java.io.Serializable;
 
+/**
+ * This class in charge for all the user details
+ */
 public class User implements Serializable  {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * 
-	 */
-	/**
-	 * 
-	 */
 	private String Name,Password,UserName,Id;
 	private int isConnected,Role,Blocked;
 	/*

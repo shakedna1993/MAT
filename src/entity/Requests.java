@@ -2,6 +2,9 @@ package entity;
 
 import java.io.Serializable;
 
+/**
+ * This class in charge for all the request details
+ */
 public class Requests implements Serializable{
 	/**
 	 * 

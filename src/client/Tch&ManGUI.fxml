@@ -27,7 +27,7 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Button fx:id="LogOut" layoutX="221.0" layoutY="345.0" mnemonicParsing="false" onAction="#clsTchManMain" text="Log Out" />
+            <Button fx:id="LogOut" layoutX="183.0" layoutY="345.0" mnemonicParsing="false" onAction="#clsTchManMain" prefHeight="25.0" prefWidth="126.0" text="         Log Out" />
             <Separator layoutY="320.0" prefHeight="7.0" prefWidth="500.0" />
             <Label fx:id="Hello" layoutX="42.0" layoutY="110.0" text="Hello!" textFill="#061880">
                <font>
@@ -39,6 +39,11 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
+            <ImageView fitHeight="25.0" fitWidth="19.0" layoutX="208.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Icons/Logout.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

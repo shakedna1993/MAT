@@ -20,6 +20,9 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
+/**
+ * This class is the controller for the Define Course screen GUI.
+ */
 public class DefineCourseGUIController implements Initializable{
 
 	public static Stage primaryStage;
@@ -63,11 +66,18 @@ public class DefineCourseGUIController implements Initializable{
 	@FXML
 	TextField Week;
 
+	/**
+	 * initialize-initialize the system manager name
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		User s =new User();
 		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		SysName.setText(s.getName());
 	}
+	
+	/**
+	 * Define- get all the details of the new course to insert into the DB
+	 */
 	@FXML
 	public void Define() throws IOException {
 		try {
@@ -188,21 +198,21 @@ public class DefineCourseGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * This method goes back to the last window that been shown 
+	 */
 	public void back() {
 		try {
-			Stage stage = (Stage) BackButton.getScene().getWindow();
-			stage.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
 			connectionmain.showSysManMain();
-		} catch (IOException e) {
-			
-			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
+	/**
+	 * Logout from the server  
+	 */
 	@FXML
 	public void clsSysMan() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));

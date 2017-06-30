@@ -2,16 +2,15 @@ package entity;
 
 import java.io.Serializable;
 
-
-
+/**
+ * This class in charge for all the teacher details
+ */
 public class Teacher extends User implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8969357742306461220L;
-//	private String Name,Password,UserName,Id;
-//	private int isConnected,Role,Blocked;
 	private String Unit,intership,TecName,TecId;
 	private int maxHours;
 	

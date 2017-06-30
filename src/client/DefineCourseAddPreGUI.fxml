@@ -51,7 +51,7 @@
          </image>
       </ImageView>
       <Label fx:id="NoteLabel" layoutX="173.0" layoutY="245.0" text="After each choose press ADD and in the end press FINISH" textFill="#1919d1" />
-      <Button fx:id="ADDButton" layoutX="470.0" layoutY="377.0" mnemonicParsing="false" onAction="#AddPreReq" prefHeight="25.0" prefWidth="59.0" text="ADD" />
+      <Button fx:id="ADDButton" layoutX="470.0" layoutY="377.0" mnemonicParsing="false" onAction="#AddPreReq" prefHeight="25.0" prefWidth="82.0" text="       ADD" />
       <Label fx:id="SuccessLabel2" layoutX="425.0" layoutY="162.0" text="was successfully added!" underline="true">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -72,5 +72,10 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="483.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/addNew.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

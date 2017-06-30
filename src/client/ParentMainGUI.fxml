@@ -13,6 +13,11 @@
 <AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ParMainGUIController">
    <children>
       <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+      <ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/BackGround.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
          <image>
             <Image url="@LOGO.png" />
@@ -28,25 +33,30 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="CalcAvg" layoutX="488.0" layoutY="431.0" prefHeight="27.0" prefWidth="77.0" text="Student Avg" textFill="#1815d0" />
-      <Button fx:id="GradeL" layoutX="325.0" layoutY="275.0" mnemonicParsing="false" onAction="#GradeList" prefHeight="25.0" prefWidth="106.0" text="Grades List" />
-      <Button fx:id="Evalu" layoutX="327.0" layoutY="360.0" mnemonicParsing="false" onAction="#EvaluationWin" prefHeight="25.0" prefWidth="106.0" text="Evaluations" />
-      <Button fx:id="CourseL" layoutX="327.0" layoutY="318.0" mnemonicParsing="false" onAction="#CourseList" prefHeight="25.0" prefWidth="106.0" text="Course List" />
-      <Label fx:id="Per_File" layoutX="277.0" layoutY="149.0" text="Personal File" underline="true">
+      <Label fx:id="CalcAvg" layoutX="361.0" layoutY="385.0" prefHeight="27.0" prefWidth="77.0" text="Student Avg" textFill="#1815d0" />
+      <Button fx:id="GradeL" layoutX="344.0" layoutY="210.0" mnemonicParsing="false" onAction="#GradeList" prefHeight="25.0" prefWidth="179.0" text="Grades List" />
+      <Button fx:id="Evalu" layoutX="346.0" layoutY="295.0" mnemonicParsing="false" onAction="#EvaluationWin" prefHeight="25.0" prefWidth="179.0" text="Evaluations &amp; Grade Files" />
+      <Button fx:id="CourseL" layoutX="346.0" layoutY="253.0" mnemonicParsing="false" onAction="#CourseList" prefHeight="25.0" prefWidth="179.0" text="Course List" />
+      <Label fx:id="Per_File" alignment="CENTER" layoutX="243.0" layoutY="149.0" prefHeight="19.0" prefWidth="163.0" text="Student Personal File" underline="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="LogOut" layoutX="278.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsParentMain" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
+      <Button fx:id="LogOut" layoutX="278.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsParentMain" prefHeight="25.0" prefWidth="124.0" text="     Log Out" />
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-      <ComboBox fx:id="StuN" layoutX="58.0" layoutY="210.0" prefHeight="25.0" prefWidth="163.0" promptText="Student Name" />
-      <Button fx:id="AvgBtn" layoutX="330.0" layoutY="432.0" mnemonicParsing="false" onAction="#Avgset" prefHeight="25.0" prefWidth="146.0" text="Calculate Average" />
-      <Label fx:id="Hello1" alignment="CENTER" layoutX="58.0" layoutY="175.0" prefHeight="27.0" prefWidth="163.0" text="choose your child:" textFill="#061880">
+      <ComboBox fx:id="StuN" layoutX="110.0" layoutY="210.0" prefHeight="25.0" prefWidth="163.0" promptText="Student Name" />
+      <Button fx:id="AvgBtn" layoutX="166.0" layoutY="386.0" mnemonicParsing="false" onAction="#Avgset" prefHeight="25.0" prefWidth="179.0" text="Calculate Average" />
+      <Label fx:id="Hello1" alignment="CENTER" layoutX="110.0" layoutY="183.0" prefHeight="27.0" prefWidth="112.0" text="Choose your child:" underline="true">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+            <ImageView fx:id="LogOutIcon" fitHeight="20.0" fitWidth="20.0" layoutX="292.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Logout.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

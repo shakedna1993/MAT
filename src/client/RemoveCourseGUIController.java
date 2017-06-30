@@ -18,6 +18,9 @@ import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
 
+/**
+ * This class is the controller for the Remove Course screen GUI.
+ */
 public class RemoveCourseGUIController implements Initializable{
 	
 	public static ClientConsole cli;
@@ -52,13 +55,18 @@ public class RemoveCourseGUIController implements Initializable{
 	@FXML
 	TextField CourseID;
 
-	
+	/**
+	 * initialize-initialize the system manager name
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		User s =new User();
 		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		SysName.setText(s.getName());
 	}
 	
+	/**
+	 * Remove-get the course id to remove from the DB
+	 */
 	public void Remove() throws IOException {
 		try {
 			Course crs = new Course(CourseID.getText());
@@ -104,24 +112,24 @@ public class RemoveCourseGUIController implements Initializable{
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
+	/**
+	 * This method goes back to the last window that been shown
+	 */
 	public void back() {
 		try {
-			Stage stage = (Stage) BackButton.getScene().getWindow();
-			stage.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
 			connectionmain.showSysManMain();
-		} catch (IOException e) {
-			
-			e.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Logout from the server
+	 */
 	@FXML
 	public void clsSysMan() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT, MsgFromServer.getDataListByIndex(IndexList.LOGIN));
