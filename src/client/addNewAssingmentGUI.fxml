@@ -12,6 +12,11 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newAssTeacher">
    <children>
+      <ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/BackGround.png" />
+         </image>
+      </ImageView>
       <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
       <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
          <image>
@@ -28,24 +33,28 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="LogOut" layoutX="346.0" layoutY="555.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Log Out" />
       <Separator layoutY="95.0" prefHeight="17.0" prefWidth="639.0" />
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
-      <Button fx:id="sendBtn" disable="true" layoutX="217.0" layoutY="455.0" mnemonicParsing="false" onAction="#newAss" prefHeight="31.0" prefWidth="77.0" text="Upload" />
-      <Label layoutX="21.0" layoutY="401.0" text="Date of Submission" />
-      <TextField fx:id="DaySubmissionTEXT" layoutX="167.0" layoutY="396.0" prefHeight="31.0" prefWidth="44.0" />
-      <TextField fx:id="month" layoutX="224.0" layoutY="396.0" prefHeight="31.0" prefWidth="77.0" />
-      <TextField fx:id="yearText" layoutX="316.0" layoutY="396.0" prefHeight="31.0" prefWidth="56.0" />
-      <Button fx:id="backBtn" layoutX="215.0" layoutY="555.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
-      <Label fx:id="selectAss" layoutX="21.0" layoutY="344.0" prefHeight="21.0" prefWidth="96.0" text="Description:" />
-      <Label fx:id="selectC" layoutX="24.0" layoutY="193.0" text="Select file to upload:" />
-      <Button fx:id="ChooseFile" layoutX="208.0" layoutY="188.0" mnemonicParsing="false" onAction="#OpenFolder" prefHeight="31.0" prefWidth="106.0" text="Choose File" />
-      <TextField fx:id="description" layoutX="165.0" layoutY="339.0" prefHeight="31.0" prefWidth="337.0" />
-      <Label layoutX="22.0" layoutY="293.0" text="Assingment name:" />
-      <TextField fx:id="AssingmentnameTEXT" layoutX="167.0" layoutY="289.0" />
-      <Label layoutX="21.0" layoutY="246.0" text="Course id:" />
-      <TextField fx:id="CourseidTEXT" layoutX="167.0" layoutY="242.0" />
-      <Label fx:id="filename" layoutX="358.0" layoutY="195.0" />
+      <Button fx:id="sendBtn" disable="true" layoutX="272.0" layoutY="458.0" mnemonicParsing="false" onAction="#newAss" prefHeight="31.0" prefWidth="111.0" text="Upload" />
+      <Label layoutX="124.0" layoutY="401.0" text="Date of Submission" underline="true" />
+      <TextField fx:id="DaySubmissionTEXT" layoutX="270.0" layoutY="396.0" prefHeight="31.0" prefWidth="44.0" text="Day" />
+      <TextField fx:id="month" alignment="CENTER" layoutX="327.0" layoutY="396.0" prefHeight="31.0" prefWidth="77.0" text="Month" />
+      <TextField fx:id="yearText" alignment="CENTER" layoutX="419.0" layoutY="396.0" prefHeight="31.0" prefWidth="56.0" text="Year" />
+      <Button fx:id="backBtn" layoutX="272.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="111.0" text="     Back" />      
+      <Label fx:id="selectAss" layoutX="124.0" layoutY="344.0" prefHeight="21.0" prefWidth="96.0" text="Description:" underline="true" />
+      <Label fx:id="selectC" layoutX="127.0" layoutY="193.0" text="Select file to upload:" underline="true" />
+      <Button fx:id="ChooseFile" layoutX="271.0" layoutY="186.0" mnemonicParsing="false" onAction="#OpenFolder" prefHeight="31.0" prefWidth="111.0" text="Choose File" />
+      <TextField fx:id="description" layoutX="270.0" layoutY="342.0" prefHeight="5.0" prefWidth="337.0" />
+      <Label layoutX="125.0" layoutY="293.0" text="Assingment name:" underline="true" />
+      <TextField fx:id="AssingmentnameTEXT" layoutX="270.0" layoutY="289.0" />
+      <Label layoutX="124.0" layoutY="246.0" text="Course id:" underline="true" />
+      <TextField fx:id="CourseidTEXT" layoutX="270.0" layoutY="242.0" />
+      <Label fx:id="filename" layoutX="410.0" layoutY="189.0" prefHeight="25.0" prefWidth="188.0" />
+      <ImageView fx:id="BackIcon" fitHeight="20.0" fitWidth="25.0" layoutX="285.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Back.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

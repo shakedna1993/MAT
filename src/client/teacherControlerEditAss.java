@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import entity.Assigenment;
 import entity.Course;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
@@ -32,6 +34,11 @@ import thred.IndexList;
 import thred.MyThread;
 
 public class teacherControlerEditAss implements Initializable{
+	
+	@FXML
+	Label Hello;
+	@FXML
+	javafx.scene.control.Label TeacherName;
 	@FXML
 	javafx.scene.control.Label courseTxt;
 	@FXML
@@ -64,6 +71,9 @@ public class teacherControlerEditAss implements Initializable{
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		User s =new User();
+		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		TeacherName.setText(s.getName());
 	 c = new Course();
 	assTxt.setText(TchMainGUIController.assToChoose);
 	ArrayList<Assigenment> b=(ArrayList<Assigenment>)MsgFromServer.getDataListByIndex(IndexList.setTableViewTeacherCourseAssigenment);

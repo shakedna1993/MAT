@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,6 +38,10 @@ import thred.MyThread;
 
 public class teacherDownloadAssStud implements Initializable {
 
+	@FXML
+	Label Hello;
+	@FXML
+	javafx.scene.control.Label TeacherName;
 	@FXML
 	Button chooseFileUP;
 	@FXML
@@ -70,6 +75,9 @@ public class teacherDownloadAssStud implements Initializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		User s =new User();
+		s=(User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
+		TeacherName.setText(s.getName());
 
 		assTxt.setText(TchMainGUIController.assToChoose);
 		ArrayList<Assigenment> b = (ArrayList<Assigenment>) MsgFromServer

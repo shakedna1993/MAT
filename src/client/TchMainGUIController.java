@@ -87,8 +87,9 @@ public class TchMainGUIController implements Initializable {
 		WeekHours.setText(maxHours);
 		int role;
 		role = ((User) MsgFromServer.getDataListByIndex(IndexList.LOGIN)).getRole();
-		if (role == 3)
+		if (role == 3){
 			Back.setDisable(true);
+		}
 
 		setComboBoxTeacherCourse(id);
 
