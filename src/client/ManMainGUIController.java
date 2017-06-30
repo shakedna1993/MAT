@@ -122,7 +122,7 @@ public class ManMainGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		num = (int) (MsgFromServer.getDataListByIndex(IndexList.BlockParent));
+		//num = (int) (MsgFromServer.getDataListByIndex(IndexList.BlockParent));
 		boolean b = (boolean) MsgFromServer.getDataListByIndex(IndexList.BlockParent);
 
 		if (b) {
@@ -151,7 +151,7 @@ public class ManMainGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		num = (int) (MsgFromServer.getDataListByIndex(IndexList.unBlockParent));
+		//num = (int) (MsgFromServer.getDataListByIndex(IndexList.unBlockParent));
 		boolean b = (boolean) MsgFromServer.getDataListByIndex(IndexList.unBlockParent);
 		if (b) {
 			Alert alert = new Alert(AlertType.INFORMATION);

@@ -1,7 +1,11 @@
 package client;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,13 +93,12 @@ public class teacherControlerEditAss implements Initializable{
 	public void editAss() throws ParseException{
 		
 		
-		
-		
-		
 		Assigenment ass = new Assigenment();
 		ass.setAssId(TchMainGUIController.assId);
 		ass.setCoursename(courseTxt.getText());
 		ass.setCourseid(c.getCourseId());
+		File f = chooser.getSelectedFile();
+		
 		
 		MyThread a = new MyThread(RequestType.assCourseTeach, IndexList.assCourseTeach,ass);
 		a.start();
@@ -108,7 +111,7 @@ public class teacherControlerEditAss implements Initializable{
 		Assigenment newAss = (Assigenment) MsgFromServer.getDataListByIndex(IndexList.assCourseTeach);
 		
 		if(fname.getText().length()!=0){
-			File f = chooser.getSelectedFile();
+			
 			newAss.setPath(f.getAbsolutePath());
 			newAss.setFileid(fname.getText());
 		}
@@ -123,14 +126,13 @@ public class teacherControlerEditAss implements Initializable{
 			java.util.Date date = fmt.parse(data);
 			newAss.setDueDate(date); 
 		}
-		
-	
-		
-		
-	
-		
-		
-		
+		Path path = Paths.get(f.getAbsolutePath());
+		try {
+			newAss.setData(Files.readAllBytes(path));
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 		
 		MyThread Q = new MyThread(RequestType.UpdateAss, IndexList.UpdateAss, newAss);
 		Q.start();

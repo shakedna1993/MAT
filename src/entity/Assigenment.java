@@ -11,6 +11,7 @@ public class Assigenment implements Serializable{
 	private String  UserId, Fileid, courseid, coursename, classid, classname, teacherid, techername,assname,grade,semester,comments,evalid,path,UserName, late;
 	private int check, AssId, assStudent;
 	private Date DueDate;
+	private byte[] data;
 	
 	/**
 	 * FileType={1-PDF, 2-WORD, 3-ZIP, 4-Excel}
@@ -24,6 +25,16 @@ public class Assigenment implements Serializable{
 		AssId = -1;
 		late = "";
 		
+	}
+
+
+	public byte[] getData() {
+		return data;
+	}
+
+
+	public void setData(byte[] data) {
+		this.data = data;
 	}
 
 

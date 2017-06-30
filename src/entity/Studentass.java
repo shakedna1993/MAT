@@ -13,10 +13,35 @@ public class Studentass implements Serializable{
 	private int Assid;
 	private Date Date;
 	private File path, evapath, gradepath;
+	private byte[] data, evaData, gradeData;
 	
 	
 	public Studentass() {
 		super();
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public byte[] getEvaData() {
+		return evaData;
+	}
+
+	public void setEvaData(byte[] evaData) {
+		this.evaData = evaData;
+	}
+
+	public byte[] getGradeData() {
+		return gradeData;
+	}
+
+	public void setGradeData(byte[] gradeData) {
+		this.gradeData = gradeData;
 	}
 
 	public Studentass(int assid, String assiName, String studid, String courseid, String fileid, 

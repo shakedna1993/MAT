@@ -140,7 +140,13 @@ public class TchMainGUIController implements Initializable {
 		}
 
 		Course course = (Course) MsgFromServer.getDataListByIndex(IndexList.createCourseEntityByName);
-
+		MyThread C1 = new MyThread(RequestType.setComboBoxTeacherCourse, IndexList.setComboBoxTeacherCourse, s.getId());
+		C1.start();
+		try {
+			C1.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
 		ltd = (ArrayList<Assigenment>) MsgFromServer.getDataListByIndex(IndexList.setComboBoxTeacherCourse);
 
 		MyThread B = new MyThread(RequestType.createClassEntity, IndexList.createClassEntity, null);

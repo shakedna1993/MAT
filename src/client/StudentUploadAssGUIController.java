@@ -4,6 +4,9 @@ import java.io.File;
 //import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -69,6 +72,14 @@ public class StudentUploadAssGUIController implements Initializable {
 		try {
 			File f = new File(chooser.getSelectedFile().getPath());
 			Studentass SA = new Studentass(ass, s.getId(), crs, "", duedate, f, fname);
+			Path path = Paths.get(f.getAbsolutePath());
+			try {
+				SA.setData(Files.readAllBytes(path));
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+			
 			MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile, SA);
 			try {
 				C.start();

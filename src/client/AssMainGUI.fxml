@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.AssMainGUIController">
+<AnchorPane prefHeight="600.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.AssMainGUIController">
    <children>
       <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
       <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="316.0">
@@ -34,7 +39,7 @@
       <Separator layoutY="132.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
       <Button fx:id="Back" layoutX="212.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="77.0" text="Back" />
-      <ComboBox fx:id="STC" layoutX="240.0" layoutY="179.0" prefHeight="25.0" prefWidth="220.0" promptText="Course" />
+      <ComboBox fx:id="STC" layoutX="240.0" layoutY="179.0" onAction="#setTableViewStudentCourseAssigenment" prefHeight="25.0" prefWidth="220.0" promptText="Course" />
       <Button fx:id="Upload_Ass" layoutX="376.0" layoutY="462.0" mnemonicParsing="false" onAction="#UploadAss" prefHeight="25.0" prefWidth="200.0" text="Assignment Submission" />
       <Button fx:id="Down_Ass" layoutX="127.0" layoutY="462.0" mnemonicParsing="false" onAction="#DownloadAss" prefHeight="25.0" prefWidth="200.0" text="Download Selected Assignment" />
       <Label fx:id="Ass" layoutX="289.0" layoutY="147.0" text="Assignments" underline="true">

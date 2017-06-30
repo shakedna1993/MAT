@@ -1,7 +1,11 @@
 package client;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javax.swing.JFileChooser;
@@ -124,7 +128,20 @@ public class EvaluationsGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		if ((int) MsgFromServer.getDataListByIndex(IndexList.DownloadStuEvaluation) == 1) {
+		Studentass dlass = (Studentass) MsgFromServer.getDataListByIndex(IndexList.DownloadStuEvaluation);
+		if (dlass != null) {
+			String home = System.getProperty("user.home");
+			File newFolder = new File(home + "\\Downloads\\");
+			if (!newFolder.exists()) newFolder.mkdirs();
+			String filePath = newFolder.getAbsolutePath();
+			Path path = Paths.get(filePath+"\\" + dlass.getEvaFileName());
+			try {
+				Files.write(path, dlass.getEvaData());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			filePath = filePath+"\\" + dlass.getFileid();
+			
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Success");
 			alert.setHeaderText(null);
@@ -160,7 +177,20 @@ public class EvaluationsGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		if ((int) MsgFromServer.getDataListByIndex(IndexList.DownloadStuGradeFile) == 1) {
+		Studentass dlass = (Studentass) MsgFromServer.getDataListByIndex(IndexList.DownloadStuGradeFile);
+		if (dlass != null) {
+			String home = System.getProperty("user.home");
+			File newFolder = new File(home + "\\Downloads\\");
+			if (!newFolder.exists()) newFolder.mkdirs();
+			String filePath = newFolder.getAbsolutePath();
+			Path path = Paths.get(filePath+"\\" + dlass.getGradeFileName());
+			try {
+				Files.write(path, dlass.getGradeData());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			filePath = filePath+"\\" + dlass.getFileid();
+			
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Success");
 			alert.setHeaderText(null);

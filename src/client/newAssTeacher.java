@@ -1,7 +1,12 @@
 package client;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -103,7 +108,14 @@ public class newAssTeacher implements Initializable {
 		ass.setCourseid(CourseidTEXT.getText());
 		ass.setPath(f.getAbsolutePath());
 		ass.setFileid(filename.getText());
-
+		
+		Path path = Paths.get(ass.getPath());
+		try {
+			ass.setData(Files.readAllBytes(path));
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 		if (ass.getAssname().length() == 0 || ass.getCourseid().length() == 0
 				|| DaySubmissionTEXT.getText().length() != 2 || month.getText().length() != 2
 				|| yearText.getText().length() != 4) {

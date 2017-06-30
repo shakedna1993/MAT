@@ -1,8 +1,12 @@
 package client;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import entity.Assigenment;
@@ -212,12 +216,12 @@ public class AssMainGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		MyFile tmpFile = null;
+		Assigenment dlass = null;
 		try {
-			tmpFile = ((MyFile) MsgFromServer.getDataListByIndex(IndexList.DownloadAssigenment));
+			dlass = ((Assigenment) MsgFromServer.getDataListByIndex(IndexList.DownloadAssigenment));
 		} catch (Exception e) {
 		}
-		if (tmpFile == null || tmpFile.getSize() <= 0) {
+		if (dlass == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Fail");
 			alert.setHeaderText(null);
@@ -225,13 +229,17 @@ public class AssMainGUIController implements Initializable {
 			alert.show();
 			return;
 		}
-		FileOutputStream fos = new FileOutputStream(tmpFile.getFileName());
-		fos.write(tmpFile.getData());
-		fos.close();
+		String home = System.getProperty("user.home");
+		File newFolder = new File(home + "\\Downloads\\");
+		if (!newFolder.exists()) newFolder.mkdirs();
+		String filePath = newFolder.getAbsolutePath();
+		Path path = Paths.get(filePath+"\\" + dlass.getFileid());
+		Files.write(path, dlass.getData());
+		filePath = filePath+"\\" + dlass.getFileid();
 
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Success");
-		alert.setContentText("The file was successfuly downloaded to: " + tmpFile.getFileName());
+		alert.setContentText("The file was successfuly downloaded to: " + filePath);
 		alert.show();
 
 	}

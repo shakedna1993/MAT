@@ -1,7 +1,11 @@
 package client;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -10,6 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import entity.Assigenment;
 import entity.Course;
+import entity.Studentass;
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -133,8 +138,20 @@ public class teacherDownloadAssStud implements Initializable {
 				e1.printStackTrace();
 			}
 
-			int flag = (int) MsgFromServer.getDataListByIndex(IndexList.downloadOneFileStud);
-			if (flag == 1) {
+			Studentass dlass = (Studentass) MsgFromServer.getDataListByIndex(IndexList.downloadOneFileStud);
+			if (dlass != null) {
+				String home = System.getProperty("user.home");
+				File newFolder = new File(home + "\\Downloads\\");
+				if (!newFolder.exists()) newFolder.mkdirs();
+				String filePath = newFolder.getAbsolutePath();
+				Path path = Paths.get(filePath+"\\" + dlass.getFname());
+				try {
+					Files.write(path, dlass.getData());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				filePath = filePath+"\\" + dlass.getFileid();
+				
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Download assignments");
 				alert.setHeaderText(null);
@@ -170,8 +187,21 @@ public class teacherDownloadAssStud implements Initializable {
 			e1.printStackTrace();
 		}
 
-		int flag = (int) MsgFromServer.getDataListByIndex(IndexList.downloadStudentAssForTeacher);
-		if (flag == 1) {
+		ArrayList<Studentass> dlassList = (ArrayList<Studentass>) MsgFromServer.getDataListByIndex(IndexList.downloadStudentAssForTeacher);
+		if (dlassList != null) {
+			for (int i=0; i<dlassList.size(); i++){
+				Studentass dlass = dlassList.get(i);
+				String home = System.getProperty("user.home");
+				File newFolder = new File(home + "\\Downloads\\");
+				if (!newFolder.exists()) newFolder.mkdirs();
+				String filePath = newFolder.getAbsolutePath();
+				Path path = Paths.get(filePath+"\\" + dlass.getFname());
+				try {
+					Files.write(path, dlass.getData());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Download assignments");
 			alert.setHeaderText(null);
@@ -226,6 +256,14 @@ public class teacherDownloadAssStud implements Initializable {
 			File f = chooser2.getSelectedFile();
 			choosenStud.setPath(f.getAbsolutePath());
 			choosenStud.setFileid(chooser2.getSelectedFile().getName());
+			Path path = Paths.get(f.getAbsolutePath());
+			try {
+				choosenStud.setData(Files.readAllBytes(path));
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+			
 			MyThread a = new MyThread(RequestType.uploadEvaluation, IndexList.uploadEvaluation, choosenStud);
 			a.start();
 			try {
@@ -268,6 +306,13 @@ public class teacherDownloadAssStud implements Initializable {
 			File f = chooser2.getSelectedFile();
 			choosenStud.setPath(f.getAbsolutePath());
 			choosenStud.setFileid(chooser2.getSelectedFile().getName());
+			Path path = Paths.get(f.getAbsolutePath());
+			try {
+				choosenStud.setData(Files.readAllBytes(path));
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
 			MyThread a = new MyThread(RequestType.uploadGradeFile, IndexList.uploadGradeFile, choosenStud);
 			a.start();
 			try {

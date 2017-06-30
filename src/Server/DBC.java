@@ -26,11 +26,16 @@ import entity.User;
 import entity.Class;
 import Server.Connect;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * This class contains all the interaction with the Data-Base *
@@ -1923,21 +1928,32 @@ public class DBC {
 					ass.setUserId(rs.getString(4));
 					ass.setCourseid(rs.getString(5));
 					ass.setAssname(rs.getString(8));
-					ResultSet rs1 = stmt.executeQuery(
-							"SELECT * FROM moodle.studentassignment where " + "CourseId='" + asud.getCourseid()
-									+ "' AND Studid='" + asud.getStudid() + "' AND TechAssId='" + ass.getAssId() + "'");
-					while (rs1.next()) {
-						flag = 1;
-					}
-					if (flag == 0) {
-						lst.add(ass);
-					}
+					lst.add(ass);
 				}
 
 				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+			for (int i=0; i<lst.size(); i++){
+				Assigenment ass = lst.get(i);
+				rs = stmt
+						.executeQuery("SELECT * FROM moodle.studentassignment where " + "CourseId='" + asud.getCourseid()
+						+ "' AND Studid='" + asud.getStudid() + "' AND TechAssId='" + ass.getAssId() + "'");
+				while (rs.next()) {
+					try {
+						int id = rs.getInt(9);
+						if (ass.getAssId() == id) {
+							lst.remove(i);
+							i--;
+						}
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			
 			rs.close();
 			Connect.close();
 			return lst;
@@ -1987,6 +2003,17 @@ public class DBC {
 	}
 
 	public static int UploadFile(Studentass stuass) throws Exception {
+		
+		
+		File newFolder = new File("/MAT-LocalFiles/");
+		if (!newFolder.exists()) newFolder.mkdirs();
+		String filePath = newFolder.getAbsolutePath();
+		Path path = Paths.get(filePath+"/" + stuass.getFname());
+		Files.write(path, stuass.getData());
+		filePath = filePath+"/" + stuass.getFname();
+		File f = new File(filePath);
+		stuass.setPath(f);
+		
 		try {
 			Connection conn = Connect.getConnection();
 			FileInputStream InputStream = new FileInputStream(stuass.getPath());
@@ -1999,7 +2026,8 @@ public class DBC {
 			stmt.setString(2, stuass.getCourseid());
 			stmt.setDate(3, datenow);
 			stmt.setString(4, stuass.getFileid());
-			stmt.setBinaryStream(5, (InputStream) InputStream, (long) stuass.getPath().length());
+			Blob blob = new javax.sql.rowset.serial.SerialBlob(stuass.getData());
+			stmt.setBlob(5, blob);
 			stmt.setString(6, stuass.getFname());
 			stmt.setInt(8, stuass.getAssid());
 			if (datenow.after(stuass.getDate())) {
@@ -2017,30 +2045,34 @@ public class DBC {
 		}
 	}
 
-	public static MyFile DownloadAssigenment(Assigenment ass) throws IOException {
+	public static Assigenment DownloadAssigenment(Assigenment ass) throws IOException{
+		Assigenment ret = null;
 		Statement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
-
+		int flag = 1;
+		
 		try {
-			conn = Connect.getConnection();
+			 conn = Connect.getConnection();
 			stmt = conn.createStatement();
-			String sql = "select * from moodle.teacherassingment where Assid= '" + ass.getAssId() + "'";
+			String sql = "select * from moodle.teacherassingment where Assid= '"+ ass.getAssId() + "'";
 			rs = stmt.executeQuery(sql);
-			if (rs.next()) {
-				Blob blob = rs.getBlob(7);
-
-				int blobLength = (int) blob.length();
-
-				return (new MyFile()).setData(blob.getBytes(1, (int) blob.length()))
-						.setFileName("c:\\Downloads\\" + rs.getString(2)).setSize(blobLength);
+			while (rs.next()){
+				ret = new Assigenment();
+				ret.setAssId(rs.getInt(1));
+				ret.setFileid(rs.getString(2));
+				ret.setDueDate(rs.getDate(3));
+				ret.setTeacherid(rs.getString(4));
+				ret.setCourseid(rs.getString(5));
+				ret.setSemester(rs.getString(6));
+				ret.setData(rs.getBytes(7));
+				ret.setAssname(rs.getString(8));
 			}
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
-
+			flag = 0;
 		}
-
-		return new MyFile().setSize(-1);
+		return ret;
 	}
 
 	/**
@@ -2877,6 +2909,13 @@ public class DBC {
 		System.out.println(data);
 		PreparedStatement myStmt = null;
 
+		File newFolder = new File("/MAT-LocalFiles/");
+		if (!newFolder.exists()) newFolder.mkdirs();
+		String filePath = newFolder.getAbsolutePath();
+		Path path = Paths.get(filePath+"/" + ass.getFileid());
+		Files.write(path, ass.getData());
+		filePath = filePath+"/" + ass.getFileid();
+		
 		FileInputStream inputStream = null;
 		try {// need to fix!
 
@@ -2884,15 +2923,15 @@ public class DBC {
 			Connection conn = Connect.getConnection();
 			myStmt = conn.prepareStatement(Quary);
 
-			File theFile = new File(ass.getPath());
+			File theFile = new File(filePath);
 			inputStream = new FileInputStream(theFile);
 
 			myStmt.setString(1, ass.getFileid());// need to fix
 			myStmt.setString(2, data);
 			myStmt.setString(3, ass.getUserId());
 			myStmt.setString(4, ass.getCourseid());
-
-			myStmt.setBinaryStream(5, (InputStream) inputStream, (long) theFile.length());
+			Blob blob = new javax.sql.rowset.serial.SerialBlob(ass.getData());
+			myStmt.setBlob(5, blob);
 
 			myStmt.setString(6, ass.getAssname());
 
@@ -2915,10 +2954,21 @@ public class DBC {
 		String data = fmt.format(ass.getDueDate());
 		PreparedStatement myStmt = null;
 
+		File newFolder = new File("/MAT-LocalFiles/");
+		if (!newFolder.exists()) newFolder.mkdirs();
+		String filePath = newFolder.getAbsolutePath();
+		Path path = Paths.get(filePath+"/" + ass.getFileid());
+		try {
+			Files.write(path, ass.getData());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		filePath = filePath+"/" + ass.getFileid();
+		
 		FileInputStream inputStream = null;
 		if (ass.getPath() != null) {
 			try {
-
 				String Quary = "update moodle.teacherassingment set Fileid=?, DueDate=?, assName=?, path=? where Assid= '"
 						+ ass.getAssId() + "' AND CourseId= '" + ass.getCourseid() + "'";
 				Connection conn = Connect.getConnection();
@@ -2928,9 +2978,8 @@ public class DBC {
 				myStmt.setString(2, data);
 				myStmt.setString(3, ass.getAssname());
 
-				File theFile = new File(ass.getPath());
-				inputStream = new FileInputStream(theFile);
-				myStmt.setBinaryStream(4, (InputStream) inputStream, (long) theFile.length());
+				Blob blob = new javax.sql.rowset.serial.SerialBlob(ass.getData());
+				myStmt.setBlob(4, blob);
 
 				if (myStmt.executeUpdate() == 0)
 					System.out.println("error");
@@ -2989,14 +3038,13 @@ public class DBC {
 		return a1;
 	}
 
-	public static int downloadStudentAssForTeacher(Assigenment teacherAss) throws IOException {
+	public static ArrayList<Studentass> downloadStudentAssForTeacher(Assigenment teacherAss) throws IOException {
+		ArrayList<Studentass> ret = new ArrayList<Studentass>();
 		Statement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		int flag = 1;
-		InputStream input = null;
-		FileOutputStream output = null;
-		Assigenment ass = null;
+
+		Studentass ass = null;
 
 		try {
 			conn = Connect.getConnection();
@@ -3004,38 +3052,17 @@ public class DBC {
 			String sql = "select * from moodle.studentassignment where TechAssId= '" + teacherAss.getAssId() + "'";
 			rs = stmt.executeQuery(sql);
 
-			ass = new Assigenment();
-
 			while (rs.next()) {
-				ass.setAssId(rs.getInt(1));
-				ass.setUserId(rs.getString(2));
-				ass.setCourseid(rs.getString(3));
-				ass.setDueDate(rs.getDate(4));
-				ass.setCheck(rs.getInt(8));
-
-				String home = System.getProperty("user.home");
-				File theFile = new File(home + "\\Downloads\\" + rs.getString(7));
-
-				output = new FileOutputStream(theFile);
-				input = rs.getBinaryStream(6);
-
-				byte[] buffer = new byte[1024];
-				while (input.read(buffer) > 0) {
-					output.write(buffer);
-				}
+				ass = new Studentass();
+				ass.setAssid(rs.getInt(1));
+				ass.setData(rs.getBytes(6));
+				ass.setFname(rs.getString(7));
+				ret.add(ass);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			flag = 0;
-		} finally {
-			if (input != null) {
-				input.close();
 			}
-			if (output != null) {
-				output.close();
-			}
-		}
-		return flag;
+		return ret;
 
 	}
 
@@ -3085,14 +3112,13 @@ public class DBC {
 
 	}
 
-	public static int downloadOneFileStud(Assigenment assToDownload) throws IOException {
+	public static Studentass downloadOneFileStud(Assigenment assToDownload) throws IOException {
+		Studentass ret = null;
 		Statement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		int flag = 1;
-		InputStream input = null;
-		FileOutputStream output = null;
-		Assigenment ass = null;
+
+		Studentass ass = null;
 
 		try {
 			conn = Connect.getConnection();
@@ -3102,52 +3128,54 @@ public class DBC {
 					+ "'";
 			rs = stmt.executeQuery(sql);
 
-			ass = new Assigenment();
+			ass = new Studentass();
 
 			while (rs.next()) {
-
-				String home = System.getProperty("user.home");
-				File theFile = new File(home + "\\Downloads\\" + rs.getString(7));
-				output = new FileOutputStream(theFile);
-				input = rs.getBinaryStream(6);
-
-				byte[] buffer = new byte[1024];
-				while (input.read(buffer) > 0) {
-					output.write(buffer);
-				}
+				ret = new Studentass();
+				ret.setAssid(rs.getInt(1));
+				ret.setStudid(rs.getString(2));
+				ret.setCourseid(rs.getString(3));
+				ret.setDate(rs.getDate(4));
+				ret.setFileid(rs.getString(5));
+				ret.setData(rs.getBytes(6));
+				ret.setFname(rs.getString(7));
+				ret.setEvaData(rs.getBytes(10));
+				ret.setEvaFileName(rs.getString(11));
+				ret.setGradeData(rs.getBytes(12));
+				ret.setGradeFileName(rs.getString(13));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			flag = 0;
-		} finally {
-			if (input != null) {
-				input.close();
-			}
-			if (output != null) {
-				output.close();
-			}
-		}
-		return flag;
+		} 
+		return ret;
 
 	}
 
 	public static int uploadEvaluation(Assigenment ass) throws IOException {
 
+		File newFolder = new File("/MAT-LocalFiles/");
+		if (!newFolder.exists()) newFolder.mkdirs();
+		String filePath = newFolder.getAbsolutePath();
+		Path path = Paths.get(filePath+"/" + ass.getFileid());
+		Files.write(path, ass.getData());
+		filePath = filePath+"/" + ass.getFileid();
+		ass.setPath(filePath);
+		
+		
 		PreparedStatement myStmt = null;
-
+		
 		FileInputStream inputStream = null;
 		try {// need to fix! String Quary="UPDATE moodle.teachers SET
 				// Unit='"+Unit+"' WHERE Id="+id+"";
-
+			
 			String Quary = "UPDATE moodle.studentassignment SET evaluation=?, evaluationName=?  WHERE Courseid='"
 					+ ass.getCourseid() + "' AND Studid='" + ass.getUserId() + "' AND TechAssId='" + ass.getAssId()
 					+ "'";
 			Connection conn = Connect.getConnection();
 			myStmt = conn.prepareStatement(Quary);
 
-			File theFile = new File(ass.getPath());
-			inputStream = new FileInputStream(theFile);
-			myStmt.setBinaryStream(1, (InputStream) inputStream, (long) theFile.length());
+			Blob blob = new javax.sql.rowset.serial.SerialBlob(ass.getData());
+			myStmt.setBlob(1, blob);
 			myStmt.setString(2, ass.getFileid());// need to fix
 
 			if (myStmt.executeUpdate() == 0)
@@ -3165,6 +3193,14 @@ public class DBC {
 
 	public static int uploadGradeFile(Assigenment ass) throws IOException {
 
+		File newFolder = new File("/MAT-LocalFiles/");
+		if (!newFolder.exists()) newFolder.mkdirs();
+		String filePath = newFolder.getAbsolutePath();
+		Path path = Paths.get(filePath+"/" + ass.getFileid());
+		Files.write(path, ass.getData());
+		filePath = filePath+"/" + ass.getFileid();
+		ass.setPath(filePath);
+		
 		PreparedStatement myStmt = null;
 
 		FileInputStream inputStream = null;
@@ -3177,9 +3213,8 @@ public class DBC {
 			Connection conn = Connect.getConnection();
 			myStmt = conn.prepareStatement(Quary);
 
-			File theFile = new File(ass.getPath());
-			inputStream = new FileInputStream(theFile);
-			myStmt.setBinaryStream(1, (InputStream) inputStream, (long) theFile.length());
+			Blob blob = new javax.sql.rowset.serial.SerialBlob(ass.getData());
+			myStmt.setBlob(1, blob);
 			myStmt.setString(2, ass.getFileid());// need to fix
 
 			if (myStmt.executeUpdate() == 0)
@@ -3286,13 +3321,11 @@ public class DBC {
 		return s;
 	}
 
-	public static int DownloadStuEvaluation(Studentass ass) throws IOException {
+	public static Studentass DownloadStuEvaluation(Studentass ass) throws IOException {
+		Studentass ret = null;
 		Statement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		int flag = 1;
-		InputStream input = null;
-		FileOutputStream output = null;
 
 		try {
 			conn = Connect.getConnection();
@@ -3300,37 +3333,31 @@ public class DBC {
 			String sql = "select * from moodle.studentassignment where Assid= '" + ass.getAssid() + "'";
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				String home = System.getProperty("user.home");
-				File theFile = new File(home + "\\Downloads\\" + rs.getString(11));
-				output = new FileOutputStream(theFile);
-				input = rs.getBinaryStream(10);
-
-				byte[] buffer = new byte[1024];
-				while (input.read(buffer) > 0) {
-					output.write(buffer);
-				}
+				ret = new Studentass();
+				ret.setAssid(rs.getInt(1));
+				ret.setStudid(rs.getString(2));
+				ret.setCourseid(rs.getString(3));
+				ret.setDate(rs.getDate(4));
+				ret.setFileid(rs.getString(5));
+				ret.setData(rs.getBytes(6));
+				ret.setFname(rs.getString(7));
+				ret.setEvaData(rs.getBytes(10));
+				ret.setEvaFileName(rs.getString(11));
+				ret.setGradeData(rs.getBytes(12));
+				ret.setGradeFileName(rs.getString(13));
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			flag = 0;
-		} finally {
-			if (input != null) {
-				input.close();
-			}
-			if (output != null) {
-				output.close();
-			}
 		}
-		return flag;
+		return ret;
 	}
 
-	public static int DownloadStuGradeFile(Studentass ass) throws IOException {
+	public static Studentass DownloadStuGradeFile(Studentass ass) throws IOException {
+		Studentass ret = null;
 		Statement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		int flag = 1;
-		InputStream input = null;
-		FileOutputStream output = null;
 
 		try {
 			conn = Connect.getConnection();
@@ -3338,28 +3365,24 @@ public class DBC {
 			String sql = "select * from moodle.studentassignment where Assid= '" + ass.getAssid() + "'";
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
-				String home = System.getProperty("user.home");
-				File theFile = new File(home + "\\Downloads\\" + rs.getString(13));
-				output = new FileOutputStream(theFile);
-				input = rs.getBinaryStream(12);
-
-				byte[] buffer = new byte[1024];
-				while (input.read(buffer) > 0) {
-					output.write(buffer);
-				}
+				ret = new Studentass();
+				ret.setAssid(rs.getInt(1));
+				ret.setStudid(rs.getString(2));
+				ret.setCourseid(rs.getString(3));
+				ret.setDate(rs.getDate(4));
+				ret.setFileid(rs.getString(5));
+				ret.setData(rs.getBytes(6));
+				ret.setFname(rs.getString(7));
+				ret.setEvaData(rs.getBytes(10));
+				ret.setEvaFileName(rs.getString(11));
+				ret.setGradeData(rs.getBytes(12));
+				ret.setGradeFileName(rs.getString(13));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			flag = 0;
-		} finally {
-			if (input != null) {
-				input.close();
-			}
-			if (output != null) {
-				output.close();
-			}
 		}
-		return flag;
+		
+		return ret;
 	}
 
 	public static Course createCourseEntityByName(String courseName) {
