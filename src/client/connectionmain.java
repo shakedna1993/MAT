@@ -374,18 +374,6 @@ public class connectionmain extends Application {
 	}
 	
 	/**
-	 * show the window of Remove class
-	 */
-	public static void removeClass(ActionEvent event) throws IOException{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/client/RemoveClassGUI.fxml"));
-		Pane root = loader.load();		
-		primaryStage.setScene(new Scene(root));		
-		primaryStage.setTitle("M.A.T- Remove class");
-		primaryStage.show();
-	}
-	
-	/**
 	 * show the window of Add student
 	 */
 	public static void addStudent(ActionEvent event) throws IOException{

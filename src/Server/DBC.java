@@ -119,8 +119,9 @@ public class DBC {
 
 				try {
 					stud.setParentId(rs.getString(1));
-					stud.setAvg(rs.getFloat(2));
+					
 					stud.setId(rs.getString(3) == null ? "-1" : rs.getString(3));
+					stud.setAvg(avgOneStudent(stud.getId()));
 					stud.setClassid(rs.getString(4));
 				} catch (Exception e) {
 					stud.setId("-1");
@@ -473,8 +474,8 @@ public class DBC {
 				try {
 					Student s = new Student();
 					s.setParentId((rs.getString(1)));
-					s.setAvg((rs.getFloat(2)));
 					s.setId(rs.getString(3));
+					s.setAvg(avgOneStudent(s.getId()));
 					s.setClassid(classId);
 					studList.add(s);
 				} catch (Exception e) {
@@ -1309,8 +1310,8 @@ public class DBC {
 				try {
 					Student s = new Student();
 					s.setParentId((rs.getString(1)));
-					s.setAvg((rs.getFloat(2)));
 					s.setId(rs.getString(3));
+					s.setAvg(avgOneStudent(s.getId()));
 					s.setClassid(classId);
 					studList.add(s);
 				} catch (Exception e) {
@@ -2319,7 +2320,7 @@ public class DBC {
 				try {
 					stu.setId(rs.getString(1));
 					stu.setName(rs.getString(2));
-					stu.setAvg(rs.getFloat(3));
+					stu.setAvg(avgOneStudent(stu.getId()));
 					stu.setClassid(rs.getString(4));
 					stu.setParentId(Pid);
 					lst.add(stu);
@@ -2358,8 +2359,8 @@ public class DBC {
 				Student stu = new Student();
 				try {
 					stu.setParentId(rs.getString(1));
-					stu.setAvg(rs.getFloat(2));
 					stu.setId(rs.getString(3));
+					stu.setAvg(avgOneStudent(stu.getId()));
 					stu.setClassid(rs.getString(4));
 
 					lst.add(stu);

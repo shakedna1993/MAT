@@ -78,11 +78,9 @@ public class StuMainGUIController implements Initializable {
 		try {a.join();} 
 		catch (InterruptedException e1) {e1.printStackTrace();}
 		
-		String avg;
-		Student stud = new Student();
-		stud = (Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
-		avg = Float.toString(stud.getAvg());
-		AvgC.setText(avg);
+		float avg;
+		avg = (float)(MsgFromServer.getDataListByIndex(IndexList.avgOneStudent));
+		AvgC.setText(""+avg);
 	}
 
 	/**

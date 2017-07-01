@@ -52,7 +52,7 @@
       <Separator layoutY="363.0" prefHeight="5.0" prefWidth="639.0" />
       <Separator layoutX="326.0" layoutY="133.0" orientation="VERTICAL" prefHeight="231.0" prefWidth="5.0" />
       <Button fx:id="Avg" layoutX="253.0" layoutY="383.0" mnemonicParsing="false" onAction="#Avgset" prefHeight="25.0" prefWidth="146.0" text="Show Average" />
-      <Label fx:id="AvgC" alignment="CENTER" layoutX="295.0" layoutY="433.0" prefHeight="27.0" prefWidth="63.0" text="Avg">
+      <Label fx:id="AvgC" alignment="CENTER" layoutX="265.0" layoutY="433.0" prefHeight="27.0" prefWidth="127.0" text="Avg">
          <font>
             <Font size="18.0" />
          </font>
