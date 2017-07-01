@@ -32,41 +32,41 @@ import thred.MyThread;
  */
 public class EvaluationsGUIController implements Initializable {
 	@FXML
-	Button back;
+	private Button back;
 	@FXML
-	Label stuName;
+	private Label stuName;
 	@FXML
-	Label Hello;
+	private Label Hello;
 	@FXML
-	Label ChooseLabel;
+	private Label ChooseLabel;
 	@FXML
-	Button DownLoadButton;
+	private Button DownLoadButton;
 	@FXML
-	Button LogOut;
+	private Button LogOut;
 	@FXML
-	ImageView Logo;
+	private ImageView Logo;
 	@FXML
-	ImageView BackGround;
+	private ImageView BackGround;
 	@FXML
-	ImageView BackIcon;
+	private ImageView BackIcon;
 	@FXML
-	ImageView LogOutIcon;
+	private ImageView LogOutIcon;
 	@FXML
-	Label Eva_label;
+	private Label Eva_label;
 	@FXML
-	Button downEvaluation;
+	private Button downEvaluation;
 	@FXML
-	Button downGradeFile;
+	private Button downGradeFile;
 	@FXML
-	Button chooseFolder;
+	private Button chooseFolder;
 
 	JFileChooser chooser = new JFileChooser();
 
 	@FXML
-	TableView<Studentass> table = new TableView<>();
+	private TableView<Studentass> table = new TableView<>();
 
 	private ObservableList<Studentass> data;
-	static String filedir;
+	private static String filedir;
 
 	/**
 	 * initialize-initialize the student name, shows the evaluations and grade files list.
@@ -118,7 +118,7 @@ public class EvaluationsGUIController implements Initializable {
 	/**
 	 * DownloadAssigenmentEvaluation-Downloads an assignment evaluation
 	 */
-	public void DownloadAssigenmentEvaluation() {
+	private void DownloadAssigenmentEvaluation() {
 		if (table.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Wrong Choise");
@@ -169,7 +169,7 @@ public class EvaluationsGUIController implements Initializable {
 	/**
 	 * DownloadAssigenmentGradeFile-Downloads an assignment grade file
 	 */
-	public void DownloadAssigenmentGradeFile() {
+	private void DownloadAssigenmentGradeFile() {
 		if (table.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Wrong Choise");
@@ -222,7 +222,7 @@ public class EvaluationsGUIController implements Initializable {
 	 * Logout from the server  
 	 */
 	@FXML
-	public void clsEva() {
+	private void clsEva() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

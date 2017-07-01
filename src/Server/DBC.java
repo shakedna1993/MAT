@@ -1356,11 +1356,12 @@ public class DBC {
 				Requests r = new Requests();
 				try {
 					r.setReqId(rs.getString(1));
-					r.setUserId(rs.getString(2));
-					r.setCourseId(rs.getString(3));
-					r.setRequestDescription(rs.getString(4));
-					r.setStatus(rs.getInt(5));
-					r.setReqType(rs.getInt(6));
+					r.setRequestDescription(rs.getString(2));
+					r.setStatus(rs.getInt(3));
+					r.setReqType(rs.getInt(4));
+					r.setUserId(rs.getString(5));
+					r.setCourseId(rs.getString(6));
+
 					lst.add(r);
 				} catch (Exception e) {
 					e.printStackTrace();

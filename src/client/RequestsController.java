@@ -21,11 +21,8 @@ import thred.IndexList;
 import thred.MyThread;
 
 
-
 /**
- * d
- * 
- *	
+ *This class presents the requests to the school principal
  */
 public class RequestsController implements Initializable{
 
@@ -55,12 +52,8 @@ public class RequestsController implements Initializable{
 
 	
 	/**
-	 * d
+	 * this method carried out First thing. It is designed to initialize the information in the window 
 	 * 
-	 *	@param	arg0
-	 *	@param	arg1
-	 *
-	 *	@return void
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
@@ -69,8 +62,9 @@ public class RequestsController implements Initializable{
 		RequestInfoToManeger();
 	}
 	
-	
-	
+	/**
+	*	When the request confirmation key is pressed the application is approved and this functionality follows
+	*/
 	@FXML
 	private void ApprovalRequest() {
 		MyThread a = new MyThread(RequestType.ApprovalRequest, IndexList.ApprovalRequest, chooseRequests.getReqId());
@@ -95,6 +89,9 @@ public class RequestsController implements Initializable{
 	}
 	
 	
+	/**
+	*	When the prompt rejection key is pressed the application is not approved and this functionality follows
+	*/
 	@FXML
 	private void RejectRequest() {
 			MyThread a = new MyThread(RequestType.RejectRequest, IndexList.RejectRequest, chooseRequests.getReqId());
@@ -121,13 +118,18 @@ public class RequestsController implements Initializable{
 			}
 	}
 	
+	
+	/**
+	 * This method goes back to the last window that been shown
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		connectionmain.showManagerMain();
 	}
 	
-	
-	
+	/**
+	*	This method shows all the information that a particular request has to the manager
+	*/
 	private void RequestInfoToManeger()
 	{
 		chooseRequests=ManMainGUIController.getChooseRequests();
@@ -169,8 +171,9 @@ public class RequestsController implements Initializable{
 		}
 	}
 	
-	
-	
+	/**
+	*	When the LOGOUT is pressed, this function works to make an orderly LOGOUT
+	*/
 	@FXML
 	public void clsRequestList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,

@@ -24,16 +24,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import thred.IndexList;
 import thred.MyThread;
-
+/**
+ * This class is the controller for the Manager main screen GUI.
+ */
 public class ManMainGUIController implements Initializable {
-
-	/**
-	 * This class is the controller for the Manager main screen GUI.
-	 */
 
 	public static ClientConsole cli;
 	public static Stage primaryStage;
 	private ArrayList<Requests> req = new ArrayList<Requests>();
+	private static Requests chooseRequests = new Requests();
+	private ObservableList<Student> data;
+	private String[] type = { "Register Student to Course", "Remove Student from Course",
+			"Change Teacher Appointment" };
 
 	@FXML
 	private Label Reqs;
@@ -64,11 +66,6 @@ public class ManMainGUIController implements Initializable {
 	@FXML
 	private TableView<Student> table = new TableView<>();
 
-	private static Requests chooseRequests = new Requests();
-	private ObservableList<Student> data;
-	int num = 0;
-	private String[] type = { "Register Student to Course", "Remove Student from Course",
-			"Change Teacher Appointment" };
 
 	/**
 	 * initialize-initialize the manager gui details: name, list of parent,
@@ -79,50 +76,52 @@ public class ManMainGUIController implements Initializable {
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		ManName.setText(s.getName());
 		studentParentInfo();
-		numReq.setText(Integer.toString(re()));
+		numReq.setText(Integer.toString(RequestsInfo()));
 		int role;
 		role = ((User) MsgFromServer.getDataListByIndex(IndexList.LOGIN)).getRole();
 		if (role == 2)
 			Back.setDisable(true);
 	}
 
+	
+	/**
+	 *	This method is responsible for filling the table with information about parent and student. To block the requested parent
+	 */
 	@SuppressWarnings("unchecked")
 	public void studentParentInfo() {
 		MyThread a = new MyThread(RequestType.StudentsList, IndexList.StudentsList);
 		a.start();
-		try {
-			a.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+		try {a.join();}
+		catch (InterruptedException e1) {e1.printStackTrace();}
 
 		ArrayList<Student> b = (ArrayList<Student>) MsgFromServer.getDataListByIndex(IndexList.StudentsList);
 		data = FXCollections.observableArrayList(b);
 
 		TableColumn<Student, String> c1 = new TableColumn<>("Student Id");
 		c1.setCellValueFactory(new PropertyValueFactory<>("Id"));
-		TableColumn<Student, String> c2 = new TableColumn<>("Parent");
+		TableColumn<Student, String> c2 = new TableColumn<>("Parent ID");
 		c2.setCellValueFactory(new PropertyValueFactory<>("ParentId"));
-		TableColumn<Student, String> c3 = new TableColumn<>("Class");
+		TableColumn<Student, String> c3 = new TableColumn<>("Class no");
 		c3.setCellValueFactory(new PropertyValueFactory<>("classid"));
-		TableColumn<Student, String> c4 = new TableColumn<>("avg");
+		TableColumn<Student, String> c4 = new TableColumn<>("average");
 		c4.setCellValueFactory(new PropertyValueFactory<>("avg"));
 
 		table.getColumns().addAll(c1, c2, c3, c4);
 		table.setItems(data);
 	}
 
+	
+	/**
+	 *	This method is called as soon as the school principal Press the button parent block. Its role is to block the parent.
+	 */
 	@FXML
 	private void BlockParent() {
 		String Pid = table.getSelectionModel().getSelectedItem().getParentId();
 		MyThread a = new MyThread(RequestType.BlockParent, IndexList.BlockParent, Pid);
 		a.start();
-		try {
-			a.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-		//num = (int) (MsgFromServer.getDataListByIndex(IndexList.BlockParent));
+		try {a.join();}
+		catch (InterruptedException e1) {e1.printStackTrace();}
+		
 		boolean b = (boolean) MsgFromServer.getDataListByIndex(IndexList.BlockParent);
 
 		if (b) {
@@ -141,17 +140,17 @@ public class ManMainGUIController implements Initializable {
 
 	}
 
+	/**
+	 *	This method is called as soon as the school principal Press the button parent unblock. Its role is to unblock the parent.
+	 */
 	@FXML
 	private void unBlockParent() {
 		String Pid = table.getSelectionModel().getSelectedItem().getParentId();
 		MyThread a = new MyThread(RequestType.unBlockParent, IndexList.unBlockParent, Pid);
 		a.start();
-		try {
-			a.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
-		//num = (int) (MsgFromServer.getDataListByIndex(IndexList.unBlockParent));
+		try {a.join();}
+		catch (InterruptedException e1) {e1.printStackTrace();}
+		
 		boolean b = (boolean) MsgFromServer.getDataListByIndex(IndexList.unBlockParent);
 		if (b) {
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -168,17 +167,18 @@ public class ManMainGUIController implements Initializable {
 		}
 	}
 
+	/**
+	 *	The role of this method is to present the information about the requests manager
+	 *	@return count of requests
+	 */
 	@SuppressWarnings("unchecked")
 	@FXML
-	private int re() {
+	private int RequestsInfo() {
 		int count = 0;
 		MyThread a = new MyThread(RequestType.RequestsInfo, IndexList.RequestsInfo);
 		a.start();
-		try {
-			a.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+		try {a.join();}
+		catch (InterruptedException e1) {e1.printStackTrace();}
 
 		req = (ArrayList<Requests>) MsgFromServer.getDataListByIndex(IndexList.RequestsInfo);
 		ArrayList<String> S = new ArrayList<String>();
@@ -191,26 +191,24 @@ public class ManMainGUIController implements Initializable {
 				MyThread b = new MyThread(RequestType.getUserDetailsById, IndexList.getUserDetailsById,
 						req.get(i).getUserId());
 				b.start();
-				try {
-					b.join();
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				}
+				try {b.join();} 
+				catch (InterruptedException e1) {e1.printStackTrace();}
 
 				User u = (User) MsgFromServer.getDataListByIndex(IndexList.getUserDetailsById);
 
 				typeString = typeString + " - " + u.getName();
 
 				S.add(typeString);
-
 				count++;
 			}
 		}
-
 		list.setItems((ObservableList<String>) FXCollections.observableArrayList(S));
 		return count;
 	}
 
+	/**
+	 *	This method enters the selected request and displays the information
+	 */
 	@FXML
 	private void chooseReq() {
 		String Selected = list.getSelectionModel().getSelectedItem();
@@ -220,11 +218,8 @@ public class ManMainGUIController implements Initializable {
 			MyThread b = new MyThread(RequestType.getUserDetailsById, IndexList.getUserDetailsById,
 					req.get(i).getUserId());
 			b.start();
-			try {
-				b.join();
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
+			try {b.join();} 
+			catch (InterruptedException e1) {e1.printStackTrace();}
 			User u = (User) MsgFromServer.getDataListByIndex(IndexList.getUserDetailsById);
 
 			if (Selected.contains(u.getName()) && Selected.contains(type[req.get(i).getReqType() - 1])) {
@@ -251,7 +246,6 @@ public class ManMainGUIController implements Initializable {
 	/**
 	 * This method goes back to the last window that been shown
 	 */
-
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		connectionmain.showTch_ManMain();
@@ -265,7 +259,6 @@ public class ManMainGUIController implements Initializable {
 		try {
 			connectionmain.ShowReportSection();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

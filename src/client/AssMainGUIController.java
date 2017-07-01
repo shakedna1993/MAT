@@ -40,38 +40,38 @@ public class AssMainGUIController implements Initializable {
 	public static Stage primaryStage;
 
 	@FXML
-	ComboBox<String> STC;
+	private ComboBox<String> STC;
 	@FXML
-	Button Upload_Ass;
+	private Button Upload_Ass;
 	@FXML
-	Button selectBtn;
+	private Button selectBtn;
 	@FXML
-	Button Down_Ass;
+	private Button Down_Ass;
 	@FXML
-	Button CourseL;
+	private Button CourseL;
 	@FXML
-	Button Back;
+	private Button Back;
 	@FXML
-	Button LogOut;
+	private Button LogOut;
 	@FXML
-	Label Hello, selectAss;
+	private Label Hello, selectAss;
 	@FXML
-	Label Down;
+	private Label Down;
 	@FXML
-	Label UP;
+	private Label UP;
 	@FXML
-	Label selectC;
+	private Label selectC;
 	@FXML
-	Label Ass;
+	private Label Ass;
 	@FXML
-	javafx.scene.control.Label StuName;
+	private javafx.scene.control.Label StuName;
 	@FXML
 	TableView<Assigenment> table = new TableView<>();
 	@FXML
-	ImageView Logo;
+	private ImageView Logo;
 
 	private ObservableList<Assigenment> data;
-	static String assToChoose;
+	private static String assToChoose;/////לא משתמשים בזה
 	static String crs, filedir, id;
 
 	/**
@@ -90,7 +90,7 @@ public class AssMainGUIController implements Initializable {
 	 * This method Shows a list of the courses student is learning.
 	 */
 	@SuppressWarnings("unchecked")
-	public void setComboBoxStudentCourse(String id) {
+	private void setComboBoxStudentCourse(String id) {
 		ArrayList<String> a1 = new ArrayList<String>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Course course = new Course();
@@ -123,7 +123,7 @@ public class AssMainGUIController implements Initializable {
 	 * This method Shows in table the assignments student have in a course.
 	 */
 	@SuppressWarnings("unchecked")
-	public void setTableViewStudentCourseAssigenment() {
+	private void setTableViewStudentCourseAssigenment() {
 		table.getColumns().clear();
 
 		Object st = STC.getValue();
@@ -171,7 +171,7 @@ public class AssMainGUIController implements Initializable {
 	/**
 	 * This method Uploading a file to submit to the teacher.
 	 */
-	public void UploadAss() {
+	private void UploadAss() {
 		try {
 			if (table.getSelectionModel().getSelectedItem() == null) {
 				Alert alert = new Alert(AlertType.WARNING);
@@ -187,7 +187,6 @@ public class AssMainGUIController implements Initializable {
 			StudentUploadAssGUIController.initVariable(crs, tmp, tmp1);
 			connectionmain.ShowStudentUploadAss();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -246,7 +245,7 @@ public class AssMainGUIController implements Initializable {
 	 * Logout from the server
 	 */
 	@FXML
-	public void clsAssMain() {
+	private void clsAssMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

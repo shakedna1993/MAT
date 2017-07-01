@@ -39,30 +39,30 @@ import thred.MyThread;
 public class newAssTeacher implements Initializable {
 
 	@FXML
-	Button ChooseFile;
+	private Button ChooseFile;
 	@FXML
-	Button sendBtn;
+	private Button sendBtn;
 	@FXML
-	Button backBtn;
+	private Button backBtn;
 	@FXML
-	Button LogOut;
+	private Button LogOut;
 
 	@FXML
-	TextField description;
+	private TextField description;
 	@FXML
-	javafx.scene.control.Label filename;
+	private javafx.scene.control.Label filename;
 
 	@FXML
-	TextField AssingmentnameTEXT;
+	private TextField AssingmentnameTEXT;
 	@FXML
-	TextField CourseidTEXT;
+	private TextField CourseidTEXT;
 	@FXML
-	TextField ClassidTEXT;
+	private TextField ClassidTEXT;
 	@FXML
-	javafx.scene.control.Label detlabel;
+	private javafx.scene.control.Label detlabel;
 
 	@FXML
-	javafx.scene.control.Label tecName;
+	private javafx.scene.control.Label tecName;
 	@FXML
 	private DatePicker dp;
 	JFileChooser chooser = new JFileChooser();
@@ -83,7 +83,7 @@ public class newAssTeacher implements Initializable {
 	 * This method teacher choose file to send
 	 */
 	@FXML
-	public void OpenFolder() {
+	private void OpenFolder() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls",
 				"txt", "png", "docx");
 		chooser.setFileFilter(filter);
@@ -99,7 +99,7 @@ public class newAssTeacher implements Initializable {
 	 * This method teacher fill all details and post the new assignment
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void newAss() throws ParseException {
+	private void newAss() throws ParseException {
 		int flag = 0;
 		File f = chooser.getSelectedFile();
 		User s = new User();

@@ -22,7 +22,7 @@ import thred.IndexList;
 import thred.MyThread;
 
 /**
- *	
+ * This class is the controller for the parents main screen GUI.
  */
 public class ParMainGUIController implements Initializable {
 
@@ -51,13 +51,8 @@ public class ParMainGUIController implements Initializable {
 	private ComboBox<String> StuN;
 
 	/**
-	 * d
+	 * this method carried out First thing. It is designed to initialize the information in the window 
 	 * 
-	 * @param location
-	 *            an absolute URL giving the base location
-	 * @param resources
-	 *
-	 * @return void
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		User s = new User();
@@ -68,9 +63,9 @@ public class ParMainGUIController implements Initializable {
 	}
 
 	/**
-	 * d
+	 * This method is used to fill the combo box with the parent's children so that they can follow their information in school
 	 * 
-	 * @param id
+	 * @param id is the parent id to look about all is children.
 	 *
 	 * @return void
 	 */
@@ -78,11 +73,8 @@ public class ParMainGUIController implements Initializable {
 	private void parSetStudentComboBox(String id) {
 		MyThread a = new MyThread(RequestType.parSetStudentComboBox, IndexList.parSetStudentComboBox, id);
 		a.start();
-		try {
-			a.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+		try {a.join();} 
+		catch (InterruptedException e1) {e1.printStackTrace();}
 
 		DaddyStudent = (ArrayList<Student>) (MsgFromServer.getDataListByIndex(IndexList.parSetStudentComboBox));
 		ArrayList<String> nameMyStu = new ArrayList<String>();
@@ -93,6 +85,11 @@ public class ParMainGUIController implements Initializable {
 		StuN.setItems(list);
 	}
 
+	
+	
+	/**
+	 *	This method is used to calculate the average of the selected student
+	 */
 	@FXML
 	private void Avgset() {
 		selectedChild();
@@ -101,17 +98,14 @@ public class ParMainGUIController implements Initializable {
 			alert.setTitle("Incorrect Fields");
 			alert.setHeaderText(null);
 			alert.setContentText("Please select a student");
-
 			alert.show();
 			return;
 		}
 		MyThread a = new MyThread(RequestType.avgOneStudent, IndexList.avgOneStudent, selectedSon.getId());
 		a.start();
-		try {
-			a.join();
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
-		}
+		try {a.join();} 
+		catch (InterruptedException e1) {e1.printStackTrace();}
+		
 		float avg = (float) (MsgFromServer.getDataListByIndex(IndexList.avgOneStudent));
 		selectedSon.setAvg(avg);
 		String avgToScreen = Float.toString(selectedSon.getAvg());
@@ -119,17 +113,14 @@ public class ParMainGUIController implements Initializable {
 	}
 
 	/**
-	 * d
-	 * 
-	 *
-	 * @return void
+	 * This method is used to save the selected student 
 	 */
 	private void selectedChild() {
 		String name = new String();
 		boolean flag = false;
 		name = StuN.getSelectionModel().getSelectedItem();
-		if (name != null) {
-
+		if (name != null)
+		{
 			int i;
 			for (i = 0; i < DaddyStudent.size(); i++) {
 				if (name.equals(DaddyStudent.get(i).getName())) {
@@ -139,52 +130,53 @@ public class ParMainGUIController implements Initializable {
 			}
 			if (flag)
 				selectedSon = DaddyStudent.get(i);
-		} else
-			selectedSon = null;
+			else
+				selectedSon = null;
+		}
 	}
 
+	
+	/**
+	 * This method is used to show the student's courses if they exist
+	 */
 	@FXML
 	private void CourseList() {
-
 		selectedChild();
 		if (selectedSon == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Incorrect Fields");
 			alert.setHeaderText(null);
 			alert.setContentText("Please select a student");
-
 			alert.show();
 			return;
 		}
-		try {
-			connectionmain.ShowCourseList();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		try {connectionmain.ShowCourseList();}
+		catch (IOException e) {e.printStackTrace();}
 	}
-
+	
+	/**
+	 * This method is used to show the student's Grades if they exist
+	 */
 	@FXML
 	private void GradeList() {
-
 		selectedChild();
 		if (selectedSon == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Incorrect Fields");
 			alert.setHeaderText(null);
 			alert.setContentText("Please select a student");
-
 			alert.show();
 			return;
 		}
-		try {
-			connectionmain.ShowGradeList();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		try {connectionmain.ShowGradeList();}
+		catch (IOException e) {e.printStackTrace();}
 	}
 
+	
+	
+	/**
+	 * This method is used to show the student's Evaluations if they exist
+	 */
 	@FXML
 	public void EvaluationWin() {
 		selectedChild();
@@ -193,7 +185,6 @@ public class ParMainGUIController implements Initializable {
 			alert.setTitle("Incorrect Fields");
 			alert.setHeaderText(null);
 			alert.setContentText("Please select a student");
-
 			alert.show();
 			return;
 		}
@@ -205,6 +196,10 @@ public class ParMainGUIController implements Initializable {
 		}
 	}
 
+	
+	/**
+	 * Logout from the server  
+	 */
 	@FXML
 	public void clsParentMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
@@ -225,8 +220,7 @@ public class ParMainGUIController implements Initializable {
 	@Override
 	public String toString() {
 		return "StuMainGUIController [GradeL=" + GradeL + ", CourseL=" + CourseL + ", Evalu=" + Evalu + ", Avg="
-				+ AvgBtn + ", LogOut=" + LogOut + ", StuN=" + StuN + ", CalcAvg=" + CalcAvg + ", parName=" + parName
-				+ "]";
+				+ AvgBtn + ", LogOut=" + LogOut + ", StuN=" + StuN + ", CalcAvg=" + CalcAvg + ", parName=" + parName+ "]";
 	}
 
 	public static Student getSelectedSon() {

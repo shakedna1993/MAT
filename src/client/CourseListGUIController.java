@@ -27,26 +27,26 @@ import thred.MyThread;
 
 public class CourseListGUIController implements Initializable {
 	@FXML
-	Button back;
+	private Button back;
 	@FXML
-	Label stuName;
+	private Label stuName;
 	@FXML
-	Label Hello;
+	private Label Hello;
 	@FXML
-	Button LogOut;
+	private Button LogOut;
 	@FXML
-	ImageView Logo;
+	private ImageView Logo;
 	@FXML
-	ImageView BackGround;
+	private ImageView BackGround;
 	@FXML
-	ImageView BackIcon;
+	private ImageView BackIcon;
 	@FXML
-	ImageView LogOutIcon;
+	private ImageView LogOutIcon;
 	@FXML
-	Label courseList;
+	private Label courseList;
 
 	@FXML
-	TableView<Course> table = new TableView<>();
+	private TableView<Course> table = new TableView<>();
 
 	private ObservableList<Course> data;
 
@@ -99,7 +99,7 @@ public class CourseListGUIController implements Initializable {
 	 * Logout from the server  
 	 */
 	@FXML
-	public void clsCourseList() {
+	private  void clsCourseList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

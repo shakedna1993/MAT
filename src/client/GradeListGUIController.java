@@ -25,14 +25,14 @@ import thred.MyThread;
  */
 public class GradeListGUIController implements Initializable {
 	@FXML
-	Button back;
+	private Button back;
 	@FXML
-	Label stuName;
+	private Label stuName;
 	@FXML
-	Button LogOut;
+	private Button LogOut;
 
 	@FXML
-	TableView<Course> table = new TableView<>();
+	private TableView<Course> table = new TableView<>();
 	private ObservableList<Course> data;
 
 	/**
@@ -85,7 +85,7 @@ public class GradeListGUIController implements Initializable {
 	 * Logout from the server
 	 */
 	@FXML
-	public void clsGradeList() {
+	private void clsGradeList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

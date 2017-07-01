@@ -105,9 +105,9 @@ public class LoginGUIcontroller {
 			}
 			if (((User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN))).getBlocked() == 1) {
 				Alert alert = new Alert(AlertType.WARNING);
-				alert.setTitle("Ban");
+				alert.setTitle("Block");
 				alert.setHeaderText(null);
-				alert.setContentText("The user is banned from the system");
+				alert.setContentText("The user is Block from the system\n Contact school administration in order to unblock your user.");
 				alert.show();
 				return;
 			}
@@ -146,10 +146,7 @@ public class LoginGUIcontroller {
 				connectionmain.showSysManMain();
 				break;
 			case 6:
-				if (mem.getBlocked() == 0)
 					connectionmain.showParentMain();
-				else
-					connectionmain.BlockedParentMain();
 				break;
 			case 7:
 				connectionmain.showTch_ManMain();

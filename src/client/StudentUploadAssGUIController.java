@@ -27,27 +27,27 @@ import thred.MyThread;
 
 public class StudentUploadAssGUIController implements Initializable {
 	@FXML
-	Button ChooseFile;
+	private Button ChooseFile;
 	@FXML
-	Button Upload_Ass;
+	private Button Upload_Ass;
 	@FXML
-	Button Back;
+	private Button Back;
 	@FXML
-	Button LogOut;
+	private Button LogOut;
 	@FXML
-	Label Hello;
+	private Label Hello;
 	@FXML
-	Label stuName;
+	private Label stuName;
 	@FXML
-	Label filename;
+	private Label filename;
 	@FXML
-	Label lab1;
+	private Label lab1;
 
 	JFileChooser chooser = new JFileChooser();
-	User s = new User();
-	static String crs, fname;
-	static int ass;
-	static Date duedate;
+	private User s = new User();
+	private static String crs, fname;
+	private static int ass;
+	private static Date duedate;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
@@ -55,7 +55,7 @@ public class StudentUploadAssGUIController implements Initializable {
 	}
 
 	@FXML
-	public void OpenFolder() {
+	private void OpenFolder() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls",
 				"docx");
 		chooser.setFileFilter(filter);
@@ -68,7 +68,7 @@ public class StudentUploadAssGUIController implements Initializable {
 	}
 
 	@FXML
-	public void UploadAss() {
+	private void UploadAss() {
 		try {
 			File f = new File(chooser.getSelectedFile().getPath());
 			Studentass SA = new Studentass(ass, s.getId(), crs, "", duedate, f, fname);
@@ -129,7 +129,7 @@ public class StudentUploadAssGUIController implements Initializable {
 	}
 
 	@FXML
-	public void clsUploadAss() {
+	private void clsUploadAss() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

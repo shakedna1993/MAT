@@ -26,35 +26,35 @@ public class StuMainGUIController implements Initializable {
 	public static Stage primaryStage;
 
 	@FXML
-	Button Ass_Sub;
+	private Button Ass_Sub;
 	@FXML
-	Button GradeL;
+	private Button GradeL;
 	@FXML
-	Button CourseL;
+	private Button CourseL;
 	@FXML
-	Button Evalu;
+	private Button Evalu;
 	@FXML
-	Button Avg;
+	private Button Avg;
 	@FXML
-	Button LogOut;
+	private Button LogOut;
 	@FXML
-	ImageView LogOutIcon;
+	private ImageView LogOutIcon;
 	@FXML
-	ImageView BackGround;
+	private ImageView BackGround;
 
 	@FXML
-	Label Hello;
+	private Label Hello;
 	@FXML
-	Label Per_File;
+	private Label Per_File;
 	@FXML
-	Label Ass;
+	private Label Ass;
 	@FXML
-	Label AvgC;
+	private Label AvgC;
 	@FXML
-	javafx.scene.control.Label stuName;
+	private javafx.scene.control.Label stuName;
 
 	@FXML
-	ImageView Logo;
+	private ImageView Logo;
 
 	/**
 	 * initialize-initialize the student name.
@@ -69,7 +69,7 @@ public class StuMainGUIController implements Initializable {
 	 * This method gets the student average and display it. 
 	 */
 	@FXML
-	public void Avgset() {
+	private void Avgset() {
 		String avg;
 		Student stud = new Student();
 		stud = (Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));
@@ -81,7 +81,7 @@ public class StuMainGUIController implements Initializable {
 	 * This method shows list of courses the student learning 
 	 */
 	@FXML
-	public void CourseList() {
+	private void CourseList() {
 		try {
 			connectionmain.ShowCourseList();
 		} catch (IOException e) {
@@ -94,7 +94,7 @@ public class StuMainGUIController implements Initializable {
 	 * This method shows the student grade list 
 	 */
 	@FXML
-	public void GradeList() {
+	private void GradeList() {
 		try {
 			connectionmain.ShowGradeList();
 		} catch (IOException e) {
@@ -107,7 +107,7 @@ public class StuMainGUIController implements Initializable {
 	 * This method shows the Assignment window
 	 */
 	@FXML
-	public void AssignmentWin() {
+	private void AssignmentWin() {
 		try {
 			connectionmain.ShowAssOptions();
 		} catch (IOException e) {
@@ -120,7 +120,7 @@ public class StuMainGUIController implements Initializable {
 	 * This method shows the Evaluation window
 	 */
 	@FXML
-	public void EvaluationWin() {
+	private void EvaluationWin() {
 		try {
 			connectionmain.ShowEvaluationList();
 		} catch (IOException e) {
@@ -133,7 +133,7 @@ public class StuMainGUIController implements Initializable {
 	 * Logout from the server  
 	 */
 	@FXML
-	public void clsStudentMain() {
+	private void clsStudentMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

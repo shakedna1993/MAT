@@ -30,19 +30,19 @@ public class ReportsMainGUIController implements Initializable {
 	public static Stage primaryStage;
 
 	@FXML
-	ComboBox<String> STC;
+	private ComboBox<String> STC;
 	@FXML
-	Button selectBtn;
+	private Button selectBtn;
 	@FXML
-	Button Back;
+	private Button Back;
 	@FXML
-	Button LogOut;
+	private Button LogOut;
 	@FXML
-	Label Hello;
+	private Label Hello;
 	@FXML
-	Label ManName;
+	private Label ManName;
 	@FXML
-	ImageView Logo;
+	private ImageView Logo;
 
 	/**
 	 * initialize-initialize the Manager name.
@@ -59,7 +59,7 @@ public class ReportsMainGUIController implements Initializable {
 	 * This method Shows a list of the Reports Exist in the DB.
 	 */
 	@SuppressWarnings("unchecked")
-	public void setComboBoxManagerReports() {
+	private void setComboBoxManagerReports() {
 		ArrayList<Reports> a1 = new ArrayList<Reports>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Reports rep = new Reports();
@@ -82,7 +82,7 @@ public class ReportsMainGUIController implements Initializable {
 	 */
 	@SuppressWarnings("unchecked")
 	@FXML
-	public void setStatisticReport() {
+	private void setStatisticReport() {
 		Object st = STC.getValue();
 		if (st == null) {
 			Alert alert = new Alert(AlertType.WARNING);
