@@ -285,7 +285,7 @@ public class OpCheck {
 			ArrayList<Assigenment> lst = new ArrayList<>();
 			Assigenment ass = new Assigenment();
 			ass = (Assigenment) op.getMsg();
-			lst = DBC.setTableViewTeacherCourseAssigenment(ass.getCoursename(), ass.getTeacherid());
+			lst = DBC.setTableViewTeacherCourseAssigenment((Assigenment) op.getMsg());
 			return lst;
 
 		case getWeeklyHours:

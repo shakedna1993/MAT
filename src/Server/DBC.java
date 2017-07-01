@@ -2723,99 +2723,46 @@ public class DBC {
 	 * This method will search all the Assignment for a specific course with specific teacher in
 	 * the DB
 	 * 
-	 *@param coursename -will
-	 *            hold the name of the course
-	 *            
-	 *@param teacherid -will
-	 *            hold the id number of the teacher         
+	 *@param ass1 -will
+	 *            the course id and the teacher id to find the assignment
+     
 	 * @return return list of assignment for this course 
 	 */
-	public static ArrayList<Assigenment> setTableViewTeacherCourseAssigenment(String coursename, String teacherid) {
+	public static ArrayList<Assigenment> setTableViewTeacherCourseAssigenment(Assigenment ass1) {
 		Statement stmt;
-		ArrayList<String> a1 = new ArrayList<>();
-		ArrayList<String> a2 = new ArrayList<>();
-		ArrayList<Assigenment> lst = new ArrayList<>();
+		ArrayList<Assigenment> cla =new ArrayList<Assigenment>();
 		try {
 			Connection conn = Connect.getConnection();
 			stmt = conn.createStatement();
-
-			ResultSet rs = stmt.executeQuery("SELECT * FROM moodle.classcourse where tid='" + teacherid + "'");
-
+			ResultSet rs = stmt.executeQuery(
+				"	SELECT * FROM moodle.teacherassingment where tecid = '"+ass1.getTeacherid()+"' and CourseId = '"+ass1.getCourseid()+"'");
 			while (rs.next()) {
-				// Print out the values
-				// Assigenment ass = new Assigenment();
+				Assigenment ass = new Assigenment();
 				try {
 
-					a1.add(rs.getString(1));
-					/*
-					 * ass.setAssId(rs.getString(1));
-					 * ass.setFileid(rs.getString(2));
-					 * ass.setDueDate(rs.getDate(3));
-					 * ass.setUserId(rs.getString(4));
-					 * ass.setState(rs.getInt(5));
-					 * ass.setAssname(rs.getString(6));
-					 * ass.setCourseid(rs.getString(7));
-					 * ass.setClassid(rs.getString(8));
-					 * ass.setTeacherid(rs.getString(9));
-					 * ass.setCoursename(rs.getString(10)); lst.add(ass);
-					 */
-				}
-
+					ass.setAssId(rs.getInt(1));
+					ass.setFileid(rs.getString(2));
+					ass.setDueDate(rs.getDate(3));
+					ass.setUserId(rs.getString(4));
+					// ass.setCheck(rs2.getInt(5));
+					ass.setCourseid(rs.getString(5));
+					ass.setAssname(rs.getString(8));
+					cla.add(ass);
+				} 
 				catch (Exception e) {
+					
 					e.printStackTrace();
 				}
 			}
-			for (int i = 0; i < a1.size(); i++) {
-				ResultSet rs1 = stmt.executeQuery("SELECT * FROM moodle.course where Courseid='" + a1.get(i) + "'");
-				while (rs1.next()) {
-
-					try {
-						if (coursename.equals(rs1.getString(2))) {
-							a2.add(rs1.getString(1));
-						}
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				rs1.close();
-			}
-
-			for (int i = 0; i < a2.size(); i++) {
-				ResultSet rs2 = stmt
-						.executeQuery("SELECT * FROM moodle.teacherassingment where CourseId='" + a2.get(i) + "'");
-
-				while (rs2.next()) {
-					// Print out the values
-					Assigenment ass = new Assigenment();
-					try {
-
-						ass.setAssId(rs2.getInt(1));
-						ass.setFileid(rs2.getString(2));
-						ass.setDueDate(rs2.getDate(3));
-						ass.setUserId(rs2.getString(4));
-						// ass.setCheck(rs2.getInt(5));
-						ass.setCourseid(rs2.getString(5));
-						ass.setAssname(rs2.getString(8));
-						lst.add(ass);
-					}
-
-					catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				rs2.close();
-			}
 			rs.close();
 			Connect.close();
-			return lst;
-
+			return cla;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return lst;
+		return cla;
 	}
+
 
 	
 	/**
