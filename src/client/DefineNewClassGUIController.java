@@ -18,9 +18,16 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
+/**
+ * 
+ * DefineNewClassGUI controller class for the "Define new Class" function in the Secretary window.
+ *
+ */
 
 public class DefineNewClassGUIController implements Initializable {
-
+/**
+ * temp class placeholder
+ */
 	private static entity.Class tempClass;
 
 	public static entity.Class getTempClass() {
@@ -55,7 +62,11 @@ public class DefineNewClassGUIController implements Initializable {
 		// TODO Auto-generated method stub
 
 	}
-
+/**
+ * This method is called when pressing the "Define" button.
+ * It verifies all input fields and checks the DB for duplicate entries before trying to send it the DB.
+ * After creating the new class it opens the "Edit/Remove Class" window with the newly created class.
+ */
 	@FXML
 	private void defineClassBtn() {
 		if (id_field.getText().equals("") || name_field.getText().equals("") || max_field.getText().equals("")) {
@@ -102,7 +113,11 @@ public class DefineNewClassGUIController implements Initializable {
 			System.out.println(e);
 		}
 	}
-
+/**
+ * This method checks if the given String 'cid' is a class ID that already exists in the DB.
+ * @param cid - the class ID in question.
+ * @return true if the class ID is already in the DB, false if it doesn't.
+ */
 	private boolean classIDExists(String cid) {
 		MyThread a = new MyThread(RequestType.classIDExists, IndexList.classIDExists, cid);
 		a.start();
@@ -113,7 +128,11 @@ public class DefineNewClassGUIController implements Initializable {
 		}
 		return ((boolean) MsgFromServer.getDataListByIndex(IndexList.classIDExists));
 	}
-
+	/**
+	 * This method checks if the given String 'name' is a class name that already exists in the DB.
+	 * @param name - the class name in question.
+	 * @return true if the class name is already in the DB, false if it doesn't.
+	 */
 	private boolean classNameExists(String name) {
 		MyThread a = new MyThread(RequestType.classNameExists, IndexList.classNameExists, name);
 		a.start();
@@ -124,7 +143,12 @@ public class DefineNewClassGUIController implements Initializable {
 		}
 		return ((boolean) MsgFromServer.getDataListByIndex(IndexList.classNameExists));
 	}
-
+/**
+ * This method creates an entity from the given parameters and sends it to the server DB.
+ * @param cid - the class ID.
+ * @param name - the class Name.
+ * @param max - the class's max students allowed.
+ */
 	private void defineClass(String cid, String name, int max) {
 		entity.Class c = new entity.Class();
 		c.setClassId(cid);
@@ -141,7 +165,11 @@ public class DefineNewClassGUIController implements Initializable {
 		}
 
 	}
-
+	/**
+	 * Goes back to the main Secretary menu.
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();

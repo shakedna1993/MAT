@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import entity.Class;
 import entity.Course;
+import entity.CourseClassView;
 import entity.Student;
 import entity.Teacher;
 import javafx.collections.FXCollections;
@@ -27,7 +28,11 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
-
+/**
+ * 
+ * DefineClass4CourseGUI controller class for the "Define Class for a Course" function in the Secretary window.
+ *
+ */
 public class DefineClass4CourseGUIController implements Initializable {
 
 	private ArrayList<entity.Class> classList;
@@ -68,9 +73,13 @@ public class DefineClass4CourseGUIController implements Initializable {
 		fillComboBox();
 
 	}
-
+/**
+ * Defines a course to a class based on the selections in the GUI window.
+ * Before defining it check all parameters for correct input and presents error messages if something is missing.
+ * @throws Exception
+ */
 	@FXML
-	private void defineButton(ActionEvent e) throws Exception {
+	private void defineButton() throws Exception {
 		String semid = getCurrentSemesterID();
 		String str = (String) courseCombo.getValue();
 		if (str == null) {
@@ -105,7 +114,7 @@ public class DefineClass4CourseGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 		if ((boolean) MsgFromServer.getDataListByIndex(IndexList.AddClassToCourse)) {
-			selectByID(null);
+			selectByID();
 		}
 		par[1] = semid;
 		par[2] = courseid;
@@ -140,9 +149,13 @@ public class DefineClass4CourseGUIController implements Initializable {
 		}
 
 	}
-
+	/**
+	 * Removes selected class from selected course. i.e. removes the class-course tuple in the DB as well as all students in the class selected.
+	 * Before removing it verifies all selections are legal and present warning if they are not.
+	 * @throws Exception
+	 */
 	@FXML
-	private void removeButton(ActionEvent e) throws Exception {
+	private void removeButton() throws Exception {
 		CourseClassView ccv = (CourseClassView) classCoursesTable.getSelectionModel().getSelectedItem();
 		if (ccv == null) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -170,7 +183,7 @@ public class DefineClass4CourseGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 		if ((boolean) MsgFromServer.getDataListByIndex(IndexList.RemoveClassFromCourse)) {
-			selectByID(null);
+			selectByID();
 		}
 		par[1] = courseid;
 		for (int i = 0; i < classStudentList.size(); i++) {
@@ -188,7 +201,10 @@ public class DefineClass4CourseGUIController implements Initializable {
 		}
 
 	}
-
+/**
+ * Retrieves the current semester as defined in the DB.
+ * @return a String containing the current semester ID.
+ */
 	private String getCurrentSemesterID() {
 		MyThread a = new MyThread(RequestType.getCurrentSemesterID, IndexList.getCurrentSemesterID, null);
 		a.start();
@@ -199,7 +215,11 @@ public class DefineClass4CourseGUIController implements Initializable {
 		}
 		return (String) (MsgFromServer.getDataListByIndex(IndexList.getCurrentSemesterID));
 	}
-
+/**
+ * Gets all courses for a specific class in the current semester from the DB and displaying them in the tableview using a "CourseClassView" class 
+ * to display the class-course details in a much clearer format.
+ * @param c - the class for which the courses will be shown.
+ */
 	private void getClassCourses(Class c) {
 		MyThread a = new MyThread(RequestType.getClassCourses, IndexList.getClassCourses, c);
 		a.start();
@@ -245,6 +265,9 @@ public class DefineClass4CourseGUIController implements Initializable {
 		classCoursesTable.setItems(FXCollections.observableArrayList(lst));
 	}
 
+	/**
+	 * Fills the appropriate combo-boxs for class selection by name of ID.
+	 */
 	@SuppressWarnings("unchecked")
 	private void fillComboBox() {
 		MyThread a = new MyThread(RequestType.getActiveClasses, IndexList.getActiveClasses, null);
@@ -268,9 +291,12 @@ public class DefineClass4CourseGUIController implements Initializable {
 		idCombo.setItems(FXCollections.observableArrayList(idList));
 		nameCombo.setItems(FXCollections.observableArrayList(nameList));
 	}
-
+/**
+ * When selecting a class by it's ID, this method sets the name in the other combo box and fills the course combo boxs for the appropriate courses.
+ * @throws Exception
+ */
 	@FXML
-	private void selectByID(ActionEvent e) throws Exception {
+	private void selectByID() throws Exception {
 
 		entity.Class c = new entity.Class();
 		for (int i = 0; i < classList.size(); i++) {
@@ -287,7 +313,11 @@ public class DefineClass4CourseGUIController implements Initializable {
 		}
 
 	}
-
+/**
+ * Fills the course combo box for the class c.
+ * It only fills the courses the class can take in this semester, so any courses already taken by the class wont be shown in the combo box.
+ * @param c - the class in question.
+ */
 	private void fillCourseComboBox(Class c) {
 		MyThread a = new MyThread(RequestType.getAvailableCoursesForClass, IndexList.getAvailableCoursesForClass, c);
 		a.start();
@@ -309,9 +339,12 @@ public class DefineClass4CourseGUIController implements Initializable {
 
 		courseCombo.setItems(FXCollections.observableArrayList(nameList));
 	}
-
+/**
+ * When selecting a course from the course combo-box, this method fills the teacher combo list according to the teaching unit they are in.
+ * @throws Exception
+ */
 	@FXML
-	private void selectCourse(ActionEvent e) throws Exception {
+	private void selectCourse() throws Exception {
 		String str = (String) courseCombo.getValue();
 		if (str == null)
 			return;
@@ -325,6 +358,11 @@ public class DefineClass4CourseGUIController implements Initializable {
 		teacherCombo.setItems(FXCollections.observableArrayList(teacherComboList));
 	}
 
+	/**
+	 * Getting a list of teachers from the DB that can teach the course with the ID 'courseid' given as parameter.
+	 * @param courseid - the course ID in question.
+	 * @return ArrayList<Teacher> object with all teachers for the given course.
+	 */
 	@SuppressWarnings("unchecked")
 	private ArrayList<Teacher> getTeachersForCourse(String courseid) {
 		if (courseid == null) {
@@ -341,9 +379,12 @@ public class DefineClass4CourseGUIController implements Initializable {
 			return (ArrayList<Teacher>) (MsgFromServer.getDataListByIndex(IndexList.getTeachersForCourse));
 		}
 	}
-
+	/**
+	 * When selecting a class by it's name, this method sets the ID in the other combo box and fills the course combo boxs for the appropriate courses.
+	 * @throws Exception
+	 */
 	@FXML
-	private void selectByName(ActionEvent e) throws Exception {
+	private void selectByName() throws Exception {
 
 		entity.Class c = new entity.Class();
 		for (int i = 0; i < classList.size(); i++) {
@@ -360,6 +401,11 @@ public class DefineClass4CourseGUIController implements Initializable {
 
 	}
 
+	/**
+	 * Getting a list of students from the DB that are in the class with the ID 'classId' as given in parameter.
+	 * @param classId - the class ID in question.
+	 * @return ArrayList<Teacher> object with all students for the given class.
+	 */
 	@SuppressWarnings("unchecked")
 	private ArrayList<Student> getStudentList(String classId) {
 		if (classId == null) {
@@ -384,7 +430,11 @@ public class DefineClass4CourseGUIController implements Initializable {
 			return (ArrayList<Student>) (MsgFromServer.getDataListByIndex(IndexList.getStudentInClass));
 		}
 	}
-
+	/**
+	 * Goes back to the main Secretary menu.
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();

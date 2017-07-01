@@ -19,7 +19,11 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
-
+/**
+ * 
+ * AddStudentGUI controller class for the "Add Student" function in the Secretary window.
+ *
+ */
 public class AddStudentGUIController implements Initializable {
 	public static ClientConsole cli;
 
@@ -58,7 +62,10 @@ public class AddStudentGUIController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	}
-
+	/**
+	 * Happens when the "Add" button is pressed in the "Add new Student" window.
+	 * It checks all fields for input errors and only then proceeds to check the DB for duplicate entries and verifies the parent ID is in the DB.
+	 */
 	public void addButton() {
 		if (id_field.getText().length() != 9) {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -157,6 +164,14 @@ public class AddStudentGUIController implements Initializable {
 		}
 	}
 
+	/**
+	 * Adds the student to the DB with the following parameters:
+	 * @param sid - Student's ID
+	 * @param name - Student's name
+	 * @param user - Student's user name for login to the MAT system.
+	 * @param password - Student's password for login to the MAT system.
+	 * @param pid Student's parent ID to link him to the MAT system.
+	 */
 	private void addStudent(String sid, String name, String user, String password, String pid) {
 		Student s = new Student();
 		s.setId(sid);
@@ -174,7 +189,11 @@ public class AddStudentGUIController implements Initializable {
 		}
 
 	}
-
+	/**
+	 * Goes back to the main Secretary menu.
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();
@@ -185,7 +204,11 @@ public class AddStudentGUIController implements Initializable {
 		primaryStage.setTitle("M.A.T- Secretary Connection");
 		primaryStage.show();
 	}
-
+	/**
+	 * Checks if the input string sid exists as a student ID in the DB.
+	 * @param sid - the Student ID in question.
+	 * @return true if the student ID exists, false if it does not exist.
+	 */
 	private boolean studentExists(String sid) {
 		MyThread a = new MyThread(RequestType.StudentExists, IndexList.StudentExists, sid);
 		a.start();
@@ -196,7 +219,12 @@ public class AddStudentGUIController implements Initializable {
 		}
 		return ((String) MsgFromServer.getDataListByIndex(IndexList.StudentExists)).equals("true");
 	}
-
+	
+	/**
+	 * Checks if the input string name exists as a user name in the DB.
+	 * @param sid - the user name in question.
+	 * @return true if the user name exists, false if it does not exist.
+	 */
 	private boolean userNameExists(String name) {
 		MyThread a = new MyThread(RequestType.UserNameExists, IndexList.UserNameExists, name);
 		a.start();
@@ -207,7 +235,11 @@ public class AddStudentGUIController implements Initializable {
 		}
 		return ((boolean) MsgFromServer.getDataListByIndex(IndexList.UserNameExists));
 	}
-
+	/**
+	 * Checks if the input string pid exists as a parent ID in the DB.
+	 * @param sid - the Parent ID in question.
+	 * @return true if the Parent ID exists, false if it does not exist.
+	 */
 	private boolean parentExists(String pid) {
 		MyThread a = new MyThread(RequestType.ParentExists, IndexList.ParentExists, pid);
 		a.start();

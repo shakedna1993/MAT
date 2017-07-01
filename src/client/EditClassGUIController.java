@@ -26,7 +26,11 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
-
+/**
+ * 
+ * EditClassGUI controller class for the "Edit/Remove Class" function in the Secretary window.
+ *
+ */
 public class EditClassGUIController implements Initializable {
 
 	private ArrayList<entity.Class> classList;
@@ -76,7 +80,7 @@ public class EditClassGUIController implements Initializable {
 			idCombo.setValue(c.getClassId());
 			nameCombo.setValue(c.getName());
 			try {
-				selectByID(null);
+				selectByID();
 				DefineNewClassGUIController.setTempClass(null);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -84,6 +88,9 @@ public class EditClassGUIController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method polls the DB for all students who are not in any class and displays them on the class-less student tableview.
+	 */
 	@SuppressWarnings("unchecked")
 	private void getClasslessStudents() {
 		ArrayList<Student> studentList = getStudentList(null);
@@ -100,7 +107,11 @@ public class EditClassGUIController implements Initializable {
 		studentListTable2.getColumns().addAll(c1, c2, c3);
 		studentListTable2.setItems(FXCollections.observableArrayList(studentList));
 	}
-
+/**
+ * Deletes the selected class in the combo-boxs, after confirming selection inputs and displaying the appropriate messages if the selections are wrong.
+ * Also removes students from the selected class and un-registers them from the courses the class was registered to.
+ * 
+ */
 	@FXML
 	private void deleteClass() {
 		Alert alert = new Alert(AlertType.CONFIRMATION,
@@ -123,7 +134,6 @@ public class EditClassGUIController implements Initializable {
 					boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.DeleteClass));
 					if (b) {
 						getClasslessStudents();
-						// initialize(null, null);
 						studentListTable.setItems(null);
 						numField.setText("");
 						maxField.setText("");
@@ -133,6 +143,9 @@ public class EditClassGUIController implements Initializable {
 		}
 	}
 
+	/**
+	 * Fills the class combo-boxs for selection with the active classes that are in the DB.
+	 */
 	@SuppressWarnings("unchecked")
 	private void fillComboBox() {
 		MyThread a = new MyThread(RequestType.getActiveClasses, IndexList.getActiveClasses, null);
@@ -157,9 +170,13 @@ public class EditClassGUIController implements Initializable {
 		nameCombo.setItems(FXCollections.observableArrayList(nameList));
 	}
 
+	/**
+	 * Happens when a class is selected in the "ID" combo box. After selecting a class by ID it displays the class name in the "Name" combo box and displays the student list in the student tableview.
+	 * @throws Exception
+	 */
 	@SuppressWarnings("unchecked")
 	@FXML
-	private void selectByID(ActionEvent e) throws Exception {
+	private void selectByID() throws Exception {
 
 		entity.Class c = new entity.Class();
 		for (int i = 0; i < classList.size(); i++) {
@@ -191,7 +208,10 @@ public class EditClassGUIController implements Initializable {
 		}
 
 	}
-
+	/**
+	 * Happens when a class is selected in the "Name" combo box. After selecting a class by Name it displays the class ID in the "ID" combo box and displays the student list in the student tableview.
+	 * @throws Exception
+	 */
 	@SuppressWarnings("unchecked")
 	@FXML
 	private void selectByName(ActionEvent e) throws Exception {
@@ -226,7 +246,11 @@ public class EditClassGUIController implements Initializable {
 		}
 
 	}
-
+/**
+ * Gets all the students in the class with the ID "classId".
+ * @param classId - the target class ID
+ * @return the student list for the class classId, if classId is null, it returns all the class-less students.
+ */
 	@SuppressWarnings("unchecked")
 	private ArrayList<Student> getStudentList(String classId) {
 		if (classId == null) {
@@ -251,9 +275,13 @@ public class EditClassGUIController implements Initializable {
 			return (ArrayList<Student>) (MsgFromServer.getDataListByIndex(IndexList.getStudentInClass));
 		}
 	}
-
+/**
+ * This method happens when updating the class max capacity field and hitting "Enter".
+ * It updates the selected class's max student capacity in the DB.
+ * @throws Exception
+ */
 	@FXML
-	private void updateMax(ActionEvent event) throws Exception {
+	private void updateMax() throws Exception {
 		int newMax = Integer.parseInt(maxField.getText());
 		String cid = (String) idCombo.getValue();
 		Object par[] = { cid, newMax };
@@ -277,14 +305,19 @@ public class EditClassGUIController implements Initializable {
 			}
 		}
 	}
-
+/**
+ * This method adds the selected class-less student to the selected class.
+ * If the selected fields are not correct if displays an appropriate message.
+ * If the class is full it doesn't allow more students to be added.
+ * @throws Exception
+ */
 	@FXML
-	private void addButton(ActionEvent event) throws Exception {
+	private void addButton() throws Exception {
 		if (studentListTable2.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Null selection");
 			alert.setHeaderText(null);
-			alert.setContentText("Null selection");
+			alert.setContentText("No student selected.");
 
 			alert.show();
 			return;
@@ -318,13 +351,17 @@ public class EditClassGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 		if ((boolean) MsgFromServer.getDataListByIndex(IndexList.AddStudentToClass)) {
-			selectByID(null);
+			selectByID();
 			getClasslessStudents();
 		}
 	}
-
+/**
+ * This method happens when pressing the "remove" button.
+ * It removes the selected student from the selected class and displays warning messages if selection is wrong.
+ * @throws Exception
+ */
 	@FXML
-	private void removeButton(ActionEvent event) throws Exception {
+	private void removeButton() throws Exception {
 		String sid = "" + ((Student) studentListTable.getSelectionModel().getSelectedItem()).getId();
 		String cid = "" + ((Student) studentListTable.getSelectionModel().getSelectedItem()).getClassid();
 		String par[] = { sid, cid };
@@ -336,11 +373,15 @@ public class EditClassGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 		if ((boolean) MsgFromServer.getDataListByIndex(IndexList.RemoveStudentFromClass)) {
-			selectByID(null);
+			selectByID();
 			getClasslessStudents();
 		}
 	}
-
+	/**
+	 * Goes back to the main Secretary menu.
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();

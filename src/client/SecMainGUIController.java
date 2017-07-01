@@ -142,7 +142,10 @@ public class SecMainGUIController implements Initializable {
 		requestListTable.getColumns().addAll(c1, c3, c4, c5, c6);
 		requestListTable.setItems(FXCollections.observableArrayList(reqList));
 	}
-
+	/**
+	 * Logs out from the system.
+	 * @throws Exception
+	 */
 	@FXML
 	public void clsSecretaryMain() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
@@ -169,39 +172,69 @@ public class SecMainGUIController implements Initializable {
 				+ ", InReqID=" + InReqID + ", Req_ID=" + Req_ID + ", SecName=" + SecName + ", ReqDes=" + ReqDes
 				+ ", Logo=" + Logo + "]";
 	}
-
+/**
+ * Opens the "Add Student" window.
+ * @param event
+ * @throws IOException
+ */
 	@FXML
 	public void addStudent(ActionEvent event) throws IOException {
 		connectionmain.addStudent(event);
 	}
-
+	/**
+	 * Opens the "New Class" window.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void newClass(ActionEvent event) throws IOException {
 		connectionmain.newClass(event);
 	}
-
+	/**
+	 * Opens the "Edit Class" window.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void editClass(ActionEvent event) throws IOException {
 		connectionmain.editClass(event);
-	}
+	}/**
+	 * Opens the "New Request" window.
+	 * @param event
+	 * @throws IOException
+	 */
 	
 	@FXML
 	public void newRequest(ActionEvent event) throws IOException {
 		connectionmain.newRequest();
 	}
-
+	/**
+	 * Opens the "Open Request" window.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void openRequest(ActionEvent event) throws IOException {
 		selectedRequest = requestListTable.getSelectionModel().getSelectedItem();
 		if (selectedRequest == null) return;
 		connectionmain.openRequest();
 	}
-
+	/**
+	 * Opens the "Define Class for a Course" window.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void defineClass4Course(ActionEvent event) throws IOException {
 		connectionmain.defineClass4Course(event);
 	}
-	
+	/**
+	 * Opens a new semester.
+	 * Before making the DB changes for the new semester, a confirmation dialog opens up to confirm the new semester.
+	 * It will create a new semester, make it the only active semester and copy the relevant courses that was updated or added by the system manager.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void openNewSemester(ActionEvent event) throws IOException {
 		Alert alert = new Alert(AlertType.CONFIRMATION, "This action will open a new semester.\nThe current semester will be set inactive and some courses may change.\nAre you sure you want to open a new semester?", ButtonType.YES, ButtonType.NO);

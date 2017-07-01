@@ -28,11 +28,23 @@ import javafx.stage.Stage;
 import sun.applet.Main;
 import thred.IndexList;
 import thred.MyThread;
-
+/**
+ * 
+ * OpenRequestGUI controller class for the "Open Request" function in the Secretary window.
+ *
+ */
 public class OpenRequestGUIController implements Initializable {
-
+	/**
+	 * stores the request that was selected in the Secretary main menu.
+	 */
 	private Requests selectedRequest;
+	/**
+	 * stores the user for which the request is processed for.
+	 */
 	private User selectedUser = null;
+	/**
+	 * stores the course for which the request is processed for.
+	 */
 	private Course selectedCourse = null;
 	@FXML
 	private Label classIDLabel;
@@ -87,7 +99,10 @@ public class OpenRequestGUIController implements Initializable {
 		selectedRequest = (Requests) (MsgFromServer.getDataListByIndex(IndexList.getRequestByID));
 		populateFields(selectedRequest.getReqType());
 	}
-
+/**
+ * populated the fields for the request depending on what request type the request is.
+ * @param reqType - the request type: 1 - Register Student to Course. 2 - Remove Student from Course. 3 - Change Teacher Appointment.
+ */
 	private void populateFields(int reqType) {
 		MyThread a = new MyThread(RequestType.getCourseByID, IndexList.getCourseByID, selectedRequest.getCourseId());
 		a.start();
@@ -160,9 +175,14 @@ public class OpenRequestGUIController implements Initializable {
 			replaceCombo.setItems(FXCollections.observableArrayList(replaceStrList));
 		}
 	}
-
+/**
+ * Processes the request based on the decision.
+ * If no decision, the button will not be available for press.
+ * If decision is approved - register/remove student from course, or if it's a teacher there will be a combobox given to choose a replacement teacher.
+ * @throws Exception
+ */
 	@FXML
-	private void processButton(ActionEvent event) throws Exception {
+	private void processButton() throws Exception {
 		if (selectedRequest.getStatus() == 1) {
 			if (selectedRequest.getReqType() == 1) {
 				// par = {studentid,semid,courseid,coursename}
@@ -228,7 +248,11 @@ public class OpenRequestGUIController implements Initializable {
 			}
 		}
 	}
-
+/**
+ * Changes a request to "Inactive" in the DB, meaning it was processed and doesn't need to be looked at but will still be in the DB.
+ * @param r - the request to de-activate.
+ * @throws IOException
+ */
 	private void deActivateRequest(Requests r) throws IOException {
 		MyThread a = new MyThread(RequestType.DeActivateRequest, IndexList.DeActivateRequest, r.getReqId());
 		a.start();
@@ -246,7 +270,11 @@ public class OpenRequestGUIController implements Initializable {
 			connectionmain.showSecretaryMain();
 		}
 	}
-
+	/**
+	 * Goes back to the main Secretary menu.
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	private void backButton(ActionEvent event) throws Exception {
 		Stage primaryStage = connectionmain.getPrimaryStage();

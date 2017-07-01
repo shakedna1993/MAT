@@ -145,7 +145,11 @@ public class DBC {
 		}
 
 	}
-
+/**
+ * This method returns a course object by the given ID parameter.
+ * @param cid - the Course's ID
+ * @return a Course Object with the given id, null otherwise.
+ */
 	public static Course getCourseByID(String cid) {
 		Statement stmt;
 		Course c = null;
@@ -249,7 +253,11 @@ public class DBC {
 		}
 
 	}
-
+/**
+ * This method polls the SQL DB for the given student ID.
+ * @param sid - the student ID.
+ * @return a String "true" if sid exists in the DB and "false" if it doesn't.
+ */
 	public static String StudentExists(String sid) {
 		Statement stmt;
 		boolean flag = false;
@@ -277,7 +285,11 @@ public class DBC {
 		}
 
 	}
-
+	/**
+	 * This method polls the SQL DB for the given parent ID.
+	 * @param pid - the parent ID.
+	 * @return a String "true" if pid exists in the DB and "false" if it doesn't.
+	 */
 	public static String ParentExists(String pid) {
 		Statement stmt;
 		boolean flag = false;
@@ -304,7 +316,11 @@ public class DBC {
 			return "" + false;
 		}
 	}
-
+/**
+ * This method adds a new class to the SQL DB
+ * @param c - The class object to add to the DB
+ * @return 1 if successful, 0 otherwise.
+ */
 	public static int DefineClass(entity.Class c) {
 		Statement stmt;
 		try {
@@ -316,14 +332,18 @@ public class DBC {
 					+ c.getClassId() + "', '" + c.getName() + "', '" + c.getMAXStudent() + "');");
 
 			Connect.close();
-
+			return 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 
 		}
 		return 0;
 	}
-
+	/**
+	 * This method adds a new student to the SQL DB
+	 * @param s - The student object to add to the DB
+	 * @return 1 if successful, 0 otherwise.
+	 */
 	public static int AddStudent(Student s) {
 		Statement stmt;
 
@@ -347,16 +367,19 @@ public class DBC {
 				}
 
 			}
-			// rs.close();
 			Connect.close();
-
+			return 1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 
 		}
 		return 0;
 	}
-
+	/**
+	 * This method adds a student to a class in the SQL DB
+	 * @param par - a String array containing: {StudentID, ClassID}
+	 * @return true if successful, false otherwise.
+	 */
 	public static boolean AddStudentToClass(String par[]) {
 		Statement stmt;
 		boolean flag = false;
@@ -372,7 +395,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+	/**
+	 * This method removes a student from a class in the SQL DB
+	 * @param par - a String array containing: {StudentID, ClassID}
+	 * @return true if successful, false otherwise.
+	 */
 	public static boolean RemoveStudentFromClass(String par[]) {
 		Statement stmt;
 		boolean flag = false;
@@ -387,7 +414,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method returns an available course list for a specific class 'c' in the current semester.
+ * @param c - the class in question
+ * @return ArrayList with the available courses the class can register to in the current semester. or Null if an error occurred.
+ */
 	public static ArrayList<Course> getAvailableCoursesForClass(Class c) {
 		Statement stmt;
 		ArrayList<Course> courseList = new ArrayList<Course>();
@@ -430,7 +461,11 @@ public class DBC {
 			return null;
 		}
 	}
-
+/**
+ * This method returns all courses taken by the class 'c' in the current semester, along with the teachers for those courses.
+ * @param c - the class in question.
+ * @return two ArrayLists in an Object Array: { courseList, teacherList }, null if an error occurred.
+ */
 	public static Object[] getClassCourses(entity.Class c) {
 		Statement stmt;
 		ArrayList<Course> courseList = new ArrayList<Course>();
@@ -485,7 +520,11 @@ public class DBC {
 			return null;
 		}
 	}
-
+/**
+ * This method returns the students that are not assigned to a class.
+ * @param classId - a void parameter for the classid
+ * @return ArrayList with the students that are in no class. null if an error occurred.
+ */
 	public static ArrayList<Student> getStudentInNoClass(String classId) {
 		Statement stmt;
 		ArrayList<Student> studList = new ArrayList<Student>();
@@ -523,7 +562,11 @@ public class DBC {
 			return null;
 		}
 	}
-
+/**
+ * This method polls the SQL DB for classes for a specific teacher & class.
+ * @param par - an object array containing: {User, Course} where User is the teacher User Entity, and Course is the Course Entity.
+ * @return ArrayList containing all classes for the 2 parameters.
+ */
 	public static ArrayList<entity.Class> getClassListForTeacherInCourse(Object par[]) {
 		// par = {User, Course};
 		Statement stmt;
@@ -564,7 +607,11 @@ public class DBC {
 			return null;
 		}
 	}
-
+/**
+ * This method polls the DB for teachers that can teach a specific course by cross referencing the course Unit and Teacher Unit.
+ * @param courseid - the specific course in question.
+ * @return ArrayList containing the teachers that can teach that specific course.
+ */
 	public static ArrayList<Teacher> getTeachersForCourse(String courseid) {
 		Statement stmt;
 		ArrayList<Teacher> teacherList = new ArrayList<Teacher>();
@@ -603,7 +650,11 @@ public class DBC {
 			return null;
 		}
 	}
-
+/**
+ * This method checks if a 'uid' is a user ID that exists in the DB
+ * @param uid - the ID in question.
+ * @return true if 'uid' is in the DB, false otherwise.
+ */
 	public static boolean UserIdExists(String uid) {
 		// Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager,
 		// 6- Parent, 7- Manager&Teacher}
@@ -627,7 +678,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method returns a list of users filtered by a role in the DB.
+ * @param role - the role to filter the users by.
+ * @return ArrayList containing Users with the given role.
+ */
 	public static ArrayList<User> getUsersByRole(int role) {
 		// Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager,
 		// 6- Parent, 7- Manager&Teacher}
@@ -656,7 +711,10 @@ public class DBC {
 		}
 		return userList;
 	}
-
+/**
+ * This method returns all courses available for the current semester.
+ * @return ArrayList of Courses with the courses available in this semester.
+ */
 	public static ArrayList<Course> getAllCoursesInCurrSemester() {
 		// Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager,
 		// 6- Parent, 7- Manager&Teacher}
@@ -700,7 +758,11 @@ public class DBC {
 		}
 		return courseList;
 	}
-
+/**
+ * This method returns a request from the DB by it's ID.
+ * @param rid - the request ID to get
+ * @return the request that that matched 'rid', null otherwise.
+ */
 	public static Requests getRequestByID(String rid) {
 		Statement stmt;
 		Requests r = null;
@@ -729,7 +791,11 @@ public class DBC {
 		}
 		return r;
 	}
-
+/**
+ * This method returns a class object by it's ID.
+ * @param cid - the class ID in question.
+ * @return a Class Object with the ID 'cid' from the DB, null otherwise.
+ */
 	public static entity.Class getClassByID(String cid) {
 		Statement stmt;
 		entity.Class c = null;
@@ -753,7 +819,11 @@ public class DBC {
 		}
 		return c;
 	}
-
+	/**
+	 * This method returns a User object by it's ID.
+	 * @param uid - the class ID in question.
+	 * @return a User Object with the ID 'uid' from the DB, null otherwise.
+	 */
 	public static User getUserByID(String uid) {
 		Statement stmt;
 		String semid = getCurrentSemesterID();
@@ -778,7 +848,12 @@ public class DBC {
 		}
 		return u;
 	}
-
+/**
+ * This method returns all courses in the current semester involving the user 'u' given as parameter.
+ * If it's a student - then all the courses he takes, if it's a teacher - then all the courses he gives.
+ * @param u - the user in question.
+ * @return ArrayList of courses that the user 'u' participates in the current semester.
+ */
 	public static ArrayList<Course> getUserCoursesInCurrSemester(User u) {
 		// Role={1-Secretary, 2-Manager, 3-Teacher, 4-Student, 5-System manager,
 		// 6- Parent, 7- Manager&Teacher}
@@ -811,7 +886,7 @@ public class DBC {
 				Connection conn = Connect.getConnection();
 				stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(
-						"SELECT * FROM moodle.classcourse where tid='" + u.getId() + "' and semid='" + semid + "'");
+						"SELECT DISTINCT courseid FROM moodle.classcourse where tid='" + u.getId() + "' and semid='" + semid + "'");
 				while (rs.next()) {
 					try {
 						Course c = new Course();
@@ -843,7 +918,12 @@ public class DBC {
 		}
 		return courseList;
 	}
-
+/**
+ * This method changes the status of a class to 'deleted' but doesn't delete it from the DB.
+ * It also removes the class and all of it's students from any courses it is taking this semester.
+ * @param c - the class to 'delete'
+ * @return true if successful, false otherwise.
+ */
 	public static boolean DeleteClass(entity.Class c) {
 		Statement stmt;
 		ArrayList<Course> courseList = (ArrayList<Course>) (getClassCourses(c)[0]);
@@ -870,10 +950,15 @@ public class DBC {
 			Connect.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
-
+/**
+ * This method removes a class from a course in a semester given by the Parameters.
+ * @param par - a String array containing: {courseid, classid, semesterid}
+ * @return true if successful, false otherwise.
+ */
 	public static boolean RemoveClassFromCourse(String par[]) {
 		Statement stmt;
 		boolean flag = false;
@@ -889,7 +974,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method opens a new semester and sets it as the current semester.
+ * It creates the new course list for the new semester as designed by the system manager and sets those courses available to classes and students.
+ * @return true if successful, false otherwise.
+ */
 	public static boolean OpenNewSemester() {
 		Statement stmt;
 		boolean flag = false;
@@ -958,7 +1047,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method checks the student pre-requisites for a given course he wants to register to.
+ * @param par a String Array containing: {studentid,semid,courseid,coursename}
+ * @return true if pre-requisites are met, false otherwise.
+ */
 	public static boolean CheckStudentPreReq(String par[]) {
 		// par = {studentid,semid,courseid,coursename}
 		Statement stmt;
@@ -987,27 +1080,40 @@ public class DBC {
 			stmt = conn.createStatement();
 			if (preList.size() == 0)
 				flag = true;
-			else
+			else {
+				boolean[] flags = new boolean[preList.size()];
 				for (int i = 0; i < preList.size(); i++) {
 					ResultSet rs = stmt.executeQuery("SELECT * FROM moodle.studentcourse WHERE `studid`='" + par[0]
 							+ "' and`courseid`='" + preList.get(i).getCourseId() + "'");
 					while (rs.next()) {
 						try {
-							if (rs.getInt(4) > 55)
-								flag = true;
+							if (rs.getInt(4) > 55){
+								flags[i] = true;
+								break;
+							}
+							else flags[i] = false;
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					}
 					rs.close();
 				}
+				flag = true;
+				for (int i=0; i<flags.length; i++){
+					if (flags[i]==false) flag = false;
+				}
+			}
 			Connect.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return flag;
 	}
-
+/**
+ * This method adds a student to a course in the a semester, if no semester is specified in the given parameters, it referes to the current semester.
+ * @param par - a String array containing: {studentid,semid,courseid,coursename}
+ * @return true if successful, false otherwise.
+ */
 	public static boolean AddStudentToCourse(String par[]) {
 		// par = {studentid,semid,courseid,coursename}
 		if (par[1] == null)
@@ -1028,7 +1134,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method adds a class and all of it's students to a course.
+ * @param par a String array containing {courseid,classid,teacherid,semesterid}
+ * @return true if successful, false otherwise.
+ */
 	public static boolean AddClassToCourse(String par[]) {
 		// par = {courseid,classid,tid,semid}
 		Statement stmt;
@@ -1046,7 +1156,10 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method returns a list of all active requests 
+ * @return ArrayList containing all active requests.
+ */
 	public static ArrayList<Requests> getActiveRequests() {
 		ArrayList<Requests> reqList = new ArrayList<Requests>();
 		Statement stmt;
@@ -1076,7 +1189,11 @@ public class DBC {
 		}
 		return reqList;
 	}
-
+/**
+ * This method adds a new request to the DB
+ * @param r - the request object to add
+ * @return true if successful, false otherwise.
+ */
 	public static boolean AddNewRequest(Requests r) {
 		String lastReqID = "";
 		Statement stmt;
@@ -1129,7 +1246,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * this method updates the max student int for a given class
+ * @param par - an Object Array containing: {String classid, int MaxStudents}
+ * @return true if successful, false otherwise.
+ */
 	public static boolean UpdateMaxStudents(Object par[]) {
 		Statement stmt;
 		boolean flag = false;
@@ -1145,7 +1266,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method changes the given request 'rid' to in-active in the DB.
+ * @param rid - a String containing the request ID to deactivate
+ * @return true if successful, false otherwise.
+ */
 	public static boolean DeActivateRequest(String rid) {
 		Statement stmt;
 		boolean flag = false;
@@ -1160,7 +1285,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method replaces a teacher with another teacher for a course in a specific semester, if semid = null, current one is selected by default.
+ * @param par - a String array containing: {courseid,classid,oldTeacherid,semid,newTeacherID}
+ * @return true if successful, false otherwise.
+ */
 	public static boolean ChangeTeacherAppointment(String par[]) {
 		// par = {courseid,classid,oldTeacherid,semid,newTeacherID}
 		if (par[3] == null)
@@ -1180,7 +1309,11 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method removes a student from a course in a given semester.
+ * @param par - a String array containing: {studid,courseid,semid}
+ * @return true if successful, false otherwise.
+ */
 	public static boolean RemoveStudentFromCourse(String par[]) {
 		// par = {studid,courseid,semid}
 		Statement stmt;
@@ -1197,7 +1330,10 @@ public class DBC {
 		}
 		return flag;
 	}
-
+/**
+ * This method returns the currently active semester as stated in the DB.
+ * @return String containing the current semester's ID.
+ */
 	public static String getCurrentSemesterID() {
 		Statement stmt;
 		String res;
@@ -1220,7 +1356,11 @@ public class DBC {
 		}
 		return null;
 	}
-
+/**
+ * This method returns a list of students in a given class by it's ID.
+ * @param classId - a String with the class ID in question.
+ * @return ArrayList of students in the class with the ID 'classId'.
+ */
 	public static ArrayList<Student> getStudentInClass(String classId) {
 		Statement stmt;
 		ArrayList<Student> studList = new ArrayList<Student>();
@@ -1258,7 +1398,10 @@ public class DBC {
 			return null;
 		}
 	}
-
+/**
+ * This method returns all classes labeled as "Active" in the DB (Not deleted classes).
+ * @return ArrayList of active classes.
+ */
 	public static ArrayList<entity.Class> getActiveClasses() {
 		Statement stmt;
 		ArrayList<entity.Class> classList = new ArrayList<entity.Class>();
@@ -1285,7 +1428,11 @@ public class DBC {
 			return null;
 		}
 	}
-
+/**
+ * This method checks the DB for a username
+ * @param name - the username in question
+ * @return true if 'name' exists in the DB as a username, false otherwise.
+ */
 	public static boolean UserNameExists(String name) {
 		Statement stmt;
 		boolean flag = false;
@@ -1310,7 +1457,11 @@ public class DBC {
 			return false;
 		}
 	}
-
+/**
+ * This method check if a given classID exists in the DB
+ * @param id - the class ID in question.
+ * @return true if the class ID exists in the DB, false otherwise.
+ */
 	public static boolean classIDExists(String id) {
 		Statement stmt;
 		boolean flag = false;
@@ -1374,7 +1525,11 @@ public class DBC {
 		}
 		return lst;
 	}
-
+/**
+ * This method checks if a given class name exists in the DB
+ * @param name - the class name in question
+ * @return true if it exists, false otherwise.
+ */
 	public static boolean classNameExists(String name) {
 		Statement stmt;
 		boolean flag = false;

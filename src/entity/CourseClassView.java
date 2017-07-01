@@ -1,5 +1,9 @@
-package client;
-
+package entity;
+/**
+ * 
+ * Class-Course view class for tableview format purposes.
+ *
+ */
 public class CourseClassView {
 	
 		private String courseid,coursename,hours,teacherid,teachername;

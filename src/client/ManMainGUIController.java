@@ -212,6 +212,14 @@ public class ManMainGUIController implements Initializable {
 	@FXML
 	private void chooseReq() {
 		String Selected = list.getSelectionModel().getSelectedItem();
+		if (Selected == null){
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("WARNING");
+			alert.setHeaderText(null);
+			alert.setContentText("Please Select a request first.");
+			alert.show();
+			return;
+		}
 		int i;
 		boolean flag = false;
 		for (i = 0; i < req.size(); i++) {
