@@ -55,6 +55,8 @@ public class StuMainGUIController implements Initializable {
 
 	@FXML
 	private ImageView Logo;
+	
+	private static String id;
 
 	/**
 	 * initialize-initialize the student name.
@@ -63,6 +65,7 @@ public class StuMainGUIController implements Initializable {
 		User s = new User();
 		s = (User) (MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		stuName.setText(s.getName());
+		id=s.getId();
 	}
 
 	/**
@@ -70,6 +73,11 @@ public class StuMainGUIController implements Initializable {
 	 */
 	@FXML
 	private void Avgset() {
+		MyThread a = new MyThread(RequestType.avgOneStudent, IndexList.avgOneStudent, id);
+		a.start();
+		try {a.join();} 
+		catch (InterruptedException e1) {e1.printStackTrace();}
+		
 		String avg;
 		Student stud = new Student();
 		stud = (Student) (MsgFromServer.getDataListByIndex(IndexList.StudentDetails));

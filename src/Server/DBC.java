@@ -118,7 +118,6 @@ public class DBC {
 				// Print out the values
 
 				try {
-					avgOneStudent(Id);
 					stud.setParentId(rs.getString(1));
 					stud.setAvg(rs.getFloat(2));
 					stud.setId(rs.getString(3) == null ? "-1" : rs.getString(3));
