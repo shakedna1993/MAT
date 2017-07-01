@@ -40,38 +40,38 @@
       <Separator layoutY="546.0" prefHeight="5.0" prefWidth="639.0" />
       <Button fx:id="Back" layoutX="184.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="111.0" text="Back" />
       
-      <Label fx:id="Reps" layoutX="423.0" layoutY="450.0" text="Reports" textFill="#0c8833" underline="true">
+      <Label fx:id="Reps" layoutX="452.0" layoutY="451.0" text="Reports" underline="true">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
       <Separator layoutX="302.0" layoutY="433.0" prefHeight="5.0" prefWidth="338.0" />
-      <Label fx:id="Reqs" layoutX="108.0" layoutY="144.0" text="Requests" textFill="#0c8833" underline="true">
+      <Label fx:id="Reqs" layoutX="125.0" layoutY="144.0" text="Requests" underline="true">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="OpenReq" layoutX="106.0" layoutY="435.0" mnemonicParsing="false" onAction="#chooseReq" text="Open Request" />
-      <Button fx:id="GenRep" layoutX="361.0" layoutY="493.0" mnemonicParsing="false" onAction="#GenrateReports" text="Generate Statistical Reports">
+      <Button fx:id="OpenReq" layoutX="106.0" layoutY="422.0" mnemonicParsing="false" onAction="#chooseReq" text="Open Request" />
+      <Button fx:id="GenRep" layoutX="388.0" layoutY="487.0" mnemonicParsing="false" onAction="#GenrateReports" text="Generate Statistical Reports">
          <font>
             <Font size="13.0" />
          </font></Button>
       <Separator layoutX="301.0" layoutY="133.0" orientation="VERTICAL" prefHeight="414.0" prefWidth="8.0" />
-      <Label fx:id="BlockLabel" layoutX="432.0" layoutY="144.0" text="Block Parent" textFill="#0c8833" underline="true">
+      <Label fx:id="BlockLabel" layoutX="432.0" layoutY="144.0" text="Block Parent" underline="true">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
       <Button fx:id="Block" layoutX="387.0" layoutY="380.0" mnemonicParsing="false" onAction="#BlockParent" prefHeight="25.0" prefWidth="84.0" text="Block" />
       <Button fx:id="UnBlock" layoutX="499.0" layoutY="380.0" mnemonicParsing="false" onAction="#unBlockParent" prefHeight="25.0" prefWidth="78.0" text="UnBlock" />
       <TableView fx:id="table" layoutX="333.0" layoutY="176.0" prefHeight="182.0" prefWidth="284.0" />
-      <Label layoutX="70.0" layoutY="187.0" prefHeight="17.0" prefWidth="55.0" text="You have" />
-      <Label fx:id="numReq" alignment="CENTER" layoutX="124.0" layoutY="186.0" prefHeight="19.0" prefWidth="28.0" text="0" textFill="#e33624">
+      <Label layoutX="70.0" layoutY="174.0" prefHeight="17.0" prefWidth="55.0" text="You have" />
+      <Label fx:id="numReq" alignment="CENTER" layoutX="124.0" layoutY="173.0" prefHeight="19.0" prefWidth="28.0" text="0" textFill="#e33624">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="156.0" layoutY="187.0" prefHeight="17.0" prefWidth="101.0" text="waiting requests" />
-      <ListView fx:id="list" layoutX="30.0" layoutY="220.0" prefHeight="200.0" prefWidth="244.0" />
+      <Label layoutX="156.0" layoutY="174.0" prefHeight="17.0" prefWidth="101.0" text="waiting requests" />
+      <ListView fx:id="list" layoutX="30.0" layoutY="207.0" prefHeight="200.0" prefWidth="244.0" />
       <ImageView fx:id="LogOutIcon" fitHeight="20.0" fitWidth="25.0" layoutX="360.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/Logout.png" />

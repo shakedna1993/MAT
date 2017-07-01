@@ -55,7 +55,7 @@ public class StudentUploadAssGUIController implements Initializable {
 	}
 
 	@FXML
-	private void OpenFolder() {
+	public void OpenFolder() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls",
 				"docx");
 		chooser.setFileFilter(filter);
@@ -68,7 +68,7 @@ public class StudentUploadAssGUIController implements Initializable {
 	}
 
 	@FXML
-	private void UploadAss() {
+	public void UploadAss() {
 		try {
 			File f = new File(chooser.getSelectedFile().getPath());
 			Studentass SA = new Studentass(ass, s.getId(), crs, "", duedate, f, fname);

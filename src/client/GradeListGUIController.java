@@ -85,7 +85,7 @@ public class GradeListGUIController implements Initializable {
 	 * Logout from the server
 	 */
 	@FXML
-	private void clsGradeList() {
+	public void clsGradeList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

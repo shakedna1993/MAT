@@ -118,7 +118,7 @@ public class EvaluationsGUIController implements Initializable {
 	/**
 	 * DownloadAssigenmentEvaluation-Downloads an assignment evaluation
 	 */
-	private void DownloadAssigenmentEvaluation() {
+	public void DownloadAssigenmentEvaluation() {
 		if (table.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Wrong Choise");
@@ -169,7 +169,7 @@ public class EvaluationsGUIController implements Initializable {
 	/**
 	 * DownloadAssigenmentGradeFile-Downloads an assignment grade file
 	 */
-	private void DownloadAssigenmentGradeFile() {
+	public void DownloadAssigenmentGradeFile() {
 		if (table.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Wrong Choise");

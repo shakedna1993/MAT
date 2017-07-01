@@ -143,7 +143,7 @@ public class EditCourseGUIController implements Initializable{
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Wrong details");
 				alert.setHeaderText(null);
-				alert.setContentText("The Course is not exists");
+				alert.setContentText("The Course does not exists");
 				
 				alert.show();
 				return;

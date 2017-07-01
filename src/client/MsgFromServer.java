@@ -91,10 +91,6 @@ public class MsgFromServer {
 		case StudentDetails:
 			setDataListByIndex(IndexList.StudentDetails, returnMsg.getMsg());
 			return;
-		case UpdateUnit:
-			setDataListByIndex(IndexList.UpdateUnit, returnMsg.getMsg());
-		case Teacherdetails:
-			setDataListByIndex(IndexList.Teacherdetails, returnMsg.getMsg());
 		case StudentExists:
 			setDataListByIndex(IndexList.StudentExists, returnMsg.getMsg());
 		case ParentExists:

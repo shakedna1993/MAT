@@ -7,9 +7,6 @@ public class IndexList {
 
 	public static final int LOGIN = 0;
 	public static final int Empty = 2;
-
-	public static final int UpdateUnit= 4;
-	public static final int Teacherdetails = 5;
 	public static final int LOGOUT=6;
 	public static final int StudentDetails=7;
 	

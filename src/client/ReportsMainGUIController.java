@@ -59,7 +59,7 @@ public class ReportsMainGUIController implements Initializable {
 	 * This method Shows a list of the Reports Exist in the DB.
 	 */
 	@SuppressWarnings("unchecked")
-	private void setComboBoxManagerReports() {
+	public void setComboBoxManagerReports() {
 		ArrayList<Reports> a1 = new ArrayList<Reports>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Reports rep = new Reports();
@@ -82,7 +82,7 @@ public class ReportsMainGUIController implements Initializable {
 	 */
 	@SuppressWarnings("unchecked")
 	@FXML
-	private void setStatisticReport() {
+	public void setStatisticReport() {
 		Object st = STC.getValue();
 		if (st == null) {
 			Alert alert = new Alert(AlertType.WARNING);

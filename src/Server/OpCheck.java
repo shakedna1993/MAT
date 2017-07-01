@@ -47,19 +47,6 @@ public class OpCheck {
 		case ResetServer:
 			DBC.ResetServer();
 			return 1;
-
-		case Teacherdetails:
-			User User3 = (User) op.getMsg();
-			Teacher Teacher = new Teacher();
-			Teacher = DBC.Teacherdetails(User3.getId());
-			return Teacher;
-		case UpdateUnit:
-			Teacher Teacher1 = (Teacher) op.getMsg();
-			val = DBC.UpdateUnit(Teacher1.getId(), Teacher1.getUnit());
-			if (val == 1)
-				return "Success";
-			else
-				return "fail";
 		case getActiveClasses:
 			return DBC.getActiveClasses();
 		case getUsersByRole:

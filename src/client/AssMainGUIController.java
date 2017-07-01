@@ -71,7 +71,6 @@ public class AssMainGUIController implements Initializable {
 	private ImageView Logo;
 
 	private ObservableList<Assigenment> data;
-	private static String assToChoose;/////לא משתמשים בזה
 	static String crs, filedir, id;
 
 	/**
@@ -90,7 +89,7 @@ public class AssMainGUIController implements Initializable {
 	 * This method Shows a list of the courses student is learning.
 	 */
 	@SuppressWarnings("unchecked")
-	private void setComboBoxStudentCourse(String id) {
+	public void setComboBoxStudentCourse(String id) {
 		ArrayList<String> a1 = new ArrayList<String>();
 		ArrayList<String> a2 = new ArrayList<String>();
 		Course course = new Course();
@@ -123,7 +122,7 @@ public class AssMainGUIController implements Initializable {
 	 * This method Shows in table the assignments student have in a course.
 	 */
 	@SuppressWarnings("unchecked")
-	private void setTableViewStudentCourseAssigenment() {
+	public void setTableViewStudentCourseAssigenment() {
 		table.getColumns().clear();
 
 		Object st = STC.getValue();
@@ -171,7 +170,7 @@ public class AssMainGUIController implements Initializable {
 	/**
 	 * This method Uploading a file to submit to the teacher.
 	 */
-	private void UploadAss() {
+	public void UploadAss() {
 		try {
 			if (table.getSelectionModel().getSelectedItem() == null) {
 				Alert alert = new Alert(AlertType.WARNING);
@@ -236,7 +235,8 @@ public class AssMainGUIController implements Initializable {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Success");
-		alert.setContentText("The file was successfuly downloaded to: " + filePath);
+		alert.setHeaderText(null);
+		alert.setContentText("Download successful");
 		alert.show();
 
 	}

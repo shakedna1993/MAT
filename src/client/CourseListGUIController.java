@@ -99,7 +99,7 @@ public class CourseListGUIController implements Initializable {
 	 * Logout from the server  
 	 */
 	@FXML
-	private  void clsCourseList() {
+	public  void clsCourseList() {
 		MyThread a = new MyThread(RequestType.LOGOUT, IndexList.LOGOUT,
 				MsgFromServer.getDataListByIndex(IndexList.LOGIN));
 		a.start();

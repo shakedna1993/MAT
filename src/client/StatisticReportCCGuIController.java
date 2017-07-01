@@ -152,7 +152,7 @@ public class StatisticReportCCGuIController implements Initializable {
 		a2.clear();
 		for (int i = 0; i < a3.size(); i++) {
 			if (a3.get(i) >= Semid)
-				a2.add("0" + (a3.get(i).toString()));
+				a2.add(a3.get(i).toString());
 		}
 		STC2.getSelectionModel().clearSelection();
 		clearGraph();

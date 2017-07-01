@@ -83,7 +83,7 @@ public class newAssTeacher implements Initializable {
 	 * This method teacher choose file to send
 	 */
 	@FXML
-	private void OpenFolder() {
+	public void OpenFolder() {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & DOC & DOCX & XSLS", "pdf", "doc", "xsls",
 				"txt", "png", "docx");
 		chooser.setFileFilter(filter);
@@ -99,7 +99,7 @@ public class newAssTeacher implements Initializable {
 	 * This method teacher fill all details and post the new assignment
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void newAss() throws ParseException {
+	public void newAss() throws ParseException {
 		int flag = 0;
 		File f = chooser.getSelectedFile();
 		User s = new User();
