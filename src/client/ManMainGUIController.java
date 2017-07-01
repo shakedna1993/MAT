@@ -34,8 +34,8 @@ public class ManMainGUIController implements Initializable {
 	private ArrayList<Requests> req = new ArrayList<Requests>();
 	private static Requests chooseRequests = new Requests();
 	private ObservableList<Student> data;
-	private String[] type = { "Register Student to Course", "Remove Student from Course",
-			"Change Teacher Appointment" };
+	private String[] type = { "Register Student", "Remove Student",
+			"Change Teacher" };
 
 	@FXML
 	private Label Reqs;
@@ -196,7 +196,7 @@ public class ManMainGUIController implements Initializable {
 
 				User u = (User) MsgFromServer.getDataListByIndex(IndexList.getUserDetailsById);
 
-				typeString = typeString + " - " + u.getName();
+				typeString ="("+req.get(i).getReqId()+") "+ typeString + " - " + u.getName();
 
 				S.add(typeString);
 				count++;
@@ -223,14 +223,8 @@ public class ManMainGUIController implements Initializable {
 		int i;
 		boolean flag = false;
 		for (i = 0; i < req.size(); i++) {
-			MyThread b = new MyThread(RequestType.getUserDetailsById, IndexList.getUserDetailsById,
-					req.get(i).getUserId());
-			b.start();
-			try {b.join();} 
-			catch (InterruptedException e1) {e1.printStackTrace();}
-			User u = (User) MsgFromServer.getDataListByIndex(IndexList.getUserDetailsById);
 
-			if (Selected.contains(u.getName()) && Selected.contains(type[req.get(i).getReqType() - 1])) {
+			if (Selected.contains("("+req.get(i).getReqId()+")")) {
 				flag = true;
 				break;
 			}
