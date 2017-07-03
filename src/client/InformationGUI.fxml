@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1009.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.InfoGUIController">
+   <children>
+      <ImageView fx:id="BackGround" fitHeight="480.0" fitWidth="613.0" layoutX="26.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/BackGround.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="-129.0" layoutY="-22.0" prefHeight="20.0" prefWidth="200.0" />
+      <ImageView fx:id="Logo" fitHeight="110.0" fitWidth="320.0" layoutX="694.0" layoutY="-2.0">
+         <image>
+            <Image url="@LOGO.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="Hello" alignment="CENTER" layoutX="43.0" layoutY="40.0" prefHeight="20.0" prefWidth="56.0" text="Hello!" textFill="#061880">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="SysName" layoutX="102.0" layoutY="67.0" prefHeight="21.0" prefWidth="200.0" text="Manager Name" textFill="#061880">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="logOut_btn" layoutX="639.0" layoutY="561.0" mnemonicParsing="false" onAction="#clsSysManMain" prefHeight="25.0" prefWidth="111.0" text="     Log Out" />    
+      <Separator layoutY="95.0" prefHeight="17.0" prefWidth="1009.0" />
+      <Separator layoutY="132.0" prefHeight="5.0" prefWidth="1009.0" />
+      <Separator layoutY="546.0" prefHeight="5.0" prefWidth="1010.0" />
+      <ImageView fx:id="LogOutIcon" fitHeight="20.0" fitWidth="20.0" layoutX="654.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Logout.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="272.0" layoutY="133.0" orientation="VERTICAL" prefHeight="278.0" prefWidth="2.0" />
+      <TableView fx:id="CourseLIST" layoutX="306.0" layoutY="169.0" prefHeight="221.0" prefWidth="301.0" />
+      <Label fx:id="CourseList_Label" layoutX="420.0" layoutY="144.0" text="Course List" underline="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label layoutX="122.0" layoutY="145.0" text="Teachers" underline="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <TableView fx:id="teacherListTable" layoutX="54.0" layoutY="169.0" prefHeight="221.0" prefWidth="183.0" />
+      <Separator layoutX="1.0" layoutY="401.0" prefHeight="17.0" prefWidth="1009.0" />
+      <ComboBox fx:id="classidCombo" layoutX="657.0" layoutY="169.0" onAction="#selectByID" prefWidth="150.0" promptText="Select by ID" />
+      <ComboBox fx:id="classnameCombo" layoutX="826.0" layoutY="169.0" onAction="#selectByName" prefWidth="150.0" promptText="Select by Name" />
+      <Label layoutX="798.0" layoutY="144.0" prefHeight="19.0" prefWidth="56.0" text="Class" underline="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="500.0" layoutY="418.0" text="Students" underline="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="userCombo" layoutX="252.0" layoutY="457.0" onAction="#selectUser" prefHeight="25.0" prefWidth="193.0" promptText="Select Student" />
+      <TextField fx:id="searchField" layoutX="592.0" layoutY="457.0" onAction="#searchButton" />
+      <Label layoutX="470.0" layoutY="461.0" text="Search student by ID:" />
+      <Button fx:id="showGrade_btn" layoutX="359.0" layoutY="511.0" mnemonicParsing="false" onAction="#stuGradeButton" text="Show Courses&amp;Grades" />
+      <Button fx:id="showEva_btn" layoutX="516.0" layoutY="511.0" mnemonicParsing="false" onAction="#stuEvaluButton" prefHeight="25.0" prefWidth="137.0" text="Show Evaluations" />
+      <TableView fx:id="studentListTable" layoutX="667.0" layoutY="211.0" prefHeight="178.0" prefWidth="301.0" />
+      <Separator layoutX="633.0" layoutY="132.0" orientation="VERTICAL" prefHeight="278.0" prefWidth="6.0" />
+      <Button fx:id="back_btn" layoutX="431.0" layoutY="562.0" mnemonicParsing="false" onAction="#backButton" prefHeight="25.0" prefWidth="111.0" text="        Back" />
+      <ImageView fitHeight="20.0" fitWidth="54.0" layoutX="447.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/Back.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

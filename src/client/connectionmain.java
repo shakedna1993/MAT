@@ -446,6 +446,17 @@ public class connectionmain extends Application {
 		primaryStage.show();
 	}
 	
+	/**
+	 * show the information window
+	 */
+	public static void showInfo() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/client/InformationGUI.fxml"));
+		mainLayout = loader.load();
+		primaryStage.setScene(new Scene(mainLayout));
+		primaryStage.setTitle("M.A.T- Manager Connection");
+		primaryStage.show();
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

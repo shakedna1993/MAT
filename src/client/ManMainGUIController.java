@@ -50,6 +50,8 @@ public class ManMainGUIController implements Initializable {
 	@FXML
 	private Button CheckReq;
 	@FXML
+	private Button InfoBtn;
+	@FXML
 	private Button OpenReq;
 	@FXML
 	private Button GenRep;
@@ -260,6 +262,17 @@ public class ManMainGUIController implements Initializable {
 	public void GenrateReports() {
 		try {
 			connectionmain.ShowReportSection();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * This method open the information window
+	 */
+	@FXML
+	public void openInfo() {
+		try {
+			connectionmain.showInfo();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

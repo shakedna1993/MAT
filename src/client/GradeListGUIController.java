@@ -62,6 +62,15 @@ public class GradeListGUIController implements Initializable {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if (s.getRole() == 2) {
+			try {
+				MyThread a = new MyThread(RequestType.StudentCourse, IndexList.StudentCourse,
+						InfoGUIController.getSelectedUser());
+				a.start();
+				a.join();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		data = FXCollections.observableArrayList();
 		ArrayList<Course> b = (ArrayList<Course>) MsgFromServer.getDataListByIndex(IndexList.StudentCourse);
@@ -113,6 +122,8 @@ public class GradeListGUIController implements Initializable {
 			connectionmain.showStudentMain();
 		else if (a == 6)
 			connectionmain.showParentMain();
+		else if (a == 2)
+			connectionmain.showInfo();
 	}
 
 }

@@ -97,6 +97,15 @@ public class EvaluationsGUIController implements Initializable {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if (s.getRole() == 2) {
+			try {
+				MyThread a = new MyThread(RequestType.StudentEvaluations, IndexList.StudentEvaluations,
+						InfoGUIController.getSelectedUser());
+				a.start();
+				a.join();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		data = FXCollections.observableArrayList();
@@ -249,6 +258,8 @@ public class EvaluationsGUIController implements Initializable {
 			connectionmain.showStudentMain();
 		else if (a == 6)
 			connectionmain.showParentMain();
+		else if (a == 2)
+			connectionmain.showInfo();
 	}
 
 }
