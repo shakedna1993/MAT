@@ -240,16 +240,19 @@ public class SecMainGUIController implements Initializable {
 		Alert alert = new Alert(AlertType.CONFIRMATION, "This action will open a new semester.\nThe current semester will be set inactive and some courses may change.\nAre you sure you want to open a new semester?", ButtonType.YES, ButtonType.NO);
 		alert.showAndWait();
 		if (alert.getResult() == ButtonType.YES) {
-			MyThread a = new MyThread(RequestType.OpenNewSemester, IndexList.OpenNewSemester, null);
-			a.start();
-			try {
-				a.join();
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-	
-			boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.OpenNewSemester));
+			openNewSem();
 		}
 	}
-
+	public boolean openNewSem(){
+		MyThread a = new MyThread(RequestType.OpenNewSemester, IndexList.OpenNewSemester, null);
+		a.start();
+		try {
+			a.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+	
+		boolean b = (boolean) (MsgFromServer.getDataListByIndex(IndexList.OpenNewSemester));
+		return b;
+	}
 }

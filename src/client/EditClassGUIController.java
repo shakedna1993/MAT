@@ -343,6 +343,14 @@ public class EditClassGUIController implements Initializable {
 		}
 		String cid = (String) idCombo.getValue();
 		String par[] = { sid, cid };
+		if (AddStudentToClass(par)) {
+			selectByID();
+			getClasslessStudents();
+		}
+		
+	}
+	public boolean AddStudentToClass(String[] par) {
+		//String par[] = { sid, cid };
 		MyThread a = new MyThread(RequestType.AddStudentToClass, IndexList.AddStudentToClass, par);
 		a.start();
 		try {
@@ -350,11 +358,9 @@ public class EditClassGUIController implements Initializable {
 		} catch (InterruptedException e1) {
 			e1.printStackTrace();
 		}
-		if ((boolean) MsgFromServer.getDataListByIndex(IndexList.AddStudentToClass)) {
-			selectByID();
-			getClasslessStudents();
-		}
+		return (boolean) MsgFromServer.getDataListByIndex(IndexList.AddStudentToClass);
 	}
+
 /**
  * This method happens when pressing the "remove" button.
  * It removes the selected student from the selected class and displays warning messages if selection is wrong.

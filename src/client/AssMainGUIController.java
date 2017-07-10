@@ -71,7 +71,7 @@ public class AssMainGUIController implements Initializable {
 	private ImageView Logo;
 
 	private ObservableList<Assigenment> data;
-	static String crs, filedir, id;
+	String crs, filedir, id;
 
 	/**
 	 * initialize-initialize the student name, set his id.
@@ -213,6 +213,7 @@ public class AssMainGUIController implements Initializable {
 			e1.printStackTrace();
 		}
 		Assigenment dlass = null;
+
 		try {
 			dlass = ((Assigenment) MsgFromServer.getDataListByIndex(IndexList.DownloadAssigenment));
 		} catch (Exception e) {
@@ -241,6 +242,21 @@ public class AssMainGUIController implements Initializable {
 
 	}
 
+	public static Assigenment downloadAss(Assigenment ass2) {
+		MyThread a = new MyThread(RequestType.DownloadAssigenment, IndexList.DownloadAssigenment, ass2);
+		a.start();
+		try {
+			a.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Assigenment dlass = null;
+		try {
+			dlass = ((Assigenment) MsgFromServer.getDataListByIndex(IndexList.DownloadAssigenment));
+		}catch (Exception e) {
+		}
+		return dlass;
+	}
 	/**
 	 * Logout from the server
 	 */

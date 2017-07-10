@@ -215,6 +215,17 @@ public class newAssTeacher implements Initializable {
 		}
 
 	}
+	
+	public static int newAss(Assigenment ass){
+		MyThread B = new MyThread(RequestType.insertNewAss, IndexList.insertNewAss, ass);
+		B.start();
+		try {
+			B.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		return(int) MsgFromServer.getDataListByIndex(IndexList.insertNewAss);
+	}
 	/**
 	 * Back to the last window  
 	 */

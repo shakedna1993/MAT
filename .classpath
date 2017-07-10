@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="AcceptanceTest"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OCSF"/>
-	<classpathentry kind="lib" path="C:/Users/Rinat/Downloads/mysql-connector-java-5.1.42-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/Tzachi/Downloads/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42/mysql-connector-java-5.1.42-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tzachi/Downloads/Lab_10-FITpro/Lab_04-FITpro/CoffeeMaker_Student - lab/fitlibraryRunner.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Tzachi/Downloads/fit-java-1.1/fit.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

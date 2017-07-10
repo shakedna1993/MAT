@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<meta content="MSHTML 11.00.10570.1001" name="GENERATOR" />
+	</head>
+	<body>
+	</body>
+</html>
+<title></title>
+<body>
+	<p>
+		Test for new Assignment</p>
+	<table border="1" cellpadding="1" cellspacing="1" style="width: 200px;">
+		<tbody>
+			<tr>
+				<td>
+					fit.ActionFixture</td>
+				<td>
+					&nbsp;</td>
+				<td>
+					&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					start</td>
+				<td>
+					Fixtures.TestCreateNewAss</td>
+				<td>
+					&nbsp;</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					insert courseid</td>
+				<td>
+					01100</td>
+			</tr>
+			<tr>
+				<td>
+					check</td>
+				<td>
+					course exists</td>
+				<td>
+					false</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					insert name</td>
+				<td>
+					name</td>
+			</tr>
+			<tr>
+				<td>
+					check</td>
+				<td>
+					return name</td>
+				<td>
+					name</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					insert description</td>
+				<td>
+					description</td>
+			</tr>
+			<tr>
+				<td>
+					check</td>
+				<td>
+					return description</td>
+				<td>
+					description</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					insert due date</td>
+				<td>
+					due date</td>
+			</tr>
+			<tr>
+				<td>
+					check</td>
+				<td>
+					return due date</td>
+				<td>
+					due date</td>
+			</tr>
+			<tr>
+				<td>
+					enter</td>
+				<td>
+					upload assignment</td>
+				<td>
+					a</td>
+			</tr>
+			<tr>
+				<td>
+					check</td>
+				<td>
+					assignment uploaded</td>
+				<td>
+					true</td>
+			</tr>
+		</tbody>
+	</table></body>

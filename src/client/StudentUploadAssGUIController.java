@@ -79,7 +79,6 @@ public class StudentUploadAssGUIController implements Initializable {
 				
 				e.printStackTrace();
 			}
-			
 			MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile, SA);
 			try {
 				C.start();
@@ -87,7 +86,9 @@ public class StudentUploadAssGUIController implements Initializable {
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			if ((int) MsgFromServer.getDataListByIndex(IndexList.UploadFile) == 1) {
+			
+			
+			if ((int) MsgFromServer.getDataListByIndex(IndexList.UploadFile) == 1)  {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Late Submission");
 				alert.setHeaderText(null);
@@ -114,6 +115,17 @@ public class StudentUploadAssGUIController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static int upFile(Studentass sA) {
+		MyThread C = new MyThread(RequestType.UploadFile, IndexList.UploadFile, sA);
+		try {
+			C.start();
+			C.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		return (int) MsgFromServer.getDataListByIndex(IndexList.UploadFile);
 	}
 
 	public static void initVariable(String crs2, int tmp, Date tmp1) {

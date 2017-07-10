@@ -172,7 +172,7 @@ public class AddStudentGUIController implements Initializable {
 	 * @param password - Student's password for login to the MAT system.
 	 * @param pid Student's parent ID to link him to the MAT system.
 	 */
-	private void addStudent(String sid, String name, String user, String password, String pid) {
+	public void addStudent(String sid, String name, String user, String password, String pid) {
 		Student s = new Student();
 		s.setId(sid);
 		s.setName(name);
@@ -209,7 +209,7 @@ public class AddStudentGUIController implements Initializable {
 	 * @param sid - the Student ID in question.
 	 * @return true if the student ID exists, false if it does not exist.
 	 */
-	private boolean studentExists(String sid) {
+	public boolean studentExists(String sid) {
 		MyThread a = new MyThread(RequestType.StudentExists, IndexList.StudentExists, sid);
 		a.start();
 		try {

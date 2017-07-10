@@ -198,7 +198,29 @@ public class DefineCourseGUIController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
+	public static String courseExists(Course crs){
+		MyThread b = new MyThread(RequestType.CourseExists, IndexList.CourseExists, crs);
+		b.start();
+		try {
+			b.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ""+((Course) (MsgFromServer.getDataListByIndex(IndexList.CourseExists))).getCourseId().equals("-1");
+	}
+	public static String defNewCourse(Course crs){
+		MyThread c = new MyThread(RequestType.DefineNewCourse, IndexList.DefineNewCourse, crs);
+		c.start();
+		try {
+			c.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Course course = (Course) (MsgFromServer.getDataListByIndex(IndexList.DefineNewCourse)); 
+		return course.getCourseId();
+	}
 	/**
 	 * This method goes back to the last window that been shown 
 	 */

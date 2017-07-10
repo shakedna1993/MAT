@@ -114,7 +114,18 @@ public class RemoveCourseGUIController implements Initializable{
 			e.printStackTrace();
 		}	
 	}
-	
+	public static int removeCourse(Course c){
+		MyThread a = new MyThread(RequestType.RemoveCourse, IndexList.RemoveCourse, c);
+		a.start();
+		try {
+			a.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return (int)MsgFromServer.getDataListByIndex(IndexList.RemoveCourse);
+	}
 	/**
 	 * This method goes back to the last window that been shown
 	 */

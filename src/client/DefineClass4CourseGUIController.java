@@ -129,10 +129,7 @@ public class DefineClass4CourseGUIController implements Initializable {
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			// if
-			// ((boolean)MsgFromServer.getDataListByIndex(IndexList.CheckStudentPreReq))
-			// {
-			boolean preFlag = (boolean) MsgFromServer.getDataListByIndex(IndexList.CheckStudentPreReq);
+			boolean preFlag = checkStudentPre(par);
 			// }
 			if (preFlag) {
 				a = new MyThread(RequestType.AddStudentToCourse, IndexList.AddStudentToCourse, par);
@@ -149,6 +146,26 @@ public class DefineClass4CourseGUIController implements Initializable {
 		}
 
 	}
+	/**
+	 * par[0] = classStudentList.get(i).getId();
+		par[1] = semid;
+		par[2] = courseid;
+		par[3] = coursename;
+	 * @param par
+	 * @return
+	 */
+	public boolean checkStudentPre(String[] par) {
+		
+		MyThread a = new MyThread(RequestType.CheckStudentPreReq, IndexList.CheckStudentPreReq, par);
+		a.start();
+		try {
+			a.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		boolean preFlag = (boolean) MsgFromServer.getDataListByIndex(IndexList.CheckStudentPreReq);
+	return preFlag;
+}
 	/**
 	 * Removes selected class from selected course. i.e. removes the class-course tuple in the DB as well as all students in the class selected.
 	 * Before removing it verifies all selections are legal and present warning if they are not.
